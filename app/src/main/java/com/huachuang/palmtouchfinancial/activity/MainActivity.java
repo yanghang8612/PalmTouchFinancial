@@ -17,7 +17,10 @@ import android.view.MenuItem;
 
 import com.huachuang.palmtouchfinancial.R;
 
-public class MainActivity extends AppCompatActivity
+import org.xutils.view.annotation.ContentView;
+
+@ContentView(R.layout.activity_main)
+public class MainActivity extends BaseActivity
         implements NavigationView.OnNavigationItemSelectedListener {
 
     public static void actionStart(Context context) {
@@ -28,7 +31,6 @@ public class MainActivity extends AppCompatActivity
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_main);
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 

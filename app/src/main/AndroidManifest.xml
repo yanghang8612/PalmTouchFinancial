@@ -28,8 +28,12 @@
 
         <activity
             android:name=".activity.MainActivity"
-            android:theme="@style/AppTheme.NoActionBar">
-        </activity>
+            android:launchMode="singleTask"
+            android:theme="@style/AppTheme.NoActionBar" />
+
+        <activity
+            android:name=".activity.RegisterActivity"
+            android:theme="@style/AppTheme" />
 
     </application>
 
