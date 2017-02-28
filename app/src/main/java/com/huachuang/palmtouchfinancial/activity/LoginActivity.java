@@ -63,7 +63,7 @@ public class LoginActivity extends BaseActivity {
     @Event(value = R.id.login_password,
             type = TextView.OnEditorActionListener.class)
     private boolean onLoginPasswordEditorAction(TextView v, int actionId, KeyEvent event) {
-        if (actionId == R.id.login || actionId == EditorInfo.IME_NULL) {
+        if (actionId == EditorInfo.IME_NULL || actionId == EditorInfo.IME_ACTION_SEARCH) {
             attemptLogin();
             return true;
         }
@@ -86,7 +86,6 @@ public class LoginActivity extends BaseActivity {
      * errors are presented and no actual login attempt is made.
      */
     private void attemptLogin() {
-        attemptLogin();
         if (authTask != null) {
             return;
         }
