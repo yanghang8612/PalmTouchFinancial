@@ -43,7 +43,7 @@ public class LoginActivity extends BaseActivity {
 
     // UI references.
     @ViewInject(R.id.login_phone_number)
-    private AutoCompleteTextView phoneNumberView;
+    private EditText phoneNumberView;
 
     @ViewInject(R.id.login_password)
     private EditText passwordView;
@@ -198,7 +198,7 @@ public class LoginActivity extends BaseActivity {
 
             try {
                 // Simulate network access.
-                Thread.sleep(5000);
+                Thread.sleep(500);
             } catch (InterruptedException e) {
                 return false;
             }
