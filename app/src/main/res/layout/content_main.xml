@@ -13,8 +13,9 @@
     tools:context="com.huachuang.palmtouchfinancial.activity.MainActivity"
     tools:showIn="@layout/app_bar_main">
 
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Hello World!" />
+    <android.support.v4.view.ViewPager
+        android:id="@+id/ad_carousel_pager"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/ad_carousel_height" />
+
 </RelativeLayout>

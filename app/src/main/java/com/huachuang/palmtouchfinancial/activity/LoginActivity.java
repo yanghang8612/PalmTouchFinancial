@@ -72,7 +72,8 @@ public class LoginActivity extends BaseActivity {
 
     @Event(value = R.id.sign_in_button)
     private void onSignInButtonClicked(View view) {
-        attemptLogin();
+//        attemptLogin();
+        MainActivity.actionStart(this);
     }
 
     @Event(value = R.id.register_link)
