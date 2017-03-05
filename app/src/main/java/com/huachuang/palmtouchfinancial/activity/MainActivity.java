@@ -22,6 +22,8 @@ import android.widget.LinearLayout.LayoutParams;
 
 import com.huachuang.palmtouchfinancial.R;
 import com.huachuang.palmtouchfinancial.adapter.AdCarouselAdapter;
+import com.huachuang.palmtouchfinancial.loader.AdImageLoader;
+import com.youth.banner.Banner;
 
 import org.xutils.view.annotation.ContentView;
 import org.xutils.view.annotation.ViewInject;
@@ -33,10 +35,11 @@ import java.util.List;
 public class MainActivity extends BaseActivity
         implements NavigationView.OnNavigationItemSelectedListener {
 
-    @ViewInject(R.id.ad_carousel_pager)
-    ViewPager adCarouselPager;
+    @ViewInject(R.id.drawer_layout)
+    DrawerLayout drawer;
 
-    LinearLayout adCarouselPointLayout;
+    @ViewInject(R.id.ad_carousel_view)
+    Banner adCarouselView;
 
     public static void actionStart(Context context) {
         Intent intent = new Intent(context, MainActivity.class);
@@ -58,7 +61,6 @@ public class MainActivity extends BaseActivity
             }
         });
 
-        DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
         ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(
                 this, drawer, toolbar, R.string.navigation_drawer_open, R.string.navigation_drawer_close);
         drawer.addDrawerListener(toggle);
@@ -67,24 +69,10 @@ public class MainActivity extends BaseActivity
         NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
         navigationView.setNavigationItemSelectedListener(this);
 
-        final List<ImageView> ads = new ArrayList<>();
-        ImageView one = new ImageView(this);
-        one.setLayoutParams(new LayoutParams(LayoutParams.MATCH_PARENT, LayoutParams.MATCH_PARENT));
-        one.setBackgroundResource(R.drawable.ad_one);
-        ads.add(one);
-        ImageView two = new ImageView(this);
-        two.setLayoutParams(new LayoutParams(LayoutParams.MATCH_PARENT, LayoutParams.MATCH_PARENT));
-        two.setBackgroundResource(R.drawable.ad_two);
-        ads.add(two);
-        ImageView three = new ImageView(this);
-        three.setLayoutParams(new LayoutParams(LayoutParams.MATCH_PARENT, LayoutParams.MATCH_PARENT));
-        three.setBackgroundResource(R.drawable.ad_two);
-        ads.add(three);
-
-        adCarouselPointLayout = new LinearLayout(this);
-
-        adCarouselPager.setAdapter(new AdCarouselAdapter(ads));
-        adCarouselPager.setCurrentItem(Integer.MAX_VALUE / 2 - (Integer.MAX_VALUE / 2 % ads.size()));
+        List<Integer> images = new ArrayList<>();
+        images.add(R.drawable.ad_one);
+        images.add(R.drawable.ad_two);
+        adCarouselView.setImages(images).setImageLoader(new AdImageLoader()).start();
     }
 
     @Override
@@ -139,7 +127,6 @@ public class MainActivity extends BaseActivity
 
         }
 
-        DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
         drawer.closeDrawer(GravityCompat.START);
         return true;
     }
