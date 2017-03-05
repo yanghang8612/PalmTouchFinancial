@@ -24,4 +24,8 @@
 
     <color name="black">#000000</color>
     <color name="go_back_dark">#21282C</color>
+
+    <color name="white">#FFFFFF</color>
+    <color name="bottom_bar_background">#EEEEEE</color>
+    <color name="bottom_bar_active">#0277BD</color>
 </resources>
