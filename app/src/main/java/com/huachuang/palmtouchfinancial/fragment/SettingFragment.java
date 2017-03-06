@@ -5,4 +5,8 @@ package com.huachuang.palmtouchfinancial.fragment;
  */
 
 public class SettingFragment extends BaseFragment {
+    @Override
+    protected void initFragment() {
+
+    }
 }

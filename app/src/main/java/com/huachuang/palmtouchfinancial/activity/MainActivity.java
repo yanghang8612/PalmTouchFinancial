@@ -3,11 +3,10 @@ package com.huachuang.palmtouchfinancial.activity;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
-import android.support.design.widget.BottomNavigationView;
-import android.support.design.widget.FloatingActionButton;
-import android.support.design.widget.Snackbar;
-import android.view.View;
 import android.support.design.widget.NavigationView;
+import android.support.v4.app.Fragment;
+import android.support.v4.app.FragmentManager;
+import android.support.v4.app.FragmentTransaction;
 import android.support.v4.view.GravityCompat;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
@@ -18,27 +17,23 @@ import android.view.MenuItem;
 import com.ashokvarma.bottomnavigation.BottomNavigationBar;
 import com.ashokvarma.bottomnavigation.BottomNavigationItem;
 import com.huachuang.palmtouchfinancial.R;
-import com.huachuang.palmtouchfinancial.loader.AdImageLoader;
-import com.youth.banner.Banner;
+import com.huachuang.palmtouchfinancial.fragment.FragmentFactory;
 
 import org.xutils.view.annotation.ContentView;
 import org.xutils.view.annotation.ViewInject;
-
-import java.util.ArrayList;
-import java.util.List;
 
 @ContentView(R.layout.activity_main)
 public class MainActivity extends BaseActivity
         implements NavigationView.OnNavigationItemSelectedListener {
 
-    @ViewInject(R.id.drawer_layout)
-    DrawerLayout drawer;
+    private int preFragmentIndex = 0;
+    private final int defaultFragmentIndex = 0;
 
-    @ViewInject(R.id.ad_carousel_view)
-    Banner adCarouselView;
+    @ViewInject(R.id.drawer_layout)
+    private DrawerLayout drawer;
 
     @ViewInject(R.id.bottom_navigation_bar)
-    BottomNavigationBar bottomNavigationBar;
+    private BottomNavigationBar bottomNavigationBar;
 
     public static void actionStart(Context context) {
         Intent intent = new Intent(context, MainActivity.class);
@@ -52,17 +47,12 @@ public class MainActivity extends BaseActivity
         setSupportActionBar(toolbar);
 
         ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(
-                this, drawer, toolbar, R.string.action_get_verification_code, R.string.action_get_verification_code);
+                this, drawer, toolbar, R.string.navigation_drawer_open, R.string.navigation_drawer_close);
         drawer.addDrawerListener(toggle);
         toggle.syncState();
 
         NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
         navigationView.setNavigationItemSelectedListener(this);
-
-        List<Integer> images = new ArrayList<>();
-        images.add(R.drawable.ad_one);
-        images.add(R.drawable.ad_two);
-        adCarouselView.setImages(images).setImageLoader(new AdImageLoader()).start();
 
         bottomNavigationBar
                 .addItem(new BottomNavigationItem(R.drawable.ic_home_black_48dp, "主页"))
@@ -70,8 +60,22 @@ public class MainActivity extends BaseActivity
                 .addItem(new BottomNavigationItem(R.drawable.ic_settings_black_48dp, "设置"))
                 .setBarBackgroundColor(R.color.bottom_bar_background)
                 .setActiveColor(R.color.bottom_bar_active)
+                .setTabSelectedListener(new BottomNavigationBar.OnTabSelectedListener() {
+                    @Override
+                    public void onTabSelected(int position) {
+                        switchFragment(preFragmentIndex, position);
+                        preFragmentIndex = position;
+                    }
+
+                    @Override
+                    public void onTabUnselected(int position) {}
+
+                    @Override
+                    public void onTabReselected(int position) {}
+                })
                 .initialise();
 
+        showDefaultFragment();
     }
 
     @Override
@@ -128,5 +132,28 @@ public class MainActivity extends BaseActivity
 
         drawer.closeDrawer(GravityCompat.START);
         return true;
+    }
+
+    private void showDefaultFragment() {
+        Fragment defaultFragment = FragmentFactory.getInstanceByIndex(defaultFragmentIndex);
+        FragmentManager fragmentManager = getSupportFragmentManager();
+        FragmentTransaction transaction = fragmentManager.beginTransaction();
+        transaction.replace(R.id.main_fragment, defaultFragment);
+        transaction.commit();
+    }
+
+    private void switchFragment(int fromIndex, int toIndex) {
+        Fragment from = FragmentFactory.getInstanceByIndex(fromIndex), to = FragmentFactory.getInstanceByIndex(toIndex);
+        if (from == null || to == null) {
+            return;
+        }
+        FragmentManager fragmentManager = getSupportFragmentManager();
+        FragmentTransaction transaction = fragmentManager.beginTransaction();
+        if (!to.isAdded()) {
+            transaction.hide(from).add(R.id.main_fragment, to).commit();
+        }
+        else {
+            transaction.hide(from).show(to).commit();
+        }
     }
 }

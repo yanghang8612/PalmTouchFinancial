@@ -12,7 +12,9 @@ import org.xutils.x;
  * Created by Asuka on 2017/2/28.
  */
 
-public class BaseFragment extends Fragment {
+public abstract class BaseFragment extends Fragment {
+
+    private static final String TAG = BaseFragment.class.getSimpleName();
 
     private boolean injected = false;
 
@@ -28,5 +30,13 @@ public class BaseFragment extends Fragment {
         if (!injected) {
             x.view().inject(this, this.getView());
         }
+    }
+
+    protected abstract void initFragment();
+
+    @Override
+    public void onActivityCreated(Bundle savedInstanceState) {
+        super.onActivityCreated(savedInstanceState);
+        initFragment();
     }
 }
