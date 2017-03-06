@@ -3,40 +3,40 @@ package com.huachuang.palmtouchfinancial.activity;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
-import android.support.annotation.Nullable;
-import android.support.v7.widget.Toolbar;
 import android.view.MenuItem;
-import android.view.View;
-import android.widget.ViewFlipper;
+import android.webkit.WebChromeClient;
+import android.webkit.WebView;
+import android.webkit.WebViewClient;
 
 import com.huachuang.palmtouchfinancial.R;
 
 import org.xutils.view.annotation.ContentView;
-import org.xutils.view.annotation.Event;
 import org.xutils.view.annotation.ViewInject;
 
-/**
- * Created by Asuka on 2017/2/28.
- */
+@ContentView(R.layout.activity_credit_card_apply)
+public class CreditCardApplyActivity extends BaseActivity {
 
-@ContentView(R.layout.activity_register)
-public class RegisterActivity extends BaseActivity {
-
-    @ViewInject(R.id.register_flipper)
-    private ViewFlipper registerFlipper;
+    @ViewInject(R.id.web_view)
+    WebView webView;
 
     public static void actionStart(Context context) {
-        Intent intent = new Intent(context, RegisterActivity.class);
+        Intent intent = new Intent(context, CreditCardApplyActivity.class);
         context.startActivity(intent);
     }
 
     @Override
-    protected void onCreate(@Nullable Bundle savedInstanceState) {
+    protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         if (getSupportActionBar() != null) {
             getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         }
-        registerFlipper.setInAnimation(this, R.anim.push_left_in);
+        webView.getSettings().setJavaScriptEnabled(true);
+        webView.getSettings().setJavaScriptCanOpenWindowsAutomatically(true);
+        webView.getSettings().setSupportMultipleWindows(true);
+        webView.setWebViewClient(new WebViewClient());
+        webView.setWebChromeClient(new WebChromeClient());
+        webView.loadUrl("http://creditcard.ecitic.com/h5/shenqing/list.html?foot_s=0&sid=SJRSYXQ4");
+
     }
 
     @Override
@@ -49,10 +49,5 @@ public class RegisterActivity extends BaseActivity {
                 break;
         }
         return super.onOptionsItemSelected(item);
-    }
-
-    @Event(value = R.id.register_next_step_button)
-    private void onRegisterNextStepButtonClicked(View view) {
-        registerFlipper.setDisplayedChild(1);
     }
 }

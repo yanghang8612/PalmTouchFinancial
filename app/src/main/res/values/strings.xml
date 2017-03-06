@@ -49,8 +49,4 @@
     <string name="main_violation_query">违章查询</string>
     <string name="main_traffic_fine">交通罚款</string>
     <string name="main_fuel_card">加油卡充值</string>
-    <string name="title_activity_test">TestActivity</string>
-    <string name="title_home">Home</string>
-    <string name="title_dashboard">Dashboard</string>
-    <string name="title_notifications">Notifications</string>
 </resources>

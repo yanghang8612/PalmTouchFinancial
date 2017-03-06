@@ -11,7 +11,6 @@
         android:label="@string/app_name"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-
         <activity
             android:name=".activity.LoginActivity"
             android:label="@string/app_name">
@@ -21,16 +20,15 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-
         <activity
-            android:name=".activity.RegisterActivity"
-            android:theme="@style/AppTheme.NoActionBar" />
-
+            android:name=".activity.RegisterActivity" />
         <activity
             android:name=".activity.MainActivity"
             android:label=""
             android:launchMode="singleTask"
             android:theme="@style/AppTheme.NoActionBar" />
+        <activity
+            android:name=".activity.CreditCardApplyActivity" />
     </application>
 
 </manifest>

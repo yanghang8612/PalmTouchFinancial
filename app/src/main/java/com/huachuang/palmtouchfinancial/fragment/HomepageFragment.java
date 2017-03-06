@@ -1,10 +1,14 @@
 package com.huachuang.palmtouchfinancial.fragment;
 
+import android.view.View;
+
 import com.huachuang.palmtouchfinancial.R;
+import com.huachuang.palmtouchfinancial.activity.CreditCardApplyActivity;
 import com.huachuang.palmtouchfinancial.loader.AdImageLoader;
 import com.youth.banner.Banner;
 
 import org.xutils.view.annotation.ContentView;
+import org.xutils.view.annotation.Event;
 import org.xutils.view.annotation.ViewInject;
 
 import java.util.ArrayList;
@@ -26,5 +30,10 @@ public class HomepageFragment extends BaseFragment {
         images.add(R.drawable.ad_one);
         images.add(R.drawable.ad_two);
         adCarouselView.setImages(images).setImageLoader(new AdImageLoader()).start();
+    }
+
+    @Event(value = R.id.credit_card_apply_card)
+    private void onCreditCardApplyCardClicked(View view) {
+        CreditCardApplyActivity.actionStart(this.getContext());
     }
 }
