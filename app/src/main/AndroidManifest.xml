@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
-<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+<manifest
+    xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.huachuang.palmtouchfinancial">
 
     <uses-permission android:name="android.permission.INTERNET" />
@@ -20,15 +21,16 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity
-            android:name=".activity.RegisterActivity" />
+        <activity android:name=".activity.RegisterActivity" />
         <activity
             android:name=".activity.MainActivity"
             android:label=""
             android:launchMode="singleTask"
             android:theme="@style/AppTheme.NoActionBar" />
         <activity
-            android:name=".activity.CreditCardApplyActivity" />
+            android:name=".activity.CreditCardApplyActivity"
+            android:label="@string/activity_credit_card_apply" />
+        <activity android:name=".activity.PersonalInfoActivity"></activity>
     </application>
 
 </manifest>

@@ -42,6 +42,7 @@
                 android:src="@drawable/china_unicom" />
 
             <TextView
+                android:id="@+id/order_item_name"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_centerVertical="true"
@@ -53,6 +54,7 @@
 
 
             <TextView
+                android:id="@+id/order_item_status"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_centerVertical="true"

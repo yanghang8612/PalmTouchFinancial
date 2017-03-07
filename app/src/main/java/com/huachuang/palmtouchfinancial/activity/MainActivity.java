@@ -56,8 +56,9 @@ public class MainActivity extends BaseActivity
 
         bottomNavigationBar
                 .addItem(new BottomNavigationItem(R.drawable.ic_home_black_48dp, "主页"))
-                .addItem(new BottomNavigationItem(R.drawable.ic_assignment_black_48dp, "订单"))
-                .addItem(new BottomNavigationItem(R.drawable.ic_settings_black_48dp, "设置"))
+                .addItem(new BottomNavigationItem(R.drawable.ic_share_black_48dp, "分享"))
+                .addItem(new BottomNavigationItem(R.drawable.ic_money_black, "信用卡"))
+                .addItem(new BottomNavigationItem(R.drawable.ic_person_black_48dp, "我的"))
                 .setBarBackgroundColor(R.color.bottom_bar_background)
                 .setActiveColor(R.color.bottom_bar_active)
                 .setTabSelectedListener(new BottomNavigationBar.OnTabSelectedListener() {
