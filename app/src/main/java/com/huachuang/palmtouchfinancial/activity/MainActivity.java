@@ -3,6 +3,7 @@ package com.huachuang.palmtouchfinancial.activity;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
+import android.support.annotation.IdRes;
 import android.support.design.widget.NavigationView;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
@@ -14,13 +15,13 @@ import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
 
-import com.ashokvarma.bottomnavigation.BottomNavigationBar;
-import com.ashokvarma.bottomnavigation.BottomNavigationItem;
 import com.huachuang.palmtouchfinancial.R;
 import com.huachuang.palmtouchfinancial.fragment.FragmentFactory;
 
 import org.xutils.view.annotation.ContentView;
 import org.xutils.view.annotation.ViewInject;
+
+import it.sephiroth.android.library.bottomnavigation.BottomNavigation;
 
 @ContentView(R.layout.activity_main)
 public class MainActivity extends BaseActivity
@@ -33,7 +34,7 @@ public class MainActivity extends BaseActivity
     private DrawerLayout drawer;
 
     @ViewInject(R.id.bottom_navigation_bar)
-    private BottomNavigationBar bottomNavigationBar;
+    private BottomNavigation bottomNavigationBar;
 
     public static void actionStart(Context context) {
         Intent intent = new Intent(context, MainActivity.class);
@@ -54,27 +55,43 @@ public class MainActivity extends BaseActivity
         NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
         navigationView.setNavigationItemSelectedListener(this);
 
-        bottomNavigationBar
-                .addItem(new BottomNavigationItem(R.drawable.ic_home_black_48dp, "主页"))
-                .addItem(new BottomNavigationItem(R.drawable.ic_share_black_48dp, "分享"))
-                .addItem(new BottomNavigationItem(R.drawable.ic_money_black, "信用卡"))
-                .addItem(new BottomNavigationItem(R.drawable.ic_person_black_48dp, "我的"))
-                .setBarBackgroundColor(R.color.bottom_bar_background)
-                .setActiveColor(R.color.bottom_bar_active)
-                .setTabSelectedListener(new BottomNavigationBar.OnTabSelectedListener() {
-                    @Override
-                    public void onTabSelected(int position) {
-                        switchFragment(preFragmentIndex, position);
-                        preFragmentIndex = position;
-                    }
+//        bottomNavigationBar
+//                .setMode(BottomNavigationBar.MODE_FIXED)
+//                .setBackgroundStyle(BottomNavigationBar.BACKGROUND_STYLE_STATIC)
+//                .setActiveColor(R.color.bottom_bar_active)
+//                .setInActiveColor(R.color.bottom_bar_inactive)
+//                .setBarBackgroundColor(R.color.bottom_bar_background)
+//                .addItem(new BottomNavigationItem(R.drawable.ic_home_white, "主页"))
+//                .addItem(new BottomNavigationItem(R.drawable.ic_share_white, "分享"))
+//                .addItem(new BottomNavigationItem(R.drawable.ic_wallet_white, "信用卡"))
+//                .addItem(new BottomNavigationItem(R.drawable.ic_my_white, "我的"))
+//                .setTabSelectedListener(new BottomNavigationBar.OnTabSelectedListener() {
+//                    @Override
+//                    public void onTabSelected(int position) {
+//                        switchFragment(preFragmentIndex, position);
+//                        preFragmentIndex = position;
+//                    }
+//
+//                    @Override
+//                    public void onTabUnselected(int position) {}
+//
+//                    @Override
+//                    public void onTabReselected(int position) {}
+//                })
+//                .initialise();
 
-                    @Override
-                    public void onTabUnselected(int position) {}
+        bottomNavigationBar.setOnMenuItemClickListener(new BottomNavigation.OnMenuItemSelectionListener() {
+            @Override
+            public void onMenuItemSelect(@IdRes int i, int i1, boolean b) {
+                switchFragment(preFragmentIndex, i1);
+                preFragmentIndex = i1;
+            }
 
-                    @Override
-                    public void onTabReselected(int position) {}
-                })
-                .initialise();
+            @Override
+            public void onMenuItemReselect(@IdRes int i, int i1, boolean b) {
+
+            }
+        });
 
         showDefaultFragment();
     }

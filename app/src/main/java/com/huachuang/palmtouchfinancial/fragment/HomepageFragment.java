@@ -27,12 +27,14 @@ public class HomepageFragment extends BaseFragment {
     @Override
     protected void initFragment() {
         List<Integer> images = new ArrayList<>();
-        images.add(R.drawable.ad_one);
-        images.add(R.drawable.ad_two);
+        images.add(R.drawable.ad_1);
+        images.add(R.drawable.ad_2);
+        images.add(R.drawable.ad_3);
+        images.add(R.drawable.ad_4);
         adCarouselView.setImages(images).setImageLoader(new AdImageLoader()).start();
     }
 
-    @Event(value = R.id.credit_card_apply_card)
+    @Event(value = R.id.main_apply_for_credit_card)
     private void onCreditCardApplyCardClicked(View view) {
         CreditCardApplyActivity.actionStart(this.getContext());
     }

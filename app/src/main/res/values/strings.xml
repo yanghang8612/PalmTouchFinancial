@@ -15,6 +15,11 @@
     <string name="menu_change_password">修改密码</string>
     <string name="menu_sign_out">退出登录</string>
 
+    <string name="bottom_navigation_home">主页</string>
+    <string name="bottom_navigation_share">分享</string>
+    <string name="bottom_navigation_wallet">钱包</string>
+    <string name="bottom_navigation_my">我的</string>
+
     <string name="setting_share_app">分享APP</string>
     <string name="setting_check_update">检查更新</string>
     <string name="setting_feedback">意见反馈</string>
@@ -28,8 +33,8 @@
     <string name="prompt_verification_code">验证码</string>
     <string name="action_sign_in">登录</string>
     <string name="action_get_verification_code">获取验证码</string>
-    <string name="action_next_step">下一步</string>
-    <string name="action_sign_up">注册</string>
+    <string name="action_register_next_step">下一步</string>
+    <string name="action_register_finish">完成</string>
     <string name="goto_register_head">还没有帐号?</string>
     <string name="goto_register_tail">立即注册</string>
     <string name="error_invalid_phone_number">手机号码非法</string>
@@ -42,12 +47,15 @@
     <string name="main_apply_for_loan">网贷申请</string>
     <string name="main_mobile_payment">移动支付</string>
 
-    <string name="main_gift_card">礼品卡</string>
-    <string name="main_movie_ticket">电影票</string>
-    <string name="main_enjoy_myself">吃喝玩乐</string>
-    <string name="main_jd">京东优选</string>
+    <string name="main_share_app">分享</string>
+    <string name="main_my_shopping_mall">我的商城</string>
+    <string name="main_insurance">保险</string>
+    <string name="main_etc">ETC</string>
     <string name="main_mobile_phone_recharge">话费充值</string>
-    <string name="main_violation_query">违章查询</string>
-    <string name="main_traffic_fine">交通罚款</string>
+    <string name="main_movie_ticket">电影票</string>
     <string name="main_fuel_card">加油卡充值</string>
+    <string name="main_enjoy_myself">吃喝玩乐</string>
+
+    <string name="share_base_users">基础推荐数</string>
+    <string name="share_derive_users">衍生推荐数</string>
 </resources>

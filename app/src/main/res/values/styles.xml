@@ -17,7 +17,7 @@
 
 
     <style name="ButtonPrimary" parent="Theme.AppCompat.Light">
-        <item name="colorButtonNormal">@color/indigo</item>
+        <item name="colorButtonNormal">@color/colorPrimary</item>
         <item name="android:textColor">@color/icons</item>
     </style>
 

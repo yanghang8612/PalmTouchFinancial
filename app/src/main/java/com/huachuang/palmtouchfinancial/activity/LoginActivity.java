@@ -12,10 +12,10 @@ import android.text.TextUtils;
 import android.view.KeyEvent;
 import android.view.View;
 import android.view.inputmethod.EditorInfo;
-import android.widget.AutoCompleteTextView;
 import android.widget.EditText;
 import android.widget.TextView;
 
+import com.google.zxing.integration.android.IntentIntegrator;
 import com.huachuang.palmtouchfinancial.R;
 
 import org.xutils.view.annotation.ContentView;
@@ -72,8 +72,11 @@ public class LoginActivity extends BaseActivity {
 
     @Event(value = R.id.sign_in_button)
     private void onSignInButtonClicked(View view) {
-//        attemptLogin();
+        //attemptLogin();
         MainActivity.actionStart(this);
+        /*IntentIntegrator integrator = new IntentIntegrator(this);
+        integrator.setOrientationLocked(false);
+        integrator.initiateScan();*/
     }
 
     @Event(value = R.id.register_link)
