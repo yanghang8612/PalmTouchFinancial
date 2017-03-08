@@ -24,6 +24,7 @@
     <color name="orange">#EF6C00</color>
     <color name="brown">#5D4037</color>
     <color name="dark_orange">#BF360C</color>
+    <color name="light_grey">#EEEEEE</color>
 
     <color name="bottom_bar_background">#FFFFFF</color>
     <color name="bottom_bar_active">#1E88E5</color>
