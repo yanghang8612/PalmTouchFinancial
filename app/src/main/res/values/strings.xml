@@ -10,6 +10,7 @@
 
     <string name="menu_real_name_information">实名认证</string>
     <string name="menu_change_debit_card">结算卡变更</string>
+    <string name="menu_my_rate">我的费率</string>
     <string name="menu_profit_share">分润统计</string>
     <string name="menu_agent_manager">用户管理</string>
     <string name="menu_change_password">修改密码</string>

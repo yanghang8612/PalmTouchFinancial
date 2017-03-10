@@ -1,7 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <menu xmlns:android="http://schemas.android.com/apk/res/android">
-
-    <group>
+    <group android:id="@+id/menu_group_one">
         <item
             android:id="@+id/nav_real_name_information"
             android:icon="@drawable/ic_assignment_ind_black_48dp"
@@ -10,6 +9,10 @@
             android:id="@+id/nav_change_debit_card"
             android:icon="@drawable/ic_note_black_48dp"
             android:title="@string/menu_change_debit_card" />
+        <item
+            android:id="@+id/nav_my_rate"
+            android:icon="@drawable/ic_monetization_on_black_48dp"
+            android:title="@string/menu_my_rate" />
         <item
             android:id="@+id/nav_profit_share"
             android:icon="@drawable/ic_pan_tool_black_48dp"
