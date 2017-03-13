@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+    <item
+        android:title="@string/share_weixin_friends"
+        android:icon="@drawable/ssdk_oks_classic_wechat" />
+
+    <item
+        android:title="@string/share_weixin_moments"
+        android:icon="@drawable/ssdk_oks_classic_wechatmoments" />
+</menu>

@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+    <item
+        android:title="@string/share_qq_friends"
+        android:icon="@drawable/ssdk_oks_classic_qq" />
+
+    <item
+        android:title="@string/share_qq_qzone"
+        android:icon="@drawable/ssdk_oks_classic_qzone" />
+</menu>

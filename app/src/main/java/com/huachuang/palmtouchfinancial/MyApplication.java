@@ -3,6 +3,8 @@ package com.huachuang.palmtouchfinancial;
 import android.app.Application;
 import org.xutils.x;
 
+import cn.sharesdk.framework.ShareSDK;
+
 /**
  * Created by Asuka on 2017/2/27.
  */
@@ -14,5 +16,6 @@ public class MyApplication extends Application {
         super.onCreate();
         x.Ext.init(this);
         x.Ext.setDebug(true);
+        ShareSDK.initSDK(this, "");
     }
 }

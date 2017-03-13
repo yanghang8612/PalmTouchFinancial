@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <array name="profit_tab">
+        <item>推荐</item>
+        <item>信用卡</item>
+        <item>贷款</item>
+        <item>商城</item>
+    </array>
+</resources>
