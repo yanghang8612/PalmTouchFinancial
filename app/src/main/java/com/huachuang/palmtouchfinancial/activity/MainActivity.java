@@ -35,17 +35,15 @@ public class MainActivity extends BaseActivity
     @ViewInject(R.id.drawer_layout)
     private DrawerLayout drawer;
 
+    @ViewInject(R.id.nav_view)
+    NavigationView navigation;
+
     @ViewInject(R.id.bottom_navigation_bar)
     private BottomNavigation bottomNavigationBar;
 
     public static void actionStart(Context context) {
         Intent intent = new Intent(context, MainActivity.class);
         context.startActivity(intent);
-    }
-
-    @Event(value = R.id.nav_header_main)
-    private void onNavHeaderMainClicked(View view) {
-        PersonalInfoActivity.actionStart(this);
     }
 
     @Override
@@ -58,6 +56,16 @@ public class MainActivity extends BaseActivity
                 this, drawer, toolbar, R.string.navigation_drawer_open, R.string.navigation_drawer_close);
         drawer.addDrawerListener(toggle);
         toggle.syncState();
+
+        navigation.getHeaderView(0).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if (drawer.isDrawerOpen(GravityCompat.START)) {
+                    drawer.closeDrawer(GravityCompat.START);
+                }
+                PersonalInfoActivity.actionStart(MainActivity.this);
+            }
+        });
 
         NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
         navigationView.setNavigationItemSelectedListener(this);
