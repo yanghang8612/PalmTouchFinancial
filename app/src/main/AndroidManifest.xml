@@ -79,7 +79,8 @@
             </intent-filter>
         </activity>
         <activity android:name=".activity.RateActivity" />
-        <activity android:name=".activity.ProfitActivity"></activity>
+        <activity android:name=".activity.ProfitActivity" />
+        <activity android:name=".activity.RealNameInfoEditActivity"></activity>
     </application>
 
 </manifest>
