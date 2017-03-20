@@ -34,13 +34,24 @@
             android:label="@string/title_activity_register" />
         <activity
             android:name=".activity.MainActivity"
-            android:label=""
+            android:label="@string/title_activity_main"
             android:launchMode="singleTask"
             android:theme="@style/AppTheme.NoActionBar" />
         <activity
             android:name=".activity.CreditCardApplyActivity"
-            android:label="@string/activity_credit_card_apply" />
-        <activity android:name=".activity.PersonalInfoActivity" />
+            android:label="@string/title_activity_credit_card_apply" />
+        <activity
+            android:name=".activity.PersonalInfoActivity"
+            android:label="@string/title_activity_personal_info" />
+        <activity
+            android:name=".activity.RateActivity"
+            android:label="@string/title_activity_rate" />
+        <activity
+            android:name=".activity.ProfitActivity"
+            android:label="@string/title_activity_profit" />
+        <activity
+            android:name=".activity.RealNameInfoActivity"
+            android:label="@string/title_activity_real_name_info" />
         <activity
             android:name="com.journeyapps.barcodescanner.CaptureActivity"
             android:screenOrientation="fullSensor"
@@ -78,9 +89,7 @@
                 <category android:name="android.intent.category.DEFAULT" />
             </intent-filter>
         </activity>
-        <activity android:name=".activity.RateActivity" />
-        <activity android:name=".activity.ProfitActivity" />
-        <activity android:name=".activity.RealNameInfoEditActivity"></activity>
+        <activity android:name=".activity.DebitCardActivity"></activity>
     </application>
 
 </manifest>

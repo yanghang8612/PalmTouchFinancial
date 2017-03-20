@@ -20,7 +20,6 @@ import com.huachuang.palmtouchfinancial.R;
 import com.huachuang.palmtouchfinancial.fragment.FragmentFactory;
 
 import org.xutils.view.annotation.ContentView;
-import org.xutils.view.annotation.Event;
 import org.xutils.view.annotation.ViewInject;
 
 import it.sephiroth.android.library.bottomnavigation.BottomNavigation;
@@ -143,6 +142,7 @@ public class MainActivity extends BaseActivity
         int id = item.getItemId();
         switch (id) {
             case R.id.nav_real_name_information:
+                RealNameInfoActivity.actionStart(this);
                 break;
             case R.id.nav_change_debit_card:
                 break;

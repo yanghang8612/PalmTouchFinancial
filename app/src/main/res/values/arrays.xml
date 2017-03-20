@@ -6,4 +6,8 @@
         <item>贷款</item>
         <item>商城</item>
     </array>
+    <array name="sex">
+        <item>男</item>
+        <item>女</item>
+    </array>
 </resources>

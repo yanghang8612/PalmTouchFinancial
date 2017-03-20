@@ -1,12 +1,17 @@
 <resources>
     <string name="app_name">掌触金控</string>
-    <string name="activity_credit_card_apply">信用卡申请</string>
 
     <string name="navigation_drawer_open">Open navigation drawer</string>
     <string name="navigation_drawer_close">Close navigation drawer</string>
 
     <string name="title_activity_login">登录</string>
     <string name="title_activity_register">注册</string>
+    <string name="title_activity_main" />
+    <string name="title_activity_credit_card_apply">信用卡申请</string>
+    <string name="title_activity_personal_info">我的信息</string>
+    <string name="title_activity_profit">我的收益</string>
+    <string name="title_activity_rate">费率信息</string>
+    <string name="title_activity_real_name_info">实名认证</string>
 
     <string name="menu_real_name_information">实名认证</string>
     <string name="menu_change_debit_card">结算卡变更</string>
@@ -63,5 +68,4 @@
     <string name="share_weixin_moments">微信朋友圈</string>
     <string name="share_qq_friends">QQ好友</string>
     <string name="share_qq_qzone">QQ空间</string>
-    <string name="title_activity_profit">ProfitActivity</string>
 </resources>

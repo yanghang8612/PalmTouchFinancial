@@ -2,6 +2,7 @@ package com.huachuang.palmtouchfinancial.activity;
 
 import android.content.Context;
 import android.content.Intent;
+import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.MenuItem;
 
@@ -9,11 +10,11 @@ import com.huachuang.palmtouchfinancial.R;
 
 import org.xutils.view.annotation.ContentView;
 
-@ContentView(R.layout.activity_real_name_info_edit)
-public class RealNameInfoEditActivity extends BaseActivity {
+@ContentView(R.layout.activity_debit_card)
+public class DebitCardActivity extends BaseActivity {
 
     public static void actionStart(Context context) {
-        Intent intent = new Intent(context, RealNameInfoEditActivity.class);
+        Intent intent = new Intent(context, DebitCardActivity.class);
         context.startActivity(intent);
     }
 
