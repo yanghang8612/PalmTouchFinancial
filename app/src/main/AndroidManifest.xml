@@ -52,6 +52,12 @@
         <activity
             android:name=".activity.RealNameInfoActivity"
             android:label="@string/title_activity_real_name_info" />
+        <activity android:name=".activity.DebitCardActivity" />
+        <activity
+            android:name=".activity.DistrictActivity"
+            android:label="@string/title_activity_district"  />
+
+
         <activity
             android:name="com.journeyapps.barcodescanner.CaptureActivity"
             android:screenOrientation="fullSensor"
@@ -89,7 +95,6 @@
                 <category android:name="android.intent.category.DEFAULT" />
             </intent-filter>
         </activity>
-        <activity android:name=".activity.DebitCardActivity"></activity>
     </application>
 
 </manifest>

@@ -48,6 +48,7 @@ public class MainActivity extends BaseActivity
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 
@@ -145,6 +146,7 @@ public class MainActivity extends BaseActivity
                 RealNameInfoActivity.actionStart(this);
                 break;
             case R.id.nav_change_debit_card:
+                DistrictActivity.actionStart(this);
                 break;
             case R.id.nav_my_rate:
                 RateActivity.actionStart(this);

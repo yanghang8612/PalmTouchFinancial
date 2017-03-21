@@ -51,5 +51,6 @@ dependencies {
     compile 'com.flipboard:bottomsheet-commons:1.5.3'
     compile 'cn.pedant.sweetalert:library:1.2'
     compile 'com.github.ybq:Android-SpinKit:1.1.0'
+    compile 'com.opencsv:opencsv:3.7'
     testCompile 'junit:junit:4.12'
 }

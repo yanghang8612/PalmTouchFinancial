@@ -29,12 +29,12 @@ public class ProfitAdapter extends RecyclerView.Adapter<ProfitAdapter.ViewHolder
         return 0;
     }
 
-    public static class ViewHolder extends RecyclerView.ViewHolder{
+    static class ViewHolder extends RecyclerView.ViewHolder{
 
-        public TextView profitName;
-        public TextView profitWriteTime;
-        public TextView profitDetail;
-        public ImageView profitHeadPicture;
+        TextView profitName;
+        TextView profitWriteTime;
+        TextView profitDetail;
+        ImageView profitHeadPicture;
 
         public ViewHolder(View itemView) {
             super(itemView);

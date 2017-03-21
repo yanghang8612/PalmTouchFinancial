@@ -81,7 +81,7 @@ public class RealNameInfoActivity extends BaseActivity {
             currentFlipper = 1;
         }
         else {
-            realNameInfoFlipper.setInAnimation(this, R.anim.push_left_out);
+            realNameInfoFlipper.setInAnimation(this, R.anim.push_right_in);
             realNameInfoFlipper.setDisplayedChild(0);
             ((Button) view).setText("修改认证信息");
             currentFlipper = 0;
