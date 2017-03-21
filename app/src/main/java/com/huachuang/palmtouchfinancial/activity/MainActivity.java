@@ -2,8 +2,12 @@ package com.huachuang.palmtouchfinancial.activity;
 
 import android.content.Context;
 import android.content.Intent;
+import android.graphics.Color;
+import android.graphics.Rect;
+import android.os.Build;
 import android.os.Bundle;
 import android.support.annotation.IdRes;
+import android.support.design.widget.AppBarLayout;
 import android.support.design.widget.NavigationView;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
@@ -15,9 +19,12 @@ import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.view.WindowManager;
+import android.widget.LinearLayout;
 
 import com.huachuang.palmtouchfinancial.R;
 import com.huachuang.palmtouchfinancial.fragment.FragmentFactory;
+import com.huachuang.palmtouchfinancial.util.CommonUtils;
 
 import org.xutils.view.annotation.ContentView;
 import org.xutils.view.annotation.ViewInject;
@@ -35,10 +42,18 @@ public class MainActivity extends BaseActivity
     private DrawerLayout drawer;
 
     @ViewInject(R.id.nav_view)
-    NavigationView navigation;
+    private NavigationView navigationView;
+
+    @ViewInject(R.id.toolbar)
+    Toolbar toolbar;
+
+    @ViewInject(R.id.main_content)
+    LinearLayout mainContent;
 
     @ViewInject(R.id.bottom_navigation_bar)
     private BottomNavigation bottomNavigationBar;
+
+    private int statusBarHeight;
 
     public static void actionStart(Context context) {
         Intent intent = new Intent(context, MainActivity.class);
@@ -49,7 +64,19 @@ public class MainActivity extends BaseActivity
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
-        Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
+        int resourceId = getResources().getIdentifier("status_bar_height", "dimen", "android");
+        if (resourceId > 0) {
+            statusBarHeight = getResources().getDimensionPixelSize(resourceId);
+        }
+
+        if (Build.VERSION.SDK_INT >= 21) {
+            int option = View.SYSTEM_UI_FLAG_LAYOUT_FULLSCREEN;
+            getWindow().getDecorView().setSystemUiVisibility(option);
+        }
+
+        AppBarLayout.LayoutParams toolbarParams = (AppBarLayout.LayoutParams) toolbar.getLayoutParams();
+        toolbarParams.setMargins(0, statusBarHeight, 0, 0);
+        toolbar.setLayoutParams(toolbarParams);
         setSupportActionBar(toolbar);
 
         ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(
@@ -57,7 +84,7 @@ public class MainActivity extends BaseActivity
         drawer.addDrawerListener(toggle);
         toggle.syncState();
 
-        navigation.getHeaderView(0).setOnClickListener(new View.OnClickListener() {
+        navigationView.getHeaderView(0).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 if (drawer.isDrawerOpen(GravityCompat.START)) {
@@ -66,8 +93,6 @@ public class MainActivity extends BaseActivity
                 PersonalInfoActivity.actionStart(MainActivity.this);
             }
         });
-
-        NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
         navigationView.setNavigationItemSelectedListener(this);
 
 //        bottomNavigationBar
@@ -176,6 +201,21 @@ public class MainActivity extends BaseActivity
     }
 
     private void switchFragment(int fromIndex, int toIndex) {
+        int contentMarginTop = (toIndex == 0) ? 0 : statusBarHeight + CommonUtils.dip2px(this, 48);
+        DrawerLayout.LayoutParams params = (DrawerLayout.LayoutParams) mainContent.getLayoutParams();
+        params.setMargins(0, contentMarginTop, 0, 0);
+        mainContent.setLayoutParams(params);
+        if (Build.VERSION.SDK_INT >= 21) {
+            if (toIndex == 0) {
+                getWindow().setStatusBarColor(Color.TRANSPARENT);
+                toolbar.setBackgroundColor(Color.TRANSPARENT);
+            }
+            else {
+                getWindow().setStatusBarColor(getResources().getColor(R.color.colorPrimary));
+                toolbar.setBackgroundColor(getResources().getColor(R.color.colorPrimary));
+            }
+        }
+
         Fragment from = FragmentFactory.getInstanceByIndex(fromIndex), to = FragmentFactory.getInstanceByIndex(toIndex);
         if (from == null || to == null) {
             return;

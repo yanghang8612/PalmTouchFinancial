@@ -10,7 +10,8 @@
     <com.youth.banner.Banner
         android:id="@+id/ad_carousel_view"
         android:layout_width="match_parent"
-        android:layout_height="@dimen/ad_carousel_height"/>
+        android:layout_height="@dimen/ad_carousel_height"
+        android:clipToPadding="false"/>
 
     <LinearLayout
         android:layout_width="match_parent"

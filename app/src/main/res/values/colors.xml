@@ -12,6 +12,7 @@
     <color name="secondary_text">#727272</color>
     <color name="icons">#FFFFFF</color>
     <color name="divider">#B6B6B6</color>
+    <color name="transparent">#00000000</color>
 
     <color name="indigo">#536DFE</color>
     <color name="blue">#1E88E5</color>
