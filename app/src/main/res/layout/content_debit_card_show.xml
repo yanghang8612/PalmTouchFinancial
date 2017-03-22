@@ -6,7 +6,7 @@
     android:layout_height="match_parent">
 
     <LinearLayout
-        android:id="@+id/real_name_info_show_view"
+        android:id="@+id/debit_card_show_view"
         android:orientation="vertical"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -15,7 +15,7 @@
         <LinearLayout
             android:orientation="horizontal"
             android:layout_width="match_parent"
-            android:layout_height="@dimen/real_row_height">
+            android:layout_height="@dimen/debit_row_height">
 
             <TextView
                 android:layout_width="0dp"
@@ -23,16 +23,17 @@
                 android:layout_weight="1"
                 android:layout_gravity="center"
                 android:gravity="center"
-                android:text="姓名"
+                android:text="结算户主"
                 android:textColor="@color/black" />
 
             <LinearLayout
                 android:layout_width="1dp"
                 android:layout_height="match_parent"
                 android:background="@color/divider"
-                android:layout_margin="@dimen/real_divider_margin" />
+                android:layout_margin="@dimen/debit_divider_margin" />
 
             <TextView
+                android:id="@+id/debit_card_owner_name"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_weight="3"
@@ -44,7 +45,7 @@
         <LinearLayout
             android:orientation="horizontal"
             android:layout_width="match_parent"
-            android:layout_height="@dimen/real_row_height">
+            android:layout_height="@dimen/debit_row_height">
 
             <TextView
                 android:layout_width="0dp"
@@ -52,28 +53,29 @@
                 android:layout_weight="1"
                 android:layout_gravity="center"
                 android:gravity="center"
-                android:text="身份证号"
+                android:text="结算卡号"
                 android:textColor="@color/black" />
 
             <LinearLayout
                 android:layout_width="1dp"
                 android:layout_height="match_parent"
                 android:background="@color/divider"
-                android:layout_margin="@dimen/real_divider_margin" />
+                android:layout_margin="@dimen/debit_divider_margin" />
 
             <TextView
+                android:id="@+id/debit_card_number"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_weight="3"
                 android:layout_gravity="center"
-                android:text="41152119******0033" />
+                android:text="622202020******8785" />
 
         </LinearLayout>
 
         <LinearLayout
             android:orientation="horizontal"
             android:layout_width="match_parent"
-            android:layout_height="@dimen/real_row_height">
+            android:layout_height="@dimen/debit_row_height">
 
             <TextView
                 android:layout_width="0dp"
@@ -81,21 +83,52 @@
                 android:layout_weight="1"
                 android:layout_gravity="center"
                 android:gravity="center"
-                android:text="性别"
+                android:text="所属银行"
                 android:textColor="@color/black" />
 
             <LinearLayout
                 android:layout_width="1dp"
                 android:layout_height="match_parent"
                 android:background="@color/divider"
-                android:layout_margin="@dimen/real_divider_margin" />
+                android:layout_margin="@dimen/debit_divider_margin" />
 
             <TextView
+                android:id="@+id/debit_card_bank"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_weight="3"
                 android:layout_gravity="center"
-                android:text="男" />
+                android:text="中国工商银行北京人民大学支行" />
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:orientation="horizontal"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/debit_row_height">
+
+            <TextView
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:layout_gravity="center"
+                android:gravity="center"
+                android:text="银行地区"
+                android:textColor="@color/black" />
+
+            <LinearLayout
+                android:layout_width="1dp"
+                android:layout_height="match_parent"
+                android:background="@color/divider"
+                android:layout_margin="@dimen/debit_divider_margin" />
+
+            <TextView
+                android:id="@+id/debit_card_province"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="3"
+                android:layout_gravity="center"
+                android:text="北京市海淀区" />
 
         </LinearLayout>
 

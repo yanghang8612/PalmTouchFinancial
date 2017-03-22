@@ -29,7 +29,8 @@
             android:drawableTop="@drawable/ic_credit_card_white"
             android:drawablePadding="@dimen/main_header_padding"
             android:text="@string/main_apply_for_credit_card"
-            android:textColor="@color/white" />
+            android:textColor="@color/white"
+            android:textSize="@dimen/main_header_text_size" />
 
         <TextView
             android:layout_width="0dp"
@@ -40,7 +41,8 @@
             android:drawableTop="@drawable/ic_loan_white"
             android:drawablePadding="@dimen/main_header_padding"
             android:text="@string/main_apply_for_loan"
-            android:textColor="@color/white" />
+            android:textColor="@color/white"
+            android:textSize="@dimen/main_header_text_size" />
 
         <TextView
             android:layout_width="0dp"
@@ -51,7 +53,8 @@
             android:drawableTop="@drawable/ic_fingerprint_white"
             android:drawablePadding="@dimen/main_header_padding"
             android:text="@string/main_mobile_payment"
-            android:textColor="@color/white" />
+            android:textColor="@color/white"
+            android:textSize="@dimen/main_header_text_size" />
 
     </LinearLayout>
 
@@ -80,7 +83,8 @@
                 android:layout_height="wrap_content"
                 android:layout_marginTop="@dimen/main_item_margin"
                 android:text="@string/main_share_app"
-                android:textColor="@color/black" />
+                android:textColor="@color/black"
+                android:textSize="@dimen/main_content_text_size" />
 
         </LinearLayout>
 
@@ -103,7 +107,8 @@
                 android:layout_height="wrap_content"
                 android:layout_marginTop="@dimen/main_item_margin"
                 android:text="@string/main_my_shopping_mall"
-                android:textColor="@color/black" />
+                android:textColor="@color/black"
+                android:textSize="@dimen/main_content_text_size" />
 
         </LinearLayout>
 
@@ -126,7 +131,8 @@
                 android:layout_height="wrap_content"
                 android:layout_marginTop="@dimen/main_item_margin"
                 android:text="@string/main_insurance"
-                android:textColor="@color/black" />
+                android:textColor="@color/black"
+                android:textSize="@dimen/main_content_text_size" />
 
         </LinearLayout>
 
@@ -149,7 +155,8 @@
                 android:layout_height="wrap_content"
                 android:layout_marginTop="@dimen/main_item_margin"
                 android:text="@string/main_etc"
-                android:textColor="@color/black" />
+                android:textColor="@color/black"
+                android:textSize="@dimen/main_content_text_size" />
 
         </LinearLayout>
 
@@ -188,7 +195,8 @@
                 android:layout_height="wrap_content"
                 android:layout_marginTop="@dimen/main_item_margin"
                 android:text="@string/main_mobile_phone_recharge"
-                android:textColor="@color/black" />
+                android:textColor="@color/black"
+                android:textSize="@dimen/main_content_text_size" />
 
         </LinearLayout>
 
@@ -211,7 +219,8 @@
                 android:layout_height="wrap_content"
                 android:layout_marginTop="@dimen/main_item_margin"
                 android:text="@string/main_movie_ticket"
-                android:textColor="@color/black" />
+                android:textColor="@color/black"
+                android:textSize="@dimen/main_content_text_size" />
 
         </LinearLayout>
 
@@ -234,7 +243,8 @@
                 android:layout_height="wrap_content"
                 android:layout_marginTop="@dimen/main_item_margin"
                 android:text="@string/main_fuel_card"
-                android:textColor="@color/black" />
+                android:textColor="@color/black"
+                android:textSize="@dimen/main_content_text_size" />
 
         </LinearLayout>
 
@@ -257,7 +267,8 @@
                 android:layout_height="wrap_content"
                 android:layout_marginTop="@dimen/main_item_margin"
                 android:text="@string/main_enjoy_myself"
-                android:textColor="@color/black" />
+                android:textColor="@color/black"
+                android:textSize="@dimen/main_content_text_size" />
 
         </LinearLayout>
 

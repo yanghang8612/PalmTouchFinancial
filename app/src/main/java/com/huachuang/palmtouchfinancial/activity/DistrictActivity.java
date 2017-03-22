@@ -30,6 +30,8 @@ public class DistrictActivity extends BaseActivity {
         context.startActivity(intent);
     }
 
+    private DistrictAdapter adapter;
+
     @ViewInject(R.id.district_final_name)
     private TextView districtFinalNameView;
 
@@ -38,8 +40,6 @@ public class DistrictActivity extends BaseActivity {
 
     @ViewInject(R.id.district_list)
     private RecyclerView districtRecyclerList;
-
-    private DistrictAdapter adapter;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {

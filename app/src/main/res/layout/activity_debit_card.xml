@@ -1,9 +1,26 @@
 <?xml version="1.0" encoding="utf-8"?>
-<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
+    android:orientation="vertical"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context="com.huachuang.palmtouchfinancial.activity.DebitCardActivity">
 
-</android.support.constraint.ConstraintLayout>
+    <ViewFlipper
+        android:id="@+id/debit_card_flipper"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1">
+        <include android:id="@+id/debit_card_show_content" layout="@layout/content_debit_card_show" />
+        <include android:id="@+id/debit_card_edit_content" layout="@layout/content_debit_card_edit" />
+    </ViewFlipper>
+
+    <Button
+        android:id="@+id/debit_card_button"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="修改结算卡信息"
+        android:theme="@style/ButtonPrimary" />
+
+</LinearLayout>

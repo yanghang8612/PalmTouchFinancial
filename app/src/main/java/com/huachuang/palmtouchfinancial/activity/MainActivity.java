@@ -4,6 +4,7 @@ import android.content.Context;
 import android.content.Intent;
 import android.graphics.Color;
 import android.graphics.Rect;
+import android.graphics.Typeface;
 import android.os.Build;
 import android.os.Bundle;
 import android.support.annotation.IdRes;
@@ -35,8 +36,16 @@ import it.sephiroth.android.library.bottomnavigation.BottomNavigation;
 public class MainActivity extends BaseActivity
         implements NavigationView.OnNavigationItemSelectedListener {
 
+    private static final String TAG = "MainActivity";
+
+    public static void actionStart(Context context) {
+        Intent intent = new Intent(context, MainActivity.class);
+        context.startActivity(intent);
+    }
+
     private int preFragmentIndex = 0;
     private final int defaultFragmentIndex = 0;
+    private int statusBarHeight;
 
     @ViewInject(R.id.drawer_layout)
     private DrawerLayout drawer;
@@ -52,13 +61,6 @@ public class MainActivity extends BaseActivity
 
     @ViewInject(R.id.bottom_navigation_bar)
     private BottomNavigation bottomNavigationBar;
-
-    private int statusBarHeight;
-
-    public static void actionStart(Context context) {
-        Intent intent = new Intent(context, MainActivity.class);
-        context.startActivity(intent);
-    }
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -171,7 +173,7 @@ public class MainActivity extends BaseActivity
                 RealNameInfoActivity.actionStart(this);
                 break;
             case R.id.nav_change_debit_card:
-                DistrictActivity.actionStart(this);
+                DebitCardActivity.actionStart(this);
                 break;
             case R.id.nav_my_rate:
                 RateActivity.actionStart(this);
@@ -201,6 +203,19 @@ public class MainActivity extends BaseActivity
     }
 
     private void switchFragment(int fromIndex, int toIndex) {
+        Fragment from = FragmentFactory.getInstanceByIndex(fromIndex), to = FragmentFactory.getInstanceByIndex(toIndex);
+        if (from == null || to == null) {
+            return;
+        }
+        FragmentManager fragmentManager = getSupportFragmentManager();
+        FragmentTransaction transaction = fragmentManager.beginTransaction();
+        if (!to.isAdded()) {
+            transaction.hide(from).add(R.id.main_fragment, to).commit();
+        }
+        else {
+            transaction.hide(from).show(to).commit();
+        }
+
         int contentMarginTop = (toIndex == 0) ? 0 : statusBarHeight + CommonUtils.dip2px(this, 48);
         DrawerLayout.LayoutParams params = (DrawerLayout.LayoutParams) mainContent.getLayoutParams();
         params.setMargins(0, contentMarginTop, 0, 0);
@@ -214,19 +229,6 @@ public class MainActivity extends BaseActivity
                 getWindow().setStatusBarColor(getResources().getColor(R.color.colorPrimary));
                 toolbar.setBackgroundColor(getResources().getColor(R.color.colorPrimary));
             }
-        }
-
-        Fragment from = FragmentFactory.getInstanceByIndex(fromIndex), to = FragmentFactory.getInstanceByIndex(toIndex);
-        if (from == null || to == null) {
-            return;
-        }
-        FragmentManager fragmentManager = getSupportFragmentManager();
-        FragmentTransaction transaction = fragmentManager.beginTransaction();
-        if (!to.isAdded()) {
-            transaction.hide(from).add(R.id.main_fragment, to).commit();
-        }
-        else {
-            transaction.hide(from).show(to).commit();
         }
     }
 }

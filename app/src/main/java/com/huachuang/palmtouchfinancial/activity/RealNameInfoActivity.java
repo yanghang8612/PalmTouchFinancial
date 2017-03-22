@@ -3,19 +3,20 @@ package com.huachuang.palmtouchfinancial.activity;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
+import android.support.annotation.NonNull;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ViewFlipper;
 
+import com.afollestad.materialdialogs.DialogAction;
+import com.afollestad.materialdialogs.MaterialDialog;
 import com.huachuang.palmtouchfinancial.R;
 
 import org.xutils.view.annotation.ContentView;
 import org.xutils.view.annotation.Event;
 import org.xutils.view.annotation.ViewInject;
-
-import cn.pedant.SweetAlert.SweetAlertDialog;
 
 @ContentView(R.layout.activity_real_name_info)
 public class RealNameInfoActivity extends BaseActivity {
@@ -25,13 +26,10 @@ public class RealNameInfoActivity extends BaseActivity {
         context.startActivity(intent);
     }
 
+    private short currentFlipper = 0;
+
     @ViewInject(R.id.real_name_info_flipper)
     private ViewFlipper realNameInfoFlipper;
-
-    @ViewInject(R.id.real_name_info_name_edit)
-    private EditText nameEdit;
-
-    private short currentFlipper = 0;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -45,21 +43,22 @@ public class RealNameInfoActivity extends BaseActivity {
     public boolean onOptionsItemSelected(MenuItem item) {
         if (item.getItemId() == android.R.id.home) {
             if (currentFlipper == 1) {
-                new SweetAlertDialog(this, SweetAlertDialog.WARNING_TYPE)
-                        .setTitleText("确认不保存退出吗?")
-                        .setCancelText("取消")
-                        .setConfirmText("确认")
-                        .showCancelButton(true)
-                        .setCancelClickListener(new SweetAlertDialog.OnSweetClickListener() {
+                new MaterialDialog.Builder(this)
+                        .content("确认不保存退出吗?")
+                        .contentColorRes(R.color.black)
+                        .positiveText("确认")
+                        .negativeText("取消")
+                        .autoDismiss(false)
+                        .onPositive(new MaterialDialog.SingleButtonCallback() {
                             @Override
-                            public void onClick(SweetAlertDialog sDialog) {
-                                sDialog.dismissWithAnimation();
+                            public void onClick(@NonNull MaterialDialog dialog, @NonNull DialogAction which) {
+                                finish();
                             }
                         })
-                        .setConfirmClickListener(new SweetAlertDialog.OnSweetClickListener() {
+                        .onNegative(new MaterialDialog.SingleButtonCallback() {
                             @Override
-                            public void onClick(SweetAlertDialog sDialog) {
-                                finish();
+                            public void onClick(@NonNull MaterialDialog dialog, @NonNull DialogAction which) {
+                                dialog.dismiss();
                             }
                         })
                         .show();
