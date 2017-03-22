@@ -32,9 +32,10 @@
     <string name="setting_share_app">分享APP</string>
     <string name="setting_check_update">检查更新</string>
     <string name="setting_feedback">意见反馈</string>
+    <string name="setting_user_agreement">用户协议</string>
     <string name="setting_about_us">关于我们</string>
+    <string name="setting_hotline">客服热线</string>
 
-    <!-- Strings related to login -->
     <string name="prompt_phone_number">手机号</string>
     <string name="prompt_password">密码</string>
     <string name="prompt_confirm_password">确认密码</string>

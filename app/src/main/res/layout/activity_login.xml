@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/login_content"
     android:orientation="vertical"
@@ -36,31 +37,40 @@
 
             <android.support.design.widget.TextInputLayout
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content">
+                android:layout_height="wrap_content"
+                android:paddingRight="20dp">
 
-                <android.support.design.widget.TextInputEditText
+                <com.rengwuxian.materialedittext.MaterialEditText
                     android:id="@+id/login_phone_number"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:drawableLeft="@drawable/ic_phone_black_24dp"
                     android:hint="@string/prompt_phone_number"
                     android:inputType="phone"
-                    android:maxLines="1" />
+                    android:maxLines="1"
+                    android:textSize="15sp"
+                    app:met_underlineColor="@color/black"
+                    app:met_iconLeft="@drawable/ic_phone"
+                    app:met_iconPadding="0dp"/>
 
             </android.support.design.widget.TextInputLayout>
 
             <android.support.design.widget.TextInputLayout
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content">
+                android:layout_height="wrap_content"
+                android:paddingRight="20dp">
 
-                <android.support.design.widget.TextInputEditText
+                <com.rengwuxian.materialedittext.MaterialEditText
                     android:id="@+id/login_password"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:hint="@string/prompt_password"
                     android:imeOptions="actionUnspecified"
                     android:inputType="textPassword"
-                    android:maxLines="1" />
+                    android:maxLines="1"
+                    android:textSize="15sp"
+                    app:met_underlineColor="@color/black"
+                    app:met_iconLeft="@drawable/ic_password"
+                    app:met_iconPadding="0dp" />
 
             </android.support.design.widget.TextInputLayout>
 
@@ -69,8 +79,8 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:text="@string/action_sign_in"
-                android:textStyle="bold"
-                android:theme="@style/ButtonPrimary" />
+                android:theme="@style/ButtonPrimary"
+                android:textSize="15sp" />
 
             <LinearLayout
                 android:layout_width="match_parent"
@@ -92,7 +102,7 @@
                     android:gravity="center_vertical"
                     android:text="@string/goto_register_tail"
                     android:textSize="16sp"
-                    android:textColor="@color/accent" />
+                    android:textColor="@color/colorPrimary" />
 
             </LinearLayout>
 

@@ -55,9 +55,10 @@
         <activity android:name=".activity.DebitCardActivity" />
         <activity
             android:name=".activity.DistrictActivity"
-            android:label="@string/title_activity_district"  />
-
-
+            android:label="@string/title_activity_district" />
+        <activity
+            android:name=".activity.SpecificApplyActivity"
+            android:theme="@style/AppTheme.NoActionBar"/>
         <activity
             android:name="com.journeyapps.barcodescanner.CaptureActivity"
             android:screenOrientation="fullSensor"
