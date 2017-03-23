@@ -14,6 +14,7 @@ import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
 import android.support.v4.view.GravityCompat;
+import android.support.v4.view.ViewPager;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.widget.Toolbar;
@@ -26,9 +27,18 @@ import android.widget.LinearLayout;
 import com.huachuang.palmtouchfinancial.R;
 import com.huachuang.palmtouchfinancial.fragment.FragmentFactory;
 import com.huachuang.palmtouchfinancial.util.CommonUtils;
+import com.uuch.adlibrary.AdConstant;
+import com.uuch.adlibrary.AdManager;
+import com.uuch.adlibrary.bean.AdInfo;
+import com.uuch.adlibrary.transformer.ZoomOutPageTransformer;
+import com.youth.banner.transformer.DepthPageTransformer;
 
 import org.xutils.view.annotation.ContentView;
 import org.xutils.view.annotation.ViewInject;
+
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
 
 import it.sephiroth.android.library.bottomnavigation.BottomNavigation;
 
@@ -37,6 +47,7 @@ public class MainActivity extends BaseActivity
         implements NavigationView.OnNavigationItemSelectedListener {
 
     private static final String TAG = "MainActivity";
+    private static final int defaultFragmentIndex = 0;
 
     public static void actionStart(Context context) {
         Intent intent = new Intent(context, MainActivity.class);
@@ -44,8 +55,10 @@ public class MainActivity extends BaseActivity
     }
 
     private int preFragmentIndex = 0;
-    private final int defaultFragmentIndex = 0;
-    private int statusBarHeight;
+    private int statusBarHeight = 0;
+    private List<AdInfo> adList = new ArrayList<>();
+    private AdManager adManager = new AdManager(MainActivity.this, adList);
+    private ViewPager.PageTransformer transformer = new ZoomOutPageTransformer();
 
     @ViewInject(R.id.drawer_layout)
     private DrawerLayout drawer;
@@ -97,45 +110,29 @@ public class MainActivity extends BaseActivity
         });
         navigationView.setNavigationItemSelectedListener(this);
 
-//        bottomNavigationBar
-//                .setMode(BottomNavigationBar.MODE_FIXED)
-//                .setBackgroundStyle(BottomNavigationBar.BACKGROUND_STYLE_STATIC)
-//                .setActiveColor(R.color.bottom_bar_active)
-//                .setInActiveColor(R.color.bottom_bar_inactive)
-//                .setBarBackgroundColor(R.color.bottom_bar_background)
-//                .addItem(new BottomNavigationItem(R.drawable.ic_home_white, "主页"))
-//                .addItem(new BottomNavigationItem(R.drawable.ic_share_white, "分享"))
-//                .addItem(new BottomNavigationItem(R.drawable.ic_wallet_white, "信用卡"))
-//                .addItem(new BottomNavigationItem(R.drawable.ic_my_white, "我的"))
-//                .setTabSelectedListener(new BottomNavigationBar.OnTabSelectedListener() {
-//                    @Override
-//                    public void onTabSelected(int position) {
-//                        switchFragment(preFragmentIndex, position);
-//                        preFragmentIndex = position;
-//                    }
-//
-//                    @Override
-//                    public void onTabUnselected(int position) {}
-//
-//                    @Override
-//                    public void onTabReselected(int position) {}
-//                })
-//                .initialise();
-
         bottomNavigationBar.setOnMenuItemClickListener(new BottomNavigation.OnMenuItemSelectionListener() {
             @Override
-            public void onMenuItemSelect(@IdRes int i, int i1, boolean b) {
-                switchFragment(preFragmentIndex, i1);
-                preFragmentIndex = i1;
+            public void onMenuItemSelect(@IdRes int id, int index, boolean b) {
+                switchFragment(preFragmentIndex, index);
+                preFragmentIndex = index;
             }
 
             @Override
-            public void onMenuItemReselect(@IdRes int i, int i1, boolean b) {
+            public void onMenuItemReselect(@IdRes int id, int index, boolean b) {
 
             }
         });
 
+        initAdList();
+        adManager.setOverScreen(true)
+                .setPageTransformer(transformer)
+                .setBounciness(0)
+                .setSpeed(5);
+        adManager.showAdDialog(AdConstant.ANIM_DOWN_TO_UP);
+
         showDefaultFragment();
+
+        System.out.println(Arrays.toString(CommonUtils.getCardType(this, "6222020200079068785")));
     }
 
     @Override
@@ -192,6 +189,17 @@ public class MainActivity extends BaseActivity
         }
         drawer.closeDrawer(GravityCompat.START);
         return true;
+    }
+
+    private void initAdList() {
+        AdInfo adInfo;
+        adInfo = new AdInfo();
+        adInfo.setActivityImg("https://raw.githubusercontent.com/yipianfengye/android-adDialog/master/images/testImage1.png");
+        adList.add(adInfo);
+
+        adInfo = new AdInfo();
+        adInfo.setActivityImg("https://raw.githubusercontent.com/yipianfengye/android-adDialog/master/images/testImage2.png");
+        adList.add(adInfo);
     }
 
     private void showDefaultFragment() {

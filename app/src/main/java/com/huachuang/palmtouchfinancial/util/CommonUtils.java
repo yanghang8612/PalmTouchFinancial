@@ -1,13 +1,18 @@
 package com.huachuang.palmtouchfinancial.util;
 
 import android.content.Context;
+import android.support.v7.app.AppCompatActivity;
 
 import com.opencsv.CSVReader;
 
 import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.HashSet;
+import java.util.LinkedHashSet;
 import java.util.List;
+import java.util.Set;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
@@ -49,9 +54,9 @@ public class CommonUtils {
 
     private static CSVReader csvReader = null;
 
-    private static CSVReader getReader(Context context) {
+    private static CSVReader getReader(Context context, String csvName) {
         try {
-            InputStream inputStream = context.getAssets().open("district-succinct.csv");
+            InputStream inputStream = context.getAssets().open(csvName);
             InputStreamReader fileReader = new InputStreamReader(inputStream);
             csvReader = new CSVReader(fileReader, ' ');
         } catch (Exception e) {
@@ -61,7 +66,7 @@ public class CommonUtils {
     }
 
     public static List<String[]> getDistricts(Context context, String keyword) {
-        CSVReader reader = getReader(context);
+        CSVReader reader = getReader(context, "district-succinct.csv");
         List<String[]> districts = new ArrayList<>();
         try {
             if (reader != null) {
@@ -76,5 +81,22 @@ public class CommonUtils {
             e.printStackTrace();
         }
         return districts;
+    }
+
+    public static String[] getCardType(Context context, String cardNumber) {
+        CSVReader reader = getReader(context, "cards-identifier.csv");
+        try {
+            if (reader != null) {
+                String[] nextLine;
+                while ((nextLine = reader.readNext()) != null) {
+                    if (cardNumber.contains(nextLine[2])) {
+                        return nextLine;
+                    }
+                }
+            }
+        } catch (Exception e){
+            e.printStackTrace();
+        }
+        return null;
     }
 }
