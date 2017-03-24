@@ -30,4 +30,6 @@
     <color name="bottom_bar_background">#FFFFFF</color>
     <color name="bottom_bar_active">#1E88E5</color>
     <color name="bottom_bar_inactive">#757575</color>
+
+    <color name="credit_card_item">#E9507D</color>
 </resources>

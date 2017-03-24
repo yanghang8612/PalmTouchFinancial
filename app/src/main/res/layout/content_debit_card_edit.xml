@@ -89,39 +89,6 @@
                 android:layout_weight="1"
                 android:layout_gravity="center"
                 android:gravity="center"
-                android:text="结算卡号"
-                android:textColor="@color/black" />
-
-            <LinearLayout
-                android:layout_width="1dp"
-                android:layout_height="match_parent"
-                android:background="@color/divider"
-                android:layout_margin="@dimen/debit_divider_margin" />
-
-            <EditText
-                android:id="@+id/debit_card_confirm_number_edit"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_weight="3"
-                android:layout_gravity="center"
-                android:inputType="number"
-                android:maxEms="18"
-                android:text="6222020200079068785"
-                android:textSize="15sp" />
-
-        </LinearLayout>
-
-        <LinearLayout
-            android:orientation="horizontal"
-            android:layout_width="match_parent"
-            android:layout_height="@dimen/debit_row_height">
-
-            <TextView
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:layout_gravity="center"
-                android:gravity="center"
                 android:text="所属银行"
                 android:textColor="@color/black" />
 

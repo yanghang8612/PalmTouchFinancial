@@ -113,8 +113,7 @@ public class MainActivity extends BaseActivity
         bottomNavigationBar.setOnMenuItemClickListener(new BottomNavigation.OnMenuItemSelectionListener() {
             @Override
             public void onMenuItemSelect(@IdRes int id, int index, boolean b) {
-                switchFragment(preFragmentIndex, index);
-                preFragmentIndex = index;
+                switchFragment(index);
             }
 
             @Override
@@ -210,8 +209,8 @@ public class MainActivity extends BaseActivity
         transaction.commit();
     }
 
-    private void switchFragment(int fromIndex, int toIndex) {
-        Fragment from = FragmentFactory.getInstanceByIndex(fromIndex), to = FragmentFactory.getInstanceByIndex(toIndex);
+    public void switchFragment(int toIndex) {
+        Fragment from = FragmentFactory.getInstanceByIndex(preFragmentIndex), to = FragmentFactory.getInstanceByIndex(toIndex);
         if (from == null || to == null) {
             return;
         }
@@ -223,6 +222,7 @@ public class MainActivity extends BaseActivity
         else {
             transaction.hide(from).show(to).commit();
         }
+        preFragmentIndex = toIndex;
 
         int contentMarginTop = (toIndex == 0) ? 0 : statusBarHeight + CommonUtils.dip2px(this, 48);
         DrawerLayout.LayoutParams params = (DrawerLayout.LayoutParams) mainContent.getLayoutParams();

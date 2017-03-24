@@ -75,6 +75,7 @@
             android:layout_height="@dimen/main_single_row_height">
 
             <LinearLayout
+                android:id="@+id/main_share_app"
                 android:orientation="vertical"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
@@ -99,6 +100,7 @@
             </LinearLayout>
 
             <LinearLayout
+                android:id="@+id/main_my_shopping_mall"
                 android:orientation="vertical"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
@@ -123,6 +125,7 @@
             </LinearLayout>
 
             <LinearLayout
+                android:id="@+id/main_insurance"
                 android:orientation="vertical"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
@@ -147,6 +150,7 @@
             </LinearLayout>
 
             <LinearLayout
+                android:id="@+id/main_etc"
                 android:orientation="vertical"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
@@ -185,6 +189,7 @@
             android:layout_height="@dimen/main_single_row_height">
 
             <LinearLayout
+                android:id="@+id/main_mobile_phone_recharge"
                 android:orientation="vertical"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
@@ -209,6 +214,7 @@
             </LinearLayout>
 
             <LinearLayout
+                android:id="@+id/main_movie_ticket"
                 android:orientation="vertical"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
@@ -233,6 +239,7 @@
             </LinearLayout>
 
             <LinearLayout
+                android:id="@+id/main_fuel_card"
                 android:orientation="vertical"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
@@ -257,6 +264,7 @@
             </LinearLayout>
 
             <LinearLayout
+                android:id="@+id/main_enjoy_myself"
                 android:orientation="vertical"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"

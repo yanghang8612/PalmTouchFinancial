@@ -2,9 +2,9 @@
 <menu xmlns:android="http://schemas.android.com/apk/res/android">
     <item
         android:title="@string/share_qq_friends"
-        android:icon="@drawable/ssdk_oks_classic_qq" />
+        android:icon="@drawable/share_qq" />
 
     <item
         android:title="@string/share_qq_qzone"
-        android:icon="@drawable/ssdk_oks_classic_qzone" />
+        android:icon="@drawable/share_qzone" />
 </menu>

@@ -2,9 +2,9 @@
 <menu xmlns:android="http://schemas.android.com/apk/res/android">
     <item
         android:title="@string/share_weixin_friends"
-        android:icon="@drawable/ssdk_oks_classic_wechat" />
+        android:icon="@drawable/share_wechat" />
 
     <item
         android:title="@string/share_weixin_moments"
-        android:icon="@drawable/ssdk_oks_classic_wechatmoments" />
+        android:icon="@drawable/share_wechatmoments" />
 </menu>

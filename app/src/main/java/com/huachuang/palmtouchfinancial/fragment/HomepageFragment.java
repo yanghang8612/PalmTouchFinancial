@@ -4,6 +4,8 @@ import android.view.View;
 
 import com.huachuang.palmtouchfinancial.R;
 import com.huachuang.palmtouchfinancial.activity.CreditCardApplyActivity;
+import com.huachuang.palmtouchfinancial.activity.MainActivity;
+import com.huachuang.palmtouchfinancial.activity.WebViewActivity;
 import com.huachuang.palmtouchfinancial.loader.AdImageLoader;
 import com.youth.banner.Banner;
 
@@ -35,7 +37,17 @@ public class HomepageFragment extends BaseFragment {
     }
 
     @Event(value = R.id.main_apply_for_credit_card)
-    private void onCreditCardApplyCardClicked(View view) {
+    private void creditCardApplyCardClicked(View view) {
         CreditCardApplyActivity.actionStart(this.getContext());
+    }
+
+    @Event(value = R.id.main_share_app)
+    private void shareAppClicked(View view) {
+        ((MainActivity) getActivity()).switchFragment(1);
+    }
+
+    @Event(value = R.id.main_movie_ticket)
+    private void movieTicketClicked(View view) {
+        WebViewActivity.actionStart(getContext(), "https://h5.m.taobao.com/app/movie/pages/index/index.html");
     }
 }

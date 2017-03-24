@@ -8,6 +8,7 @@
 
     <string name="title_activity_main" />
     <string name="title_activity_district" />
+    <string name="title_activity_web_view" />
     <string name="title_activity_login">登录</string>
     <string name="title_activity_register">注册</string>
     <string name="title_activity_credit_card_apply">信用卡申请</string>
@@ -68,6 +69,7 @@
 
     <string name="share_base_users">基础推荐数</string>
     <string name="share_derive_users">衍生推荐数</string>
+    <string name="share_third_users">三级推荐数</string>
     <string name="share_weixin_friends">微信好友</string>
     <string name="share_weixin_moments">微信朋友圈</string>
     <string name="share_qq_friends">QQ好友</string>

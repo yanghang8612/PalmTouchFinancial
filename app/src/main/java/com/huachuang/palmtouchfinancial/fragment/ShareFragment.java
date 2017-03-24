@@ -12,8 +12,6 @@ import com.huachuang.palmtouchfinancial.R;
 import org.xutils.view.annotation.ContentView;
 import org.xutils.view.annotation.ViewInject;
 
-import cn.sharesdk.onekeyshare.OnekeyShare;
-
 /**
  * Created by Asuka on 2017/3/7.
  */
