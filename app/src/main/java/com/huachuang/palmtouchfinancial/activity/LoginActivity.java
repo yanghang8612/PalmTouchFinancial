@@ -9,6 +9,7 @@ import android.os.AsyncTask;
 
 import android.os.Build;
 import android.os.Bundle;
+import android.support.v7.widget.Toolbar;
 import android.text.TextUtils;
 import android.util.Log;
 import android.view.KeyEvent;
@@ -49,6 +50,9 @@ public class LoginActivity extends BaseActivity {
 
     private UserLoginTask authTask = null;
 
+    @ViewInject(R.id.toolbar)
+    private Toolbar toolbar;
+
     @ViewInject(R.id.login_phone_number)
     private EditText phoneNumberView;
 
@@ -64,6 +68,8 @@ public class LoginActivity extends BaseActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        toolbar.setTitle("");
+        setSupportActionBar(toolbar);
     }
 
     @Event(value = R.id.login_password,

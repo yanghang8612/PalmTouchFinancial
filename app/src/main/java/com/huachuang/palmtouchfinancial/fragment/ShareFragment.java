@@ -7,7 +7,11 @@ import android.widget.Toast;
 import com.flipboard.bottomsheet.BottomSheetLayout;
 import com.flipboard.bottomsheet.commons.IntentPickerSheetView;
 import com.flipboard.bottomsheet.commons.MenuSheetView;
+import com.huachuang.palmtouchfinancial.GlobalVariable;
 import com.huachuang.palmtouchfinancial.R;
+import com.tencent.mm.opensdk.modelmsg.SendMessageToWX;
+import com.tencent.mm.opensdk.modelmsg.WXMediaMessage;
+import com.tencent.mm.opensdk.modelmsg.WXTextObject;
 
 import org.xutils.view.annotation.ContentView;
 import org.xutils.view.annotation.ViewInject;
@@ -40,6 +44,22 @@ public class ShareFragment extends BaseFragment {
                         new MenuSheetView(ShareFragment.this.getContext(), MenuSheetView.MenuType.GRID, "分享到...", new MenuSheetView.OnMenuItemClickListener() {
                             @Override
                             public boolean onMenuItemClick(MenuItem item) {
+                                if (item.getItemId() == 0) {
+                                    // 初始化一个WXTextObject对象
+                                    String text = "share our application";
+                                    WXTextObject textObj = new WXTextObject();
+                                    textObj.text = text;
+
+                                    WXMediaMessage msg = new WXMediaMessage(textObj);
+                                    msg.mediaObject = textObj;
+                                    msg.description = text;
+
+                                    SendMessageToWX.Req req = new SendMessageToWX.Req();
+                                    req.transaction = String.valueOf(System.currentTimeMillis());
+                                    req.message = msg;
+
+                                    GlobalVariable.api.sendReq(req);
+                                }
                                 if (bottomSheet.isSheetShowing()) {
                                     bottomSheet.dismissSheet();
                                 }

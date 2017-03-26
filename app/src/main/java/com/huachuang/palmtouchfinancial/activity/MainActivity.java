@@ -24,9 +24,12 @@ import android.view.View;
 import android.view.WindowManager;
 import android.widget.LinearLayout;
 
+import com.huachuang.palmtouchfinancial.GlobalParams;
+import com.huachuang.palmtouchfinancial.GlobalVariable;
 import com.huachuang.palmtouchfinancial.R;
 import com.huachuang.palmtouchfinancial.fragment.FragmentFactory;
 import com.huachuang.palmtouchfinancial.util.CommonUtils;
+import com.tencent.mm.opensdk.openapi.WXAPIFactory;
 import com.uuch.adlibrary.AdConstant;
 import com.uuch.adlibrary.AdManager;
 import com.uuch.adlibrary.bean.AdInfo;
@@ -67,10 +70,10 @@ public class MainActivity extends BaseActivity
     private NavigationView navigationView;
 
     @ViewInject(R.id.toolbar)
-    Toolbar toolbar;
+    private Toolbar toolbar;
 
     @ViewInject(R.id.main_content)
-    LinearLayout mainContent;
+    private LinearLayout mainContent;
 
     @ViewInject(R.id.bottom_navigation_bar)
     private BottomNavigation bottomNavigationBar;
@@ -78,6 +81,9 @@ public class MainActivity extends BaseActivity
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+
+        GlobalVariable.api = WXAPIFactory.createWXAPI(this, GlobalParams.APP_ID ,true);
+        GlobalVariable.api.registerApp(GlobalParams.APP_ID);
 
         int resourceId = getResources().getIdentifier("status_bar_height", "dimen", "android");
         if (resourceId > 0) {
