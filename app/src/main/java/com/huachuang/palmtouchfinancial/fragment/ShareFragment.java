@@ -24,16 +24,16 @@ import org.xutils.view.annotation.ViewInject;
 public class ShareFragment extends BaseFragment {
 
     @ViewInject(R.id.share_fragment_bottomsheet)
-    BottomSheetLayout bottomSheet;
+    private BottomSheetLayout bottomSheet;
 
     @ViewInject(R.id.share_weixin_view)
-    View shareWeiXin;
+    private View shareWeiXin;
 
     @ViewInject(R.id.share_qq_view)
-    View shareQQ;
+    private View shareQQ;
 
     @ViewInject(R.id.share_qr_code_view)
-    View shareQrCode;
+    private View shareQrCode;
 
     @Override
     protected void initFragment() {

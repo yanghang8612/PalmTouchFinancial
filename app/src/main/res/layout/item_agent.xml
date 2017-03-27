@@ -30,9 +30,9 @@
 
         <de.hdodenhof.circleimageview.CircleImageView
             android:id="@+id/agent_item_vip"
-            android:layout_width="@dimen/agent_item_vip_size"
-            android:layout_height="@dimen/agent_item_vip_size"
-            android:layout_marginLeft="@dimen/agent_item_margin"
+            android:layout_width="@dimen/agent_item_type_size"
+            android:layout_height="@dimen/agent_item_type_size"
+            android:layout_marginRight="@dimen/agent_item_margin"
             android:layout_gravity="center"
             android:src="@drawable/ic_level_three"
             app:civ_fill_color="@color/grey" />

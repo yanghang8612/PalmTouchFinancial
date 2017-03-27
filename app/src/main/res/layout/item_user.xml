@@ -32,7 +32,7 @@
             android:id="@+id/user_item_vip"
             android:layout_width="@dimen/user_item_vip_size"
             android:layout_height="@dimen/user_item_vip_size"
-            android:layout_marginLeft="@dimen/user_item_margin"
+            android:layout_marginRight="@dimen/user_item_margin"
             android:layout_gravity="center"
             android:src="@drawable/ic_vip"
             app:civ_fill_color="@color/grey" />
@@ -41,7 +41,7 @@
             android:id="@+id/user_item_vip_activated"
             android:layout_width="@dimen/user_item_vip_size"
             android:layout_height="@dimen/user_item_vip_size"
-            android:layout_marginLeft="@dimen/user_item_margin"
+            android:layout_marginRight="@dimen/user_item_margin"
             android:layout_gravity="center"
             android:src="@drawable/ic_vip"
             android:visibility="gone"

@@ -184,6 +184,7 @@ public class MainActivity extends BaseActivity
                 ProfitActivity.actionStart(this);
                 break;
             case R.id.nav_agent_manager:
+                AgentManagerActivity.actionStart(this);
                 break;
             case R.id.nav_change_password:
                 break;

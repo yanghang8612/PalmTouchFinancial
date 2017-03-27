@@ -23,7 +23,7 @@ public class CreditCardFragment extends BaseFragment {
     private CreditCardAdapter adapter;
 
     @ViewInject(R.id.credit_card_list)
-    RecyclerView creditCardList;
+    private RecyclerView creditCardList;
 
     @Override
     protected void initFragment() {

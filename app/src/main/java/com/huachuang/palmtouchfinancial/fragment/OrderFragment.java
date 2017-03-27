@@ -16,10 +16,10 @@ import org.xutils.view.annotation.ViewInject;
 @ContentView(R.layout.fragment_order)
 public class OrderFragment extends BaseFragment{
 
-    @ViewInject(R.id.order_list_view)
-    RecyclerView orderListView;
+    private OrderAdapter adapter;
 
-    OrderAdapter adapter;
+    @ViewInject(R.id.order_list_view)
+    private RecyclerView orderListView;
 
     @Override
     protected void initFragment() {
