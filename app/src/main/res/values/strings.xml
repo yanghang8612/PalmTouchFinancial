@@ -9,13 +9,15 @@
     <string name="title_activity_main" />
     <string name="title_activity_district" />
     <string name="title_activity_web_view" />
-    <string name="title_activity_login">登录</string>
+    <string name="title_activity_login">掌触金控</string>
     <string name="title_activity_register">注册</string>
     <string name="title_activity_credit_card_apply">信用卡申请</string>
     <string name="title_activity_personal_info">我的信息</string>
     <string name="title_activity_profit">我的收益</string>
     <string name="title_activity_rate">费率信息</string>
     <string name="title_activity_real_name_info">实名认证</string>
+    <string name="title_activity_user_agreement">用户协议</string>
+    <string name="title_activity_real_about_us">关于我们</string>
 
     <string name="menu_real_name_information">实名认证</string>
     <string name="menu_change_debit_card">结算卡变更</string>

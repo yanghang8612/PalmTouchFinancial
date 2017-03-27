@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:padding="@dimen/user_item_padding">
+
+    <LinearLayout
+        android:orientation="horizontal"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <de.hdodenhof.circleimageview.CircleImageView
+            android:id="@+id/user_item_image"
+            android:layout_width="@dimen/user_item_image_size"
+            android:layout_height="@dimen/user_item_image_size"
+            android:layout_marginLeft="@dimen/user_item_margin"
+            android:src="@drawable/default_header_image" />
+
+        <TextView
+            android:id="@+id/user_item_phone_number"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:layout_marginLeft="@dimen/user_item_margin"
+            android:layout_gravity="center"
+            android:text="18511838501"/>
+
+        <de.hdodenhof.circleimageview.CircleImageView
+            android:id="@+id/user_item_vip"
+            android:layout_width="@dimen/user_item_vip_size"
+            android:layout_height="@dimen/user_item_vip_size"
+            android:layout_marginLeft="@dimen/user_item_margin"
+            android:layout_gravity="center"
+            android:src="@drawable/ic_vip"
+            app:civ_fill_color="@color/grey" />
+
+        <de.hdodenhof.circleimageview.CircleImageView
+            android:id="@+id/user_item_vip_activated"
+            android:layout_width="@dimen/user_item_vip_size"
+            android:layout_height="@dimen/user_item_vip_size"
+            android:layout_marginLeft="@dimen/user_item_margin"
+            android:layout_gravity="center"
+            android:src="@drawable/ic_vip"
+            android:visibility="gone"
+            app:civ_fill_color="@color/red" />
+
+    </LinearLayout>
+    
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:layout_marginLeft="@dimen/user_item_divider_margin"
+        android:background="@color/divider"/>
+
+</LinearLayout>

@@ -1,66 +1,63 @@
 package com.huachuang.palmtouchfinancial.backend.bean;
 
+import java.util.Date;
+
 /**
  * Created by Asuka on 2017/2/27.
  */
 
 public class User {
 
-    enum UserLevel {USER, FIRST_AGENT, SECOND_AGENT, THIRD_AGENT}
-    private String id;
-    private String phoneNumber;
-    private String name;
-    private String password;
-    private String gender;
-    private UserLevel level;
+    private long userId;
+    private String userPhoneNumber;
+    private String userPassword;
+    private short userType;
+    private boolean isVip;
     private String invitationCode;
+    private long superiorUserId;
+    private Date registerTime;
+    private Date lastLoginTime;
+    private boolean certificationState;
+    private boolean debitCardState;
 
-    public String getId() {
-        return id;
+    public long getUserId() {
+        return userId;
     }
 
-    public void setId(String id) {
-        this.id = id;
+    public void setUserId(long userId) {
+        this.userId = userId;
     }
 
-    public String getPhoneNumber() {
-        return phoneNumber;
+    public String getUserPhoneNumber() {
+        return userPhoneNumber;
     }
 
-    public void setPhoneNumber(String phoneNumber) {
-        this.phoneNumber = phoneNumber;
+    public void setUserPhoneNumber(String userPhoneNumber) {
+        this.userPhoneNumber = userPhoneNumber;
     }
 
-    public String getName() {
-        return name;
+    public String getUserPassword() {
+        return userPassword;
     }
 
-    public void setName(String name) {
-        this.name = name;
+    public void setUserPassword(String userPassword) {
+        this.userPassword = userPassword;
     }
 
-    public String getPassword() {
-        return password;
+    public short getUserType() {
+        return userType;
     }
 
-    public void setPassword(String password) {
-        this.password = password;
+    public void setUserType(short userType) {
+        this.userType = userType;
     }
 
-    public String getGender() {
-        return gender;
+    public boolean isVip() {
+        return isVip;
     }
 
-    public void setGender(String gender) {
-        this.gender = gender;
-    }
-
-    public UserLevel getLevel() {
-        return level;
-    }
-
-    public void setLevel(UserLevel level) {
-        this.level = level;
+    public void setVip(boolean vip) {
+        isVip = vip;
     }
 
     public String getInvitationCode() {
@@ -69,5 +66,45 @@ public class User {
 
     public void setInvitationCode(String invitationCode) {
         this.invitationCode = invitationCode;
+    }
+
+    public long getSuperiorUserId() {
+        return superiorUserId;
+    }
+
+    public void setSuperiorUserId(long superiorUserId) {
+        this.superiorUserId = superiorUserId;
+    }
+
+    public Date getRegisterTime() {
+        return registerTime;
+    }
+
+    public void setRegisterTime(Date registerTime) {
+        this.registerTime = registerTime;
+    }
+
+    public Date getLastLoginTime() {
+        return lastLoginTime;
+    }
+
+    public void setLastLoginTime(Date lastLoginTime) {
+        this.lastLoginTime = lastLoginTime;
+    }
+
+    public boolean isCertificationState() {
+        return certificationState;
+    }
+
+    public void setCertificationState(boolean certificationState) {
+        this.certificationState = certificationState;
+    }
+
+    public boolean isDebitCardState() {
+        return debitCardState;
+    }
+
+    public void setDebitCardState(boolean debitCardState) {
+        this.debitCardState = debitCardState;
     }
 }

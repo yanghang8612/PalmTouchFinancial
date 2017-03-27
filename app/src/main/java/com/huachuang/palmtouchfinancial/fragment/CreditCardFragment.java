@@ -27,7 +27,7 @@ public class CreditCardFragment extends BaseFragment {
 
     @Override
     protected void initFragment() {
-        adapter = new CreditCardAdapter(getContext());
+        adapter = new CreditCardAdapter();
         adapter.openLoadAnimation();
         View footerView = getActivity().getLayoutInflater().inflate(
                 R.layout.credit_card_list_footer_view,

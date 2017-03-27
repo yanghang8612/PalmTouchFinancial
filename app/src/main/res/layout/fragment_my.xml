@@ -14,12 +14,13 @@
         android:background="@color/white">
 
         <RelativeLayout
+            android:id="@+id/setting_share_app"
             android:layout_width="match_parent"
             android:layout_height="@dimen/setting_row_height"
             android:padding="@dimen/setting_padding">
 
             <ImageView
-                android:id="@+id/setting_share_app_image"
+                android:id="@+id/setting_share_app_icon"
                 android:layout_width="@dimen/setting_image_width"
                 android:layout_height="@dimen/setting_image_height"
                 android:layout_centerVertical="true"
@@ -31,7 +32,7 @@
                 android:layout_height="wrap_content"
                 android:layout_gravity="center_vertical"
                 android:layout_centerVertical="true"
-                android:layout_toRightOf="@id/setting_share_app_image"
+                android:layout_toRightOf="@id/setting_share_app_icon"
                 android:layout_marginLeft="@dimen/setting_padding"
                 android:text="@string/setting_share_app"
                 android:textSize="@dimen/setting_text_size"
@@ -49,15 +50,15 @@
         <include layout="@layout/horizontal_line" />
 
         <RelativeLayout
+            android:id="@+id/setting_check_update"
             android:layout_width="match_parent"
             android:layout_height="@dimen/setting_row_height"
             android:padding="@dimen/setting_padding">
 
             <ImageView
-                android:id="@+id/setting_check_update_image"
+                android:id="@+id/setting_check_update_icon"
                 android:layout_width="@dimen/setting_image_width"
                 android:layout_height="@dimen/setting_image_height"
-
                 android:layout_marginLeft="@dimen/setting_padding"
                 android:src="@drawable/ic_autorenew_black_48dp" />
 
@@ -66,7 +67,7 @@
                 android:layout_height="wrap_content"
                 android:layout_gravity="center_vertical"
                 android:layout_centerVertical="true"
-                android:layout_toRightOf="@id/setting_check_update_image"
+                android:layout_toRightOf="@id/setting_check_update_icon"
                 android:layout_marginLeft="@dimen/setting_padding"
                 android:text="@string/setting_check_update"
                 android:textSize="@dimen/setting_text_size"
@@ -84,12 +85,13 @@
         <include layout="@layout/horizontal_line" />
 
         <RelativeLayout
+            android:id="@+id/setting_feedback"
             android:layout_width="match_parent"
             android:layout_height="@dimen/setting_row_height"
             android:padding="@dimen/setting_padding">
 
             <ImageView
-                android:id="@+id/setting_feedback"
+                android:id="@+id/setting_feedback_icon"
                 android:layout_width="@dimen/setting_image_width"
                 android:layout_height="@dimen/setting_image_height"
                 android:layout_centerVertical="true"
@@ -101,7 +103,7 @@
                 android:layout_height="wrap_content"
                 android:layout_gravity="center_vertical"
                 android:layout_centerVertical="true"
-                android:layout_toRightOf="@id/setting_feedback"
+                android:layout_toRightOf="@id/setting_feedback_icon"
                 android:layout_marginLeft="@dimen/setting_padding"
                 android:text="@string/setting_feedback"
                 android:textSize="@dimen/setting_text_size"
@@ -126,12 +128,13 @@
         android:background="@color/white">
 
         <RelativeLayout
+            android:id="@+id/setting_user_agreement"
             android:layout_width="match_parent"
             android:layout_height="@dimen/setting_row_height"
             android:padding="@dimen/setting_padding">
 
             <ImageView
-                android:id="@+id/setting_user_agreement"
+                android:id="@+id/setting_user_agreement_icon"
                 android:layout_width="@dimen/setting_image_width"
                 android:layout_height="@dimen/setting_image_height"
                 android:layout_centerVertical="true"
@@ -143,7 +146,7 @@
                 android:layout_height="wrap_content"
                 android:layout_gravity="center_vertical"
                 android:layout_centerVertical="true"
-                android:layout_toRightOf="@id/setting_user_agreement"
+                android:layout_toRightOf="@id/setting_user_agreement_icon"
                 android:layout_marginLeft="@dimen/setting_padding"
                 android:text="@string/setting_user_agreement"
                 android:textSize="@dimen/setting_text_size"
@@ -161,12 +164,13 @@
         <include layout="@layout/horizontal_line" />
 
         <RelativeLayout
+            android:id="@+id/setting_about_us"
             android:layout_width="match_parent"
             android:layout_height="@dimen/setting_row_height"
             android:padding="@dimen/setting_padding">
 
             <ImageView
-                android:id="@+id/setting_about_us"
+                android:id="@+id/setting_about_us_icon"
                 android:layout_width="@dimen/setting_image_width"
                 android:layout_height="@dimen/setting_image_height"
                 android:layout_centerVertical="true"
@@ -178,7 +182,7 @@
                 android:layout_height="wrap_content"
                 android:layout_gravity="center_vertical"
                 android:layout_centerVertical="true"
-                android:layout_toRightOf="@id/setting_about_us"
+                android:layout_toRightOf="@id/setting_about_us_icon"
                 android:layout_marginLeft="@dimen/setting_padding"
                 android:text="@string/setting_about_us"
                 android:textSize="@dimen/setting_text_size"
@@ -196,12 +200,13 @@
         <include layout="@layout/horizontal_line" />
 
         <RelativeLayout
+            android:id="@+id/setting_hotline"
             android:layout_width="match_parent"
             android:layout_height="@dimen/setting_row_height"
             android:padding="@dimen/setting_padding">
 
             <ImageView
-                android:id="@+id/setting_hotline"
+                android:id="@+id/setting_hotline_icon"
                 android:layout_width="@dimen/setting_image_width"
                 android:layout_height="@dimen/setting_image_height"
                 android:layout_centerVertical="true"
@@ -213,7 +218,7 @@
                 android:layout_height="wrap_content"
                 android:layout_gravity="center_vertical"
                 android:layout_centerVertical="true"
-                android:layout_toRightOf="@id/setting_hotline"
+                android:layout_toRightOf="@id/setting_hotline_icon"
                 android:layout_marginLeft="@dimen/setting_padding"
                 android:text="@string/setting_hotline"
                 android:textSize="@dimen/setting_text_size"
@@ -242,7 +247,7 @@
             android:layout_centerHorizontal="true"
             android:paddingBottom="@dimen/setting_padding"
             android:text="山东省掌触金控金融咨询服务有限公司"
-            android:textSize="13sp"/>
+            android:textSize="13sp" />
 
     </RelativeLayout>
 

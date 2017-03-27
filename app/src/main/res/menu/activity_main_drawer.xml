@@ -20,8 +20,7 @@
         <item
             android:id="@+id/nav_agent_manager"
             android:icon="@drawable/ic_supervisor_account_black_48dp"
-            android:title="@string/menu_agent_manager"
-            android:visible="false"/>
+            android:title="@string/menu_agent_manager"/>
     </group>
 
     <group android:id="@+id/menu_group_two">

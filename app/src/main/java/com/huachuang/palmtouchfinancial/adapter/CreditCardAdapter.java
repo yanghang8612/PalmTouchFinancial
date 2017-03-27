@@ -15,7 +15,7 @@ import java.util.List;
  * Created by Asuka on 2017/3/24.
  */
 
-public class CreditCardAdapter extends BaseQuickAdapter<CreditCard> {
+public class CreditCardAdapter extends BaseQuickAdapter<CreditCard, BaseViewHolder> {
 
     private static List<CreditCard> cards = new ArrayList<>();
 
@@ -29,8 +29,8 @@ public class CreditCardAdapter extends BaseQuickAdapter<CreditCard> {
         cards.add(new CreditCard("广发银行", "信用卡", "6222020200079068612"));
     }
 
-    public CreditCardAdapter(Context context) {
-        super(context, R.layout.item_credit_card, cards);
+    public CreditCardAdapter() {
+        super(R.layout.item_credit_card, cards);
     }
 
     @Override

@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:padding="@dimen/about_us_padding"
+    tools:context="com.huachuang.palmtouchfinancial.activity.AboutUsActivity">
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="        山东爱心付金融软件技术有限公司坐落在美丽的江北水城-聊城。"
+        android:textSize="@dimen/about_us_main_body"
+        android:textColor="@color/black" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/about_us_content_padding"
+        android:text="        公司业务主要涉及信用卡外包、支付和电子三大领域，以新型移动支付设备、无卡支付APP及信用卡通道对接为主，着力于信用卡产业和支付产业的多元化发展，通过对未来新的生活方式的探索，不断创新商业模式和产业模式，致力于为中国小微企业、金融机构、行业客户和投资者提供金融信息、金融支付、账户托管、理财平台等综合金融服务。"
+        android:textSize="@dimen/about_us_main_body"
+        android:textColor="@color/black" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/about_us_content_padding"
+        android:text="        “诚信赢得合作，服务创造价值”始终是爱心付金融软件技术有限公司发展的核心理念。面对极速增长的市场空间，我们在全国范围内诚招分公司及代理商。我们热诚欢迎您的加入！"
+        android:textSize="@dimen/about_us_main_body"
+        android:textColor="@color/black" />
+
+</LinearLayout>

@@ -41,7 +41,7 @@ public class LoginActivity extends BaseActivity {
             "18511838501:111111"
     };
 
-    public static final String TAG = LoginActivity.class.getSimpleName();
+    public static final String TAG = "LoginActivity";
 
     public static void actionStart(Context context) {
         Intent intent = new Intent(context, LoginActivity.class);
