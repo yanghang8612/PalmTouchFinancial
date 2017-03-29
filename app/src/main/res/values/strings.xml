@@ -43,6 +43,7 @@
     <string name="prompt_password">密码</string>
     <string name="prompt_confirm_password">确认密码</string>
     <string name="prompt_invitation_code">邀请码</string>
+    <string name="prompt_recommender_id">推荐人(选填)</string>
     <string name="prompt_verification_code">验证码</string>
     <string name="action_sign_in">登录</string>
     <string name="action_get_verification_code">获取验证码</string>
