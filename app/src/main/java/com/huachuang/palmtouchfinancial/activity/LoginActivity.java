@@ -11,24 +11,18 @@ import android.os.Build;
 import android.os.Bundle;
 import android.support.v7.widget.Toolbar;
 import android.text.TextUtils;
-import android.util.Log;
 import android.view.KeyEvent;
-import android.view.MotionEvent;
 import android.view.View;
 import android.view.inputmethod.EditorInfo;
-import android.view.inputmethod.InputMethodManager;
 import android.widget.EditText;
-import android.widget.LinearLayout;
-import android.widget.ScrollView;
 import android.widget.TextView;
 
-import com.google.zxing.integration.android.IntentIntegrator;
 import com.huachuang.palmtouchfinancial.R;
-import com.huachuang.palmtouchfinancial.listener.TouchLoseFocusListener;
 
 import org.xutils.view.annotation.ContentView;
 import org.xutils.view.annotation.Event;
 import org.xutils.view.annotation.ViewInject;
+import org.xutils.x;
 
 /**
  * A login screen that offers login via phone number/password.
@@ -41,7 +35,7 @@ public class LoginActivity extends BaseActivity {
             "18511838501:111111"
     };
 
-    public static final String TAG = "LoginActivity";
+    public static final String TAG = LoginActivity.class.getSimpleName();
 
     public static void actionStart(Context context) {
         Intent intent = new Intent(context, LoginActivity.class);
@@ -70,6 +64,9 @@ public class LoginActivity extends BaseActivity {
         super.onCreate(savedInstanceState);
         toolbar.setTitle("");
         setSupportActionBar(toolbar);
+
+        x.Ext.init(this.getApplication());
+        x.Ext.setDebug(true);
     }
 
     @Event(value = R.id.login_password,

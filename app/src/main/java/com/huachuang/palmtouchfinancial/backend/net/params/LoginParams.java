@@ -9,7 +9,7 @@ import org.xutils.http.annotation.HttpRequest;
  * Created by Asuka on 2015/12/21.
  */
 @HttpRequest(
-        host = GlobalParams.URL_HEAD,
+        host = GlobalParams.SERVER_URL_HEAD,
         path = "UserManage/Login")
 public class LoginParams extends RequestParams {
     private String phoneNumber;

@@ -52,6 +52,10 @@ public class CommonUtils {
         return m.find();
     }
 
+    public static String generateVerificationCode() {
+        return String.valueOf((int) (Math.random() * 1000000));
+    }
+
     private static CSVReader csvReader = null;
 
     private static CSVReader getReader(Context context, String csvName) {

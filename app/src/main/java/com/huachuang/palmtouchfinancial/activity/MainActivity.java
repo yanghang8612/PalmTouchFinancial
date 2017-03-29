@@ -49,7 +49,7 @@ import it.sephiroth.android.library.bottomnavigation.BottomNavigation;
 public class MainActivity extends BaseActivity
         implements NavigationView.OnNavigationItemSelectedListener {
 
-    private static final String TAG = "MainActivity";
+    private static final String TAG = MainActivity.class.getSimpleName();
     private static final int defaultFragmentIndex = 0;
 
     public static void actionStart(Context context) {
@@ -82,8 +82,8 @@ public class MainActivity extends BaseActivity
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
-        GlobalVariable.api = WXAPIFactory.createWXAPI(this, GlobalParams.APP_ID ,true);
-        GlobalVariable.api.registerApp(GlobalParams.APP_ID);
+        GlobalVariable.api = WXAPIFactory.createWXAPI(this, GlobalParams.WECHAT_APP_ID ,true);
+        GlobalVariable.api.registerApp(GlobalParams.WECHAT_APP_ID);
 
         int resourceId = getResources().getIdentifier("status_bar_height", "dimen", "android");
         if (resourceId > 0) {
