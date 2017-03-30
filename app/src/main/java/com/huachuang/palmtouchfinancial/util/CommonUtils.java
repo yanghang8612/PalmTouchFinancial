@@ -38,10 +38,10 @@ public class CommonUtils {
         return m.find();
     }
 
-    public static boolean validateEmail(String email) {
-        String regExp = "^[\\w\\.]+@[\\w\\.]+$";
+    public static boolean validateVerificationCode(String verificationCode) {
+        String regExp = "^[0-9]{6}$";
         Pattern p = Pattern.compile(regExp);
-        Matcher m = p.matcher(email);
+        Matcher m = p.matcher(verificationCode);
         return m.find();
     }
 

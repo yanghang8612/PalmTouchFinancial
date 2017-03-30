@@ -24,10 +24,6 @@ import org.xutils.view.annotation.Event;
 import org.xutils.view.annotation.ViewInject;
 import org.xutils.x;
 
-/**
- * A login screen that offers login via phone number/password.
- */
-
 @ContentView(R.layout.activity_login)
 public class LoginActivity extends BaseActivity {
 

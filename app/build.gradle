@@ -44,6 +44,7 @@ dependencies {
     compile 'cn.yipianfengye.android:ad-library:1.0'
     compile 'com.github.ybq:Android-SpinKit:1.1.0'
     compile 'com.opencsv:opencsv:3.7'
+    compile 'com.alibaba:fastjson:1.2.30'
     compile 'com.tencent.mm.opensdk:wechat-sdk-android-with-mta:1.0.2'
     testCompile 'junit:junit:4.12'
 }
