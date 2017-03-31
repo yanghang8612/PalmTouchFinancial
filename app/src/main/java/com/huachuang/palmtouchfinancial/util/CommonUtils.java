@@ -45,6 +45,13 @@ public class CommonUtils {
         return m.find();
     }
 
+    public static boolean validatePassword(String password) {
+        String regExp = "^\\d{6,}$";
+        Pattern p = Pattern.compile(regExp);
+        Matcher m = p.matcher(password);
+        return m.find();
+    }
+
     public static boolean validateNumber(String name) {
         String regExp = "^\\d+$";
         Pattern p = Pattern.compile(regExp);

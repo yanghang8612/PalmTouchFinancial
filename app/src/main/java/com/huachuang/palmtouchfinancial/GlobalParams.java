@@ -11,6 +11,7 @@ public class GlobalParams {
 
     private GlobalParams(){}
 
+    //public static final String SERVER_URL_HEAD = "http://192.168.1.103:8080";
     public static final String SERVER_URL_HEAD = "http://10.0.2.2:8080";
     public static final String YUNPIAN_URL_HEAD = "https://sms.yunpian.com/v2";
     public static final String WECHAT_APP_ID = "wxffb25beeebed0544";

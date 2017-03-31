@@ -24,6 +24,8 @@ import android.view.View;
 import android.view.WindowManager;
 import android.widget.LinearLayout;
 
+import com.ashokvarma.bottomnavigation.BottomNavigationBar;
+import com.ashokvarma.bottomnavigation.BottomNavigationItem;
 import com.huachuang.palmtouchfinancial.GlobalParams;
 import com.huachuang.palmtouchfinancial.GlobalVariable;
 import com.huachuang.palmtouchfinancial.R;
@@ -43,11 +45,8 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
-import it.sephiroth.android.library.bottomnavigation.BottomNavigation;
-
 @ContentView(R.layout.activity_main)
-public class MainActivity extends BaseActivity
-        implements NavigationView.OnNavigationItemSelectedListener {
+public class MainActivity extends BaseActivity implements NavigationView.OnNavigationItemSelectedListener {
 
     private static final String TAG = MainActivity.class.getSimpleName();
     private static final int defaultFragmentIndex = 0;
@@ -76,7 +75,7 @@ public class MainActivity extends BaseActivity
     private LinearLayout mainContent;
 
     @ViewInject(R.id.bottom_navigation_bar)
-    private BottomNavigation bottomNavigationBar;
+    private BottomNavigationBar bottomNavigationBar;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -90,10 +89,8 @@ public class MainActivity extends BaseActivity
             statusBarHeight = getResources().getDimensionPixelSize(resourceId);
         }
 
-        if (Build.VERSION.SDK_INT >= 21) {
-            int option = View.SYSTEM_UI_FLAG_LAYOUT_FULLSCREEN;
-            getWindow().getDecorView().setSystemUiVisibility(option);
-        }
+        int option = View.SYSTEM_UI_FLAG_LAYOUT_FULLSCREEN;
+        getWindow().getDecorView().setSystemUiVisibility(option);
 
         AppBarLayout.LayoutParams toolbarParams = (AppBarLayout.LayoutParams) toolbar.getLayoutParams();
         toolbarParams.setMargins(0, statusBarHeight, 0, 0);
@@ -116,17 +113,27 @@ public class MainActivity extends BaseActivity
         });
         navigationView.setNavigationItemSelectedListener(this);
 
-        bottomNavigationBar.setOnMenuItemClickListener(new BottomNavigation.OnMenuItemSelectionListener() {
-            @Override
-            public void onMenuItemSelect(@IdRes int id, int index, boolean b) {
-                switchFragment(index);
-            }
+        bottomNavigationBar
+                .setMode(BottomNavigationBar.MODE_FIXED)
+                .setBackgroundStyle(BottomNavigationBar.BACKGROUND_STYLE_STATIC)
+                .addItem(new BottomNavigationItem(R.drawable.ic_home_white, "主页"))
+                .addItem(new BottomNavigationItem(R.drawable.ic_share_white, "分享"))
+                .addItem(new BottomNavigationItem(R.drawable.ic_wallet_white, "钱包"))
+                .addItem(new BottomNavigationItem(R.drawable.ic_my_white, "我的"))
+                .setActiveColor(R.color.colorPrimary)
+                .setTabSelectedListener(new BottomNavigationBar.OnTabSelectedListener() {
+                    @Override
+                    public void onTabSelected(int position) {
+                        switchFragment(position);
+                    }
 
-            @Override
-            public void onMenuItemReselect(@IdRes int id, int index, boolean b) {
+                    @Override
+                    public void onTabUnselected(int position) {}
 
-            }
-        });
+                    @Override
+                    public void onTabReselected(int position) {}
+                })
+                .initialise();
 
         initAdList();
         adManager.setOverScreen(true)
@@ -136,8 +143,6 @@ public class MainActivity extends BaseActivity
         adManager.showAdDialog(AdConstant.ANIM_DOWN_TO_UP);
 
         showDefaultFragment();
-
-        System.out.println(Arrays.toString(CommonUtils.getCardType(this, "6222020200079068785")));
     }
 
     @Override
@@ -235,14 +240,18 @@ public class MainActivity extends BaseActivity
         DrawerLayout.LayoutParams params = (DrawerLayout.LayoutParams) mainContent.getLayoutParams();
         params.setMargins(0, contentMarginTop, 0, 0);
         mainContent.setLayoutParams(params);
+        if (toIndex == 0) {
+            toolbar.setBackgroundColor(Color.TRANSPARENT);
+        }
+        else {
+            toolbar.setBackgroundColor(getResources().getColor(R.color.colorPrimary));
+        }
         if (Build.VERSION.SDK_INT >= 21) {
             if (toIndex == 0) {
                 getWindow().setStatusBarColor(Color.TRANSPARENT);
-                toolbar.setBackgroundColor(Color.TRANSPARENT);
             }
             else {
                 getWindow().setStatusBarColor(getResources().getColor(R.color.colorPrimary));
-                toolbar.setBackgroundColor(getResources().getColor(R.color.colorPrimary));
             }
         }
     }

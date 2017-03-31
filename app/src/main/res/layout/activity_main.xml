@@ -22,15 +22,11 @@
             android:layout_weight="1">
         </FrameLayout>
 
-        <it.sephiroth.android.library.bottomnavigation.BottomNavigation
+        <com.ashokvarma.bottomnavigation.BottomNavigationBar
             android:id="@+id/bottom_navigation_bar"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_gravity="bottom"
-            app:bbn_entries="@menu/activity_main_bottom_navigation"
-            app:bbn_scrollEnabled="true"
-            app:bbn_badgeProvider="@string/bbn_badgeProvider"
-            app:layout_behavior="@string/bbn_phone_view_behavior" />
+            android:layout_gravity="bottom" />
 
     </LinearLayout>
 
