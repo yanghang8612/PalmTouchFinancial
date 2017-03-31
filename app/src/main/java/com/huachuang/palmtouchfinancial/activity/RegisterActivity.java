@@ -188,6 +188,7 @@ public class RegisterActivity extends BaseActivity {
             verificationCodeLayout.setErrorEnabled(false);
         }
         final String invitationCode = invitationCodeLayout.getEditText().getText().toString();
+        final String recommenderID = recommenderIDLayout.getEditText().getText().toString();
         if (invitationCode.equals("")) {
             invitationCodeLayout.setError("请输入邀请码");
             return;
@@ -214,8 +215,14 @@ public class RegisterActivity extends BaseActivity {
                     e.printStackTrace();
                 }
             }
+
+            @Override
+            public void onFinished() {
+                if (invitationCodeCheckState && (recommenderID.equals("") || (!recommenderID.equals("") && recommenderIDCheckState))) {
+                    registerFlipper.setDisplayedChild(1);
+                }
+            }
         });
-        final String recommenderID = recommenderIDLayout.getEditText().getText().toString();
         if (!recommenderID.equals("")) {
             x.http().post(new VerifyRecommenderIDParams(recommenderID), new NetCallbackAdapter() {
                 @Override
@@ -236,13 +243,17 @@ public class RegisterActivity extends BaseActivity {
                         e.printStackTrace();
                     }
                 }
+
+                @Override
+                public void onFinished() {
+                    if (invitationCodeCheckState && (recommenderID.equals("") || (!recommenderID.equals("") && recommenderIDCheckState))) {
+                        registerFlipper.setDisplayedChild(1);
+                    }
+                }
             });
         }
         else {
             recommenderIDLayout.setErrorEnabled(false);
-        }
-        if (invitationCodeCheckState && (recommenderID.equals("") || (!recommenderID.equals("") && recommenderIDCheckState))) {
-            registerFlipper.setDisplayedChild(1);
         }
     }
 

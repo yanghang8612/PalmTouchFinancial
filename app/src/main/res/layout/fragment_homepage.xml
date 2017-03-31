@@ -65,14 +65,17 @@
     <LinearLayout
         android:orientation="vertical"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="0dp"
+        android:layout_weight="1"
         android:layout_marginTop="@dimen/main_margin"
+        android:layout_marginBottom="@dimen/main_margin"
         android:background="@color/white">
 
         <LinearLayout
             android:orientation="horizontal"
             android:layout_width="match_parent"
-            android:layout_height="@dimen/main_single_row_height">
+            android:layout_height="0dp"
+            android:layout_weight="1">
 
             <LinearLayout
                 android:id="@+id/main_share_app"
@@ -84,10 +87,9 @@
                 android:gravity="center">
 
                 <ImageView
-                    android:layout_width="@dimen/main_image_width"
-                    android:layout_height="@dimen/main_image_height"
-                    android:src="@drawable/ic_share_black_48dp"
-                    android:tint="@color/dark_orange"/>
+                    android:layout_width="@dimen/main_image_size"
+                    android:layout_height="@dimen/main_image_size"
+                    android:src="@drawable/ic_share" />
 
                 <TextView
                     android:layout_width="wrap_content"
@@ -109,10 +111,9 @@
                 android:gravity="center">
 
                 <ImageView
-                    android:layout_width="@dimen/main_image_width"
-                    android:layout_height="@dimen/main_image_height"
-                    android:src="@drawable/ic_local_mall_black_48dp"
-                    android:tint="@color/colorPrimary"/>
+                    android:layout_width="@dimen/main_image_size"
+                    android:layout_height="@dimen/main_image_size"
+                    android:src="@drawable/ic_mall" />
 
                 <TextView
                     android:layout_width="wrap_content"
@@ -134,10 +135,9 @@
                 android:gravity="center">
 
                 <ImageView
-                    android:layout_width="@dimen/main_image_width"
-                    android:layout_height="@dimen/main_image_height"
-                    android:src="@drawable/ic_spa_black_48dp"
-                    android:tint="@color/colorPrimary"/>
+                    android:layout_width="@dimen/main_image_size"
+                    android:layout_height="@dimen/main_image_size"
+                    android:src="@drawable/ic_loan" />
 
                 <TextView
                     android:layout_width="wrap_content"
@@ -159,10 +159,9 @@
                 android:gravity="center">
 
                 <ImageView
-                    android:layout_width="@dimen/main_image_width"
-                    android:layout_height="@dimen/main_image_height"
-                    android:src="@drawable/ic_directions_car_black_48dp"
-                    android:tint="@color/dark_orange"/>
+                    android:layout_width="@dimen/main_image_size"
+                    android:layout_height="@dimen/main_image_size"
+                    android:src="@drawable/ic_etc" />
 
                 <TextView
                     android:layout_width="wrap_content"
@@ -186,7 +185,8 @@
         <LinearLayout
             android:orientation="horizontal"
             android:layout_width="match_parent"
-            android:layout_height="@dimen/main_single_row_height">
+            android:layout_height="0dp"
+            android:layout_weight="1">
 
             <LinearLayout
                 android:id="@+id/main_mobile_phone_recharge"
@@ -198,10 +198,9 @@
                 android:gravity="center">
 
                 <ImageView
-                    android:layout_width="@dimen/main_image_width"
-                    android:layout_height="@dimen/main_image_height"
-                    android:src="@drawable/ic_phone_android_black_48dp"
-                    android:tint="@color/colorPrimary"/>
+                    android:layout_width="@dimen/main_image_size"
+                    android:layout_height="@dimen/main_image_size"
+                    android:src="@drawable/ic_charge" />
 
                 <TextView
                     android:layout_width="wrap_content"
@@ -223,10 +222,9 @@
                 android:gravity="center">
 
                 <ImageView
-                    android:layout_width="@dimen/main_image_width"
-                    android:layout_height="@dimen/main_image_height"
-                    android:src="@drawable/ic_movie_black_48dp"
-                    android:tint="@color/dark_orange"/>
+                    android:layout_width="@dimen/main_image_size"
+                    android:layout_height="@dimen/main_image_size"
+                    android:src="@drawable/ic_movie" />
 
                 <TextView
                     android:layout_width="wrap_content"
@@ -248,10 +246,9 @@
                 android:gravity="center">
 
                 <ImageView
-                    android:layout_width="@dimen/main_image_width"
-                    android:layout_height="@dimen/main_image_height"
-                    android:src="@drawable/ic_local_gas_station_black_48dp"
-                    android:tint="@color/colorPrimary"/>
+                    android:layout_width="@dimen/main_image_size"
+                    android:layout_height="@dimen/main_image_size"
+                    android:src="@drawable/ic_gas" />
 
                 <TextView
                     android:layout_width="wrap_content"
@@ -273,16 +270,15 @@
                 android:gravity="center">
 
                 <ImageView
-                    android:layout_width="@dimen/main_image_width"
-                    android:layout_height="@dimen/main_image_height"
-                    android:src="@drawable/ic_restaurant_black_48dp"
-                    android:tint="@color/dark_orange"/>
+                    android:layout_width="@dimen/main_image_size"
+                    android:layout_height="@dimen/main_image_size"
+                    android:src="@drawable/ic_all"/>
 
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="@dimen/main_item_margin"
-                    android:text="@string/main_enjoy_myself"
+                    android:text="@string/main_all"
                     android:textColor="@color/black"
                     android:textSize="@dimen/main_content_text_size" />
 

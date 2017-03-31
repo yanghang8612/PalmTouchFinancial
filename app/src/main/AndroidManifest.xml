@@ -19,7 +19,8 @@
         android:icon="@mipmap/ic_launcher"
         android:label="@string/app_name"
         android:supportsRtl="true"
-        android:theme="@style/AppTheme">
+        android:theme="@style/AppTheme"
+        android:hardwareAccelerated="true">
         <activity
             android:name=".activity.LoginActivity"
             android:label="@string/app_name"
@@ -53,7 +54,9 @@
         <activity
             android:name=".activity.RealNameInfoActivity"
             android:label="@string/title_activity_real_name_info" />
-        <activity android:name=".activity.DebitCardActivity" />
+        <activity
+            android:name=".activity.DebitCardActivity"
+            android:label="@string/title_activity_debit_card"/>
         <activity
             android:name=".activity.DistrictActivity"
             android:label="@string/title_activity_district" />
@@ -70,7 +73,8 @@
             android:name=".activity.AboutUsActivity"
             android:label="@string/title_activity_real_about_us" />
         <activity
-            android:name=".activity.AgentManagerActivity" />
+            android:name=".activity.AgentManagerActivity"
+            android:label="@string/title_activity_agent_manager"/>
         <activity
             android:name="com.journeyapps.barcodescanner.CaptureActivity"
             android:screenOrientation="fullSensor"

@@ -8,7 +8,7 @@ import android.support.v4.app.Fragment;
 public class FragmentFactory {
 
     private static BaseFragment[] fragments = {
-            new HomepageFragment(), new ShareFragment(), new CreditCardFragment(), new MyFragment()
+            new HomepageFragment(), new ShareFragment(), new WalletFragment(), new MyFragment()
     };
 
     public static Fragment getInstanceByIndex(int index) {

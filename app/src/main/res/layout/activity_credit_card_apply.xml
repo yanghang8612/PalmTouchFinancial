@@ -31,7 +31,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:padding="@dimen/credit_card_apply_card_content_padding"
-                android:src="@drawable/xingye"/>
+                android:src="@drawable/apply_xingye"/>
 
         </android.support.v7.widget.CardView>
 
@@ -51,7 +51,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:padding="@dimen/credit_card_apply_card_content_padding"
-                android:src="@drawable/zhongxin"/>
+                android:src="@drawable/apply_zhongxin"/>
 
         </android.support.v7.widget.CardView>
 
@@ -78,7 +78,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:padding="@dimen/credit_card_apply_card_content_padding"
-                android:src="@drawable/pufa"/>
+                android:src="@drawable/apply_pufa"/>
 
         </android.support.v7.widget.CardView>
 
@@ -98,7 +98,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:padding="@dimen/credit_card_apply_card_content_padding"
-                android:src="@drawable/shanghai"/>
+                android:src="@drawable/apply_shanghai"/>
 
         </android.support.v7.widget.CardView>
 
@@ -125,7 +125,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:padding="@dimen/credit_card_apply_card_content_padding"
-                android:src="@drawable/jiaotong"/>
+                android:src="@drawable/apply_jiaotong"/>
 
         </android.support.v7.widget.CardView>
 
@@ -145,7 +145,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:padding="@dimen/credit_card_apply_card_content_padding"
-                android:src="@drawable/zhaoshang"/>
+                android:src="@drawable/apply_zhaoshang"/>
 
         </android.support.v7.widget.CardView>
 
@@ -172,7 +172,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:padding="@dimen/credit_card_apply_card_content_padding"
-                android:src="@drawable/guangda"/>
+                android:src="@drawable/apply_guangda"/>
 
         </android.support.v7.widget.CardView>
 
@@ -192,7 +192,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:padding="@dimen/credit_card_apply_card_content_padding"
-                android:src="@drawable/pingan"/>
+                android:src="@drawable/apply_pingan"/>
 
         </android.support.v7.widget.CardView>
 

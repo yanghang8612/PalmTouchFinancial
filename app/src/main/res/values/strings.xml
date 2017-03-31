@@ -18,6 +18,8 @@
     <string name="title_activity_real_name_info">实名认证</string>
     <string name="title_activity_user_agreement">用户协议</string>
     <string name="title_activity_real_about_us">关于我们</string>
+    <string name="title_activity_debit_card">结算卡信息</string>
+    <string name="title_activity_agent_manager">用户管理</string>
 
     <string name="menu_real_name_information">实名认证</string>
     <string name="menu_change_debit_card">结算卡变更</string>
@@ -69,7 +71,9 @@
     <string name="main_movie_ticket">电影票</string>
     <string name="main_fuel_card">加油卡充值</string>
     <string name="main_enjoy_myself">吃喝玩乐</string>
+    <string name="main_all">全部</string>
 
+    <string name="share_record">分享记录</string>
     <string name="share_base_users">基础推荐数</string>
     <string name="share_derive_users">衍生推荐数</string>
     <string name="share_third_users">三级推荐数</string>

@@ -2,47 +2,69 @@
 <LinearLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    android:orientation="vertical"
+    android:orientation="horizontal"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:padding="@dimen/agent_item_padding">
 
     <LinearLayout
+        android:id="@+id/first_divider"
         android:orientation="horizontal"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content">
-
-        <de.hdodenhof.circleimageview.CircleImageView
-            android:id="@+id/agent_item_image"
-            android:layout_width="@dimen/agent_item_image_size"
-            android:layout_height="@dimen/agent_item_image_size"
-            android:layout_marginLeft="@dimen/agent_item_margin"
-            android:src="@drawable/default_header_image" />
-
-        <TextView
-            android:id="@+id/agent_item_phone_number"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:layout_marginLeft="@dimen/agent_item_margin"
-            android:layout_gravity="center"
-            android:text="18511838501"/>
-
-        <de.hdodenhof.circleimageview.CircleImageView
-            android:id="@+id/agent_item_vip"
-            android:layout_width="@dimen/agent_item_type_size"
-            android:layout_height="@dimen/agent_item_type_size"
-            android:layout_marginRight="@dimen/agent_item_margin"
-            android:layout_gravity="center"
-            android:src="@drawable/ic_level_three"
-            app:civ_fill_color="@color/grey" />
-
-    </LinearLayout>
+        android:layout_width="16dp"
+        android:layout_height="match_parent"
+        android:visibility="gone" />
 
     <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="1dp"
-        android:layout_marginLeft="@dimen/agent_item_divider_margin"
-        android:background="@color/divider"/>
+        android:id="@+id/second_divider"
+        android:orientation="horizontal"
+        android:layout_width="16dp"
+        android:layout_height="match_parent"
+        android:visibility="gone" />
+
+    <LinearLayout
+        android:orientation="vertical"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_weight="1">
+
+        <LinearLayout
+            android:orientation="horizontal"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <de.hdodenhof.circleimageview.CircleImageView
+                android:id="@+id/agent_item_image"
+                android:layout_width="@dimen/agent_item_image_size"
+                android:layout_height="@dimen/agent_item_image_size"
+                android:layout_marginLeft="@dimen/agent_item_margin"
+                android:src="@drawable/default_header_image" />
+
+            <TextView
+                android:id="@+id/agent_item_phone_number"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:layout_marginLeft="@dimen/agent_item_margin"
+                android:layout_gravity="center"
+                android:text="18511838501" />
+
+            <de.hdodenhof.circleimageview.CircleImageView
+                android:id="@+id/agent_item_vip"
+                android:layout_width="@dimen/agent_item_type_size"
+                android:layout_height="@dimen/agent_item_type_size"
+                android:layout_marginRight="@dimen/agent_item_margin"
+                android:layout_gravity="center"
+                android:src="@drawable/ic_level_three"
+                app:civ_fill_color="@color/grey" />
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:layout_marginLeft="@dimen/agent_item_divider_margin"
+            android:background="@color/divider"/>
+
+    </LinearLayout>
 
 </LinearLayout>

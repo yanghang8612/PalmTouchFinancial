@@ -60,7 +60,6 @@ public class MainActivity extends BaseActivity implements NavigationView.OnNavig
     private int statusBarHeight = 0;
     private List<AdInfo> adList = new ArrayList<>();
     private AdManager adManager = new AdManager(MainActivity.this, adList);
-    private ViewPager.PageTransformer transformer = new ZoomOutPageTransformer();
 
     @ViewInject(R.id.drawer_layout)
     private DrawerLayout drawer;
@@ -120,7 +119,8 @@ public class MainActivity extends BaseActivity implements NavigationView.OnNavig
                 .addItem(new BottomNavigationItem(R.drawable.ic_share_white, "分享"))
                 .addItem(new BottomNavigationItem(R.drawable.ic_wallet_white, "钱包"))
                 .addItem(new BottomNavigationItem(R.drawable.ic_my_white, "我的"))
-                .setActiveColor(R.color.colorPrimary)
+                .setActiveColor(R.color.bottom_bar_active)
+                .setInActiveColor(R.color.bottom_bar_inactive)
                 .setTabSelectedListener(new BottomNavigationBar.OnTabSelectedListener() {
                     @Override
                     public void onTabSelected(int position) {
@@ -137,10 +137,11 @@ public class MainActivity extends BaseActivity implements NavigationView.OnNavig
 
         initAdList();
         adManager.setOverScreen(true)
-                .setPageTransformer(transformer)
-                .setBounciness(0)
-                .setSpeed(5);
-        adManager.showAdDialog(AdConstant.ANIM_DOWN_TO_UP);
+                .setPageTransformer(new ZoomOutPageTransformer())
+                .setWidthPerHeight(0.9F)
+                .setBounciness(1)
+                .setSpeed(1)
+                .showAdDialog(AdConstant.ANIM_DOWN_TO_UP);
 
         showDefaultFragment();
     }
@@ -205,11 +206,13 @@ public class MainActivity extends BaseActivity implements NavigationView.OnNavig
     private void initAdList() {
         AdInfo adInfo;
         adInfo = new AdInfo();
-        adInfo.setActivityImg("https://raw.githubusercontent.com/yipianfengye/android-adDialog/master/images/testImage1.png");
+        adInfo.setActivityImg(GlobalParams.SERVER_URL_HEAD + "/img/jump_1.png");
+        //adInfo.setActivityImg("https://raw.githubusercontent.com/yipianfengye/android-adDialog/master/images/testImage1.png");
         adList.add(adInfo);
 
         adInfo = new AdInfo();
-        adInfo.setActivityImg("https://raw.githubusercontent.com/yipianfengye/android-adDialog/master/images/testImage2.png");
+        adInfo.setActivityImg(GlobalParams.SERVER_URL_HEAD + "/img/jump_2.png");
+        //adInfo.setActivityImg("https://raw.githubusercontent.com/yipianfengye/android-adDialog/master/images/testImage2.png");
         adList.add(adInfo);
     }
 
