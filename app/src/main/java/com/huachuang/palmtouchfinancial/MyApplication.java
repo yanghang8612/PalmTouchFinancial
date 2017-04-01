@@ -2,10 +2,6 @@ package com.huachuang.palmtouchfinancial;
 
 import android.app.Application;
 
-import com.facebook.drawee.backends.pipeline.Fresco;
-import com.tencent.mm.opensdk.openapi.IWXAPI;
-import com.tencent.mm.opensdk.openapi.WXAPIFactory;
-
 import org.xutils.x;
 
 /**
@@ -19,6 +15,5 @@ public class MyApplication extends Application {
         super.onCreate();
         x.Ext.init(this);
         x.Ext.setDebug(true);
-
     }
 }

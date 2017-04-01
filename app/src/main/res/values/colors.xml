@@ -13,6 +13,7 @@
     <color name="icons">#FFFFFF</color>
     <color name="divider">#B6B6B6</color>
     <color name="transparent">#00000000</color>
+    <color name="light_transparent">#55000000</color>
 
     <color name="indigo">#536DFE</color>
     <color name="blue">#1E88E5</color>
@@ -26,6 +27,7 @@
     <color name="brown">#5D4037</color>
     <color name="dark_orange">#BF360C</color>
     <color name="light_grey">#EEEEEE</color>
+    <color name="indicator">#CCCCCC</color>
 
     <color name="homepage_content_icon">#9B9B9B</color>
     <color name="share_content_icon">#795548</color>

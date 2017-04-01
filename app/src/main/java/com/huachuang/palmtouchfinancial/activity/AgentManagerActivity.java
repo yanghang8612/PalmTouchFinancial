@@ -40,19 +40,34 @@ public class AgentManagerActivity extends BaseActivity {
         agentList.setLayoutManager(new LinearLayoutManager(this));
         List<MultiItemEntity> list = new ArrayList<>();
         User user;
-        user = new User();user.setUserPhoneNumber("18511838501");user.setUserType((short) 2);
-        AgentItem level0 = new AgentItem(user, 0);
-        user = new User();user.setUserPhoneNumber("18511838502");user.setUserType((short) 3);
-        AgentItem level1 = new AgentItem(user, 1);
-        user = new User();user.setUserPhoneNumber("18511838500");user.setUserType((short) 0);
-        AgentItem level1_user = new AgentItem(user, 1);
-        level0.addSubItem(level1);level0.addSubItem(level1_user);
-        user = new User();user.setUserPhoneNumber("18511838500");user.setUserType((short) 0);user.setVip(true);
-        AgentItem level2 = new AgentItem(user, 2);
-        level1.addSubItem(level2);
-        user = new User();user.setUserPhoneNumber("18511838500");user.setUserType((short) 0);
-        AgentItem level0_user = new AgentItem(user, 0);
-        list.add(level0);list.add(level0_user);
+//        user = new User();user.setUserPhoneNumber("18511838501");user.setUserType((short) 2);
+//        AgentItem level01 = new AgentItem(user, 0);
+//        user = new User();user.setUserPhoneNumber("18511838502");user.setUserType((short) 3);
+//        AgentItem level11 = new AgentItem(user, 1);
+//        user = new User();user.setUserPhoneNumber("18511838500");user.setUserType((short) 0);
+//        AgentItem level1_user = new AgentItem(user, 1);
+//        level01.addSubItem(level11);level01.addSubItem(level1_user);
+//        user = new User();user.setUserPhoneNumber("18511838500");user.setUserType((short) 0);user.setVip(true);
+//        AgentItem level21 = new AgentItem(user, 2);
+//        user = new User();user.setUserPhoneNumber("18511838500");user.setUserType((short) 0);
+//        AgentItem level22 = new AgentItem(user, 2);
+//        level11.addSubItem(level21);level11.addSubItem(level22);
+//        user = new User();user.setUserPhoneNumber("18511838500");user.setUserType((short) 0);
+//        AgentItem level0_user = new AgentItem(user, 0);
+//        list.add(level01);list.add(level0_user);
+        for (int i = 0; i < 2; i++) {
+            user = new User();user.setUserPhoneNumber(String.valueOf((long) (Math.random() * 100000000000L)));user.setUserType((short) 2);
+            AgentItem level0 = new AgentItem(user, 0);list.add(level0);
+            for (int j = 0; j < 2; j++) {
+                user = new User();user.setUserPhoneNumber(String.valueOf((long) (Math.random() * 100000000000L)));user.setUserType((short) 3);
+                AgentItem level1 = new AgentItem(user, 1);level0.addSubItem(level1);
+                for (int k = 0; k < 2; k++) {
+                    user = new User();user.setUserPhoneNumber(String.valueOf((long) (Math.random() * 100000000000L)));user.setUserType((short) 0);
+                    user.setVip(Math.random() > 0.5);
+                    AgentItem level2 = new AgentItem(user, 2);level1.addSubItem(level2);
+                }
+            }
+        }
         AgentManagerAdapter adapter = new AgentManagerAdapter(list);
         agentList.setAdapter(adapter);
     }

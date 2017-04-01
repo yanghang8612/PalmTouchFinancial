@@ -18,6 +18,15 @@ android {
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
         }
     }
+
+    splits {
+        abi {
+            enable true
+            reset()
+            include 'x86', 'armeabi-v7a','x86_64'
+            universalApk true
+        }
+    }
 }
 
 dependencies {
@@ -41,7 +50,6 @@ dependencies {
     compile 'com.afollestad.material-dialogs:commons:0.9.4.2'
     compile 'com.rengwuxian.materialedittext:library:2.1.4'
     compile 'com.github.CymChad:BaseRecyclerViewAdapterHelper:v2.9.1'
-    compile 'cn.yipianfengye.android:ad-library:1.0'
     compile 'com.github.ybq:Android-SpinKit:1.1.0'
     compile 'com.opencsv:opencsv:3.7'
     compile 'com.alibaba:fastjson:1.2.30'

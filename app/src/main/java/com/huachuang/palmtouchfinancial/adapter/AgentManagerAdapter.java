@@ -35,8 +35,8 @@ public class AgentManagerAdapter extends BaseMultiItemQuickAdapter<MultiItemEnti
     protected void convert(final BaseViewHolder holder, MultiItemEntity item) {
         final AgentItem agent = (AgentItem) item;
         if (agent.getLevel() == 1) {
-            holder.getView(R.id.first_divider).setVisibility(View.VISIBLE);
-            holder.getView(R.id.second_divider).setVisibility(View.GONE);
+            holder.getView(R.id.first_divider).setVisibility(View.GONE);
+            holder.getView(R.id.second_divider).setVisibility(View.VISIBLE);
         }
         else if (agent.getLevel() == 2) {
             holder.getView(R.id.first_divider).setVisibility(View.VISIBLE);

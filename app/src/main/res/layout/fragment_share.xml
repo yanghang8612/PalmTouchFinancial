@@ -3,7 +3,8 @@
     xmlns:android="http://schemas.android.com/apk/res/android"
     android:id="@+id/share_fragment_bottomsheet"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="match_parent"
+    android:paddingTop="72dp">
 
     <LinearLayout
         android:orientation="vertical"
@@ -14,14 +15,16 @@
         <LinearLayout
             android:orientation="vertical"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+            android:layout_height="0dp"
+            android:layout_weight="1"
             android:layout_marginTop="@dimen/share_header_margin"
             android:background="@color/white">
 
             <LinearLayout
                 android:orientation="horizontal"
                 android:layout_width="match_parent"
-                android:layout_height="72dp"
+                android:layout_height="0dp"
+                android:layout_weight="1"
                 android:padding="@dimen/share_content_padding">
 
                 <LinearLayout
@@ -191,7 +194,7 @@
             android:orientation="vertical"
             android:layout_width="match_parent"
             android:layout_height="0dp"
-            android:layout_weight="1"
+            android:layout_weight="3"
             android:paddingTop="@dimen/share_content_padding_vertical"
             android:paddingLeft="@dimen/share_content_padding_horizontal"
             android:paddingRight="@dimen/share_content_padding_horizontal"

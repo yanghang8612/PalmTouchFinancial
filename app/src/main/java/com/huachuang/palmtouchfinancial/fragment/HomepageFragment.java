@@ -33,7 +33,8 @@ public class HomepageFragment extends BaseFragment {
         images.add(R.drawable.ad_2);
         images.add(R.drawable.ad_3);
         images.add(R.drawable.ad_4);
-        adCarouselView.setImages(images).setImageLoader(new AdImageLoader()).start();
+        images.add(R.drawable.ad_5);
+        adCarouselView.setImages(images).setImageLoader(new AdImageLoader()).setDelayTime(3000).start();
     }
 
     @Event(value = R.id.main_apply_for_credit_card)
@@ -49,5 +50,13 @@ public class HomepageFragment extends BaseFragment {
     @Event(value = R.id.main_movie_ticket)
     private void movieTicketClicked(View view) {
         WebViewActivity.actionStart(getContext(), "https://h5.m.taobao.com/app/movie/pages/index/index.html");
+    }
+
+    public void startAdCarousel() {
+        adCarouselView.startAutoPlay();
+    }
+
+    public void stopAdCarousel() {
+        adCarouselView.stopAutoPlay();
     }
 }

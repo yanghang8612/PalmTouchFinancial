@@ -3,25 +3,21 @@ package com.huachuang.palmtouchfinancial.activity;
 import android.content.Context;
 import android.content.Intent;
 import android.graphics.Color;
-import android.graphics.Rect;
-import android.graphics.Typeface;
 import android.os.Build;
 import android.os.Bundle;
-import android.support.annotation.IdRes;
+import android.os.Handler;
 import android.support.design.widget.AppBarLayout;
 import android.support.design.widget.NavigationView;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
 import android.support.v4.view.GravityCompat;
-import android.support.v4.view.ViewPager;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
-import android.view.WindowManager;
 import android.widget.LinearLayout;
 
 import com.ashokvarma.bottomnavigation.BottomNavigationBar;
@@ -30,20 +26,11 @@ import com.huachuang.palmtouchfinancial.GlobalParams;
 import com.huachuang.palmtouchfinancial.GlobalVariable;
 import com.huachuang.palmtouchfinancial.R;
 import com.huachuang.palmtouchfinancial.fragment.FragmentFactory;
-import com.huachuang.palmtouchfinancial.util.CommonUtils;
+import com.huachuang.palmtouchfinancial.fragment.HomepageFragment;
 import com.tencent.mm.opensdk.openapi.WXAPIFactory;
-import com.uuch.adlibrary.AdConstant;
-import com.uuch.adlibrary.AdManager;
-import com.uuch.adlibrary.bean.AdInfo;
-import com.uuch.adlibrary.transformer.ZoomOutPageTransformer;
-import com.youth.banner.transformer.DepthPageTransformer;
 
 import org.xutils.view.annotation.ContentView;
 import org.xutils.view.annotation.ViewInject;
-
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.List;
 
 @ContentView(R.layout.activity_main)
 public class MainActivity extends BaseActivity implements NavigationView.OnNavigationItemSelectedListener {
@@ -58,8 +45,6 @@ public class MainActivity extends BaseActivity implements NavigationView.OnNavig
 
     private int preFragmentIndex = 0;
     private int statusBarHeight = 0;
-    private List<AdInfo> adList = new ArrayList<>();
-    private AdManager adManager = new AdManager(MainActivity.this, adList);
 
     @ViewInject(R.id.drawer_layout)
     private DrawerLayout drawer;
@@ -135,15 +120,15 @@ public class MainActivity extends BaseActivity implements NavigationView.OnNavig
                 })
                 .initialise();
 
-        initAdList();
-        adManager.setOverScreen(true)
-                .setPageTransformer(new ZoomOutPageTransformer())
-                .setWidthPerHeight(0.9F)
-                .setBounciness(1)
-                .setSpeed(1)
-                .showAdDialog(AdConstant.ANIM_DOWN_TO_UP);
-
         showDefaultFragment();
+
+        new Handler().postDelayed(new Runnable() {
+            @Override
+            public void run() {
+                ((HomepageFragment) FragmentFactory.getInstanceByIndex(0)).stopAdCarousel();
+                ForceJumpActivity.actionStart(MainActivity.this);
+            }
+        }, 2000);
     }
 
     @Override
@@ -203,19 +188,6 @@ public class MainActivity extends BaseActivity implements NavigationView.OnNavig
         return true;
     }
 
-    private void initAdList() {
-        AdInfo adInfo;
-        adInfo = new AdInfo();
-        adInfo.setActivityImg(GlobalParams.SERVER_URL_HEAD + "/img/jump_1.png");
-        //adInfo.setActivityImg("https://raw.githubusercontent.com/yipianfengye/android-adDialog/master/images/testImage1.png");
-        adList.add(adInfo);
-
-        adInfo = new AdInfo();
-        adInfo.setActivityImg(GlobalParams.SERVER_URL_HEAD + "/img/jump_2.png");
-        //adInfo.setActivityImg("https://raw.githubusercontent.com/yipianfengye/android-adDialog/master/images/testImage2.png");
-        adList.add(adInfo);
-    }
-
     private void showDefaultFragment() {
         Fragment defaultFragment = FragmentFactory.getInstanceByIndex(defaultFragmentIndex);
         FragmentManager fragmentManager = getSupportFragmentManager();
@@ -225,24 +197,6 @@ public class MainActivity extends BaseActivity implements NavigationView.OnNavig
     }
 
     public void switchFragment(int toIndex) {
-        Fragment from = FragmentFactory.getInstanceByIndex(preFragmentIndex), to = FragmentFactory.getInstanceByIndex(toIndex);
-        if (from == null || to == null) {
-            return;
-        }
-        FragmentManager fragmentManager = getSupportFragmentManager();
-        FragmentTransaction transaction = fragmentManager.beginTransaction();
-        if (!to.isAdded()) {
-            transaction.hide(from).add(R.id.main_fragment, to).commit();
-        }
-        else {
-            transaction.hide(from).show(to).commit();
-        }
-        preFragmentIndex = toIndex;
-
-        int contentMarginTop = (toIndex == 0) ? 0 : statusBarHeight + CommonUtils.dip2px(this, 48);
-        DrawerLayout.LayoutParams params = (DrawerLayout.LayoutParams) mainContent.getLayoutParams();
-        params.setMargins(0, contentMarginTop, 0, 0);
-        mainContent.setLayoutParams(params);
         if (toIndex == 0) {
             toolbar.setBackgroundColor(Color.TRANSPARENT);
         }
@@ -257,5 +211,24 @@ public class MainActivity extends BaseActivity implements NavigationView.OnNavig
                 getWindow().setStatusBarColor(getResources().getColor(R.color.colorPrimary));
             }
         }
+
+        Fragment from = FragmentFactory.getInstanceByIndex(preFragmentIndex), to = FragmentFactory.getInstanceByIndex(toIndex);
+        if (from == null || to == null) {
+            return;
+        }
+        FragmentManager fragmentManager = getSupportFragmentManager();
+        FragmentTransaction transaction = fragmentManager.beginTransaction();
+        if (!to.isAdded()) {
+            transaction.hide(from).add(R.id.main_fragment, to).commit();
+        }
+        else {
+            transaction.hide(from).show(to).commit();
+        }
+        preFragmentIndex = toIndex;
+
+//        int contentMarginTop = (toIndex == 0) ? 0 : statusBarHeight + CommonUtils.dip2px(this, 48);
+//        DrawerLayout.LayoutParams params = (DrawerLayout.LayoutParams) mainContent.getLayoutParams();
+//        params.setMargins(0, contentMarginTop, 0, 0);
+//        mainContent.setLayoutParams(params);
     }
 }

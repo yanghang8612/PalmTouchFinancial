@@ -4,7 +4,8 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:orientation="vertical"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="match_parent"
+    android:paddingTop="72dp">
 
     <LinearLayout
         android:orientation="horizontal"
@@ -145,7 +146,7 @@
             <android.support.v7.widget.CardView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_gravity="bottom"
+                android:layout_gravity="center"
                 android:layout_marginLeft="10dp"
                 app:cardBackgroundColor="@color/mall_text_background"
                 app:cardCornerRadius="5dp"
@@ -156,7 +157,7 @@
                     android:layout_height="wrap_content"
                     android:padding="5dp"
                     android:text="掌触商城"
-                    android:textSize="11sp"
+                    android:textSize="10sp"
                     android:textColor="@color/grey"/>
 
             </android.support.v7.widget.CardView>
@@ -168,7 +169,7 @@
             android:layout_height="wrap_content"
             android:layout_gravity="center"
             android:text="更多"
-            android:textSize="13sp"/>
+            android:textSize="12sp"/>
 
         <ImageView
             android:layout_width="16dp"
@@ -182,7 +183,6 @@
     <android.support.v7.widget.RecyclerView
         android:id="@+id/wallet_mall_list"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:layout_marginTop="-3dp"/>
+        android:layout_height="match_parent"/>
 
 </LinearLayout>

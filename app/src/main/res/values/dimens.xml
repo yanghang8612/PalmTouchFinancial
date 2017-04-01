@@ -86,13 +86,15 @@
     <dimen name="about_us_main_body">15sp</dimen>
 
     <dimen name="user_item_margin">20dp</dimen>
-    <dimen name="user_item_divider_margin">90dp</dimen>
+    <dimen name="user_item_header_margin">10dp</dimen>
+    <dimen name="user_item_divider_margin">78dp</dimen>
     <dimen name="user_item_padding">5dp</dimen>
     <dimen name="user_item_image_size">48dp</dimen>
     <dimen name="user_item_vip_size">24dp</dimen>
 
     <dimen name="agent_item_margin">20dp</dimen>
-    <dimen name="agent_item_divider_margin">90dp</dimen>
+    <dimen name="agent_item_header_margin">10dp</dimen>
+    <dimen name="agent_item_divider_margin">78dp</dimen>
     <dimen name="agent_item_padding">5dp</dimen>
     <dimen name="agent_item_image_size">48dp</dimen>
     <dimen name="agent_item_type_size">24dp</dimen>
