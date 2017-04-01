@@ -1,13 +1,20 @@
 package com.huachuang.palmtouchfinancial.fragment;
 
+import android.support.annotation.NonNull;
 import android.support.v7.widget.DividerItemDecoration;
 import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.View;
 import android.view.ViewGroup;
 
+import com.afollestad.materialdialogs.DialogAction;
+import com.afollestad.materialdialogs.MaterialDialog;
 import com.huachuang.palmtouchfinancial.R;
+import com.huachuang.palmtouchfinancial.activity.CardManagerActivity;
 import com.huachuang.palmtouchfinancial.activity.CreditCardApplyActivity;
+import com.huachuang.palmtouchfinancial.activity.MainMallActivity;
+import com.huachuang.palmtouchfinancial.activity.MyBalanceActivity;
+import com.huachuang.palmtouchfinancial.activity.MyCoinsActivity;
 import com.huachuang.palmtouchfinancial.adapter.CreditCardAdapter;
 import com.huachuang.palmtouchfinancial.adapter.WalletMallAdapter;
 import com.huachuang.palmtouchfinancial.decoration.WalletMallGoodsDecoration;
@@ -29,26 +36,77 @@ public class WalletFragment extends BaseFragment {
 
     @Override
     protected void initFragment() {
-//        adapter = new CreditCardAdapter();
-//        adapter.openLoadAnimation();
-//        View footerView = getActivity().getLayoutInflater().inflate(
-//                R.layout.credit_card_list_footer_view,
-//                (ViewGroup) creditCardList.getParent(),
-//                false);
-//        footerView.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View v) {
-//                CreditCardApplyActivity.actionStart(getContext());
-//            }
-//        });
-//        adapter.addFooterView(footerView);
-//        creditCardList.setLayoutManager(new GridLayoutManager(getContext(), 1));
-//        creditCardList.setAdapter(adapter);
+        View header = getActivity().getLayoutInflater().inflate(R.layout.header_fragment_wallet, (ViewGroup) walletMallList.getParent(), false);
+
+        header.findViewById(R.id.wallet_scan).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                showDefaultDialog();
+            }
+        });
+        header.findViewById(R.id.wallet_pay_code).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                showDefaultDialog();
+            }
+        });
+        header.findViewById(R.id.wallet_card).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                CardManagerActivity.actionStart(WalletFragment.this.getContext());
+            }
+        });
+        header.findViewById(R.id.wallet_pay_code).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                showDefaultDialog();
+            }
+        });
+        header.findViewById(R.id.wallet_recharge).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                showDefaultDialog();
+            }
+        });
+        header.findViewById(R.id.wallet_balance).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                MyBalanceActivity.actionStart(WalletFragment.this.getContext());
+            }
+        });
+        header.findViewById(R.id.wallet_coins).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                MyCoinsActivity.actionStart(WalletFragment.this.getContext());
+            }
+        });
+        header.findViewById(R.id.wallet_mall_more).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                MainMallActivity.actionStart(WalletFragment.this.getContext());
+            }
+        });
 
         adapter = new WalletMallAdapter();
         adapter.openLoadAnimation();
+        adapter.addHeaderView(header);
         walletMallList.setLayoutManager(new GridLayoutManager(getContext(), 2));
-        walletMallList.addItemDecoration(new WalletMallGoodsDecoration(1, R.color.divider));
+        //walletMallList.addItemDecoration(new WalletMallGoodsDecoration(1, R.color.divider));
         walletMallList.setAdapter(adapter);
+    }
+
+    private void showDefaultDialog() {
+        new MaterialDialog.Builder(getContext())
+                .content("敬请期待")
+                .contentColorRes(R.color.black)
+                .positiveText("确认")
+                .autoDismiss(false)
+                .onPositive(new MaterialDialog.SingleButtonCallback() {
+                    @Override
+                    public void onClick(@NonNull MaterialDialog dialog, @NonNull DialogAction which) {
+                        dialog.dismiss();
+                    }
+                })
+                .show();
     }
 }

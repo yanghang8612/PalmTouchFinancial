@@ -1,5 +1,7 @@
 package com.huachuang.palmtouchfinancial.fragment;
 
+import android.content.Intent;
+import android.net.Uri;
 import android.view.View;
 
 import com.huachuang.palmtouchfinancial.R;
@@ -39,6 +41,7 @@ public class MyFragment extends BaseFragment {
 
     @Event(R.id.setting_hotline)
     private void hotlineClicked(View view) {
-
+        Intent intent = new Intent(Intent.ACTION_CALL, Uri.parse("tel:" + "400 810 9910"));
+        startActivity(intent);
     }
 }

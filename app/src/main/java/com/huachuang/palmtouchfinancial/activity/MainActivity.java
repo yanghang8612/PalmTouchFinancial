@@ -212,6 +212,7 @@ public class MainActivity extends BaseActivity implements NavigationView.OnNavig
             }
         }
 
+        bottomNavigationBar.selectTab(toIndex, false);
         Fragment from = FragmentFactory.getInstanceByIndex(preFragmentIndex), to = FragmentFactory.getInstanceByIndex(toIndex);
         if (from == null || to == null) {
             return;

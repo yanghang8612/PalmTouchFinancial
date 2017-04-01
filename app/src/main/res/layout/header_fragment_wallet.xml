@@ -16,6 +16,7 @@
         android:paddingRight="36dp">
 
         <TextView
+            android:id="@+id/wallet_scan"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight="1"
@@ -26,6 +27,7 @@
             android:textColor="@color/black" />
 
         <TextView
+            android:id="@+id/wallet_pay_code"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight="1"
@@ -44,6 +46,7 @@
         android:padding="36dp">
 
         <TextView
+            android:id="@+id/wallet_card"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight="1"
@@ -54,6 +57,7 @@
             android:textColor="@color/black" />
 
         <TextView
+            android:id="@+id/wallet_recharge"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight="1"
@@ -75,6 +79,7 @@
         android:layout_marginBottom="10dp">
 
         <LinearLayout
+            android:id="@+id/wallet_balance"
             android:orientation="vertical"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
@@ -91,7 +96,7 @@
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="5dp"
+                android:layout_marginTop="2dp"
                 android:text="¥ 20.00"
                 android:textColor="@color/black" />
 
@@ -104,6 +109,7 @@
             android:background="@color/divider" />
 
         <LinearLayout
+            android:id="@+id/wallet_coins"
             android:orientation="vertical"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
@@ -120,7 +126,7 @@
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="5dp"
+                android:layout_marginTop="2dp"
                 android:text="1 个"
                 android:textColor="@color/black" />
 
@@ -162,6 +168,7 @@
         </LinearLayout>
 
         <TextView
+            android:id="@+id/wallet_mall_more"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="center"

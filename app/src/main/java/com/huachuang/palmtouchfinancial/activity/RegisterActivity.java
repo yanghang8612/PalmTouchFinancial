@@ -11,6 +11,7 @@ import android.view.MenuItem;
 import android.view.View;
 import android.view.inputmethod.InputMethodManager;
 import android.widget.Button;
+import android.widget.CheckBox;
 import android.widget.Toast;
 import android.widget.ViewFlipper;
 
@@ -64,6 +65,9 @@ public class RegisterActivity extends BaseActivity {
 
     @ViewInject(R.id.register_recommender_id_layout)
     private TextInputLayout recommenderIDLayout;
+
+    @ViewInject(R.id.register_agree_check_box)
+    private CheckBox agreeCheckBox;
 
     @ViewInject(R.id.register_get_verification_code_button)
     private Button getVerificationCodeButton;
@@ -218,7 +222,10 @@ public class RegisterActivity extends BaseActivity {
 
             @Override
             public void onFinished() {
-                if (invitationCodeCheckState && (recommenderID.equals("") || (!recommenderID.equals("") && recommenderIDCheckState))) {
+                if (!agreeCheckBox.isChecked()) {
+                    Toast.makeText(RegisterActivity.this, "请阅读并同意《用户协议》", Toast.LENGTH_SHORT).show();
+                }
+                else {
                     registerFlipper.setDisplayedChild(1);
                 }
             }
@@ -247,7 +254,12 @@ public class RegisterActivity extends BaseActivity {
                 @Override
                 public void onFinished() {
                     if (invitationCodeCheckState && (recommenderID.equals("") || (!recommenderID.equals("") && recommenderIDCheckState))) {
-                        registerFlipper.setDisplayedChild(1);
+                        if (!agreeCheckBox.isChecked()) {
+                            Toast.makeText(RegisterActivity.this, "请阅读并同意《用户协议》", Toast.LENGTH_SHORT).show();
+                        }
+                        else {
+                            registerFlipper.setDisplayedChild(1);
+                        }
                     }
                 }
             });
@@ -285,6 +297,11 @@ public class RegisterActivity extends BaseActivity {
                 }
             });
         }
+    }
+
+    @Event(value = R.id.register_agreement_link)
+    private void agreementLinkClicked(View view) {
+        UserAgreementActivity.actionStart(this);
     }
 
     private CountDownTimer timer = new CountDownTimer(31000, 1000) {

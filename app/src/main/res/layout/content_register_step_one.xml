@@ -84,6 +84,28 @@
 
     </android.support.design.widget.TextInputLayout>
 
+    <LinearLayout
+        android:orientation="horizontal"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <CheckBox
+            android:id="@+id/register_agree_check_box"
+            android:layout_width="wrap_content"
+            android:layout_height="36dp"
+            android:layout_gravity="center"
+            android:text="同意" />
+
+        <TextView
+            android:id="@+id/register_agreement_link"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:text="《掌触金控用户协议》"
+            android:textColor="@color/blue" />
+
+    </LinearLayout>
+
     <Button
         android:id="@+id/register_next_step_button"
         android:layout_width="match_parent"

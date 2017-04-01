@@ -17,9 +17,10 @@ import org.xutils.view.annotation.ViewInject;
 @ContentView(R.layout.activity_web_view)
 public class WebViewActivity extends BaseActivity {
 
-    public static void actionStart(Context context, String url) {
+    public static void actionStart(Context context, String url, String title) {
         Intent intent = new Intent(context, WebViewActivity.class);
         intent.putExtra("url", url);
+        intent.putExtra("title", title);
         context.startActivity(intent);
     }
 
@@ -32,6 +33,7 @@ public class WebViewActivity extends BaseActivity {
         if (getSupportActionBar() != null) {
             getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         }
+        setTitle(getIntent().getStringExtra("title"));
         webView.getSettings().setJavaScriptEnabled(true);
         webView.getSettings().setJavaScriptCanOpenWindowsAutomatically(true);
         webView.getSettings().setSupportMultipleWindows(true);

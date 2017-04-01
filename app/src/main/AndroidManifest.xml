@@ -5,6 +5,7 @@
 
     <uses-permission android:name="android.permission.INTERNET" />
     <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
+    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
     <uses-permission android:name="android.permission.CAMERA" />
     <uses-permission android:name="android.permission.VIBRATE" />
     <uses-permission android:name="android.permission.ACCESS_WIFI_STATE" />
@@ -13,15 +14,16 @@
     <uses-permission android:name="android.permission.READ_PHONE_STATE" />
     <uses-permission android:name="android.permission.MANAGE_ACCOUNTS" />
     <uses-permission android:name="android.permission.GET_ACCOUNTS" />
+    <uses-permission android:name="android.permission.CALL_PHONE" />
 
     <application
+        android:name=".MyApplication"
         android:allowBackup="true"
         android:hardwareAccelerated="true"
         android:icon="@mipmap/ic_launcher"
         android:label="@string/app_name"
         android:supportsRtl="true"
-        android:theme="@style/AppTheme"
-        android:name=".MyApplication">
+        android:theme="@style/AppTheme">
         <activity
             android:name=".activity.LoginActivity"
             android:label="@string/app_name"
@@ -63,7 +65,7 @@
             android:label="@string/title_activity_district" />
         <activity
             android:name=".activity.SpecificApplyActivity"
-            android:theme="@style/AppTheme.NoActionBar" />
+            android:label="" />
         <activity
             android:name=".activity.WebViewActivity"
             android:label="@string/title_activity_web_view" />
@@ -80,9 +82,31 @@
             android:name=".activity.ForceJumpActivity"
             android:theme="@style/AppTheme.Transparent" />
         <activity
+            android:name=".activity.MainMallActivity"
+            android:label="@string/title_activity_mall" />
+        <activity
+            android:name=".activity.CardManagerActivity"
+            android:label=""
+            android:theme="@style/AppTheme.NoActionBar" />
+        <activity
+            android:name=".activity.MyBalanceActivity"
+            android:label="@string/title_activity_my_balance" />
+        <activity
+            android:name=".activity.MyCoinsActivity"
+            android:label="@string/title_activity_my_coins"/>
+        <activity
             android:name="com.journeyapps.barcodescanner.CaptureActivity"
             android:screenOrientation="fullSensor"
             tools:replace="screenOrientation" />
+        <activity
+            android:name="cn.finalteam.rxgalleryfinal.ui.activity.MediaActivity"
+            android:exported="true"
+            android:screenOrientation="portrait"
+            android:theme="@style/AppTheme.NoActionBar" />
+        <activity
+            android:name="com.yalantis.ucrop.UCropActivity"
+            android:screenOrientation="portrait"
+            android:theme="@style/AppTheme.NoActionBar" />
     </application>
 
 </manifest>

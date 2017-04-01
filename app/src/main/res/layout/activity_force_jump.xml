@@ -16,8 +16,8 @@
 
         <com.youth.banner.Banner
             android:id="@+id/force_jump_ads"
-            android:layout_width="350dp"
-            android:layout_height="350dp"
+            android:layout_width="320dp"
+            android:layout_height="320dp"
             app:indicator_drawable_unselected="@color/indicator"/>
 
         <de.hdodenhof.circleimageview.CircleImageView
