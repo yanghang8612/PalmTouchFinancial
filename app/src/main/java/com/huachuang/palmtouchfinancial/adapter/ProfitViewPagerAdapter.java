@@ -1,6 +1,5 @@
 package com.huachuang.palmtouchfinancial.adapter;
 
-import android.app.FragmentManager;
 import android.os.AsyncTask;
 import android.support.v4.view.PagerAdapter;
 import android.support.v4.widget.SwipeRefreshLayout;
@@ -13,8 +12,6 @@ import android.widget.ProgressBar;
 
 import com.huachuang.palmtouchfinancial.R;
 import com.huachuang.palmtouchfinancial.activity.BaseActivity;
-
-import org.xutils.http.HttpMethod;
 
 /**
  * Created by Asuka on 2017/3/13.

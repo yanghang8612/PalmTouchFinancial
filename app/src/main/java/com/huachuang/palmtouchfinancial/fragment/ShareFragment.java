@@ -2,10 +2,8 @@ package com.huachuang.palmtouchfinancial.fragment;
 
 import android.view.MenuItem;
 import android.view.View;
-import android.widget.Toast;
 
 import com.flipboard.bottomsheet.BottomSheetLayout;
-import com.flipboard.bottomsheet.commons.IntentPickerSheetView;
 import com.flipboard.bottomsheet.commons.MenuSheetView;
 import com.huachuang.palmtouchfinancial.GlobalVariable;
 import com.huachuang.palmtouchfinancial.R;

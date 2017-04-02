@@ -11,7 +11,6 @@ import android.view.ViewGroup;
 
 import com.huachuang.palmtouchfinancial.R;
 import com.huachuang.palmtouchfinancial.adapter.MainMallAdapter;
-import com.huachuang.palmtouchfinancial.decoration.MainMallGoodsDecoration;
 import com.huachuang.palmtouchfinancial.loader.AdImageLoader;
 import com.youth.banner.Banner;
 

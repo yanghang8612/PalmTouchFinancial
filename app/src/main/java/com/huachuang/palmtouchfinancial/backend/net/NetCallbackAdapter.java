@@ -1,7 +1,5 @@
 package com.huachuang.palmtouchfinancial.backend.net;
 
-import android.util.Log;
-
 import org.xutils.common.Callback;
 
 /**

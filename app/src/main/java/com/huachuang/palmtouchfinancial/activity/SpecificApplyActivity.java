@@ -3,7 +3,6 @@ package com.huachuang.palmtouchfinancial.activity;
 import android.annotation.TargetApi;
 import android.content.Context;
 import android.content.Intent;
-import android.graphics.Bitmap;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.MenuItem;
@@ -38,7 +37,7 @@ public class SpecificApplyActivity extends BaseActivity {
             "https://creditcardapp.bankcomm.com/applynew/front/apply/track/record.html?trackCode=A101208503136",
             "https://ccclub.cmbchina.com/mca/MPreContract.aspx?cardSel=uc&swbrief=Y&WT.mc_id=N3700MM2061I392500ZH",
             "https://xyk.cebbank.com/cebmms/apply/ps/card-index.htm?req_card_id=3341&pro_code=FHTG023556SJ20RONG",
-            "https://c.pingan.com/apply/mobile/apply/index.html?scc=920000515&ccp=1a2a8a9a5&showt=0"};
+            "https://c.pingan.com/apply/mobile/apply/index.html"};
 
     public static void actionStart(Context context, int bank) {
         Intent intent = new Intent(context, SpecificApplyActivity.class);
@@ -63,6 +62,11 @@ public class SpecificApplyActivity extends BaseActivity {
         webView.getSettings().setJavaScriptEnabled(true);
         webView.getSettings().setJavaScriptCanOpenWindowsAutomatically(true);
         webView.getSettings().setSupportMultipleWindows(true);
+        webView.getSettings().setBlockNetworkImage(false);
+        webView.getSettings().setDomStorageEnabled(true);
+        webView.getSettings().setAllowFileAccessFromFileURLs(true);
+        webView.getSettings().setAllowUniversalAccessFromFileURLs(true);
+        webView.getSettings().setAllowContentAccess(true);
         WebViewClient client = new WebViewClient() {
 
             @Override
@@ -70,31 +74,54 @@ public class SpecificApplyActivity extends BaseActivity {
                 String js = "";
                 switch (bankID) {
                     case 0:
-                       js += "document.getElementById('realname').value='杨行';";
-                       js += "document.getElementById('indentificationId').value='411521199111210033';";
-                       js += "document.getElementById('tel').value='18511838501';";
+                        js += "$('#realname').val('杨行');";
+                        js += "$('#indentificationId').val('411521199111210033');";
+                        js += "$('#tel').val('18511838501');";
                         break;
                     case 1:
-                        js += "document.getElementById('chaneseName').value='杨行';";
-                        js += "document.getElementById('pingyin').value='YANG HANG';";
-                        js += "document.getElementById('identity').value='411521199111210033';";
-                        js += "$('#phoneNum').val('18511838501')";
+                        js += "$('#chaneseName').val('杨行');";
+                        js += "$('#pingyin').val('YANG HANG');";
+                        js += "$('#identity').val('411521199111210033');";
+                        js += "$('#phoneNum').val('18511838501');";
                         break;
                     case 2:
+                        js += "$('#cuName').val('杨行');";
+                        js += "$('#cuIdentity').val('411521199111210033');";
+                        js += "$('#cuMobilePhone').val('18511838501');";
                         break;
                     case 3:
+                        js += "document.getElementById('TelephoneNo').value='18511838501';";
+                        js += "$('#TelephoneNo').val('18511838501');";
+                        js += "$('#username').val('杨行');";
+                        js += "$('#usernameSpell').val('YANG HANG');";
+                        js += "$('#IdNo').val('411521199111210033');";
                         break;
                     case 4:
                         break;
                     case 5:
+                        js += "document.getElementById('ctl00_ContentPlaceHolder1_txbName').value='杨行';";
+                        js += "document.getElementById('ctl00_ContentPlaceHolder1_txbCardId').value='411521199111210033';";
+                        js += "document.getElementById('tbxMobile').value='18511838501';";
                         break;
                     case 6:
+                        js += "$('#name').val('杨行');";
+                        js += "$('#namepy').val('YANG HANG');";
+                        js += "$('#id_no').val('411521199111210033');";
+                        js += "$('#mobilephone').val('18511838501');";
                         break;
                     case 7:
+                        try {
+                            Thread.sleep(100);
+                        } catch (InterruptedException e) {
+                            e.printStackTrace();
+                        }
+                        js += "$('#name').val('杨行');";
+                        js += "$('#pinyin').val('YANGHANG');";
+                        js += "$('#idNo').val('411521199111210033');";
+                        js += "$('#tel').val('18511838501');";
                         break;
                 }
-                //webView.loadUrl(js);
-                webView.evaluateJavascript(js, new ValueCallback<String>() {
+                view.evaluateJavascript(js, new ValueCallback<String>() {
                     @Override
                     public void onReceiveValue(String value) {
 
@@ -104,7 +131,7 @@ public class SpecificApplyActivity extends BaseActivity {
             }
         };
         webView.setWebViewClient(client);
-        //webView.setWebChromeClient(new WebChromeClient());
+        webView.setWebChromeClient(new WebChromeClient());
         webView.loadUrl(bankUrl[bankID]);
     }
 

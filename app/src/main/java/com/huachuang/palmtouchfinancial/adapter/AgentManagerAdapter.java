@@ -1,6 +1,5 @@
 package com.huachuang.palmtouchfinancial.adapter;
 
-import android.content.Context;
 import android.view.View;
 
 import com.chad.library.adapter.base.BaseMultiItemQuickAdapter;
@@ -9,7 +8,6 @@ import com.chad.library.adapter.base.entity.MultiItemEntity;
 import com.huachuang.palmtouchfinancial.R;
 import com.huachuang.palmtouchfinancial.adapter.entity.AgentItem;
 
-import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 

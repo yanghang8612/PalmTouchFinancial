@@ -1,7 +1,6 @@
 package com.huachuang.palmtouchfinancial.fragment;
 
 import android.support.annotation.NonNull;
-import android.support.v7.widget.DividerItemDecoration;
 import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.View;
@@ -11,13 +10,10 @@ import com.afollestad.materialdialogs.DialogAction;
 import com.afollestad.materialdialogs.MaterialDialog;
 import com.huachuang.palmtouchfinancial.R;
 import com.huachuang.palmtouchfinancial.activity.CardManagerActivity;
-import com.huachuang.palmtouchfinancial.activity.CreditCardApplyActivity;
 import com.huachuang.palmtouchfinancial.activity.MainMallActivity;
 import com.huachuang.palmtouchfinancial.activity.MyBalanceActivity;
 import com.huachuang.palmtouchfinancial.activity.MyCoinsActivity;
-import com.huachuang.palmtouchfinancial.adapter.CreditCardAdapter;
 import com.huachuang.palmtouchfinancial.adapter.WalletMallAdapter;
-import com.huachuang.palmtouchfinancial.decoration.WalletMallGoodsDecoration;
 
 import org.xutils.view.annotation.ContentView;
 import org.xutils.view.annotation.ViewInject;

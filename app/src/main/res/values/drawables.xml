@@ -1,4 +1,4 @@
-<resources xmlns:android="http://schemas.android.com/apk/res/android">
+<resources>
     <drawable name="ssdk_oks_classic_platfrom_cell_back_nor">#ffffffff</drawable>
     <drawable name="ssdk_oks_classic_platfrom_cell_back_sel">#ffeeeeee</drawable>
 </resources>

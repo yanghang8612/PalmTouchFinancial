@@ -5,8 +5,6 @@ import com.huachuang.palmtouchfinancial.GlobalParams;
 import org.xutils.http.RequestParams;
 import org.xutils.http.annotation.HttpRequest;
 
-import java.net.URLEncoder;
-
 /**
  * Created by Asuka on 2015/12/21.
  */

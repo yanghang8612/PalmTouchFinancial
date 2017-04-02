@@ -1,18 +1,13 @@
 package com.huachuang.palmtouchfinancial.util;
 
 import android.content.Context;
-import android.support.v7.app.AppCompatActivity;
 
 import com.opencsv.CSVReader;
 
 import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.HashSet;
-import java.util.LinkedHashSet;
 import java.util.List;
-import java.util.Set;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 

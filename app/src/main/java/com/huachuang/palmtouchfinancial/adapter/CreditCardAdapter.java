@@ -1,7 +1,5 @@
 package com.huachuang.palmtouchfinancial.adapter;
 
-import android.content.Context;
-
 import com.chad.library.adapter.base.BaseQuickAdapter;
 import com.chad.library.adapter.base.BaseViewHolder;
 import com.huachuang.palmtouchfinancial.GlobalParams;

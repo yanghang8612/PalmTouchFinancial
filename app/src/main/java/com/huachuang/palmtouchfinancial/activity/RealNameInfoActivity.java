@@ -7,7 +7,6 @@ import android.support.annotation.NonNull;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
-import android.widget.EditText;
 import android.widget.ViewFlipper;
 
 import com.afollestad.materialdialogs.DialogAction;
