@@ -46,14 +46,14 @@ public class MainActivity extends BaseActivity implements NavigationView.OnNavig
     private int preFragmentIndex = 0;
     private int statusBarHeight = 0;
 
+    @ViewInject(R.id.main_toolbar)
+    private Toolbar toolbar;
+
     @ViewInject(R.id.drawer_layout)
     private DrawerLayout drawer;
 
     @ViewInject(R.id.nav_view)
     private NavigationView navigationView;
-
-    @ViewInject(R.id.toolbar)
-    private Toolbar toolbar;
 
     @ViewInject(R.id.main_content)
     private LinearLayout mainContent;

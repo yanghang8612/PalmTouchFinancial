@@ -5,6 +5,7 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.support.v7.widget.Toolbar;
 import android.view.MenuItem;
 
 import com.chad.library.adapter.base.entity.MultiItemEntity;
@@ -22,10 +23,15 @@ import java.util.List;
 @ContentView(R.layout.activity_agent_manager)
 public class AgentManagerActivity extends BaseActivity {
 
+    public static final String TAG = AgentManagerActivity.class.getSimpleName();
+
     public static void actionStart(Context context) {
         Intent intent = new Intent(context, AgentManagerActivity.class);
         context.startActivity(intent);
     }
+
+    @ViewInject(R.id.about_toolbar)
+    private Toolbar toolbar;
 
     @ViewInject(R.id.agent_list)
     private RecyclerView agentList;
@@ -33,6 +39,7 @@ public class AgentManagerActivity extends BaseActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        setSupportActionBar(toolbar);
         if (getSupportActionBar() != null){
             getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         }

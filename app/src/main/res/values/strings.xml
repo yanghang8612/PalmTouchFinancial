@@ -17,13 +17,14 @@
     <string name="title_activity_rate">费率信息</string>
     <string name="title_activity_real_name_info">实名认证</string>
     <string name="title_activity_user_agreement">用户协议</string>
-    <string name="title_activity_real_about_us">关于我们</string>
+    <string name="title_activity_about_us">关于我们</string>
     <string name="title_activity_debit_card">结算卡信息</string>
     <string name="title_activity_agent_manager">用户管理</string>
-    <string name="title_activity_mall">掌触商城</string>
+    <string name="title_activity_main_mall">掌触商城</string>
     <string name="title_activity_card_manager">银行卡管理</string>
     <string name="title_activity_my_balance">我的钱包余额</string>
     <string name="title_activity_my_coins">我的电子币</string>
+    <string name="title_activity_picker_header">我的头像</string>
 
     <string name="menu_real_name_information">实名认证</string>
     <string name="menu_change_debit_card">结算卡变更</string>

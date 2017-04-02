@@ -5,6 +5,7 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.support.v7.widget.Toolbar;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
@@ -23,6 +24,8 @@ import java.util.List;
 @ContentView(R.layout.activity_main_mall)
 public class MainMallActivity extends BaseActivity {
 
+    public static final String TAG = MainMallActivity.class.getSimpleName();
+
     public static void actionStart(Context context) {
         Intent intent = new Intent(context, MainMallActivity.class);
         context.startActivity(intent);
@@ -30,12 +33,16 @@ public class MainMallActivity extends BaseActivity {
 
     private MainMallAdapter adapter;
 
+    @ViewInject(R.id.main_toolbar)
+    private Toolbar toolbar;
+
     @ViewInject(R.id.mall_goods_list)
     private RecyclerView goodsList;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        setSupportActionBar(toolbar);
         if (getSupportActionBar() != null) {
             getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         }

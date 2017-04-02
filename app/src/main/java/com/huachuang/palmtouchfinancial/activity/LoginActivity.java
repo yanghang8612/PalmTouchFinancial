@@ -39,7 +39,7 @@ public class LoginActivity extends BaseActivity {
 
     private UserLoginTask authTask = null;
 
-    @ViewInject(R.id.toolbar)
+    @ViewInject(R.id.login_toolbar)
     private Toolbar toolbar;
 
     @ViewInject(R.id.login_phone_number)
@@ -57,11 +57,7 @@ public class LoginActivity extends BaseActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        toolbar.setTitle("");
         setSupportActionBar(toolbar);
-
-        x.Ext.init(this.getApplication());
-        x.Ext.setDebug(true);
     }
 
     @Event(value = R.id.login_password,

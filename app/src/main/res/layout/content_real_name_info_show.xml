@@ -51,6 +51,35 @@
                 android:layout_weight="1"
                 android:layout_gravity="center"
                 android:gravity="center"
+                android:text="拼音"
+                android:textColor="@color/black" />
+
+            <LinearLayout
+                android:layout_width="1dp"
+                android:layout_height="match_parent"
+                android:background="@color/divider"
+                android:layout_margin="@dimen/real_divider_margin" />
+
+            <TextView
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="3"
+                android:layout_gravity="center"
+                android:text="YANG HANG" />
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:orientation="horizontal"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/real_row_height">
+
+            <TextView
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:layout_gravity="center"
+                android:gravity="center"
                 android:text="身份证号"
                 android:textColor="@color/black" />
 

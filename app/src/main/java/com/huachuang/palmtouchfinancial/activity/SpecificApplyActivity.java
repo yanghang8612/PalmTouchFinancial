@@ -4,6 +4,7 @@ import android.annotation.TargetApi;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
+import android.support.v7.widget.Toolbar;
 import android.util.Log;
 import android.view.MenuItem;
 import android.webkit.ValueCallback;
@@ -18,6 +19,8 @@ import org.xutils.view.annotation.ViewInject;
 
 @ContentView(R.layout.activity_specific_apply)
 public class SpecificApplyActivity extends BaseActivity {
+
+    public static final String TAG = SpecificApplyActivity.class.getSimpleName();
 
     public static String[] bankName = {
             "浦发银行信用卡申请",
@@ -47,6 +50,9 @@ public class SpecificApplyActivity extends BaseActivity {
 
     private int bankID;
 
+    @ViewInject(R.id.specific_apply_toolbar)
+    private Toolbar toolbar;
+
     @ViewInject(R.id.apply_web_view)
     private WebView webView;
 
@@ -54,6 +60,7 @@ public class SpecificApplyActivity extends BaseActivity {
     @TargetApi(19)
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        setSupportActionBar(toolbar);
         bankID = getIntent().getIntExtra("bank", 0);
         if (getSupportActionBar() != null){
             getSupportActionBar().setTitle(bankName[bankID]);

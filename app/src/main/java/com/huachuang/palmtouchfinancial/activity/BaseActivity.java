@@ -23,6 +23,12 @@ public abstract class BaseActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         ActivityCollector.addActivity(this);
         x.view().inject(this);
+        setTitle("");
+    }
+
+    @Override
+    protected void onStart() {
+        super.onStart();
     }
 
     @Override

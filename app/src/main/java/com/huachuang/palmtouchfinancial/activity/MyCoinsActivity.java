@@ -3,23 +3,31 @@ package com.huachuang.palmtouchfinancial.activity;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
+import android.support.v7.widget.Toolbar;
 import android.view.MenuItem;
 
 import com.huachuang.palmtouchfinancial.R;
 
 import org.xutils.view.annotation.ContentView;
+import org.xutils.view.annotation.ViewInject;
 
 @ContentView(R.layout.activity_my_coins)
 public class MyCoinsActivity extends BaseActivity {
+
+    public static final String TAG = MyCoinsActivity.class.getSimpleName();
 
     public static void actionStart(Context context) {
         Intent intent = new Intent(context, MyCoinsActivity.class);
         context.startActivity(intent);
     }
 
+    @ViewInject(R.id.my_conins_toolbar)
+    private Toolbar toolbar;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        setSupportActionBar(toolbar);
         if (getSupportActionBar() != null){
             getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         }

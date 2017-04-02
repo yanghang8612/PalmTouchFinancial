@@ -6,6 +6,7 @@ import android.os.Bundle;
 import android.os.CountDownTimer;
 import android.support.annotation.NonNull;
 import android.support.design.widget.TextInputLayout;
+import android.support.v7.widget.Toolbar;
 import android.util.Log;
 import android.view.MenuItem;
 import android.view.View;
@@ -50,6 +51,9 @@ public class RegisterActivity extends BaseActivity {
     private boolean invitationCodeCheckState = false;
     private boolean recommenderIDCheckState = false;
 
+    @ViewInject(R.id.register_toolbar)
+    private Toolbar toolbar;
+
     @ViewInject(R.id.register_flipper)
     private ViewFlipper registerFlipper;
 
@@ -83,6 +87,7 @@ public class RegisterActivity extends BaseActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        setSupportActionBar(toolbar);
         if (getSupportActionBar() != null) {
             getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         }

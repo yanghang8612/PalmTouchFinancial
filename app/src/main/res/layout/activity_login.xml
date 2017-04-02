@@ -11,13 +11,13 @@
     tools:context="com.huachuang.palmtouchfinancial.activity.LoginActivity">
 
     <android.support.design.widget.AppBarLayout
-        android:id="@+id/appbar"
+        android:id="@+id/login_appbar"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:theme="@style/AppTheme.AppBarOverlay">
 
         <android.support.v7.widget.Toolbar
-            android:id="@+id/toolbar"
+            android:id="@+id/login_toolbar"
             android:layout_width="match_parent"
             android:layout_height="@dimen/toolbar_height"
             app:popupTheme="@style/AppTheme.PopupOverlay">

@@ -5,6 +5,7 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -23,12 +24,17 @@ import java.util.List;
 @ContentView(R.layout.activity_district)
 public class DistrictActivity extends BaseActivity {
 
+    public static final String TAG = DistrictActivity.class.getSimpleName();
+
     public static void actionStart(Context context) {
         Intent intent = new Intent(context, DistrictActivity.class);
         context.startActivity(intent);
     }
 
     private DistrictAdapter adapter;
+
+    @ViewInject(R.id.district_toolbar)
+    private Toolbar toolbar;
 
     @ViewInject(R.id.district_final_name)
     private TextView districtFinalNameView;
@@ -42,6 +48,7 @@ public class DistrictActivity extends BaseActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        setSupportActionBar(toolbar);
         if (getSupportActionBar() != null) {
             getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         }

@@ -4,6 +4,7 @@ import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
+import android.support.v7.widget.Toolbar;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
@@ -20,6 +21,8 @@ import org.xutils.view.annotation.ViewInject;
 @ContentView(R.layout.activity_debit_card)
 public class DebitCardActivity extends BaseActivity {
 
+    public static final String TAG = DebitCardActivity.class.getSimpleName();
+
     public static void actionStart(Context context) {
         Intent intent = new Intent(context, DebitCardActivity.class);
         context.startActivity(intent);
@@ -27,12 +30,16 @@ public class DebitCardActivity extends BaseActivity {
 
     private short currentFlipper = 0;
 
+    @ViewInject(R.id.debit_card_toolbar)
+    private Toolbar toolbar;
+
     @ViewInject(R.id.debit_card_flipper)
     private ViewFlipper debitCardFlipper;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        setSupportActionBar(toolbar);
         if (getSupportActionBar() != null) {
             getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         }

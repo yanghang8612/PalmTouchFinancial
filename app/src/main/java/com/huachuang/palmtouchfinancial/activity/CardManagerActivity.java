@@ -19,6 +19,8 @@ import org.xutils.view.annotation.ViewInject;
 @ContentView(R.layout.activity_card_manager)
 public class CardManagerActivity extends BaseActivity {
 
+    public static final String TAG = CardManagerActivity.class.getSimpleName();
+
     public static void actionStart(Context context) {
         Intent intent = new Intent(context, CardManagerActivity.class);
         context.startActivity(intent);

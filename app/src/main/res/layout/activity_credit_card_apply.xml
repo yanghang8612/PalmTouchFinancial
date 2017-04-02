@@ -6,201 +6,232 @@
     android:orientation="vertical"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:padding="@dimen/credit_card_apply_padding"
     android:background="@color/light_grey"
     tools:context="com.huachuang.palmtouchfinancial.activity.CreditCardApplyActivity">
 
-    <LinearLayout
+    <android.support.design.widget.AppBarLayout
+        android:id="@+id/credit_card_apply_appbar"
         android:layout_width="match_parent"
-        android:layout_height="0dp"
-        android:layout_weight="1">
+        android:layout_height="wrap_content"
+        android:theme="@style/AppTheme.AppBarOverlay">
 
-        <android.support.v7.widget.CardView
-            android:id="@+id/credit_card_apply_xingye"
-            android:layout_width="0dp"
-            android:layout_height="match_parent"
-            android:layout_weight="1"
-            android:layout_margin="@dimen/credit_card_apply_padding"
-            android:stateListAnimator="@drawable/lift_on_touch"
-            android:clickable="true"
-            android:foreground="?android:attr/selectableItemBackground"
-            app:cardCornerRadius="@dimen/credit_card_apply_card_radius"
-            tools:targetApi="lollipop">
+        <android.support.v7.widget.Toolbar
+            android:id="@+id/credit_card_apply_toolbar"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/toolbar_height"
+            app:popupTheme="@style/AppTheme.PopupOverlay">
 
-            <ImageView
-                android:layout_width="match_parent"
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:text="@string/title_activity_credit_card_apply"
+                android:textSize="@dimen/toolbar_title_size"
+                android:textColor="@color/white" />
+
+        </android.support.v7.widget.Toolbar>
+
+    </android.support.design.widget.AppBarLayout>
+
+    <LinearLayout
+        android:orientation="vertical"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:padding="@dimen/credit_card_apply_padding">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="1">
+
+            <android.support.v7.widget.CardView
+                android:id="@+id/credit_card_apply_xingye"
+                android:layout_width="0dp"
                 android:layout_height="match_parent"
-                android:padding="@dimen/credit_card_apply_card_content_padding"
-                android:src="@drawable/apply_xingye"/>
+                android:layout_weight="1"
+                android:layout_margin="@dimen/credit_card_apply_padding"
+                android:stateListAnimator="@drawable/lift_on_touch"
+                android:clickable="true"
+                android:foreground="?android:attr/selectableItemBackground"
+                app:cardCornerRadius="@dimen/credit_card_apply_card_radius"
+                tools:targetApi="lollipop">
 
-        </android.support.v7.widget.CardView>
+                <ImageView
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:padding="@dimen/credit_card_apply_card_content_padding"
+                    android:src="@drawable/apply_xingye"/>
 
-        <android.support.v7.widget.CardView
-            android:id="@+id/credit_card_apply_zhongxin"
-            android:layout_width="0dp"
-            android:layout_height="match_parent"
-            android:layout_weight="1"
-            android:layout_margin="@dimen/credit_card_apply_padding"
-            android:stateListAnimator="@drawable/lift_on_touch"
-            android:clickable="true"
-            android:foreground="?android:attr/selectableItemBackground"
-            app:cardCornerRadius="@dimen/credit_card_apply_card_radius"
-            tools:targetApi="lollipop">
+            </android.support.v7.widget.CardView>
 
-            <ImageView
-                android:layout_width="match_parent"
+            <android.support.v7.widget.CardView
+                android:id="@+id/credit_card_apply_zhongxin"
+                android:layout_width="0dp"
                 android:layout_height="match_parent"
-                android:padding="@dimen/credit_card_apply_card_content_padding"
-                android:src="@drawable/apply_zhongxin"/>
+                android:layout_weight="1"
+                android:layout_margin="@dimen/credit_card_apply_padding"
+                android:stateListAnimator="@drawable/lift_on_touch"
+                android:clickable="true"
+                android:foreground="?android:attr/selectableItemBackground"
+                app:cardCornerRadius="@dimen/credit_card_apply_card_radius"
+                tools:targetApi="lollipop">
 
-        </android.support.v7.widget.CardView>
+                <ImageView
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:padding="@dimen/credit_card_apply_card_content_padding"
+                    android:src="@drawable/apply_zhongxin"/>
+
+            </android.support.v7.widget.CardView>
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="1">
+
+            <android.support.v7.widget.CardView
+                android:id="@+id/credit_card_apply_pufa"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:layout_margin="@dimen/credit_card_apply_padding"
+                android:stateListAnimator="@drawable/lift_on_touch"
+                android:clickable="true"
+                android:foreground="?android:attr/selectableItemBackground"
+                app:cardCornerRadius="@dimen/credit_card_apply_card_radius"
+                tools:targetApi="lollipop">
+
+                <ImageView
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:padding="@dimen/credit_card_apply_card_content_padding"
+                    android:src="@drawable/apply_pufa"/>
+
+            </android.support.v7.widget.CardView>
+
+            <android.support.v7.widget.CardView
+                android:id="@+id/credit_card_apply_shanghai"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:layout_margin="@dimen/credit_card_apply_padding"
+                android:stateListAnimator="@drawable/lift_on_touch"
+                android:clickable="true"
+                android:foreground="?android:attr/selectableItemBackground"
+                app:cardCornerRadius="@dimen/credit_card_apply_card_radius"
+                tools:targetApi="lollipop">
+
+                <ImageView
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:padding="@dimen/credit_card_apply_card_content_padding"
+                    android:src="@drawable/apply_shanghai"/>
+
+            </android.support.v7.widget.CardView>
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="1">
+
+            <android.support.v7.widget.CardView
+                android:id="@+id/credit_card_apply_jiaotong"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:layout_margin="@dimen/credit_card_apply_padding"
+                android:stateListAnimator="@drawable/lift_on_touch"
+                android:clickable="true"
+                android:foreground="?android:attr/selectableItemBackground"
+                app:cardCornerRadius="@dimen/credit_card_apply_card_radius"
+                tools:targetApi="lollipop">
+
+                <ImageView
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:padding="@dimen/credit_card_apply_card_content_padding"
+                    android:src="@drawable/apply_jiaotong"/>
+
+            </android.support.v7.widget.CardView>
+
+            <android.support.v7.widget.CardView
+                android:id="@+id/credit_card_apply_zhaoshang"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:layout_margin="@dimen/credit_card_apply_padding"
+                android:stateListAnimator="@drawable/lift_on_touch"
+                android:clickable="true"
+                android:foreground="?android:attr/selectableItemBackground"
+                app:cardCornerRadius="@dimen/credit_card_apply_card_radius"
+                tools:targetApi="lollipop">
+
+                <ImageView
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:padding="@dimen/credit_card_apply_card_content_padding"
+                    android:src="@drawable/apply_zhaoshang"/>
+
+            </android.support.v7.widget.CardView>
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="1">
+
+            <android.support.v7.widget.CardView
+                android:id="@+id/credit_card_apply_guangda"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:layout_margin="@dimen/credit_card_apply_padding"
+                android:stateListAnimator="@drawable/lift_on_touch"
+                android:clickable="true"
+                android:foreground="?android:attr/selectableItemBackground"
+                app:cardCornerRadius="@dimen/credit_card_apply_card_radius"
+                tools:targetApi="lollipop">
+
+                <ImageView
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:padding="@dimen/credit_card_apply_card_content_padding"
+                    android:src="@drawable/apply_guangda"/>
+
+            </android.support.v7.widget.CardView>
+
+            <android.support.v7.widget.CardView
+                android:id="@+id/credit_card_apply_pingan"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:layout_margin="@dimen/credit_card_apply_padding"
+                android:stateListAnimator="@drawable/lift_on_touch"
+                android:clickable="true"
+                android:foreground="?android:attr/selectableItemBackground"
+                app:cardCornerRadius="@dimen/credit_card_apply_card_radius"
+                tools:targetApi="lollipop">
+
+                <ImageView
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:padding="@dimen/credit_card_apply_card_content_padding"
+                    android:src="@drawable/apply_pingan"/>
+
+            </android.support.v7.widget.CardView>
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="1" />
 
     </LinearLayout>
-
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="0dp"
-        android:layout_weight="1">
-
-        <android.support.v7.widget.CardView
-            android:id="@+id/credit_card_apply_pufa"
-            android:layout_width="0dp"
-            android:layout_height="match_parent"
-            android:layout_weight="1"
-            android:layout_margin="@dimen/credit_card_apply_padding"
-            android:stateListAnimator="@drawable/lift_on_touch"
-            android:clickable="true"
-            android:foreground="?android:attr/selectableItemBackground"
-            app:cardCornerRadius="@dimen/credit_card_apply_card_radius"
-            tools:targetApi="lollipop">
-
-            <ImageView
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:padding="@dimen/credit_card_apply_card_content_padding"
-                android:src="@drawable/apply_pufa"/>
-
-        </android.support.v7.widget.CardView>
-
-        <android.support.v7.widget.CardView
-            android:id="@+id/credit_card_apply_shanghai"
-            android:layout_width="0dp"
-            android:layout_height="match_parent"
-            android:layout_weight="1"
-            android:layout_margin="@dimen/credit_card_apply_padding"
-            android:stateListAnimator="@drawable/lift_on_touch"
-            android:clickable="true"
-            android:foreground="?android:attr/selectableItemBackground"
-            app:cardCornerRadius="@dimen/credit_card_apply_card_radius"
-            tools:targetApi="lollipop">
-
-            <ImageView
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:padding="@dimen/credit_card_apply_card_content_padding"
-                android:src="@drawable/apply_shanghai"/>
-
-        </android.support.v7.widget.CardView>
-
-    </LinearLayout>
-
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="0dp"
-        android:layout_weight="1">
-
-        <android.support.v7.widget.CardView
-            android:id="@+id/credit_card_apply_jiaotong"
-            android:layout_width="0dp"
-            android:layout_height="match_parent"
-            android:layout_weight="1"
-            android:layout_margin="@dimen/credit_card_apply_padding"
-            android:stateListAnimator="@drawable/lift_on_touch"
-            android:clickable="true"
-            android:foreground="?android:attr/selectableItemBackground"
-            app:cardCornerRadius="@dimen/credit_card_apply_card_radius"
-            tools:targetApi="lollipop">
-
-            <ImageView
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:padding="@dimen/credit_card_apply_card_content_padding"
-                android:src="@drawable/apply_jiaotong"/>
-
-        </android.support.v7.widget.CardView>
-
-        <android.support.v7.widget.CardView
-            android:id="@+id/credit_card_apply_zhaoshang"
-            android:layout_width="0dp"
-            android:layout_height="match_parent"
-            android:layout_weight="1"
-            android:layout_margin="@dimen/credit_card_apply_padding"
-            android:stateListAnimator="@drawable/lift_on_touch"
-            android:clickable="true"
-            android:foreground="?android:attr/selectableItemBackground"
-            app:cardCornerRadius="@dimen/credit_card_apply_card_radius"
-            tools:targetApi="lollipop">
-
-            <ImageView
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:padding="@dimen/credit_card_apply_card_content_padding"
-                android:src="@drawable/apply_zhaoshang"/>
-
-        </android.support.v7.widget.CardView>
-
-    </LinearLayout>
-
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="0dp"
-        android:layout_weight="1">
-
-        <android.support.v7.widget.CardView
-            android:id="@+id/credit_card_apply_guangda"
-            android:layout_width="0dp"
-            android:layout_height="match_parent"
-            android:layout_weight="1"
-            android:layout_margin="@dimen/credit_card_apply_padding"
-            android:stateListAnimator="@drawable/lift_on_touch"
-            android:clickable="true"
-            android:foreground="?android:attr/selectableItemBackground"
-            app:cardCornerRadius="@dimen/credit_card_apply_card_radius"
-            tools:targetApi="lollipop">
-
-            <ImageView
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:padding="@dimen/credit_card_apply_card_content_padding"
-                android:src="@drawable/apply_guangda"/>
-
-        </android.support.v7.widget.CardView>
-
-        <android.support.v7.widget.CardView
-            android:id="@+id/credit_card_apply_pingan"
-            android:layout_width="0dp"
-            android:layout_height="match_parent"
-            android:layout_weight="1"
-            android:layout_margin="@dimen/credit_card_apply_padding"
-            android:stateListAnimator="@drawable/lift_on_touch"
-            android:clickable="true"
-            android:foreground="?android:attr/selectableItemBackground"
-            app:cardCornerRadius="@dimen/credit_card_apply_card_radius"
-            tools:targetApi="lollipop">
-
-            <ImageView
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:padding="@dimen/credit_card_apply_card_content_padding"
-                android:src="@drawable/apply_pingan"/>
-
-        </android.support.v7.widget.CardView>
-
-    </LinearLayout>
-
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="0dp"
-        android:layout_weight="1" />
 
 </LinearLayout>

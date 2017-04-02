@@ -3,6 +3,7 @@ package com.huachuang.palmtouchfinancial.activity;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
+import android.support.v7.widget.Toolbar;
 import android.view.MenuItem;
 import android.view.View;
 
@@ -10,19 +11,25 @@ import com.huachuang.palmtouchfinancial.R;
 
 import org.xutils.view.annotation.ContentView;
 import org.xutils.view.annotation.Event;
+import org.xutils.view.annotation.ViewInject;
 
 @ContentView(R.layout.activity_credit_card_apply)
 public class CreditCardApplyActivity extends BaseActivity {
 
+    public static final String TAG = CreditCardApplyActivity.class.getSimpleName();
 
     public static void actionStart(Context context) {
         Intent intent = new Intent(context, CreditCardApplyActivity.class);
         context.startActivity(intent);
     }
 
+    @ViewInject(R.id.credit_card_apply_toolbar)
+    private Toolbar toolbar;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        setSupportActionBar(toolbar);
         if (getSupportActionBar() != null) {
             getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         }
