@@ -14,7 +14,7 @@
     android:theme="@style/ThemeOverlay.AppCompat.Dark">
 
     <de.hdodenhof.circleimageview.CircleImageView
-        android:id="@+id/headerImageView"
+        android:id="@+id/nav_header_image_view"
         android:layout_width="@dimen/nav_image_length"
         android:layout_height="@dimen/nav_image_length"
         android:src="@drawable/default_header_image" />
@@ -40,11 +40,30 @@
                 android:textAppearance="@style/TextAppearance.AppCompat.Body1" />
 
             <de.hdodenhof.circleimageview.CircleImageView
+                android:id="@+id/nav_header_user_type_common"
                 android:layout_width="24dp"
                 android:layout_height="24dp"
                 android:layout_marginLeft="8dp"
                 android:src="@drawable/ic_vip"
+                app:civ_fill_color="@color/grey" />
+
+            <de.hdodenhof.circleimageview.CircleImageView
+                android:id="@+id/nav_header_user_type_vip"
+                android:layout_width="24dp"
+                android:layout_height="24dp"
+                android:layout_marginLeft="8dp"
+                android:src="@drawable/ic_vip"
+                android:visibility="gone"
                 app:civ_fill_color="@color/red" />
+
+            <de.hdodenhof.circleimageview.CircleImageView
+                android:id="@+id/nav_header_user_type_agent"
+                android:layout_width="24dp"
+                android:layout_height="24dp"
+                android:layout_marginLeft="8dp"
+                android:src="@drawable/ic_vip"
+                android:visibility="gone"
+                app:civ_fill_color="@color/grey" />
 
         </LinearLayout>
 

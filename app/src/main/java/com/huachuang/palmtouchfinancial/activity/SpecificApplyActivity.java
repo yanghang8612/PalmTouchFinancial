@@ -87,7 +87,8 @@ public class SpecificApplyActivity extends BaseActivity {
                         break;
                     case 1:
                         js += "$('#chaneseName').val('杨行');";
-                        js += "$('#pingyin').val('YANG HANG');";
+                        js += "$('#pingyin').val('YANG HANG'" +
+                                ");";
                         js += "$('#identity').val('411521199111210033');";
                         js += "$('#phoneNum').val('18511838501');";
                         break;
@@ -133,6 +134,8 @@ public class SpecificApplyActivity extends BaseActivity {
                     public void onReceiveValue(String value) {
 
                     }
+
+
                 });
                 Log.d("yang", "caonima");
             }

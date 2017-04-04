@@ -1,9 +1,13 @@
 package com.huachuang.palmtouchfinancial.util;
 
 import android.content.Context;
+import android.graphics.Bitmap;
 
+import com.huachuang.palmtouchfinancial.GlobalParams;
+import com.huachuang.palmtouchfinancial.backend.UserManager;
 import com.opencsv.CSVReader;
 
+import java.io.ByteArrayOutputStream;
 import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.util.ArrayList;
@@ -30,32 +34,67 @@ public class CommonUtils {
         String regExp = "^[1][0-9]{10}$";
         Pattern p = Pattern.compile(regExp);
         Matcher m = p.matcher(phoneNumber);
-        return m.find();
+        return m.matches();
     }
 
     public static boolean validateVerificationCode(String verificationCode) {
         String regExp = "^[0-9]{6}$";
         Pattern p = Pattern.compile(regExp);
         Matcher m = p.matcher(verificationCode);
-        return m.find();
+        return m.matches();
     }
 
     public static boolean validatePassword(String password) {
         String regExp = "^\\d{6,}$";
         Pattern p = Pattern.compile(regExp);
         Matcher m = p.matcher(password);
-        return m.find();
+        return m.matches();
     }
 
-    public static boolean validateNumber(String name) {
+    public static boolean validateNumber(String number) {
         String regExp = "^\\d+$";
         Pattern p = Pattern.compile(regExp);
+        Matcher m = p.matcher(number);
+        return m.matches();
+    }
+
+    public static boolean validateChineseName(String name) {
+        String regExp = "^[\\u4e00-\\u9fa5]{2,}$";
+        Pattern p = Pattern.compile(regExp);
         Matcher m = p.matcher(name);
-        return m.find();
+        return m.matches();
     }
 
     public static String generateVerificationCode() {
         return String.valueOf((int) (Math.random() * 1000000));
+    }
+
+    public static String mosaicIdentityCard(String identityCard) {
+        return identityCard.substring(0, 8) + "******" + identityCard.substring(14);
+    }
+
+    public static String mosaicBankCard(String bankCard) {
+        return bankCard;
+    }
+
+    public static byte[] bmpToByteArray(final Bitmap bmp,
+                                        final boolean needRecycle) {
+        ByteArrayOutputStream output = new ByteArrayOutputStream();
+        bmp.compress(Bitmap.CompressFormat.PNG, 80, output);
+        if (needRecycle) {
+            bmp.recycle();
+        }
+        byte[] result = output.toByteArray();
+        try {
+            output.close();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return result;
+    }
+
+    public static String getHeaderUrl() {
+        return GlobalParams.SERVER_URL_HEAD + "/header/" + UserManager.getCurrentUser().getUserId() + ".jpg";
     }
 
     private static CSVReader csvReader = null;

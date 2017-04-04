@@ -86,7 +86,7 @@
                 android:text="18511838501" />
 
             <de.hdodenhof.circleimageview.CircleImageView
-                android:id="@+id/agent_item_vip"
+                android:id="@+id/agent_item_level"
                 android:layout_width="@dimen/agent_item_type_size"
                 android:layout_height="@dimen/agent_item_type_size"
                 android:layout_marginRight="@dimen/agent_item_margin"

@@ -38,7 +38,6 @@
                 android:layout_gravity="center"
                 android:inputType="textPersonName"
                 android:maxLines="1"
-                android:text="杨行"
                 android:textSize="15sp" />
 
         </LinearLayout>
@@ -69,9 +68,8 @@
                 android:layout_height="wrap_content"
                 android:layout_weight="3"
                 android:layout_gravity="center"
-                android:inputType="textPersonName"
+                android:inputType="textCapCharacters"
                 android:maxLines="1"
-                android:text="YANG HANG"
                 android:textSize="15sp" />
 
         </LinearLayout>
@@ -104,7 +102,6 @@
                 android:layout_gravity="center"
                 android:inputType="number"
                 android:maxEms="18"
-                android:text="411521199111210033"
                 android:textSize="15sp" />
 
         </LinearLayout>

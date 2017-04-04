@@ -11,7 +11,7 @@ import org.xutils.http.annotation.HttpRequest;
 
 @HttpRequest(
         host = GlobalParams.SERVER_URL_HEAD,
-        path = "UserManage/Login")
+        path = "UserManager/Login")
 public class LoginParams extends RequestParams {
     private String phoneNumber;
     private String password;

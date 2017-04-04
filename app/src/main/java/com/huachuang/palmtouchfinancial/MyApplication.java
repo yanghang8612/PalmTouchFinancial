@@ -1,12 +1,8 @@
 package com.huachuang.palmtouchfinancial;
 
 import android.app.Application;
-import android.content.Context;
-import android.graphics.Color;
 
-import com.huachuang.palmtouchfinancial.loader.HeaderImageLoader;
-import com.imnjh.imagepicker.PickerConfig;
-import com.imnjh.imagepicker.SImagePicker;
+import com.tencent.mm.opensdk.openapi.WXAPIFactory;
 
 import org.xutils.x;
 
@@ -21,9 +17,7 @@ public class MyApplication extends Application {
         super.onCreate();
         x.Ext.init(this);
         x.Ext.setDebug(true);
-        SImagePicker.init(new PickerConfig.Builder().setAppContext(this)
-                            .setImageLoader(new HeaderImageLoader(this))
-                            .setToolbaseColor(Color.BLACK)
-                            .build());
+        GlobalVariable.api = WXAPIFactory.createWXAPI(this, GlobalParams.WECHAT_APP_ID ,true);
+        GlobalVariable.api.registerApp(GlobalParams.WECHAT_APP_ID);
     }
 }

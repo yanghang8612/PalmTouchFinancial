@@ -15,22 +15,26 @@ import android.support.v4.view.GravityCompat;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.widget.Toolbar;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.LinearLayout;
+import android.widget.TextView;
 
 import com.ashokvarma.bottomnavigation.BottomNavigationBar;
 import com.ashokvarma.bottomnavigation.BottomNavigationItem;
-import com.huachuang.palmtouchfinancial.GlobalParams;
-import com.huachuang.palmtouchfinancial.GlobalVariable;
+import com.bumptech.glide.Glide;
 import com.huachuang.palmtouchfinancial.R;
+import com.huachuang.palmtouchfinancial.backend.UserManager;
 import com.huachuang.palmtouchfinancial.fragment.FragmentFactory;
 import com.huachuang.palmtouchfinancial.fragment.HomepageFragment;
-import com.tencent.mm.opensdk.openapi.WXAPIFactory;
+import com.huachuang.palmtouchfinancial.util.CommonUtils;
 
 import org.xutils.view.annotation.ContentView;
 import org.xutils.view.annotation.ViewInject;
+
+import de.hdodenhof.circleimageview.CircleImageView;
 
 @ContentView(R.layout.activity_main)
 public class MainActivity extends BaseActivity implements NavigationView.OnNavigationItemSelectedListener {
@@ -65,62 +69,9 @@ public class MainActivity extends BaseActivity implements NavigationView.OnNavig
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
-        GlobalVariable.api = WXAPIFactory.createWXAPI(this, GlobalParams.WECHAT_APP_ID ,true);
-        GlobalVariable.api.registerApp(GlobalParams.WECHAT_APP_ID);
-
-        int resourceId = getResources().getIdentifier("status_bar_height", "dimen", "android");
-        if (resourceId > 0) {
-            statusBarHeight = getResources().getDimensionPixelSize(resourceId);
-        }
-
-        int option = View.SYSTEM_UI_FLAG_LAYOUT_FULLSCREEN;
-        getWindow().getDecorView().setSystemUiVisibility(option);
-
-        AppBarLayout.LayoutParams toolbarParams = (AppBarLayout.LayoutParams) toolbar.getLayoutParams();
-        toolbarParams.setMargins(0, statusBarHeight, 0, 0);
-        toolbar.setLayoutParams(toolbarParams);
-        setSupportActionBar(toolbar);
-
-        ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(
-                this, drawer, toolbar, R.string.navigation_drawer_open, R.string.navigation_drawer_close);
-        drawer.addDrawerListener(toggle);
-        toggle.syncState();
-
-        navigationView.getHeaderView(0).setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                if (drawer.isDrawerOpen(GravityCompat.START)) {
-                    drawer.closeDrawer(GravityCompat.START);
-                }
-                PersonalInfoActivity.actionStart(MainActivity.this);
-            }
-        });
-        navigationView.setNavigationItemSelectedListener(this);
-
-        bottomNavigationBar
-                .setMode(BottomNavigationBar.MODE_FIXED)
-                .setBackgroundStyle(BottomNavigationBar.BACKGROUND_STYLE_STATIC)
-                .addItem(new BottomNavigationItem(R.drawable.ic_home_white, "主页"))
-                .addItem(new BottomNavigationItem(R.drawable.ic_share_white, "分享"))
-                .addItem(new BottomNavigationItem(R.drawable.ic_wallet_white, "钱包"))
-                .addItem(new BottomNavigationItem(R.drawable.ic_my_white, "我的"))
-                .setActiveColor(R.color.bottom_bar_active)
-                .setInActiveColor(R.color.bottom_bar_inactive)
-                .setTabSelectedListener(new BottomNavigationBar.OnTabSelectedListener() {
-                    @Override
-                    public void onTabSelected(int position) {
-                        switchFragment(position);
-                    }
-
-                    @Override
-                    public void onTabUnselected(int position) {}
-
-                    @Override
-                    public void onTabReselected(int position) {}
-                })
-                .initialise();
-
-        showDefaultFragment();
+        initToolbarAndStatusBar();
+        initNavHeaderView();
+        initBottomNavigationBar();
 
         new Handler().postDelayed(new Runnable() {
             @Override
@@ -128,7 +79,13 @@ public class MainActivity extends BaseActivity implements NavigationView.OnNavig
                 ((HomepageFragment) FragmentFactory.getInstanceByIndex(0)).stopAdCarousel();
                 ForceJumpActivity.actionStart(MainActivity.this);
             }
-        }, 2000);
+        }, 500);
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+        Log.d(TAG, "shabi");
     }
 
     @Override
@@ -156,10 +113,8 @@ public class MainActivity extends BaseActivity implements NavigationView.OnNavig
         return super.onOptionsItemSelected(item);
     }
 
-    @SuppressWarnings("StatementWithEmptyBody")
     @Override
     public boolean onNavigationItemSelected(MenuItem item) {
-        // Handle navigation view item clicks here.
         int id = item.getItemId();
         switch (id) {
             case R.id.nav_real_name_information:
@@ -231,5 +186,106 @@ public class MainActivity extends BaseActivity implements NavigationView.OnNavig
 //        DrawerLayout.LayoutParams params = (DrawerLayout.LayoutParams) mainContent.getLayoutParams();
 //        params.setMargins(0, contentMarginTop, 0, 0);
 //        mainContent.setLayoutParams(params);
+    }
+
+    private void initToolbarAndStatusBar() {
+        int resourceId = getResources().getIdentifier("status_bar_height", "dimen", "android");
+        if (resourceId > 0) {
+            statusBarHeight = getResources().getDimensionPixelSize(resourceId);
+        }
+
+        int option = View.SYSTEM_UI_FLAG_LAYOUT_FULLSCREEN;
+        getWindow().getDecorView().setSystemUiVisibility(option);
+
+        AppBarLayout.LayoutParams toolbarParams = (AppBarLayout.LayoutParams) toolbar.getLayoutParams();
+        toolbarParams.setMargins(0, statusBarHeight, 0, 0);
+        toolbar.setLayoutParams(toolbarParams);
+        setSupportActionBar(toolbar);
+
+        ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(
+                this, drawer, toolbar, R.string.navigation_drawer_open, R.string.navigation_drawer_close);
+        drawer.addDrawerListener(toggle);
+        toggle.syncState();
+    }
+
+    private void initNavHeaderView() {
+        refreshNavHeaderView();
+        navigationView.getHeaderView(0).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if (drawer.isDrawerOpen(GravityCompat.START)) {
+                    drawer.closeDrawer(GravityCompat.START);
+                }
+                PersonalInfoActivity.actionStart(MainActivity.this);
+            }
+        });
+        navigationView.setNavigationItemSelectedListener(this);
+    }
+
+    private void refreshNavHeaderView() {
+        View navHeaderView = navigationView.getHeaderView(0);
+        CircleImageView agentLevelView = (CircleImageView) navHeaderView.findViewById(R.id.nav_header_user_type_agent);
+        if (UserManager.getCurrentUser().getUserType() == 0) {
+            if (UserManager.getCurrentUser().isVip()) {
+                navHeaderView.findViewById(R.id.nav_header_user_type_common).setVisibility(View.GONE);
+                navHeaderView.findViewById(R.id.nav_header_user_type_vip).setVisibility(View.VISIBLE);
+            }
+        }
+        else {
+            navHeaderView.findViewById(R.id.nav_header_user_type_common).setVisibility(View.GONE);
+            switch (UserManager.getCurrentUser().getUserType()) {
+                case 1:
+                    agentLevelView.setImageResource(R.drawable.ic_level_one);
+                    break;
+                case 2:
+                    agentLevelView.setImageResource(R.drawable.ic_level_two);
+                    break;
+                case 3:
+                    agentLevelView.setImageResource(R.drawable.ic_level_three);
+                    break;
+            }
+            agentLevelView.setVisibility(View.VISIBLE);
+        }
+
+        CircleImageView headerImageView = (CircleImageView) navHeaderView.findViewById(R.id.nav_header_image_view);
+        Glide.with(this).load(CommonUtils.getHeaderUrl()).into(headerImageView);
+
+        TextView phoneNumberView = (TextView) navHeaderView.findViewById(R.id.nav_header_phone_number);
+        phoneNumberView.setText(UserManager.getCurrentUser().getUserPhoneNumber());
+
+        TextView nameView = (TextView) navHeaderView.findViewById(R.id.nav_header_name);
+        if (UserManager.getCurrentUser().isCertificationState()) {
+            nameView.setText(UserManager.getCertificationInfo().getUserName());
+        }
+        else {
+            nameView.setText("<请实名认证>");
+        }
+    }
+
+    private void initBottomNavigationBar() {
+        bottomNavigationBar
+                .setMode(BottomNavigationBar.MODE_FIXED)
+                .setBackgroundStyle(BottomNavigationBar.BACKGROUND_STYLE_STATIC)
+                .addItem(new BottomNavigationItem(R.drawable.ic_home_white, "主页"))
+                .addItem(new BottomNavigationItem(R.drawable.ic_share_white, "分享"))
+                .addItem(new BottomNavigationItem(R.drawable.ic_wallet_white, "钱包"))
+                .addItem(new BottomNavigationItem(R.drawable.ic_my_white, "我的"))
+                .setActiveColor(R.color.bottom_bar_active)
+                .setInActiveColor(R.color.bottom_bar_inactive)
+                .setTabSelectedListener(new BottomNavigationBar.OnTabSelectedListener() {
+                    @Override
+                    public void onTabSelected(int position) {
+                        switchFragment(position);
+                    }
+
+                    @Override
+                    public void onTabUnselected(int position) {}
+
+                    @Override
+                    public void onTabReselected(int position) {}
+                })
+                .initialise();
+
+        showDefaultFragment();
     }
 }

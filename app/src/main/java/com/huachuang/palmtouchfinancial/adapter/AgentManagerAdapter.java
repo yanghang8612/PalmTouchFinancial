@@ -47,7 +47,7 @@ public class AgentManagerAdapter extends BaseMultiItemQuickAdapter<MultiItemEnti
         switch (holder.getItemViewType()) {
             case TYPE_AGENT:
                 holder.setText(R.id.agent_item_phone_number, agent.getUser().getUserPhoneNumber())
-                        .setImageResource(R.id.agent_item_vip, (agent.getUser().getUserType() == 2) ? R.drawable.ic_level_two : R.drawable.ic_level_three);
+                        .setImageResource(R.id.agent_item_level, (agent.getUser().getUserType() == 2) ? R.drawable.ic_level_two : R.drawable.ic_level_three);
                 holder.itemView.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View v) {

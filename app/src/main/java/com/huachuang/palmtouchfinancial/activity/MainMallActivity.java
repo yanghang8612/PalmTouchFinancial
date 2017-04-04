@@ -33,10 +33,10 @@ public class MainMallActivity extends BaseActivity {
 
     private MainMallAdapter adapter;
 
-    @ViewInject(R.id.main_toolbar)
+    @ViewInject(R.id.main_mall_toolbar)
     private Toolbar toolbar;
 
-    @ViewInject(R.id.mall_goods_list)
+    @ViewInject(R.id.main_mall_goods_list)
     private RecyclerView goodsList;
 
     @Override
