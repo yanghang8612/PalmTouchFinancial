@@ -18,14 +18,16 @@ public class CreateCertificationInfoParams extends RequestParams {
     private long userID;
     private String userName;
     private String userSpell;
-    private String userIdentityCard;
     private char userSex;
+    private String userIdentityCard;
+    private String userAddress;
 
-    public CreateCertificationInfoParams(String userName, String userSpell, String userIdentityCard, char userSex) {
+    public CreateCertificationInfoParams(String userName, String userSpell, char userSex, String userIdentityCard, String userAddress) {
         this.userID = UserManager.getUserID();
         this.userName = userName;
         this.userSpell = userSpell;
-        this.userIdentityCard = userIdentityCard;
         this.userSex = userSex;
+        this.userIdentityCard = userIdentityCard;
+        this.userAddress = userAddress;
     }
 }

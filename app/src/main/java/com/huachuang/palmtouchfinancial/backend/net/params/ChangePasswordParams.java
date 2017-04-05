@@ -6,21 +6,20 @@ import com.huachuang.palmtouchfinancial.backend.UserManager;
 import org.xutils.http.RequestParams;
 import org.xutils.http.annotation.HttpRequest;
 
-import java.io.File;
-
 /**
- * Created by Asuka on 2017/4/4.
+ * Created by Asuka on 2017/4/5.
  */
 
 @HttpRequest(
         host = GlobalParams.SERVER_URL_HEAD,
-        path = "Picture/UploadHeader")
-public class UploadHeaderParams extends RequestParams {
-    private long userID;
-    private File header;
+        path = "UserManager/ChangePassword")
+public class ChangePasswordParams extends RequestParams {
 
-    public UploadHeaderParams(File header) {
+    private long userID;
+    private String newPassword;
+
+    public ChangePasswordParams(String newPassword) {
         this.userID = UserManager.getUserID();
-        this.header = header;
+        this.newPassword = newPassword;
     }
 }

@@ -25,6 +25,7 @@
     <string name="title_activity_my_balance">我的钱包余额</string>
     <string name="title_activity_my_coins">我的电子币</string>
     <string name="title_activity_picker_header">我的头像</string>
+    <string name="title_activity_change_password">修改密码</string>
 
     <string name="menu_real_name_information">实名认证</string>
     <string name="menu_change_debit_card">结算卡变更</string>
@@ -47,6 +48,7 @@
     <string name="setting_hotline">客服热线</string>
 
     <string name="prompt_phone_number">手机号</string>
+    <string name="prompt_old_password">旧密码</string>
     <string name="prompt_password">密码</string>
     <string name="prompt_confirm_password">确认密码</string>
     <string name="prompt_invitation_code">邀请码</string>
@@ -56,6 +58,7 @@
     <string name="action_get_verification_code">获取验证码</string>
     <string name="action_register_next_step">下一步</string>
     <string name="action_register_finish">完成</string>
+    <string name="action_change_password">确认修改</string>
     <string name="goto_forget_password">忘记密码</string>
     <string name="goto_register">立即注册</string>
     <string name="error_invalid_phone_number">手机号码非法</string>

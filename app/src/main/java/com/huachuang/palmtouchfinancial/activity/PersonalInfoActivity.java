@@ -9,9 +9,12 @@ import android.view.View;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.alibaba.fastjson.JSON;
 import com.bumptech.glide.Glide;
+import com.bumptech.glide.load.engine.DiskCacheStrategy;
 import com.huachuang.palmtouchfinancial.R;
 import com.huachuang.palmtouchfinancial.backend.UserManager;
+import com.huachuang.palmtouchfinancial.backend.bean.UserDebitCard;
 import com.huachuang.palmtouchfinancial.backend.net.NetCallbackAdapter;
 import com.huachuang.palmtouchfinancial.backend.net.params.UploadHeaderParams;
 import com.huachuang.palmtouchfinancial.loader.HeaderImageLoader;
@@ -21,6 +24,8 @@ import com.lzy.imagepicker.bean.ImageItem;
 import com.lzy.imagepicker.ui.ImageGridActivity;
 import com.lzy.imagepicker.view.CropImageView;
 
+import org.json.JSONException;
+import org.json.JSONObject;
 import org.xutils.view.annotation.ContentView;
 import org.xutils.view.annotation.Event;
 import org.xutils.view.annotation.ViewInject;
@@ -69,7 +74,13 @@ public class PersonalInfoActivity extends BaseActivity {
         if (getSupportActionBar() != null) {
             getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         }
-        Glide.with(this).load(CommonUtils.getHeaderUrl()).into(headerImageView);
+        if (UserManager.getCurrentUser().isHeaderState()) {
+            Glide.with(this)
+                    .load(CommonUtils.getHeaderUrl())
+                    .skipMemoryCache(true)
+                    .diskCacheStrategy(DiskCacheStrategy.NONE)
+                    .into(headerImageView);
+        }
         phoneNumberView.setText(UserManager.getUserPhoneNumber());
         if (UserManager.getCurrentUser().getUserType() == 0) {
             if (UserManager.getCurrentUser().isVip()) {
@@ -125,20 +136,29 @@ public class PersonalInfoActivity extends BaseActivity {
             if (data != null && requestCode == REQUEST_CODE_IMAGE) {
                 List<ImageItem> images = (List<ImageItem>) data.getSerializableExtra(ImagePicker.EXTRA_RESULT_ITEMS);
                 ImageItem image = images.get(0);
-                x.http().post(new UploadHeaderParams(new File(image.path)), new NetCallbackAdapter() {
+                x.http().post(new UploadHeaderParams(new File(image.path)), new NetCallbackAdapter(this) {
                     @Override
                     public void onSuccess(String result) {
-                        if (result.equals("true")) {
-                            Toast.makeText(PersonalInfoActivity.this, "设置头像成功", Toast.LENGTH_SHORT).show();
-                            Glide.with(PersonalInfoActivity.this).load(CommonUtils.getHeaderUrl()).into(headerImageView);
+                        JSONObject resultJsonObject;
+                        try {
+                            resultJsonObject = new JSONObject(result);
+                            if (resultJsonObject.getBoolean("Status")) {
+                                UserManager.getCurrentUser().setHeaderState(true);
+                                Glide.with(PersonalInfoActivity.this)
+                                        .load(CommonUtils.getHeaderUrl())
+                                        .skipMemoryCache(true)
+                                        .diskCacheStrategy(DiskCacheStrategy.NONE)
+                                        .into(headerImageView);
+                            }
+                            showToast(resultJsonObject.getString("Info"));
                         }
-                        else {
-                            Toast.makeText(PersonalInfoActivity.this, "设置头像失败", Toast.LENGTH_SHORT).show();
+                        catch (JSONException e) {
+                            e.printStackTrace();
                         }
                     }
                 });
             } else {
-                Toast.makeText(this, "未选择头像", Toast.LENGTH_SHORT).show();
+                showToast("未选择头像");
             }
         }
     }

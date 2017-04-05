@@ -1,5 +1,6 @@
 package com.huachuang.palmtouchfinancial.activity;
 
+import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
@@ -7,6 +8,7 @@ import android.os.CountDownTimer;
 import android.support.annotation.NonNull;
 import android.support.design.widget.TextInputLayout;
 import android.support.v7.widget.Toolbar;
+import android.text.TextUtils;
 import android.util.Log;
 import android.view.MenuItem;
 import android.view.View;
@@ -28,6 +30,7 @@ import com.huachuang.palmtouchfinancial.util.CommonUtils;
 
 import org.json.JSONException;
 import org.json.JSONObject;
+import org.w3c.dom.Text;
 import org.xutils.view.annotation.ContentView;
 import org.xutils.view.annotation.Event;
 import org.xutils.view.annotation.ViewInject;
@@ -50,6 +53,7 @@ public class RegisterActivity extends BaseActivity {
     private String generatedVerificationCode = "";
     private boolean invitationCodeCheckState = false;
     private boolean recommenderIDCheckState = false;
+    private ProgressDialog progressDialog;
 
     @ViewInject(R.id.register_toolbar)
     private Toolbar toolbar;
@@ -93,6 +97,9 @@ public class RegisterActivity extends BaseActivity {
         }
         registerFlipper.setInAnimation(this, R.anim.push_left_in);
         countdownButton.setEnabled(false);
+        progressDialog = new ProgressDialog(this);
+        progressDialog.setMessage("加载中...");
+        progressDialog.setCancelable(false);
     }
 
     @Override
@@ -139,15 +146,17 @@ public class RegisterActivity extends BaseActivity {
         }
         else {
             phoneNumberLayout.setErrorEnabled(false);
-            x.http().post(new VerifyPhoneNumberParams(phoneNumber), new NetCallbackAdapter() {
+            x.http().post(new VerifyPhoneNumberParams(phoneNumber), new NetCallbackAdapter(this, progressDialog ,false) {
                 @Override
                 public void onSuccess(String result) {
                     try {
-                        JSONObject resultJSONObject = new JSONObject(result);
-                        if (resultJSONObject.getBoolean("Status")) {
-                            Log.d(TAG, resultJSONObject.getString("Info"));
+                        JSONObject resultJsonObject = new JSONObject(result);
+                        if (resultJsonObject.getBoolean("Status")) {
+                            Log.d(TAG, resultJsonObject.getString("Info"));
                             generatedVerificationCode = CommonUtils.generateVerificationCode();
-                            x.http().post(new GetVerificationCodeParams(phoneNumber, generatedVerificationCode), new NetCallbackAdapter() {
+                            x.http().post(
+                                    new GetVerificationCodeParams(phoneNumber, generatedVerificationCode),
+                                    new NetCallbackAdapter(RegisterActivity.this, progressDialog) {
                                 @Override
                                 public void onSuccess(String result) {
                                     Log.d(TAG, "Xutils Net Callback" + result);
@@ -156,8 +165,7 @@ public class RegisterActivity extends BaseActivity {
                             });
                         }
                         else {
-                            Log.d(TAG, resultJSONObject.getString("Info"));
-                            Toast.makeText(RegisterActivity.this, resultJSONObject.getString("Info"), Toast.LENGTH_SHORT).show();
+                            showToast(resultJsonObject.getString("Info"));
                         }
                     } catch (JSONException e) {
                         e.printStackTrace();
@@ -171,6 +179,7 @@ public class RegisterActivity extends BaseActivity {
     @Event(value = R.id.register_next_step_button)
     private void registerNextStepButtonClicked(View view) {
         hideKeyboard();
+
         String phoneNumber = phoneNumberLayout.getEditText().getText().toString();
         if (phoneNumber.equals("")) {
             phoneNumberLayout.setError("请输入手机号");
@@ -183,6 +192,7 @@ public class RegisterActivity extends BaseActivity {
         else {
             phoneNumberLayout.setErrorEnabled(false);
         }
+
         String userVerificationCode = verificationCodeLayout.getEditText().getText().toString();
         if (userVerificationCode.equals("")) {
             verificationCodeLayout.setError("请输入验证码");
@@ -195,6 +205,7 @@ public class RegisterActivity extends BaseActivity {
         else {
             verificationCodeLayout.setErrorEnabled(false);
         }
+
         final String invitationCode = invitationCodeLayout.getEditText().getText().toString();
         final String recommenderID = recommenderIDLayout.getEditText().getText().toString();
         if (invitationCode.equals("")) {
@@ -204,7 +215,8 @@ public class RegisterActivity extends BaseActivity {
         else {
             invitationCodeLayout.setErrorEnabled(false);
         }
-        x.http().post(new VerifyInvitationCodeParams(invitationCode), new NetCallbackAdapter() {
+
+        x.http().post(new VerifyInvitationCodeParams(invitationCode), new NetCallbackAdapter(this, progressDialog) {
             @Override
             public void onSuccess(String result) {
                 try {
@@ -226,16 +238,20 @@ public class RegisterActivity extends BaseActivity {
 
             @Override
             public void onFinished() {
-                if (!agreeCheckBox.isChecked()) {
-                    Toast.makeText(RegisterActivity.this, "请阅读并同意《用户协议》", Toast.LENGTH_SHORT).show();
-                }
-                else {
-                    registerFlipper.setDisplayedChild(1);
+                super.onFinished();
+                if (invitationCodeCheckState && (recommenderID.equals("") || (!recommenderID.equals("") && recommenderIDCheckState))) {
+                    if (!agreeCheckBox.isChecked()) {
+                        showToast("请阅读并同意《用户协议》");
+                    }
+                    else {
+                        registerFlipper.setDisplayedChild(1);
+                    }
                 }
             }
         });
-        if (!recommenderID.equals("")) {
-            x.http().post(new VerifyRecommenderIDParams(recommenderID), new NetCallbackAdapter() {
+
+        if (!TextUtils.isEmpty(recommenderID)) {
+            x.http().post(new VerifyRecommenderIDParams(recommenderID), new NetCallbackAdapter(this, progressDialog) {
                 @Override
                 public void onSuccess(String result) {
                     try {
@@ -257,9 +273,10 @@ public class RegisterActivity extends BaseActivity {
 
                 @Override
                 public void onFinished() {
+                    super.onFinished();
                     if (invitationCodeCheckState && (recommenderID.equals("") || (!recommenderID.equals("") && recommenderIDCheckState))) {
                         if (!agreeCheckBox.isChecked()) {
-                            Toast.makeText(RegisterActivity.this, "请阅读并同意《用户协议》", Toast.LENGTH_SHORT).show();
+                            showToast("请阅读并同意《用户协议》");
                         }
                         else {
                             registerFlipper.setDisplayedChild(1);
@@ -293,10 +310,10 @@ public class RegisterActivity extends BaseActivity {
                     invitationCodeLayout.getEditText().getText().toString(),
                     recommenderIDLayout.getEditText().getText().toString(),
                     passwordLayout.getEditText().getText().toString());
-            x.http().post(params, new NetCallbackAdapter() {
+            x.http().post(params, new NetCallbackAdapter(this, progressDialog) {
                 @Override
                 public void onSuccess(String result) {
-                    Toast.makeText(RegisterActivity.this, "注册成功，即将跳转到登录", Toast.LENGTH_SHORT).show();
+                    showToast("注册成功，即将跳转到登录");
                     RegisterActivity.this.finish();
                 }
             });

@@ -19,6 +19,7 @@ public class User {
     private Date lastLoginTime;
     private boolean certificationState;
     private boolean debitCardState;
+    private boolean headerState;
 
     public long getUserId() {
         return userId;
@@ -106,5 +107,13 @@ public class User {
 
     public void setDebitCardState(boolean debitCardState) {
         this.debitCardState = debitCardState;
+    }
+
+    public boolean isHeaderState() {
+        return headerState;
+    }
+
+    public void setHeaderState(boolean headerState) {
+        this.headerState = headerState;
     }
 }

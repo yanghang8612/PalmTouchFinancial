@@ -6,6 +6,7 @@ import android.graphics.Color;
 import android.os.Build;
 import android.os.Bundle;
 import android.os.Handler;
+import android.support.annotation.NonNull;
 import android.support.design.widget.AppBarLayout;
 import android.support.design.widget.NavigationView;
 import android.support.v4.app.Fragment;
@@ -22,9 +23,12 @@ import android.view.View;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
+import com.afollestad.materialdialogs.DialogAction;
+import com.afollestad.materialdialogs.MaterialDialog;
 import com.ashokvarma.bottomnavigation.BottomNavigationBar;
 import com.ashokvarma.bottomnavigation.BottomNavigationItem;
 import com.bumptech.glide.Glide;
+import com.bumptech.glide.load.engine.DiskCacheStrategy;
 import com.huachuang.palmtouchfinancial.R;
 import com.huachuang.palmtouchfinancial.backend.UserManager;
 import com.huachuang.palmtouchfinancial.fragment.FragmentFactory;
@@ -40,6 +44,7 @@ import de.hdodenhof.circleimageview.CircleImageView;
 public class MainActivity extends BaseActivity implements NavigationView.OnNavigationItemSelectedListener {
 
     private static final String TAG = MainActivity.class.getSimpleName();
+
     private static final int defaultFragmentIndex = 0;
 
     public static void actionStart(Context context) {
@@ -85,7 +90,7 @@ public class MainActivity extends BaseActivity implements NavigationView.OnNavig
     @Override
     protected void onResume() {
         super.onResume();
-        Log.d(TAG, "shabi");
+        refreshNavHeaderView();
     }
 
     @Override
@@ -133,8 +138,29 @@ public class MainActivity extends BaseActivity implements NavigationView.OnNavig
                 AgentManagerActivity.actionStart(this);
                 break;
             case R.id.nav_change_password:
+                ChangePasswordActivity.actionStart(this);
                 break;
             case R.id.nav_sign_out:
+                new MaterialDialog.Builder(this)
+                        .content("确认退出登录吗?")
+                        .contentColorRes(R.color.black)
+                        .positiveText("确认")
+                        .negativeText("取消")
+                        .autoDismiss(false)
+                        .onPositive(new MaterialDialog.SingleButtonCallback() {
+                            @Override
+                            public void onClick(@NonNull MaterialDialog dialog, @NonNull DialogAction which) {
+                                LoginActivity.actionStart(MainActivity.this);
+                                finish();
+                            }
+                        })
+                        .onNegative(new MaterialDialog.SingleButtonCallback() {
+                            @Override
+                            public void onClick(@NonNull MaterialDialog dialog, @NonNull DialogAction which) {
+                                dialog.dismiss();
+                            }
+                        })
+                        .show();
                 break;
             default:
                 break;
@@ -248,7 +274,13 @@ public class MainActivity extends BaseActivity implements NavigationView.OnNavig
         }
 
         CircleImageView headerImageView = (CircleImageView) navHeaderView.findViewById(R.id.nav_header_image_view);
-        Glide.with(this).load(CommonUtils.getHeaderUrl()).into(headerImageView);
+        if (UserManager.getCurrentUser().isHeaderState()) {
+            Glide.with(this)
+                    .load(CommonUtils.getHeaderUrl())
+                    .skipMemoryCache(true)
+                    .diskCacheStrategy(DiskCacheStrategy.NONE)
+                    .into(headerImageView);
+        }
 
         TextView phoneNumberView = (TextView) navHeaderView.findViewById(R.id.nav_header_phone_number);
         phoneNumberView.setText(UserManager.getCurrentUser().getUserPhoneNumber());
@@ -259,6 +291,10 @@ public class MainActivity extends BaseActivity implements NavigationView.OnNavig
         }
         else {
             nameView.setText("<请实名认证>");
+        }
+
+        if (UserManager.getCurrentUser().getUserType() == 0) {
+            navigationView.getMenu().getItem(4).setVisible(false);
         }
     }
 

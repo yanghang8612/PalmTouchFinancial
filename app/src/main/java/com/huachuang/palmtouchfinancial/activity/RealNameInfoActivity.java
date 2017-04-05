@@ -40,6 +40,8 @@ public class RealNameInfoActivity extends BaseActivity {
 
     public static final String TAG = RealNameInfoActivity.class.getSimpleName();
 
+    public static final int REQUEST_CODE_DISTRICT = 0;
+
     public static void actionStart(Context context) {
         Intent intent = new Intent(context, RealNameInfoActivity.class);
         context.startActivity(intent);
@@ -62,11 +64,14 @@ public class RealNameInfoActivity extends BaseActivity {
     @ViewInject(R.id.real_name_info_spell_view)
     private TextView spellView;
 
+    @ViewInject(R.id.real_name_info_sex_view)
+    private TextView sexView;
+
     @ViewInject(R.id.real_name_info_identify_card_view)
     private TextView identityCardView;
 
-    @ViewInject(R.id.real_name_info_sex_view)
-    private TextView sexView;
+    @ViewInject(R.id.real_name_info_address_view)
+    private TextView addressView;
 
     @ViewInject(R.id.real_name_info_name_edit)
     private EditText nameEdit;
@@ -74,11 +79,14 @@ public class RealNameInfoActivity extends BaseActivity {
     @ViewInject(R.id.real_name_info_spell_edit)
     private EditText spellEdit;
 
+    @ViewInject(R.id.real_name_info_sex_spinner)
+    private Spinner sexSpinner;
+
     @ViewInject(R.id.real_name_info_identify_card_edit)
     private EditText identityCardEdit;
 
-    @ViewInject(R.id.real_name_info_sex_spinner)
-    private Spinner sexSpinner;
+    @ViewInject(R.id.real_name_info_address_edit)
+    private TextView addressEdit;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -90,13 +98,23 @@ public class RealNameInfoActivity extends BaseActivity {
         if (!UserManager.getCurrentUser().isCertificationState()) {
             realNameInfoFlipper.setDisplayedChild(1);
             realNameInfoButton.setText("保存认证信息");
+            currentFlipper = 1;
         }
         else {
             nameView.setText(UserManager.getCertificationInfo().getUserName());
             spellView.setText(UserManager.getCertificationInfo().getUserSpell());
-            identityCardView.setText(CommonUtils.mosaicIdentityCard(UserManager.getCertificationInfo().getUserIdentityCard()));
             sexView.setText((UserManager.getCertificationInfo().getUserSex() == '0') ? "男" : "女");
+            identityCardView.setText(CommonUtils.mosaicIdentityCard(UserManager.getCertificationInfo().getUserIdentityCard()));
+            addressView.setText(UserManager.getCertificationInfo().getUserAddress());
         }
+        addressEdit.setOnFocusChangeListener(new View.OnFocusChangeListener() {
+            @Override
+            public void onFocusChange(View v, boolean hasFocus) {
+                if (hasFocus)  {
+                    DistrictActivity.actionStart(RealNameInfoActivity.this, REQUEST_CODE_DISTRICT);
+                }
+            }
+        });
     }
 
     @Override
@@ -131,20 +149,32 @@ public class RealNameInfoActivity extends BaseActivity {
         return super.onOptionsItemSelected(item);
     }
 
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        if (resultCode == RESULT_OK) {
+            if (data != null && requestCode == REQUEST_CODE_DISTRICT) {
+                Bundle bundle = data.getExtras();
+                addressEdit.setText(bundle.getString("district"));
+            }
+        }
+    }
+
     @Event(R.id.real_name_info_button)
     private void realNameInfoButtonClicked(View view) {
         if (currentFlipper == 0) {
             nameEdit.setText(UserManager.getCertificationInfo().getUserName());
             spellEdit.setText(UserManager.getCertificationInfo().getUserSpell());
-            identityCardEdit.setText(UserManager.getCertificationInfo().getUserIdentityCard());
             sexSpinner.setSelection(UserManager.getCertificationInfo().getUserSex() - '0');
+            identityCardEdit.setText(UserManager.getCertificationInfo().getUserIdentityCard());
+            addressEdit.setText(UserManager.getCertificationInfo().getUserAddress());
             realNameInfoFlipper.setInAnimation(this, R.anim.push_left_in);
             realNameInfoFlipper.setDisplayedChild(1);
             realNameInfoButton.setText("保存认证信息");
             currentFlipper = 1;
         }
         else {
-            String name = nameEdit.getText().toString();
+            final String name = nameEdit.getText().toString();
             if (TextUtils.isEmpty(name)) {
                 nameEdit.setError("请输入姓名");
                 return;
@@ -154,13 +184,15 @@ public class RealNameInfoActivity extends BaseActivity {
                 return;
             }
 
-            String spell = spellEdit.getText().toString();
+            final String spell = spellEdit.getText().toString();
             if (TextUtils.isEmpty(spell)) {
                 spellEdit.setError("请输入姓名的拼音（大写）");
                 return;
             }
 
-            String identityCard = identityCardEdit.getText().toString();
+            char sex = (sexSpinner.getSelectedItemId() == 0) ? '0' : '1';
+
+            final String identityCard = identityCardEdit.getText().toString();
             if (TextUtils.isEmpty(identityCard)) {
                 identityCardEdit.setError("请输入身份证号");
                 return;
@@ -170,21 +202,20 @@ public class RealNameInfoActivity extends BaseActivity {
                 return;
             }
 
-            char sex = (sexSpinner.getSelectedItemId() == 0) ? '0' : '1';
-
-            nameView.setText(name);
-            spellView.setText(spell);
-            identityCardView.setText(CommonUtils.mosaicIdentityCard(identityCard));
-            sexView.setText((sexSpinner.getSelectedItemId() == 0) ? "男" : "女");
+            final String address = addressEdit.getText().toString();
+            if (TextUtils.isEmpty(address)) {
+                addressEdit.setError("请输入详细地址");
+                return;
+            }
 
             RequestParams params;
             if (UserManager.getCurrentUser().isCertificationState()) {
-                params = new UpdateCertificationInfoParams(name, spell, identityCard, sex);
+                params = new UpdateCertificationInfoParams(name, spell, sex, identityCard, address);
             }
             else {
-                params = new CreateCertificationInfoParams(name, spell, identityCard, sex);
+                params = new CreateCertificationInfoParams(name, spell, sex, identityCard, address);
             }
-            x.http().post(params, new NetCallbackAdapter() {
+            x.http().post(params, new NetCallbackAdapter(this) {
                 @Override
                 public void onSuccess(String result) {
                     JSONObject resultJsonObject;
@@ -194,20 +225,25 @@ public class RealNameInfoActivity extends BaseActivity {
                             UserManager.setCertificationInfo(
                                     JSON.parseObject(resultJsonObject.getString("CertificationInfo"), UserCertificationInfo.class));
                             UserManager.getCurrentUser().setCertificationState(true);
+
+                            nameView.setText(name);
+                            spellView.setText(spell);
+                            sexView.setText((sexSpinner.getSelectedItemId() == 0) ? "男" : "女");
+                            identityCardView.setText(CommonUtils.mosaicIdentityCard(identityCard));
+                            addressView.setText(address);
+
+                            realNameInfoFlipper.setInAnimation(RealNameInfoActivity.this, R.anim.push_right_in);
+                            realNameInfoFlipper.setDisplayedChild(0);
+                            realNameInfoButton.setText("修改认证信息");
+                            currentFlipper = 0;
                         }
-                        else {
-                            Toast.makeText(RealNameInfoActivity.this, resultJsonObject.getString("Info"), Toast.LENGTH_SHORT).show();
-                        }
+                        showToast(resultJsonObject.getString("Info"));
                     }
                     catch (JSONException e) {
                         e.printStackTrace();
                     }
                 }
             });
-            realNameInfoFlipper.setInAnimation(this, R.anim.push_right_in);
-            realNameInfoFlipper.setDisplayedChild(0);
-            realNameInfoButton.setText("修改认证信息");
-            currentFlipper = 0;
         }
     }
 }

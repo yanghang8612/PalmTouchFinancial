@@ -26,9 +26,9 @@ public class DistrictActivity extends BaseActivity {
 
     public static final String TAG = DistrictActivity.class.getSimpleName();
 
-    public static void actionStart(Context context) {
+    public static void actionStart(Context context, int requestCode) {
         Intent intent = new Intent(context, DistrictActivity.class);
-        context.startActivity(intent);
+        ((BaseActivity) context).startActivityForResult(intent, requestCode);
     }
 
     private DistrictAdapter adapter;

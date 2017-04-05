@@ -15,12 +15,15 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.alibaba.fastjson.JSON;
+import com.github.ybq.android.spinkit.SpinKitView;
 import com.huachuang.palmtouchfinancial.R;
 import com.huachuang.palmtouchfinancial.backend.UserManager;
 import com.huachuang.palmtouchfinancial.backend.bean.User;
 import com.huachuang.palmtouchfinancial.backend.bean.UserCertificationInfo;
+import com.huachuang.palmtouchfinancial.backend.bean.UserDebitCard;
 import com.huachuang.palmtouchfinancial.backend.net.NetCallbackAdapter;
 import com.huachuang.palmtouchfinancial.backend.net.params.LoginParams;
+import com.huachuang.palmtouchfinancial.util.ActivityCollector;
 import com.huachuang.palmtouchfinancial.util.CommonUtils;
 
 import org.json.JSONException;
@@ -34,6 +37,7 @@ import org.xutils.x;
 public class LoginActivity extends BaseActivity {
 
     private static final String TAG = LoginActivity.class.getSimpleName();
+
     private static final String DEFAULT_PRE = "default";
 
     public static void actionStart(Context context) {
@@ -54,6 +58,12 @@ public class LoginActivity extends BaseActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setSupportActionBar(toolbar);
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+        passwordLayout.getEditText().setText("");
     }
 
     @Event(value = R.id.login_password_layout,
@@ -102,7 +112,7 @@ public class LoginActivity extends BaseActivity {
             return;
         }
 
-        x.http().post(new LoginParams(phoneNumber, password), new NetCallbackAdapter() {
+        x.http().post(new LoginParams(phoneNumber, password), new NetCallbackAdapter(this) {
             @Override
             public void onSuccess(String result) {
                 JSONObject resultJsonObject;
@@ -114,9 +124,15 @@ public class LoginActivity extends BaseActivity {
                         //String token = resultJsonObject.getString("Token");
                         UserManager.setCurrentUser(user);
                         //UserManager.setToken(token);
+
                         if (user.isCertificationState()) {
                             UserManager.setCertificationInfo(
                                     JSON.parseObject(resultJsonObject.getString("CertificationInfo"), UserCertificationInfo.class));
+                        }
+
+                        if (user.isDebitCardState()) {
+                            UserManager.setDebitCardInfo(
+                                    JSON.parseObject(resultJsonObject.getString("DebitCard"), UserDebitCard.class));
                         }
 
                         SharedPreferences.Editor editor = defaultPref.edit();
@@ -126,9 +142,10 @@ public class LoginActivity extends BaseActivity {
                         editor.apply();
 
                         MainActivity.actionStart(LoginActivity.this);
+                        finish();
                     }
                     else {
-                        Toast.makeText(LoginActivity.this, resultJsonObject.getString("Info"), Toast.LENGTH_SHORT).show();
+                        showToast(resultJsonObject.getString("Info"));
                     }
                 }
                 catch (JSONException e) {

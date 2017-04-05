@@ -13,6 +13,7 @@ import org.xutils.http.annotation.HttpRequest;
         host = GlobalParams.SERVER_URL_HEAD,
         path = "UserManager/Register")
 public class RegisterParams extends RequestParams {
+
     private String phoneNumber;
     private String invitationCode;
     private String recommenderID;

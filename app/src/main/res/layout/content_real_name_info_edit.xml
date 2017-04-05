@@ -85,6 +85,43 @@
                 android:layout_weight="1"
                 android:layout_gravity="center"
                 android:gravity="center"
+                android:text="性别"
+                android:textColor="@color/black" />
+
+            <LinearLayout
+                android:layout_width="1dp"
+                android:layout_height="match_parent"
+                android:background="@color/divider"
+                android:layout_margin="@dimen/real_divider_margin" />
+
+            <LinearLayout
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="3"
+                android:layout_gravity="center">
+
+                <Spinner
+                    android:id="@+id/real_name_info_sex_spinner"
+                    android:layout_width="80dp"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:entries="@array/sex" />
+
+            </LinearLayout>
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:orientation="horizontal"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/real_row_height">
+
+            <TextView
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:layout_gravity="center"
+                android:gravity="center"
                 android:text="身份证号"
                 android:textColor="@color/black" />
 
@@ -117,7 +154,7 @@
                 android:layout_weight="1"
                 android:layout_gravity="center"
                 android:gravity="center"
-                android:text="性别"
+                android:text="详细地址"
                 android:textColor="@color/black" />
 
             <LinearLayout
@@ -126,20 +163,14 @@
                 android:background="@color/divider"
                 android:layout_margin="@dimen/real_divider_margin" />
 
-            <LinearLayout
+            <EditText
+                android:id="@+id/real_name_info_address_edit"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_weight="3"
-                android:layout_gravity="center">
-
-                <Spinner
-                    android:id="@+id/real_name_info_sex_spinner"
-                    android:layout_width="80dp"
-                    android:layout_height="wrap_content"
-                    android:layout_gravity="center"
-                    android:entries="@array/sex" />
-
-            </LinearLayout>
+                android:layout_gravity="center"
+                android:inputType="textPostalAddress"
+                android:textSize="15sp" />
 
         </LinearLayout>
 

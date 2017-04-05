@@ -45,7 +45,7 @@ public class CommonUtils {
     }
 
     public static boolean validatePassword(String password) {
-        String regExp = "^\\d{6,}$";
+        String regExp = "^.{6,}$";
         Pattern p = Pattern.compile(regExp);
         Matcher m = p.matcher(password);
         return m.matches();
@@ -74,7 +74,7 @@ public class CommonUtils {
     }
 
     public static String mosaicBankCard(String bankCard) {
-        return bankCard;
+        return bankCard.substring(0, bankCard.length() - 10) + "******" + bankCard.substring(bankCard.length() - 4);
     }
 
     public static byte[] bmpToByteArray(final Bitmap bmp,
@@ -94,7 +94,7 @@ public class CommonUtils {
     }
 
     public static String getHeaderUrl() {
-        return GlobalParams.SERVER_URL_HEAD + "/header/" + UserManager.getCurrentUser().getUserId() + ".jpg";
+        return GlobalParams.SERVER_URL_HEAD + "/header/" + UserManager.getUserID() + ".jpg";
     }
 
     private static CSVReader csvReader = null;
@@ -143,5 +143,32 @@ public class CommonUtils {
             e.printStackTrace();
         }
         return null;
+    }
+
+    public static boolean checkBankCard(String bankCard) {
+        if(bankCard.length() < 15 || bankCard.length() > 19) {
+            return false;
+        }
+        char bit = getBankCardCheckCode(bankCard.substring(0, bankCard.length() - 1));
+        return bit != 'N' && bankCard.charAt(bankCard.length() - 1) == bit;
+    }
+
+    private static char getBankCardCheckCode(String nonCheckCodeBankCard){
+        if(nonCheckCodeBankCard == null || nonCheckCodeBankCard.trim().length() == 0
+                || !nonCheckCodeBankCard.matches("\\d+")) {
+            //如果传的不是数据返回N
+            return 'N';
+        }
+        char[] chs = nonCheckCodeBankCard.trim().toCharArray();
+        int luhmSum = 0;
+        for(int i = chs.length - 1, j = 0; i >= 0; i--, j++) {
+            int k = chs[i] - '0';
+            if(j % 2 == 0) {
+                k *= 2;
+                k = k / 10 + k % 10;
+            }
+            luhmSum += k;
+        }
+        return (luhmSum % 10 == 0) ? '0' : (char)((10 - luhmSum % 10) + '0');
     }
 }

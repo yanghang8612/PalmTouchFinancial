@@ -11,6 +11,7 @@ public class UserCertificationInfo {
     private String userName;
     private String userSpell;
     private String userIdentityCard;
+    private String userAddress;
     private char userSex;
 
     public long getId() {
@@ -51,6 +52,14 @@ public class UserCertificationInfo {
 
     public void setUserIdentityCard(String userIdentityCard) {
         this.userIdentityCard = userIdentityCard;
+    }
+
+    public String getUserAddress() {
+        return userAddress;
+    }
+
+    public void setUserAddress(String userAddress) {
+        this.userAddress = userAddress;
     }
 
     public char getUserSex() {
