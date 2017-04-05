@@ -22,7 +22,7 @@ import org.xutils.view.annotation.ViewInject;
 import java.util.List;
 
 @ContentView(R.layout.activity_district)
-public class DistrictActivity extends BaseActivity {
+public class DistrictActivity extends BaseSwipeActivity {
 
     public static final String TAG = DistrictActivity.class.getSimpleName();
 
@@ -77,7 +77,7 @@ public class DistrictActivity extends BaseActivity {
         return super.onOptionsItemSelected(item);
     }
 
-    @Event(value = R.id.district_card)
+    @Event(R.id.district_card)
     private void districtCardClicked(View view) {
         adapter.backToUpLevel();
     }

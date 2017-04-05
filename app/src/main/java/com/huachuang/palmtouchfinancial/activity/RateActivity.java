@@ -14,7 +14,7 @@ import org.xutils.view.annotation.ContentView;
 import org.xutils.view.annotation.ViewInject;
 
 @ContentView(R.layout.activity_rate)
-public class RateActivity extends BaseActivity {
+public class RateActivity extends BaseSwipeActivity {
 
     public static final String TAG = RateActivity.class.getSimpleName();
 

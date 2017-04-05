@@ -12,7 +12,7 @@ import org.xutils.view.annotation.ContentView;
 import org.xutils.view.annotation.ViewInject;
 
 @ContentView(R.layout.activity_user_agreement)
-public class UserAgreementActivity extends BaseActivity {
+public class UserAgreementActivity extends BaseSwipeActivity {
 
     public static final String TAG = UserAgreementActivity.class.getSimpleName();
 

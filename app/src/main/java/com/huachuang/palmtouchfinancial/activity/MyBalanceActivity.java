@@ -14,7 +14,7 @@ import org.xutils.view.annotation.ContentView;
 import org.xutils.view.annotation.ViewInject;
 
 @ContentView(R.layout.activity_my_balance)
-public class MyBalanceActivity extends BaseActivity {
+public class MyBalanceActivity extends BaseSwipeActivity {
 
     public static final String TAG = MyBalanceActivity.class.getSimpleName();
 

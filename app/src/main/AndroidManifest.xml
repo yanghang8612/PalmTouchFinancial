@@ -25,7 +25,7 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
         <activity
-            android:name=".activity.LoginActivity"
+            android:name=".activity.SplashActivity"
             android:label="@string/app_name">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -40,10 +40,7 @@
         <activity
             android:name=".activity.ForceJumpActivity"
             android:theme="@style/AppTheme.Transparent" />
-        <activity
-            android:name="com.journeyapps.barcodescanner.CaptureActivity"
-            android:screenOrientation="fullSensor"
-            tools:replace="screenOrientation" />
+        <activity android:name=".activity.LoginActivity" />
         <activity android:name=".activity.RegisterActivity" />
         <activity android:name=".activity.CreditCardApplyActivity" />
         <activity android:name=".activity.PersonalInfoActivity" />
@@ -62,6 +59,8 @@
         <activity android:name=".activity.MyCoinsActivity" />
         <activity android:name=".activity.CardManagerActivity" />
         <activity android:name=".activity.ChangePasswordActivity" />
+        <activity android:name=".activity.MyQrCodeActivity" />
+        <activity android:name=".activity.ShareRecordActivity" />
     </application>
 
 </manifest>

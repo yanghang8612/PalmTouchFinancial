@@ -3,10 +3,10 @@
     <item
         android:id="@+id/share_wechat_session"
         android:title="@string/share_weixin_friends"
-        android:icon="@drawable/share_wechat" />
+        android:icon="@drawable/ic_wechat" />
 
     <item
         android:id="@+id/share_wechat_timeline"
         android:title="@string/share_weixin_moments"
-        android:icon="@drawable/share_wechatmoments" />
+        android:icon="@drawable/ic_timeline" />
 </menu>

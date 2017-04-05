@@ -4,17 +4,20 @@ import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.TextView;
 
 import com.flipboard.bottomsheet.BottomSheetLayout;
 import com.flipboard.bottomsheet.commons.MenuSheetView;
 import com.huachuang.palmtouchfinancial.GlobalVariable;
 import com.huachuang.palmtouchfinancial.R;
+import com.huachuang.palmtouchfinancial.activity.ShareRecordActivity;
 import com.huachuang.palmtouchfinancial.util.CommonUtils;
 import com.tencent.mm.opensdk.modelmsg.SendMessageToWX;
 import com.tencent.mm.opensdk.modelmsg.WXMediaMessage;
 import com.tencent.mm.opensdk.modelmsg.WXWebpageObject;
 
 import org.xutils.view.annotation.ContentView;
+import org.xutils.view.annotation.Event;
 import org.xutils.view.annotation.ViewInject;
 
 /**
@@ -26,6 +29,15 @@ public class ShareFragment extends BaseFragment {
 
     @ViewInject(R.id.share_fragment_bottomsheet)
     private BottomSheetLayout bottomSheet;
+
+    @ViewInject(R.id.share_base_count)
+    private TextView baseCountView;
+
+    @ViewInject(R.id.share_derive_count)
+    private TextView deriveCountView;
+
+    @ViewInject(R.id.share_third_count)
+    private TextView thirdCountView;
 
     @ViewInject(R.id.share_weixin_view)
     private View shareWeiXin;
@@ -89,6 +101,11 @@ public class ShareFragment extends BaseFragment {
                 bottomSheet.showWithSheetView(menuSheetView);
             }
         });
+    }
+
+    @Event(R.id.share_record_layout)
+    private void shareRecordLayoutClicked(View view) {
+        ShareRecordActivity.actionStart(this.getContext());
     }
 
     private String buildTransaction(final String type) {

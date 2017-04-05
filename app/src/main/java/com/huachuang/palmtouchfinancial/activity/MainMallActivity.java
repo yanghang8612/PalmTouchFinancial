@@ -22,7 +22,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 @ContentView(R.layout.activity_main_mall)
-public class MainMallActivity extends BaseActivity {
+public class MainMallActivity extends BaseSwipeActivity {
 
     public static final String TAG = MainMallActivity.class.getSimpleName();
 

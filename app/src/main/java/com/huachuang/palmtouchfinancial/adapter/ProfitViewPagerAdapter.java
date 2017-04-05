@@ -8,7 +8,6 @@ import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.ProgressBar;
 
 import com.huachuang.palmtouchfinancial.R;
 import com.huachuang.palmtouchfinancial.activity.BaseActivity;
@@ -25,7 +24,7 @@ public class ProfitViewPagerAdapter extends PagerAdapter {
 
     private RecyclerView profitRecyclerList;
     private SwipeRefreshLayout profitSwipeContainer;
-    private ProgressBar profitProgressBar;
+    //private ProgressBar profitProgressBar;
 
     public ProfitViewPagerAdapter(BaseActivity activity, String[] tabs){
         this.currentActivity = activity;
@@ -40,21 +39,20 @@ public class ProfitViewPagerAdapter extends PagerAdapter {
         View view =  inflater.inflate(R.layout.item_profit_tab, container, false);
         profitRecyclerList = (RecyclerView) view.findViewById(R.id.profit_list);
         profitSwipeContainer = (SwipeRefreshLayout) view.findViewById(R.id.profit_swipe_container);
-        profitProgressBar = (ProgressBar) view.findViewById(R.id.profit_progressBar);
+        //profitProgressBar = (ProgressBar) view.findViewById(R.id.profit_progressBar);
 
         profitRecyclerList.setAdapter(adapter);
         profitSwipeContainer.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
             @Override
             public void onRefresh() {
-//                开始启动线程任务
                 new InitializeprofitLoadTask().execute();
             }
         });
         profitSwipeContainer.setDistanceToTriggerSync(80);
         profitRecyclerList.setLayoutManager(new LinearLayoutManager(currentActivity));
-        profitSwipeContainer.setRefreshing(true);
-        profitProgressBar.setVisibility(View.VISIBLE);
-        new InitializeprofitLoadTask().execute();
+        profitSwipeContainer.setRefreshing(false);
+        //profitProgressBar.setVisibility(View.VISIBLE);
+        //new InitializeprofitLoadTask().execute();
         adapter.notifyDataSetChanged();
         if (view.getParent() == null) {
             container.addView(view);
@@ -82,7 +80,7 @@ public class ProfitViewPagerAdapter extends PagerAdapter {
         @Override
         protected void onPostExecute(Void result) {
             profitSwipeContainer.setRefreshing(false);
-            profitProgressBar.setVisibility(View.GONE);
+            //profitProgressBar.setVisibility(View.GONE);
             super.onPostExecute(result);
         }
     }

@@ -2,11 +2,7 @@ package com.huachuang.palmtouchfinancial.backend.net;
 
 import android.app.ProgressDialog;
 import android.content.Context;
-import android.view.View;
-import android.widget.ProgressBar;
 import android.widget.Toast;
-
-import com.github.ybq.android.spinkit.SpinKitView;
 
 import org.xutils.common.Callback;
 
@@ -22,11 +18,17 @@ public abstract class NetCallbackAdapter implements Callback.ProgressCallback<St
     private boolean dismissWhenFinished;
 
     protected NetCallbackAdapter(Context context) {
+        this(context, true);
+    }
+
+    protected NetCallbackAdapter(Context context, boolean showProgressBar) {
         this.context = context;
-        this.progressBar = new ProgressDialog(context);
-        this.dismissWhenFinished = true;
-        progressBar.setMessage("加载中...");
-        progressBar.setCancelable(false);
+        if (showProgressBar) {
+            this.progressBar = new ProgressDialog(context);
+            this.dismissWhenFinished = true;
+            progressBar.setMessage("加载中...");
+            progressBar.setCancelable(false);
+        }
     }
 
     protected NetCallbackAdapter(Context context, ProgressDialog progressBar) {
@@ -46,7 +48,7 @@ public abstract class NetCallbackAdapter implements Callback.ProgressCallback<St
 
     @Override
     public void onStarted() {
-        if (!progressBar.isShowing()) {
+        if (progressBar != null && !progressBar.isShowing()) {
             progressBar.show();
         }
     }
@@ -72,7 +74,7 @@ public abstract class NetCallbackAdapter implements Callback.ProgressCallback<St
 
     @Override
     public void onFinished() {
-        if (progressBar.isShowing() && dismissWhenFinished) {
+        if (progressBar != null && progressBar.isShowing() && dismissWhenFinished) {
             progressBar.dismiss();
         }
     }

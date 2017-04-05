@@ -12,10 +12,8 @@ import android.view.KeyEvent;
 import android.view.View;
 import android.view.inputmethod.EditorInfo;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import com.alibaba.fastjson.JSON;
-import com.github.ybq.android.spinkit.SpinKitView;
 import com.huachuang.palmtouchfinancial.R;
 import com.huachuang.palmtouchfinancial.backend.UserManager;
 import com.huachuang.palmtouchfinancial.backend.bean.User;
@@ -23,7 +21,6 @@ import com.huachuang.palmtouchfinancial.backend.bean.UserCertificationInfo;
 import com.huachuang.palmtouchfinancial.backend.bean.UserDebitCard;
 import com.huachuang.palmtouchfinancial.backend.net.NetCallbackAdapter;
 import com.huachuang.palmtouchfinancial.backend.net.params.LoginParams;
-import com.huachuang.palmtouchfinancial.util.ActivityCollector;
 import com.huachuang.palmtouchfinancial.util.CommonUtils;
 
 import org.json.JSONException;
@@ -34,11 +31,9 @@ import org.xutils.view.annotation.ViewInject;
 import org.xutils.x;
 
 @ContentView(R.layout.activity_login)
-public class LoginActivity extends BaseActivity {
+public class LoginActivity extends BaseActivity implements View.OnFocusChangeListener {
 
     private static final String TAG = LoginActivity.class.getSimpleName();
-
-    private static final String DEFAULT_PRE = "default";
 
     public static void actionStart(Context context) {
         Intent intent = new Intent(context, LoginActivity.class);
@@ -66,7 +61,14 @@ public class LoginActivity extends BaseActivity {
         passwordLayout.getEditText().setText("");
     }
 
-    @Event(value = R.id.login_password_layout,
+    @Override
+    public void onFocusChange(View v, boolean hasFocus) {
+        if (hasFocus) {
+            ((TextInputLayout) v.getParent().getParent()).setErrorEnabled(false);
+        }
+    }
+
+    @Event(value = R.id.login_password_edit,
             type = TextView.OnEditorActionListener.class)
     private boolean onLoginPasswordEditorAction(TextView v, int actionId, KeyEvent event) {
         if (actionId == EditorInfo.IME_NULL || actionId == EditorInfo.IME_ACTION_SEARCH) {
@@ -76,21 +78,18 @@ public class LoginActivity extends BaseActivity {
         return false;
     }
 
-    @Event(value = R.id.sign_in_button)
+    @Event(R.id.sign_in_button)
     private void onSignInButtonClicked(View view) {
         attemptLogin();
     }
 
-    @Event(value = R.id.register_link)
+    @Event(R.id.register_link)
     private void onRegisterLinkClicked(View view) {
         RegisterActivity.actionStart(this);
     }
 
     private void attemptLogin() {
-
-        phoneNumberLayout.setError(null);
-        passwordLayout.setError(null);
-
+        hideKeyboard();
         String phoneNumber = phoneNumberLayout.getEditText().getText().toString();
         String password = passwordLayout.getEditText().getText().toString();
 
@@ -102,14 +101,20 @@ public class LoginActivity extends BaseActivity {
             phoneNumberLayout.setError(getString(R.string.error_invalid_phone_number));
             return;
         }
+        else {
+            phoneNumberLayout.setErrorEnabled(false);
+        }
 
         if (TextUtils.isEmpty(password)) {
             passwordLayout.setError("请输入密码");
             return;
         }
-        if (!CommonUtils.validatePassword(password)) {
+        else if (!CommonUtils.validatePassword(password)) {
             passwordLayout.setError(getString(R.string.error_invalid_password));
             return;
+        }
+        else {
+            passwordLayout.setErrorEnabled(false);
         }
 
         x.http().post(new LoginParams(phoneNumber, password), new NetCallbackAdapter(this) {
@@ -125,21 +130,22 @@ public class LoginActivity extends BaseActivity {
                         UserManager.setCurrentUser(user);
                         //UserManager.setToken(token);
 
-                        if (user.isCertificationState()) {
+                        if (user.getCertificationState()) {
                             UserManager.setCertificationInfo(
                                     JSON.parseObject(resultJsonObject.getString("CertificationInfo"), UserCertificationInfo.class));
                         }
 
-                        if (user.isDebitCardState()) {
+                        if (user.getDebitCardState()) {
                             UserManager.setDebitCardInfo(
                                     JSON.parseObject(resultJsonObject.getString("DebitCard"), UserDebitCard.class));
                         }
 
                         SharedPreferences.Editor editor = defaultPref.edit();
                         editor.putString("phoneNumber", UserManager.getCurrentUser().getUserPhoneNumber());
-                        editor.putLong("userID", UserManager.getCurrentUser().getUserId());
+                        editor.putString("password", UserManager.getCurrentUser().getUserPassword());
                         //editor.putString("token", token);
                         editor.apply();
+                        editor.commit();
 
                         MainActivity.actionStart(LoginActivity.this);
                         finish();

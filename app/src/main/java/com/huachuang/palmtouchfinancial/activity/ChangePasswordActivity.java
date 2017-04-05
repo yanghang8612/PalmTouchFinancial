@@ -9,12 +9,9 @@ import android.text.TextUtils;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
-import android.widget.Toast;
 
-import com.alibaba.fastjson.JSON;
 import com.huachuang.palmtouchfinancial.R;
 import com.huachuang.palmtouchfinancial.backend.UserManager;
-import com.huachuang.palmtouchfinancial.backend.bean.UserDebitCard;
 import com.huachuang.palmtouchfinancial.backend.net.NetCallbackAdapter;
 import com.huachuang.palmtouchfinancial.backend.net.params.ChangePasswordParams;
 import com.huachuang.palmtouchfinancial.util.CommonUtils;
@@ -27,7 +24,7 @@ import org.xutils.view.annotation.ViewInject;
 import org.xutils.x;
 
 @ContentView(R.layout.activity_change_password)
-public class ChangePasswordActivity extends BaseActivity {
+public class ChangePasswordActivity extends BaseSwipeActivity {
 
     private static String TAG = ChangePasswordActivity.class.getSimpleName();
 
@@ -69,7 +66,7 @@ public class ChangePasswordActivity extends BaseActivity {
         return super.onOptionsItemSelected(item);
     }
 
-    @Event(value = R.id.change_password_button)
+    @Event(R.id.change_password_button)
     private void changePasswordButtonClicked(View view) {
         String oldPassword = oldPasswordLayout.getEditText().getText().toString();
         if (TextUtils.isEmpty(oldPassword)) {

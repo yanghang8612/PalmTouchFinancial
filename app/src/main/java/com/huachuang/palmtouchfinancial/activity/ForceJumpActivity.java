@@ -2,6 +2,7 @@ package com.huachuang.palmtouchfinancial.activity;
 
 import android.content.Context;
 import android.content.Intent;
+import android.graphics.Color;
 import android.os.Bundle;
 import android.view.View;
 
@@ -25,6 +26,7 @@ public class ForceJumpActivity extends BaseActivity {
 
     public static void actionStart(Context context) {
         Intent intent = new Intent(context, ForceJumpActivity.class);
+        intent.setFlags(Intent.FLAG_ACTIVITY_NO_ANIMATION);
         context.startActivity(intent);
     }
 
@@ -51,6 +53,7 @@ public class ForceJumpActivity extends BaseActivity {
 
     @Event(R.id.close)
     private void closeClicked(View view) {
+        getWindow().getDecorView().setBackgroundColor(Color.TRANSPARENT);
         finish();
     }
 }

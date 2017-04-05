@@ -7,12 +7,13 @@ import android.support.v7.widget.Toolbar;
 import android.view.MenuItem;
 
 import com.huachuang.palmtouchfinancial.R;
+import com.huachuang.palmtouchfinancial.backend.UserManager;
 
 import org.xutils.view.annotation.ContentView;
 import org.xutils.view.annotation.ViewInject;
 
 @ContentView(R.layout.activity_about_us)
-public class AboutUsActivity extends BaseActivity {
+public class AboutUsActivity extends BaseSwipeActivity {
 
     public static final String TAG = AboutUsActivity.class.getSimpleName();
 

@@ -7,14 +7,11 @@ import android.support.v7.widget.Toolbar;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.TextView;
-import android.widget.Toast;
 
-import com.alibaba.fastjson.JSON;
 import com.bumptech.glide.Glide;
 import com.bumptech.glide.load.engine.DiskCacheStrategy;
 import com.huachuang.palmtouchfinancial.R;
 import com.huachuang.palmtouchfinancial.backend.UserManager;
-import com.huachuang.palmtouchfinancial.backend.bean.UserDebitCard;
 import com.huachuang.palmtouchfinancial.backend.net.NetCallbackAdapter;
 import com.huachuang.palmtouchfinancial.backend.net.params.UploadHeaderParams;
 import com.huachuang.palmtouchfinancial.loader.HeaderImageLoader;
@@ -38,7 +35,7 @@ import java.util.List;
 import de.hdodenhof.circleimageview.CircleImageView;
 
 @ContentView(R.layout.activity_personal_info)
-public class PersonalInfoActivity extends BaseActivity {
+public class PersonalInfoActivity extends BaseSwipeActivity {
 
     public static final String TAG = PersonalInfoActivity.class.getSimpleName();
 
@@ -74,7 +71,7 @@ public class PersonalInfoActivity extends BaseActivity {
         if (getSupportActionBar() != null) {
             getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         }
-        if (UserManager.getCurrentUser().isHeaderState()) {
+        if (UserManager.getCurrentUser().getHeaderState()) {
             Glide.with(this)
                     .load(CommonUtils.getHeaderUrl())
                     .skipMemoryCache(true)
@@ -127,6 +124,11 @@ public class PersonalInfoActivity extends BaseActivity {
         imagePicker.setOutPutY(320);//保存文件的高度。单位像素
         Intent intent = new Intent(this, ImageGridActivity.class);
         startActivityForResult(intent, REQUEST_CODE_IMAGE);
+    }
+
+    @Event(R.id.person_qr_code)
+    private void personQrCodeClicked(View view) {
+        MyQrCodeActivity.actionStart(this);
     }
 
     @Override

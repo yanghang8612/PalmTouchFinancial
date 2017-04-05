@@ -19,17 +19,14 @@ import org.xutils.x;
 
 public abstract class BaseActivity extends AppCompatActivity {
 
+    protected static final String DEFAULT_PRE = "default";
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         ActivityCollector.addActivity(this);
         x.view().inject(this);
         setTitle("");
-    }
-
-    @Override
-    protected void onStart() {
-        super.onStart();
     }
 
     @Override
@@ -45,6 +42,7 @@ public abstract class BaseActivity extends AppCompatActivity {
     }
 
     protected void hideKeyboard() {
+        getContentView().clearFocus();
         View view = getCurrentFocus();
         if (view != null) {
             ((InputMethodManager) getSystemService(Context.INPUT_METHOD_SERVICE)).

@@ -12,7 +12,7 @@ import org.xutils.view.annotation.ContentView;
 import org.xutils.view.annotation.ViewInject;
 
 @ContentView(R.layout.activity_my_coins)
-public class MyCoinsActivity extends BaseActivity {
+public class MyCoinsActivity extends BaseSwipeActivity {
 
     public static final String TAG = MyCoinsActivity.class.getSimpleName();
 

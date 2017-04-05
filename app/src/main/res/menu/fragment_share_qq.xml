@@ -1,10 +1,12 @@
 <?xml version="1.0" encoding="utf-8"?>
 <menu xmlns:android="http://schemas.android.com/apk/res/android">
     <item
+        android:id="@+id/share_qq_friend"
         android:title="@string/share_qq_friends"
-        android:icon="@drawable/share_qq" />
+        android:icon="@drawable/ic_qq" />
 
     <item
+        android:id="@+id/share_qq_qzone"
         android:title="@string/share_qq_qzone"
-        android:icon="@drawable/share_qzone" />
+        android:icon="@drawable/ic_qzone" />
 </menu>

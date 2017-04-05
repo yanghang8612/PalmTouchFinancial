@@ -93,7 +93,7 @@ public class User {
         this.lastLoginTime = lastLoginTime;
     }
 
-    public boolean isCertificationState() {
+    public boolean getCertificationState() {
         return certificationState;
     }
 
@@ -101,7 +101,7 @@ public class User {
         this.certificationState = certificationState;
     }
 
-    public boolean isDebitCardState() {
+    public boolean getDebitCardState() {
         return debitCardState;
     }
 
@@ -109,7 +109,7 @@ public class User {
         this.debitCardState = debitCardState;
     }
 
-    public boolean isHeaderState() {
+    public boolean getHeaderState() {
         return headerState;
     }
 

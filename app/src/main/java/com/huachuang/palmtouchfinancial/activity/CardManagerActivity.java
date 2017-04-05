@@ -17,7 +17,7 @@ import org.xutils.view.annotation.ContentView;
 import org.xutils.view.annotation.ViewInject;
 
 @ContentView(R.layout.activity_card_manager)
-public class CardManagerActivity extends BaseActivity {
+public class CardManagerActivity extends BaseSwipeActivity {
 
     public static final String TAG = CardManagerActivity.class.getSimpleName();
 

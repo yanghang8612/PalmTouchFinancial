@@ -14,7 +14,7 @@ import org.xutils.view.annotation.Event;
 import org.xutils.view.annotation.ViewInject;
 
 @ContentView(R.layout.activity_credit_card_apply)
-public class CreditCardApplyActivity extends BaseActivity {
+public class CreditCardApplyActivity extends BaseSwipeActivity {
 
     public static final String TAG = CreditCardApplyActivity.class.getSimpleName();
 

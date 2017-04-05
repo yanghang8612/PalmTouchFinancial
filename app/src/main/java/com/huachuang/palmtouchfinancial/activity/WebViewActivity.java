@@ -8,6 +8,7 @@ import android.view.MenuItem;
 import android.webkit.WebChromeClient;
 import android.webkit.WebView;
 import android.webkit.WebViewClient;
+import android.widget.TextView;
 
 import com.huachuang.palmtouchfinancial.R;
 
@@ -15,7 +16,7 @@ import org.xutils.view.annotation.ContentView;
 import org.xutils.view.annotation.ViewInject;
 
 @ContentView(R.layout.activity_web_view)
-public class WebViewActivity extends BaseActivity {
+public class WebViewActivity extends BaseSwipeActivity {
 
     public static final String TAG = WebViewActivity.class.getSimpleName();
 
@@ -29,6 +30,9 @@ public class WebViewActivity extends BaseActivity {
     @ViewInject(R.id.web_view_toolbar)
     private Toolbar toolbar;
 
+    @ViewInject(R.id.web_view_title)
+    private TextView title;
+
     @ViewInject(R.id.web_view)
     WebView webView;
 
@@ -39,7 +43,7 @@ public class WebViewActivity extends BaseActivity {
         if (getSupportActionBar() != null) {
             getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         }
-        setTitle(getIntent().getStringExtra("title"));
+        title.setText(getIntent().getStringExtra("title"));
         webView.getSettings().setJavaScriptEnabled(true);
         webView.getSettings().setJavaScriptCanOpenWindowsAutomatically(true);
         webView.getSettings().setSupportMultipleWindows(true);

@@ -40,8 +40,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:theme="@style/AppTheme.AppBarOverlay"
-        android:background="@color/transparent"
-        app:elevation="0dp">
+        android:background="@color/transparent">
 
         <android.support.v7.widget.Toolbar
             android:id="@+id/main_toolbar"

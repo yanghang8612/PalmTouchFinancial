@@ -55,6 +55,7 @@
                             android:textSize="10sp" />
 
                         <TextView
+                            android:id="@+id/share_base_count"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:text="0人"
@@ -99,6 +100,7 @@
                             android:textSize="10sp" />
 
                         <TextView
+                            android:id="@+id/share_derive_count"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:text="0人"
@@ -143,6 +145,7 @@
                             android:textSize="10sp" />
 
                         <TextView
+                            android:id="@+id/share_third_count"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:text="0人"
@@ -158,6 +161,7 @@
             <include layout="@layout/horizontal_line" />
 
             <LinearLayout
+                android:id="@+id/share_record_layout"
                 android:orientation="horizontal"
                 android:layout_width="match_parent"
                 android:layout_height="@dimen/share_row_height"
@@ -289,7 +293,7 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_gravity="center"
-                        android:src="@drawable/ic_weixin"/>
+                        android:src="@drawable/ic_wechat"/>
 
                     <TextView
                         android:layout_width="wrap_content"

@@ -6,13 +6,11 @@ import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.v7.widget.Toolbar;
 import android.text.TextUtils;
-import android.view.KeyEvent;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
-import android.widget.Toast;
 import android.widget.ViewFlipper;
 
 import com.afollestad.materialdialogs.DialogAction;
@@ -20,7 +18,6 @@ import com.afollestad.materialdialogs.MaterialDialog;
 import com.alibaba.fastjson.JSON;
 import com.huachuang.palmtouchfinancial.R;
 import com.huachuang.palmtouchfinancial.backend.UserManager;
-import com.huachuang.palmtouchfinancial.backend.bean.UserCertificationInfo;
 import com.huachuang.palmtouchfinancial.backend.bean.UserDebitCard;
 import com.huachuang.palmtouchfinancial.backend.net.NetCallbackAdapter;
 import com.huachuang.palmtouchfinancial.backend.net.params.CreateDebitCardParams;
@@ -36,7 +33,7 @@ import org.xutils.view.annotation.ViewInject;
 import org.xutils.x;
 
 @ContentView(R.layout.activity_debit_card)
-public class DebitCardActivity extends BaseActivity {
+public class DebitCardActivity extends BaseSwipeActivity {
 
     private static final String TAG = DebitCardActivity.class.getSimpleName();
 
@@ -98,7 +95,7 @@ public class DebitCardActivity extends BaseActivity {
         if (getSupportActionBar() != null) {
             getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         }
-        if (!UserManager.getCurrentUser().isDebitCardState()) {
+        if (!UserManager.getCurrentUser().getDebitCardState()) {
             debitCardFlipper.setDisplayedChild(1);
             debitCardButton.setText("保存结算卡信息");
             currentFlipper = 1;
@@ -217,7 +214,7 @@ public class DebitCardActivity extends BaseActivity {
             final String province = provinceEdit.getText().toString();
 
             RequestParams params;
-            if (UserManager.getCurrentUser().isDebitCardState()) {
+            if (UserManager.getCurrentUser().getDebitCardState()) {
                 params = new UpdateDebitCardParams(ownerName, number, cardType, headOffice, branch, province);
             }
             else {

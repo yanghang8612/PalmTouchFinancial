@@ -2,6 +2,7 @@ package com.huachuang.palmtouchfinancial.activity;
 
 import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.graphics.Color;
 import android.os.Build;
 import android.os.Bundle;
@@ -16,7 +17,6 @@ import android.support.v4.view.GravityCompat;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.widget.Toolbar;
-import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -98,8 +98,27 @@ public class MainActivity extends BaseActivity implements NavigationView.OnNavig
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
         if (drawer.isDrawerOpen(GravityCompat.START)) {
             drawer.closeDrawer(GravityCompat.START);
-        } else {
-            super.onBackPressed();
+        }
+        else {
+            new MaterialDialog.Builder(this)
+                    .content("确认退出吗?")
+                    .contentColorRes(R.color.black)
+                    .positiveText("确认")
+                    .negativeText("取消")
+                    .autoDismiss(false)
+                    .onPositive(new MaterialDialog.SingleButtonCallback() {
+                        @Override
+                        public void onClick(@NonNull MaterialDialog dialog, @NonNull DialogAction which) {
+                            MainActivity.super.onBackPressed();
+                        }
+                    })
+                    .onNegative(new MaterialDialog.SingleButtonCallback() {
+                        @Override
+                        public void onClick(@NonNull MaterialDialog dialog, @NonNull DialogAction which) {
+                            dialog.dismiss();
+                        }
+                    })
+                    .show();
         }
     }
 
@@ -150,6 +169,10 @@ public class MainActivity extends BaseActivity implements NavigationView.OnNavig
                         .onPositive(new MaterialDialog.SingleButtonCallback() {
                             @Override
                             public void onClick(@NonNull MaterialDialog dialog, @NonNull DialogAction which) {
+                                SharedPreferences defaultPref = getSharedPreferences(DEFAULT_PRE, MODE_PRIVATE);
+                                SharedPreferences.Editor editor = defaultPref.edit();
+                                editor.clear();
+                                editor.commit();
                                 LoginActivity.actionStart(MainActivity.this);
                                 finish();
                             }
@@ -274,7 +297,7 @@ public class MainActivity extends BaseActivity implements NavigationView.OnNavig
         }
 
         CircleImageView headerImageView = (CircleImageView) navHeaderView.findViewById(R.id.nav_header_image_view);
-        if (UserManager.getCurrentUser().isHeaderState()) {
+        if (UserManager.getCurrentUser().getHeaderState()) {
             Glide.with(this)
                     .load(CommonUtils.getHeaderUrl())
                     .skipMemoryCache(true)
@@ -286,7 +309,7 @@ public class MainActivity extends BaseActivity implements NavigationView.OnNavig
         phoneNumberView.setText(UserManager.getCurrentUser().getUserPhoneNumber());
 
         TextView nameView = (TextView) navHeaderView.findViewById(R.id.nav_header_name);
-        if (UserManager.getCurrentUser().isCertificationState()) {
+        if (UserManager.getCurrentUser().getCertificationState()) {
             nameView.setText(UserManager.getCertificationInfo().getUserName());
         }
         else {
@@ -306,8 +329,8 @@ public class MainActivity extends BaseActivity implements NavigationView.OnNavig
                 .addItem(new BottomNavigationItem(R.drawable.ic_share_white, "分享"))
                 .addItem(new BottomNavigationItem(R.drawable.ic_wallet_white, "钱包"))
                 .addItem(new BottomNavigationItem(R.drawable.ic_my_white, "我的"))
-                .setActiveColor(R.color.bottom_bar_active)
-                .setInActiveColor(R.color.bottom_bar_inactive)
+                .setActiveColor(R.color.colorPrimary)
+                .setInActiveColor(R.color.bottom_bar_active)
                 .setTabSelectedListener(new BottomNavigationBar.OnTabSelectedListener() {
                     @Override
                     public void onTabSelected(int position) {

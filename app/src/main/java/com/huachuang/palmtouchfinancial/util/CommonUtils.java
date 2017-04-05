@@ -97,6 +97,10 @@ public class CommonUtils {
         return GlobalParams.SERVER_URL_HEAD + "/header/" + UserManager.getUserID() + ".jpg";
     }
 
+    public static String getHeaderUrl(long userID) {
+        return GlobalParams.SERVER_URL_HEAD + "/header/" + userID + ".jpg";
+    }
+
     private static CSVReader csvReader = null;
 
     private static CSVReader getReader(Context context, String csvName) {

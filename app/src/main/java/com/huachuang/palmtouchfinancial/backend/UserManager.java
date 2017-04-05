@@ -35,7 +35,7 @@ public class UserManager {
         UserManager.token = token;
     }
 
-    public static boolean isLoginState() {
+    public static boolean getLoginState() {
         return loginState;
     }
 

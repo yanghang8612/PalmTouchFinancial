@@ -12,7 +12,6 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Spinner;
 import android.widget.TextView;
-import android.widget.Toast;
 import android.widget.ViewFlipper;
 
 import com.afollestad.materialdialogs.DialogAction;
@@ -36,7 +35,7 @@ import org.xutils.view.annotation.ViewInject;
 import org.xutils.x;
 
 @ContentView(R.layout.activity_real_name_info)
-public class RealNameInfoActivity extends BaseActivity {
+public class RealNameInfoActivity extends BaseSwipeActivity {
 
     public static final String TAG = RealNameInfoActivity.class.getSimpleName();
 
@@ -95,7 +94,7 @@ public class RealNameInfoActivity extends BaseActivity {
         if (getSupportActionBar() != null) {
             getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         }
-        if (!UserManager.getCurrentUser().isCertificationState()) {
+        if (!UserManager.getCurrentUser().getCertificationState()) {
             realNameInfoFlipper.setDisplayedChild(1);
             realNameInfoButton.setText("保存认证信息");
             currentFlipper = 1;
@@ -209,7 +208,7 @@ public class RealNameInfoActivity extends BaseActivity {
             }
 
             RequestParams params;
-            if (UserManager.getCurrentUser().isCertificationState()) {
+            if (UserManager.getCurrentUser().getCertificationState()) {
                 params = new UpdateCertificationInfoParams(name, spell, sex, identityCard, address);
             }
             else {

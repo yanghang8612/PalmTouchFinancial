@@ -14,7 +14,7 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 import android.widget.CheckBox;
-import android.widget.Toast;
+import android.widget.ImageView;
 import android.widget.ViewFlipper;
 
 import com.afollestad.materialdialogs.DialogAction;
@@ -27,10 +27,11 @@ import com.huachuang.palmtouchfinancial.backend.net.params.VerifyInvitationCodeP
 import com.huachuang.palmtouchfinancial.backend.net.params.VerifyPhoneNumberParams;
 import com.huachuang.palmtouchfinancial.backend.net.params.VerifyRecommenderIDParams;
 import com.huachuang.palmtouchfinancial.util.CommonUtils;
+import com.uuzuche.lib_zxing.activity.CaptureActivity;
+import com.uuzuche.lib_zxing.activity.CodeUtils;
 
 import org.json.JSONException;
 import org.json.JSONObject;
-import org.w3c.dom.Text;
 import org.xutils.view.annotation.ContentView;
 import org.xutils.view.annotation.Event;
 import org.xutils.view.annotation.ViewInject;
@@ -41,9 +42,11 @@ import org.xutils.x;
  */
 
 @ContentView(R.layout.activity_register)
-public class RegisterActivity extends BaseActivity {
+public class RegisterActivity extends BaseSwipeActivity implements View.OnFocusChangeListener {
 
     private static final String TAG = RegisterActivity.class.getSimpleName();
+
+    private static int REQUEST_CODE_QR_CODE = 0;
 
     public static void actionStart(Context context) {
         Intent intent = new Intent(context, RegisterActivity.class);
@@ -57,6 +60,9 @@ public class RegisterActivity extends BaseActivity {
 
     @ViewInject(R.id.register_toolbar)
     private Toolbar toolbar;
+
+    @ViewInject(R.id.register_camera)
+    private ImageView camera;
 
     @ViewInject(R.id.register_flipper)
     private ViewFlipper registerFlipper;
@@ -100,6 +106,13 @@ public class RegisterActivity extends BaseActivity {
         progressDialog = new ProgressDialog(this);
         progressDialog.setMessage("加载中...");
         progressDialog.setCancelable(false);
+
+        phoneNumberLayout.getEditText().setOnFocusChangeListener(this);
+        verificationCodeLayout.getEditText().setOnFocusChangeListener(this);
+        invitationCodeLayout.getEditText().setOnFocusChangeListener(this);
+        recommenderIDLayout.getEditText().setOnFocusChangeListener(this);
+        passwordLayout.getEditText().setOnFocusChangeListener(this);
+        confirmPasswordLayout.getEditText().setOnFocusChangeListener(this);
     }
 
     @Override
@@ -134,7 +147,64 @@ public class RegisterActivity extends BaseActivity {
         return super.onOptionsItemSelected(item);
     }
 
-    @Event(value = R.id.register_get_verification_code_button)
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        if (data != null && requestCode == REQUEST_CODE_QR_CODE) {
+            Bundle bundle = data.getExtras();
+            if (bundle == null) {
+                return;
+            }
+            if (bundle.getInt(CodeUtils.RESULT_TYPE) == CodeUtils.RESULT_SUCCESS) {
+                String content = bundle.getString(CodeUtils.RESULT_STRING);
+                final String[] result = content.split("/");
+                if (!TextUtils.isEmpty(content) && result[0].equals("fuck")) {
+                    if (result.length == 2) {
+                        recommenderIDLayout.getEditText().setText(result[1]);
+                    }
+                    else {
+                        invitationCodeLayout.getEditText().setText(result[2]);
+                        new MaterialDialog.Builder(this)
+                                .content("推荐人也填写该代理商吗?")
+                                .contentColorRes(R.color.black)
+                                .positiveText("确定")
+                                .negativeText("取消")
+                                .onPositive(new MaterialDialog.SingleButtonCallback() {
+                                    @Override
+                                    public void onClick(@NonNull MaterialDialog dialog, @NonNull DialogAction which) {
+                                        recommenderIDLayout.getEditText().setText(result[1]);
+                                    }
+                                })
+                                .onNegative(new MaterialDialog.SingleButtonCallback() {
+                                    @Override
+                                    public void onClick(@NonNull MaterialDialog dialog, @NonNull DialogAction which) {
+                                        dialog.dismiss();
+                                    }
+                                })
+                                .show();
+                    }
+                }
+            }
+            else if (bundle.getInt(CodeUtils.RESULT_TYPE) == CodeUtils.RESULT_FAILED) {
+                showToast("解析二维码失败");
+            }
+        }
+    }
+
+    @Override
+    public void onFocusChange(View v, boolean hasFocus) {
+        if (hasFocus) {
+            ((TextInputLayout) v.getParent().getParent()).setErrorEnabled(false);
+        }
+    }
+
+    @Event(R.id.register_camera)
+    private void registerCameraClicked(View view) {
+        Intent intent = new Intent(RegisterActivity.this, CaptureActivity.class);
+        startActivityForResult(intent, REQUEST_CODE_QR_CODE);
+    }
+
+    @Event(R.id.register_get_verification_code_button)
     private void registerGetVerificationCodeButtonClicked(View view) {
         hideKeyboard();
         final String phoneNumber = phoneNumberLayout.getEditText().getText().toString();
@@ -176,7 +246,7 @@ public class RegisterActivity extends BaseActivity {
         }
     }
 
-    @Event(value = R.id.register_next_step_button)
+    @Event(R.id.register_next_step_button)
     private void registerNextStepButtonClicked(View view) {
         hideKeyboard();
 
@@ -244,6 +314,7 @@ public class RegisterActivity extends BaseActivity {
                         showToast("请阅读并同意《用户协议》");
                     }
                     else {
+                        camera.setVisibility(View.GONE);
                         registerFlipper.setDisplayedChild(1);
                     }
                 }
@@ -279,6 +350,7 @@ public class RegisterActivity extends BaseActivity {
                             showToast("请阅读并同意《用户协议》");
                         }
                         else {
+                            camera.setVisibility(View.GONE);
                             registerFlipper.setDisplayedChild(1);
                         }
                     }
@@ -290,7 +362,7 @@ public class RegisterActivity extends BaseActivity {
         }
     }
 
-    @Event(value = R.id.next_step_button)
+    @Event(R.id.next_step_button)
     private void nextStepButtonClicked(View view) {
         hideKeyboard();
         String password = passwordLayout.getEditText().getText().toString();
@@ -320,7 +392,7 @@ public class RegisterActivity extends BaseActivity {
         }
     }
 
-    @Event(value = R.id.register_agreement_link)
+    @Event(R.id.register_agreement_link)
     private void agreementLinkClicked(View view) {
         UserAgreementActivity.actionStart(this);
     }

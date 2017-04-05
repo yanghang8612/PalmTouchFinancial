@@ -18,7 +18,7 @@ import org.xutils.view.annotation.ContentView;
 import org.xutils.view.annotation.ViewInject;
 
 @ContentView(R.layout.activity_specific_apply)
-public class SpecificApplyActivity extends BaseActivity {
+public class SpecificApplyActivity extends BaseSwipeActivity {
 
     public static final String TAG = SpecificApplyActivity.class.getSimpleName();
 
