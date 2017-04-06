@@ -207,7 +207,7 @@
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="0dp"
-                android:layout_weight="5"
+                android:layout_weight="2"
                 android:orientation="vertical">
 
                 <TextView
@@ -221,7 +221,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="@dimen/share_content_margin"
-                    android:text="1、分享者可获得分享收益，分享下一级得67元，下二级17元，下三级7元，收益即时到账。"
+                    android:text="1、分享者可获得分享收益，分享下一级得25元，下二级12.5元，下三级5元。"
                     android:textColor="@color/black"
                     android:textSize="13sp" />
 
@@ -229,15 +229,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="@dimen/share_content_margin"
-                    android:text="2、分享商户产生交易，分享者可获得下一级万5，下二级万3，下三级万2的收益，收益即时到账。"
-                    android:textColor="@color/black"
-                    android:textSize="13sp" />
-
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="@dimen/share_content_margin"
-                    android:text="3、分享朋友成功注册或刷卡交易都可获得积分，积分可兑换礼品。"
+                    android:text="2、分享朋友注册或办理信用卡、贷款、刷卡都可获得积分，积分可兑换现金。"
                     android:textColor="@color/black"
                     android:textSize="13sp" />
 
@@ -277,7 +269,7 @@
                 android:orientation="horizontal"
                 android:layout_width="match_parent"
                 android:layout_height="0dp"
-                android:layout_weight="2"
+                android:layout_weight="1"
                 android:layout_marginTop="@dimen/share_way_margin"
                 android:weightSum="3">
 

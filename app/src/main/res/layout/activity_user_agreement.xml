@@ -54,7 +54,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="@dimen/user_agreement_content_padding"
-                android:text="        山东随信付金融软件技术有限公司软件用户服务协议（以下简称本协议）双方为山东随信付金融软件技术有限公司与使用山东随信付金融软件技术有限公司软件的用户（以下简称“用户”）。本协议用于规范双方之间全部的法律关系及权利义务，具有合同效力。山东随信付金融软件技术有限公司软件旨在利用移动网络所具有的便利性，为广大用户提供自助式的信用卡办理、贷款、保险缴纳、公共事业缴费等服务。为明确双方的权利和义务，规范双方业务行为，甲方（用户）、乙方（山东随信付金融软件技术有限公司）本着平等互利的原则，就使用山东随信付金融软件技术有限公司软件的相关事宜达成本协议。"
+                android:text="        山东捷讯金融软件技术有限公司软件用户服务协议（以下简称本协议）双方为山东捷讯金融软件技术有限公司与使用山东捷讯金融软件技术有限公司软件的用户（以下简称“用户”）。本协议用于规范双方之间全部的法律关系及权利义务，具有合同效力。山东捷讯金融软件技术有限公司旨在利用移动网络所具有的便利性，为广大用户提供自助式的信用卡办理、贷款、保险缴纳、公共事业缴费等服务。为明确双方的权利和义务，规范双方业务行为，甲方（用户）、乙方（山东捷讯金融软件技术有限公司）本着平等互利的原则，就使用山东捷讯金融软件技术有限公司软件的相关事宜达成本协议。"
                 android:textSize="@dimen/user_agreement_main_body"
                 android:textColor="@color/black"/>
 
@@ -71,7 +71,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="@dimen/user_agreement_content_padding"
-                android:text="1. 山东随信付金融软件技术有限公司软件"
+                android:text="1. 山东捷讯金融软件技术有限公司软件"
                 android:textSize="@dimen/user_agreement_main_body"
                 android:textColor="@color/black"/>
 
@@ -88,7 +88,7 @@
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="本协议中的山东随信付金融软件技术有限公司软件指“掌触金控”，为用户提供的手机客户端软件，为客户提供自助式的信用卡办理、贷款、保险缴纳、公共事业缴费等服务。"
+                    android:text="本协议中的山东捷讯金融软件技术有限公司软件指“掌触金控”，为用户提供的手机客户端软件，为客户提供自助式的信用卡办理、贷款、保险缴纳、公共事业缴费等服务。"
                     android:textSize="@dimen/user_agreement_main_body"
                     android:textColor="@color/black"/>
 
@@ -115,7 +115,7 @@
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="用户注册是指用户在山东随信付金融软件技术有限公司软件中填写相关信息并确认相关用户协议的过程。"
+                    android:text="用户注册是指用户在山东捷讯金融软件技术有限公司软件中填写相关信息并确认相关用户协议的过程。"
                     android:textSize="@dimen/user_agreement_main_body"
                     android:textColor="@color/black"/>
 
@@ -196,7 +196,7 @@
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="本协议所称的服务协议中断是指山东随信付金融软件技术有限公司软件停止向用户提供全部或部分服务但不注销用户资格的情形。\n本协议所称的服务协议终止是指山东随信付金融软件技术有限公司软件注销用户资格、解除与用户服务协议的情形。"
+                    android:text="本协议所称的服务协议中断是指山东捷讯金融软件技术有限公司软件停止向用户提供全部或部分服务但不注销用户资格的情形。\n本协议所称的服务协议终止是指山东捷讯金融软件技术有限公司软件注销用户资格、解除与用户服务协议的情形。"
                     android:textSize="@dimen/user_agreement_main_body"
                     android:textColor="@color/black"/>
 
@@ -223,7 +223,7 @@
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="本协议中所称的“交易”是指用户在山东随信付金融软件技术有限公司软件上进行的支付交易。"
+                    android:text="本协议中所称的“交易”是指用户在山东捷讯金融软件技术有限公司软件上进行的支付交易。"
                     android:textSize="@dimen/user_agreement_main_body"
                     android:textColor="@color/black"/>
 
@@ -250,7 +250,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="@dimen/user_agreement_content_padding"
-                android:text="        必须是具备《中华人民共和国民法通则》规定的完全民事行为能力的自然人，或者是具有相应合法证照的实体组织。无民事行为能力人、限制民事行为能力人以及无合法证照的组织不得注册并使用山东随信付金融软件技术有限公司软件。无民事行为能力人、限制民事行为能力人以及无合法证照的组织以不当方式注册为山东随信付金融软件技术有限公司软件用户，其与山东随信付金融软件技术有限公司之间的服务协议自始无效，乙方一经发现，有权注销用户。"
+                android:text="        必须是具备《中华人民共和国民法通则》规定的完全民事行为能力的自然人，或者是具有相应合法证照的实体组织。无民事行为能力人、限制民事行为能力人以及无合法证照的组织不得注册并使用山东捷讯金融软件技术有限公司软件。无民事行为能力人、限制民事行为能力人以及无合法证照的组织以不当方式注册为山东捷讯金融软件技术有限公司软件用户，其与山东捷讯金融软件技术有限公司之间的服务协议自始无效，乙方一经发现，有权注销用户。"
                 android:textSize="@dimen/user_agreement_main_body"
                 android:textColor="@color/black"/>
 
@@ -258,7 +258,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="@dimen/user_agreement_content_padding"
-                android:text="        无民事行为能力人或限制民事行为能力人以不当方式注册为山东随信付金融软件技术有限公司软件用户且利用山东随信付金融软件技术有限公司软件进行交易的，无民事行为能力人所进行的交易行为自始无效，限制民事行为能力人所进行的超出其民事能力范围的交易行为自始无效。"
+                android:text="        无民事行为能力人或限制民事行为能力人以不当方式注册为山东捷讯金融软件技术有限公司软件用户且利用山东捷讯金融软件技术有限公司软件进行交易的，无民事行为能力人所进行的交易行为自始无效，限制民事行为能力人所进行的超出其民事能力范围的交易行为自始无效。"
                 android:textSize="@dimen/user_agreement_main_body"
                 android:textColor="@color/black"/>
 
@@ -275,7 +275,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="@dimen/user_agreement_content_padding"
-                android:text="        本协议所指的服务包括：山东随信付金融软件技术有限公司软件供用户使用的服务。"
+                android:text="        本协议所指的服务包括：山东捷讯金融软件技术有限公司软件供用户使用的服务。"
                 android:textSize="@dimen/user_agreement_main_body"
                 android:textColor="@color/black"/>
 
@@ -300,7 +300,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="@dimen/user_agreement_content_padding"
-                android:text="        1. 甲方自愿下载和使用乙方山东随信付金融软件技术有限公司软件。"
+                android:text="        1. 甲方自愿下载和使用乙方山东捷讯金融软件技术有限公司软件。"
                 android:textSize="@dimen/user_agreement_main_body"
                 android:textColor="@color/black"/>
 
@@ -308,7 +308,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="@dimen/user_agreement_content_padding"
-                android:text="        2. 甲方自愿申请注册成为乙方山东随信付金融软件技术有限公司软件用户，经乙方同意后，将有权根据注册项目的不同享受不同的服务。"
+                android:text="        2. 甲方自愿申请注册成为乙方山东捷讯金融软件技术有限公司软件用户，经乙方同意后，将有权根据注册项目的不同享受不同的服务。"
                 android:textSize="@dimen/user_agreement_main_body"
                 android:textColor="@color/black"/>
 
@@ -348,7 +348,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="@dimen/user_agreement_content_padding"
-                android:text="        2. 甲方自愿申请注册乙方山东随信付金融软件技术有限公司软件，经乙方同意后，将有权根据注册项目的不同享受不同的服务。"
+                android:text="        2. 甲方自愿申请注册乙方山东捷讯金融软件技术有限公司软件，经乙方同意后，将有权根据注册项目的不同享受不同的服务。"
                 android:textSize="@dimen/user_agreement_main_body"
                 android:textColor="@color/black"/>
 
@@ -356,7 +356,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="@dimen/user_agreement_content_padding"
-                android:text="        3. 甲方自行负担下载山东随信付金融软件技术有限公司软件和个人上网所支付的与此服务有关的电话费用、网络费用。"
+                android:text="        3. 甲方自行负担下载山东捷讯金融软件技术有限公司软件和个人上网所支付的与此服务有关的电话费用、网络费用。"
                 android:textSize="@dimen/user_agreement_main_body"
                 android:textColor="@color/black"/>
 
@@ -380,7 +380,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="@dimen/user_agreement_content_padding"
-                android:text="        6. 甲方有义务在注册时提供自己的真实资料，并保证诸如真实姓名、身份证号码、联系电话等内容的有效性及安全性。同时，用户也有义务在相关资料实际变更时及时更新有关注册资料。用户保证不以他人资料在山东随信付金融软件技术有限公司软件进行注册或认证。"
+                android:text="        6. 甲方有义务在注册时提供自己的真实资料，并保证诸如真实姓名、身份证号码、联系电话等内容的有效性及安全性。同时，用户也有义务在相关资料实际变更时及时更新有关注册资料。用户保证不以他人资料在山东捷讯金融软件技术有限公司软件进行注册或认证。"
                 android:textSize="@dimen/user_agreement_main_body"
                 android:textColor="@color/black"/>
 
@@ -396,7 +396,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="@dimen/user_agreement_content_padding"
-                android:text="        8. 甲方不得利用技术手段及其他手段破坏及扰乱山东随信付金融软件技术有限公司软件程序的正常运行。"
+                android:text="        8. 甲方不得利用技术手段及其他手段破坏及扰乱山东捷讯金融软件技术有限公司软件程序的正常运行。"
                 android:textSize="@dimen/user_agreement_main_body"
                 android:textColor="@color/black"/>
 
@@ -404,7 +404,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="@dimen/user_agreement_content_padding"
-                android:text="        9. 甲方在登录山东随信付金融软件技术有限公司软件后，只能使用本人的银行卡或银行账户进行支付操作。因使用或盗用他人的银行卡及银行账户而完成的支付交易所产生的任何责任由甲方自行承担。"
+                android:text="        9. 甲方在登录山东捷讯金融软件技术有限公司软件后，只能使用本人的银行卡或银行账户进行支付操作。因使用或盗用他人的银行卡及银行账户而完成的支付交易所产生的任何责任由甲方自行承担。"
                 android:textSize="@dimen/user_agreement_main_body"
                 android:textColor="@color/black"/>
 
@@ -428,7 +428,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="@dimen/user_agreement_content_padding"
-                android:text="        12. 甲方承诺自己在使用山东随信付金融软件技术有限公司软件时实施的所有行为遵守国家法律、法规相关规定以及各种社会公共利益或公共道德。对于任何法律后果的发生，甲方将以自己的名义独立承担所有相应的法律责任。"
+                android:text="        12. 甲方承诺自己在使用山东捷讯金融软件技术有限公司软件时实施的所有行为遵守国家法律、法规相关规定以及各种社会公共利益或公共道德。对于任何法律后果的发生，甲方将以自己的名义独立承担所有相应的法律责任。"
                 android:textSize="@dimen/user_agreement_main_body"
                 android:textColor="@color/black"/>
 
@@ -784,7 +784,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="@dimen/user_agreement_content_padding"
-                android:text="        2. 甲方在中国山东随信付金融软件技术有限公司软件中注销手续办理完毕，本协议即为终止。但注销用户后，乙方仍保留下列权利及义务："
+                android:text="        2. 甲方在中国山东捷讯金融软件技术有限公司软件中注销手续办理完毕，本协议即为终止。但注销用户后，乙方仍保留下列权利及义务："
                 android:textSize="@dimen/user_agreement_main_body"
                 android:textColor="@color/black"/>
 
@@ -984,7 +984,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="@dimen/user_agreement_content_padding"
-                android:text="        1. 山东随信付金融软件技术有限公司有权随时修改本协议的有关条款，一旦本协议的内容发生变动，山东随信付金融软件技术有限公司将会通过适当方式向用户提示修改内容。"
+                android:text="        1. 山东捷讯金融软件技术有限公司有权随时修改本协议的有关条款，一旦本协议的内容发生变动，山东捷讯金融软件技术有限公司将会通过适当方式向用户提示修改内容。"
                 android:textSize="@dimen/user_agreement_main_body"
                 android:textColor="@color/black"/>
 
@@ -992,7 +992,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="@dimen/user_agreement_content_padding"
-                android:text="        2. 如果用户不同意山东随信付金融软件技术有限公司对本协议相关条款所做的修改，有权停止使用山东随信付金融软件技术有限公司提供的服务。如果用户继续使用山东随信付金融软件技术有限公司提供的服务，则视为其接受山东随信付金融软件技术有限公司对本协议相关条款的修改。"
+                android:text="        2. 如果用户不同意山东捷讯金融软件技术有限公司对本协议相关条款所做的修改，有权停止使用山东捷讯金融软件技术有限公司提供的服务。如果用户继续使用山东捷讯金融软件技术有限公司提供的服务，则视为其接受山东捷讯金融软件技术有限公司对本协议相关条款的修改。"
                 android:textSize="@dimen/user_agreement_main_body"
                 android:textColor="@color/black"/>
 
@@ -1042,7 +1042,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="@dimen/user_agreement_content_padding"
-                android:text="        本协议的任何条款如因任何原因而被确认无效，都不影响本协议其他条款的效力。本协议自甲方在中国山东随信付金融软件技术有限公司软件完成注册起生效。"
+                android:text="        本协议的任何条款如因任何原因而被确认无效，都不影响本协议其他条款的效力。本协议自甲方在中国山东捷讯金融软件技术有限公司软件完成注册起生效。"
                 android:textSize="@dimen/user_agreement_main_body"
                 android:textColor="@color/black"/>
 
@@ -1059,7 +1059,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="@dimen/user_agreement_content_padding"
-                android:text="        本服务协议条款的解释权归山东随信付金融软件技术有限公司。"
+                android:text="        本服务协议条款的解释权归山东捷讯金融软件技术有限公司。"
                 android:textSize="@dimen/user_agreement_main_body"
                 android:textColor="@color/black"/>
 

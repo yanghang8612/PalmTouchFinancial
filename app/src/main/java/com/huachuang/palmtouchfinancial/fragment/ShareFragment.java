@@ -8,9 +8,11 @@ import android.widget.TextView;
 
 import com.flipboard.bottomsheet.BottomSheetLayout;
 import com.flipboard.bottomsheet.commons.MenuSheetView;
+import com.huachuang.palmtouchfinancial.GlobalParams;
 import com.huachuang.palmtouchfinancial.GlobalVariable;
 import com.huachuang.palmtouchfinancial.R;
 import com.huachuang.palmtouchfinancial.activity.ShareRecordActivity;
+import com.huachuang.palmtouchfinancial.backend.UserManager;
 import com.huachuang.palmtouchfinancial.util.CommonUtils;
 import com.tencent.mm.opensdk.modelmsg.SendMessageToWX;
 import com.tencent.mm.opensdk.modelmsg.WXMediaMessage;
@@ -59,11 +61,11 @@ public class ShareFragment extends BaseFragment {
                             public boolean onMenuItemClick(MenuItem item) {
                                 // 初始化一个WXTextObject对象
                                 WXWebpageObject webpage = new WXWebpageObject();
-                                webpage.webpageUrl = "www.baidu.com";
+                                webpage.webpageUrl = GlobalParams.SERVER_URL_HEAD + "/register_step_one.html?recommenderID=" + UserManager.getUserPhoneNumber();
 
                                 WXMediaMessage msg = new WXMediaMessage(webpage);
-                                msg.title = "分享app";
-                                msg.description = "快点击下载吧";
+                                msg.title = "下载注册掌触金控APP，推荐好友就送现金大礼";
+                                msg.description = "信用卡申请、办理贷款，掌触金控为您提供一站式解决方案，更有推荐现金大礼，刷卡返佣等优惠活动等你来，赶快加入吧！";
                                 Bitmap thumb = BitmapFactory.decodeResource(getResources(), R.mipmap.ic_launcher);
                                 msg.thumbData = CommonUtils.bmpToByteArray(thumb, true);
 

@@ -41,7 +41,7 @@
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="        山东爱心付金融软件技术有限公司坐落在美丽的江北水城-聊城。"
+            android:text="        山东捷讯金融软件技术有限公司坐落在美丽的江北水城-聊城。"
             android:textSize="@dimen/about_us_main_body"
             android:textColor="@color/black" />
 
@@ -57,7 +57,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="@dimen/about_us_content_padding"
-            android:text="        “诚信赢得合作，服务创造价值”始终是爱心付金融软件技术有限公司发展的核心理念。面对极速增长的市场空间，我们在全国范围内诚招分公司及代理商。我们热诚欢迎您的加入！"
+            android:text="        “诚信赢得合作，服务创造价值”始终是捷讯金融软件技术有限公司发展的核心理念。面对极速增长的市场空间，我们在全国范围内诚招分公司及代理商。我们热诚欢迎您的加入！"
             android:textSize="@dimen/about_us_main_body"
             android:textColor="@color/black" />
 

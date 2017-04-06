@@ -47,9 +47,9 @@
     <dimen name="share_header_margin">10dp</dimen>
     <dimen name="share_content_margin">5dp</dimen>
     <dimen name="share_content_padding">10dp</dimen>
-    <dimen name="share_content_padding_vertical">24dp</dimen>
-    <dimen name="share_content_padding_horizontal">36dp</dimen>
-    <dimen name="share_way_margin">15dp</dimen>
+    <dimen name="share_content_padding_vertical">36dp</dimen>
+    <dimen name="share_content_padding_horizontal">24dp</dimen>
+    <dimen name="share_way_margin">10dp</dimen>
 
     <dimen name="real_row_height">50dp</dimen>
     <dimen name="real_divider_margin">12dp</dimen>
