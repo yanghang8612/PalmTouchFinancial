@@ -167,7 +167,7 @@ public class RegisterActivity extends BaseSwipeActivity implements View.OnFocusC
                         new MaterialDialog.Builder(this)
                                 .content("推荐人也填写该代理商吗?")
                                 .contentColorRes(R.color.black)
-                                .positiveText("确定")
+                                .positiveText("确认")
                                 .negativeText("取消")
                                 .onPositive(new MaterialDialog.SingleButtonCallback() {
                                     @Override

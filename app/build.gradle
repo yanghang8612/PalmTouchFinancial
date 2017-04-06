@@ -62,5 +62,6 @@ dependencies {
     compile 'com.lzy.widget:imagepicker:0.5.0'
     compile 'com.jude:swipebackhelper:3.1.2'
     compile 'cn.yipianfengye.android:zxing-library:2.1'
+    compile 'in.srain.cube:ultra-ptr:1.0.11'
     compile 'com.tencent.mm.opensdk:wechat-sdk-android-with-mta:1.0.2'
 }

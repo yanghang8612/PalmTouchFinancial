@@ -50,48 +50,40 @@ public class CreditCardApplyActivity extends BaseSwipeActivity {
     @Event(R.id.credit_card_apply_xingye)
     private void xingyeClicked(View view) {
         SpecificApplyActivity.actionStart(this, 0);
-        finish();
     }
 
     @Event(R.id.credit_card_apply_zhongxin)
     private void zhongxinClicked(View view) {
         SpecificApplyActivity.actionStart(this, 1);
-        finish();
     }
 
     @Event(R.id.credit_card_apply_pufa)
     private void pufaClicked(View view) {
         SpecificApplyActivity.actionStart(this, 2);
-        finish();
     }
 
     @Event(R.id.credit_card_apply_shanghai)
     private void shanghaiClicked(View view) {
         SpecificApplyActivity.actionStart(this, 3);
-        finish();
     }
 
     @Event(R.id.credit_card_apply_jiaotong)
     private void jiaotongClicked(View view) {
         SpecificApplyActivity.actionStart(this, 4);
-        finish();
     }
 
     @Event(R.id.credit_card_apply_zhaoshang)
     private void zhaoshangClicked(View view) {
         SpecificApplyActivity.actionStart(this, 5);
-        finish();
     }
 
     @Event(R.id.credit_card_apply_guangda)
     private void guangdaClicked(View view) {
         SpecificApplyActivity.actionStart(this, 6);
-        finish();
     }
 
     @Event(R.id.credit_card_apply_pingan)
     private void pinganClicked(View view) {
         SpecificApplyActivity.actionStart(this, 7);
-        finish();
     }
 }

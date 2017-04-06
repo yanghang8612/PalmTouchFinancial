@@ -183,7 +183,7 @@ public class RealNameInfoActivity extends BaseSwipeActivity {
                 return;
             }
 
-            final String spell = spellEdit.getText().toString();
+            final String spell = spellEdit.getText().toString().toUpperCase();
             if (TextUtils.isEmpty(spell)) {
                 spellEdit.setError("请输入姓名的拼音（大写）");
                 return;

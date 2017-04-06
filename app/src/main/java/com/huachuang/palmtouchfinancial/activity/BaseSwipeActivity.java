@@ -48,5 +48,6 @@ public class BaseSwipeActivity extends BaseActivity {
     protected void onDestroy() {
         super.onDestroy();
         SwipeBackHelper.onDestroy(this);
+        overridePendingTransition(0, 0);
     }
 }
