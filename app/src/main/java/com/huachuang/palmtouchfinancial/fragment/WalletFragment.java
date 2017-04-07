@@ -12,7 +12,7 @@ import com.huachuang.palmtouchfinancial.R;
 import com.huachuang.palmtouchfinancial.activity.CardManagerActivity;
 import com.huachuang.palmtouchfinancial.activity.MainMallActivity;
 import com.huachuang.palmtouchfinancial.activity.MyBalanceActivity;
-import com.huachuang.palmtouchfinancial.activity.MyCoinsActivity;
+import com.huachuang.palmtouchfinancial.activity.MyPointsActivity;
 import com.huachuang.palmtouchfinancial.adapter.WalletMallAdapter;
 
 import org.xutils.view.annotation.ContentView;
@@ -70,10 +70,10 @@ public class WalletFragment extends BaseFragment {
                 MyBalanceActivity.actionStart(WalletFragment.this.getContext());
             }
         });
-        header.findViewById(R.id.wallet_coins).setOnClickListener(new View.OnClickListener() {
+        header.findViewById(R.id.wallet_points).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                MyCoinsActivity.actionStart(WalletFragment.this.getContext());
+                MyPointsActivity.actionStart(WalletFragment.this.getContext());
             }
         });
         header.findViewById(R.id.wallet_mall_more).setOnClickListener(new View.OnClickListener() {

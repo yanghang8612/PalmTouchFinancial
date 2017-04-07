@@ -11,17 +11,17 @@ import com.huachuang.palmtouchfinancial.R;
 import org.xutils.view.annotation.ContentView;
 import org.xutils.view.annotation.ViewInject;
 
-@ContentView(R.layout.activity_my_coins)
-public class MyCoinsActivity extends BaseSwipeActivity {
+@ContentView(R.layout.activity_my_points)
+public class MyPointsActivity extends BaseSwipeActivity {
 
-    public static final String TAG = MyCoinsActivity.class.getSimpleName();
+    public static final String TAG = MyPointsActivity.class.getSimpleName();
 
     public static void actionStart(Context context) {
-        Intent intent = new Intent(context, MyCoinsActivity.class);
+        Intent intent = new Intent(context, MyPointsActivity.class);
         context.startActivity(intent);
     }
 
-    @ViewInject(R.id.my_conins_toolbar)
+    @ViewInject(R.id.my_points_toolbar)
     private Toolbar toolbar;
 
     @Override

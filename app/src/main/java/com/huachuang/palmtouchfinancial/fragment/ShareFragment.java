@@ -11,6 +11,7 @@ import com.flipboard.bottomsheet.commons.MenuSheetView;
 import com.huachuang.palmtouchfinancial.GlobalParams;
 import com.huachuang.palmtouchfinancial.GlobalVariable;
 import com.huachuang.palmtouchfinancial.R;
+import com.huachuang.palmtouchfinancial.activity.ShareQrCodeActivity;
 import com.huachuang.palmtouchfinancial.activity.ShareRecordActivity;
 import com.huachuang.palmtouchfinancial.backend.UserManager;
 import com.huachuang.palmtouchfinancial.util.CommonUtils;
@@ -108,6 +109,11 @@ public class ShareFragment extends BaseFragment {
     @Event(R.id.share_record_layout)
     private void shareRecordLayoutClicked(View view) {
         ShareRecordActivity.actionStart(this.getContext());
+    }
+
+    @Event(R.id.share_qr_code_view)
+    private void shareQrCodeViewClicked(View view) {
+        ShareQrCodeActivity.actionStart(this.getContext());
     }
 
     private String buildTransaction(final String type) {
