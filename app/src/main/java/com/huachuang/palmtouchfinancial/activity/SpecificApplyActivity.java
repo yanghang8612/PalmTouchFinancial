@@ -28,7 +28,7 @@ public class SpecificApplyActivity extends BaseSwipeActivity {
     public static final String TAG = SpecificApplyActivity.class.getSimpleName();
 
     public static String[] bankName = {
-            "浦发银行",
+            "兴业银行",
             "中信银行",
             "浦发银行",
             "上海银行",
