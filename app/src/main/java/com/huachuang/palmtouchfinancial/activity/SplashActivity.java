@@ -33,72 +33,84 @@ public class SplashActivity extends BaseActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        if (UserManager.getLoginState()) {
-            MainActivity.actionStart(this);
-            finish();
+        SharedPreferences defaultPref = getSharedPreferences(DEFAULT_PRE, MODE_PRIVATE);
+        boolean isFirst = defaultPref.getBoolean("isFirst", false);
+        if (isFirst) {
+            setContentView(R.layout.activity_splash_first);
+            SharedPreferences.Editor editor = defaultPref.edit();
+            editor.putBoolean("isFirst", true);
+            editor.apply();
+            editor.commit();
         }
         else {
-            new Handler().postDelayed(new Runnable() {
-                @Override
-                public void run() {
-                    progressBar.setVisibility(View.VISIBLE);
-                }
-            }, 1000);
-            new Handler().postDelayed(new Runnable() {
-                @Override
-                public void run() {
-                    SharedPreferences defaultPref = getSharedPreferences(DEFAULT_PRE, MODE_PRIVATE);
-                    String phoneNumber = defaultPref.getString("phoneNumber", "");
-                    String password = defaultPref.getString("password", "");
-                    if (TextUtils.isEmpty(phoneNumber)) {
-                        LoginActivity.actionStart(SplashActivity.this);
-                        finish();
-                        return;
+            if (UserManager.getLoginState()) {
+                MainActivity.actionStart(this);
+                finish();
+            }
+            else {
+                new Handler().postDelayed(new Runnable() {
+                    @Override
+                    public void run() {
+                        progressBar.setVisibility(View.VISIBLE);
                     }
-                    x.http().post(new LoginParams(phoneNumber, password), new NetCallbackAdapter(SplashActivity.this, false) {
-                        @Override
-                        public void onSuccess(String result) {
-                            JSONObject resultJsonObject;
-                            try {
-                                SharedPreferences defaultPref = getSharedPreferences(DEFAULT_PRE, MODE_PRIVATE);
-                                resultJsonObject = new JSONObject(result);
-                                if (resultJsonObject.getBoolean("Status")) {
-                                    User user = JSON.parseObject(resultJsonObject.getString("User"), User.class);
-                                    //String token = resultJsonObject.getString("Token");
-                                    UserManager.setCurrentUser(user);
-                                    //UserManager.setToken(token);
-
-                                    if (user.getCertificationState()) {
-                                        UserManager.setCertificationInfo(
-                                                JSON.parseObject(resultJsonObject.getString("CertificationInfo"), UserCertificationInfo.class));
-                                    }
-
-                                    if (user.getDebitCardState()) {
-                                        UserManager.setDebitCardInfo(
-                                                JSON.parseObject(resultJsonObject.getString("DebitCard"), UserDebitCard.class));
-                                    }
-
-                                    SharedPreferences.Editor editor = defaultPref.edit();
-                                    editor.putString("phoneNumber", UserManager.getCurrentUser().getUserPhoneNumber());
-                                    editor.putString("password", UserManager.getCurrentUser().getUserPassword());
-                                    //editor.putString("token", token);
-                                    editor.apply();
-
-                                    MainActivity.actionStart(SplashActivity.this);
-                                    finish();
-                                }
-                                else {
-                                    LoginActivity.actionStart(SplashActivity.this);
-                                    finish();
-                                }
-                            }
-                            catch (JSONException e) {
-                                e.printStackTrace();
-                            }
+                }, 1000);
+                new Handler().postDelayed(new Runnable() {
+                    @Override
+                    public void run() {
+                        SharedPreferences defaultPref = getSharedPreferences(DEFAULT_PRE, MODE_PRIVATE);
+                        String phoneNumber = defaultPref.getString("phoneNumber", "");
+                        String password = defaultPref.getString("password", "");
+                        if (TextUtils.isEmpty(phoneNumber)) {
+                            LoginActivity.actionStart(SplashActivity.this);
+                            finish();
+                            return;
                         }
-                    });
-                }
-            }, 3000);
+                        x.http().post(new LoginParams(phoneNumber, password), new NetCallbackAdapter(SplashActivity.this, false) {
+                            @Override
+                            public void onSuccess(String result) {
+                                JSONObject resultJsonObject;
+                                try {
+                                    SharedPreferences defaultPref = getSharedPreferences(DEFAULT_PRE, MODE_PRIVATE);
+                                    resultJsonObject = new JSONObject(result);
+                                    if (resultJsonObject.getBoolean("Status")) {
+                                        User user = JSON.parseObject(resultJsonObject.getString("User"), User.class);
+                                        //String token = resultJsonObject.getString("Token");
+                                        UserManager.setCurrentUser(user);
+                                        //UserManager.setToken(token);
+
+                                        if (user.getCertificationState()) {
+                                            UserManager.setCertificationInfo(
+                                                    JSON.parseObject(resultJsonObject.getString("CertificationInfo"), UserCertificationInfo.class));
+                                        }
+
+                                        if (user.getDebitCardState()) {
+                                            UserManager.setDebitCardInfo(
+                                                    JSON.parseObject(resultJsonObject.getString("DebitCard"), UserDebitCard.class));
+                                        }
+
+                                        SharedPreferences.Editor editor = defaultPref.edit();
+                                        editor.putString("phoneNumber", UserManager.getCurrentUser().getUserPhoneNumber());
+                                        editor.putString("password", UserManager.getCurrentUser().getUserPassword());
+                                        //editor.putString("token", token);
+                                        editor.apply();
+                                        editor.commit();
+
+                                        MainActivity.actionStart(SplashActivity.this);
+                                        finish();
+                                    }
+                                    else {
+                                        LoginActivity.actionStart(SplashActivity.this);
+                                        finish();
+                                    }
+                                }
+                                catch (JSONException e) {
+                                    e.printStackTrace();
+                                }
+                            }
+                        });
+                    }
+                }, 3000);
+            }
         }
     }
 }
