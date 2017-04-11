@@ -109,7 +109,15 @@ public class RegisterActivity extends BaseSwipeActivity implements View.OnFocusC
 
         phoneNumberLayout.getEditText().setOnFocusChangeListener(this);
         verificationCodeLayout.getEditText().setOnFocusChangeListener(this);
-        invitationCodeLayout.getEditText().setOnFocusChangeListener(this);
+        invitationCodeLayout.getEditText().setOnFocusChangeListener(new View.OnFocusChangeListener() {
+            @Override
+            public void onFocusChange(View v, boolean hasFocus) {
+                if (hasFocus)  {
+                    Intent intent = new Intent(RegisterActivity.this, CaptureActivity.class);
+                    startActivityForResult(intent, REQUEST_CODE_QR_CODE);
+                }
+            }
+        });
         recommenderIDLayout.getEditText().setOnFocusChangeListener(this);
         passwordLayout.getEditText().setOnFocusChangeListener(this);
         confirmPasswordLayout.getEditText().setOnFocusChangeListener(this);
@@ -208,7 +216,7 @@ public class RegisterActivity extends BaseSwipeActivity implements View.OnFocusC
     private void registerGetVerificationCodeButtonClicked(View view) {
         hideKeyboard();
         final String phoneNumber = phoneNumberLayout.getEditText().getText().toString();
-        if (phoneNumber.equals("")) {
+        if (TextUtils.isEmpty(phoneNumber)) {
             phoneNumberLayout.setError("请输入手机号");
         }
         else if (!CommonUtils.validatePhone(phoneNumber)) {
@@ -251,7 +259,7 @@ public class RegisterActivity extends BaseSwipeActivity implements View.OnFocusC
         hideKeyboard();
 
         String phoneNumber = phoneNumberLayout.getEditText().getText().toString();
-        if (phoneNumber.equals("")) {
+        if (TextUtils.isEmpty(phoneNumber)) {
             phoneNumberLayout.setError("请输入手机号");
             return;
         }
@@ -264,7 +272,7 @@ public class RegisterActivity extends BaseSwipeActivity implements View.OnFocusC
         }
 
         String userVerificationCode = verificationCodeLayout.getEditText().getText().toString();
-        if (userVerificationCode.equals("")) {
+        if (TextUtils.isEmpty(userVerificationCode)) {
             verificationCodeLayout.setError("请输入验证码");
             return;
         }
@@ -278,7 +286,7 @@ public class RegisterActivity extends BaseSwipeActivity implements View.OnFocusC
 
         final String invitationCode = invitationCodeLayout.getEditText().getText().toString();
         final String recommenderID = recommenderIDLayout.getEditText().getText().toString();
-        if (invitationCode.equals("")) {
+        if (TextUtils.isEmpty(invitationCode)) {
             invitationCodeLayout.setError("请输入邀请码");
             return;
         }
@@ -309,7 +317,7 @@ public class RegisterActivity extends BaseSwipeActivity implements View.OnFocusC
             @Override
             public void onFinished() {
                 super.onFinished();
-                if (invitationCodeCheckState && (recommenderID.equals("") || (!recommenderID.equals("") && recommenderIDCheckState))) {
+                if (invitationCodeCheckState && (TextUtils.isEmpty(recommenderID) || (!TextUtils.isEmpty(recommenderID) && recommenderIDCheckState))) {
                     if (!agreeCheckBox.isChecked()) {
                         showToast("请阅读并同意《用户协议》");
                     }
@@ -345,7 +353,7 @@ public class RegisterActivity extends BaseSwipeActivity implements View.OnFocusC
                 @Override
                 public void onFinished() {
                     super.onFinished();
-                    if (invitationCodeCheckState && (recommenderID.equals("") || (!recommenderID.equals("") && recommenderIDCheckState))) {
+                    if (invitationCodeCheckState && (TextUtils.isEmpty(recommenderID) || (!TextUtils.isEmpty(recommenderID) && recommenderIDCheckState))) {
                         if (!agreeCheckBox.isChecked()) {
                             showToast("请阅读并同意《用户协议》");
                         }
@@ -367,7 +375,7 @@ public class RegisterActivity extends BaseSwipeActivity implements View.OnFocusC
         hideKeyboard();
         String password = passwordLayout.getEditText().getText().toString();
         String confirmPassword = confirmPasswordLayout.getEditText().getText().toString();
-        if (password.equals("")) {
+        if (TextUtils.isEmpty(password)) {
             passwordLayout.setError("请输入密码");
         }
         else if (!CommonUtils.validatePassword(password)) {

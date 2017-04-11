@@ -15,7 +15,7 @@ import org.xutils.view.annotation.ContentView;
 import org.xutils.view.annotation.ViewInject;
 
 @ContentView(R.layout.activity_profit)
-public class ProfitActivity extends BaseSwipeActivity {
+public class ProfitActivity extends BaseActivity {
 
     public static final String TAG = ProfitActivity.class.getSimpleName();
 

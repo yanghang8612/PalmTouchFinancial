@@ -10,6 +10,23 @@
         <item>男</item>
         <item>女</item>
     </array>
+    <array name="marriage">
+        <item>未婚</item>
+        <item>已婚</item>
+        <item>离异</item>
+    </array>
+    <array name="land_sources">
+        <item>出让</item>
+        <item>转让</item>
+        <item>划拨</item>
+        <item>其他</item>
+    </array>
+    <array name="house_type">
+        <item>商品房公寓</item>
+        <item>别墅</item>
+        <item>房改房</item>
+        <item>动迁房</item>
+    </array>
     <array name="bank">
         <item>中国工商银行</item>
         <item>中国银行</item>

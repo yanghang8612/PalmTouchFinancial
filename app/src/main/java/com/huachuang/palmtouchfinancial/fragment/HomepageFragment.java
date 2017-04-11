@@ -7,6 +7,7 @@ import com.afollestad.materialdialogs.DialogAction;
 import com.afollestad.materialdialogs.MaterialDialog;
 import com.huachuang.palmtouchfinancial.R;
 import com.huachuang.palmtouchfinancial.activity.CreditCardApplyActivity;
+import com.huachuang.palmtouchfinancial.activity.LoanApplyActivity;
 import com.huachuang.palmtouchfinancial.activity.MainActivity;
 import com.huachuang.palmtouchfinancial.activity.MainMallActivity;
 import com.huachuang.palmtouchfinancial.activity.WebViewActivity;
@@ -65,7 +66,7 @@ public class HomepageFragment extends BaseFragment {
 
     @Event(R.id.main_apply_for_loan)
     private void loanApplyClicked(View view) {
-        showDefaultDialog();
+        LoanApplyActivity.actionStart(this.getContext());
     }
 
     @Event(R.id.main_mobile_payment)

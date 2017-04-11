@@ -6,6 +6,7 @@ import android.os.Bundle;
 import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
+import android.text.TextUtils;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -87,7 +88,7 @@ public class DistrictActivity extends BaseSwipeActivity {
         String detailName = districtDetailView.getText().toString();
         String district = "";
         if (!finalName.equals(getResources().getString(R.string.district_default))) {
-            if (detailName.equals("")) {
+            if (TextUtils.isEmpty(detailName)) {
                 finalName = finalName.substring(0, finalName.length() - 1);
             }
             district = finalName + detailName;

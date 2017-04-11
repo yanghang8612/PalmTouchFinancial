@@ -243,8 +243,7 @@ public class MainActivity extends BaseActivity implements NavigationView.OnNavig
             statusBarHeight = getResources().getDimensionPixelSize(resourceId);
         }
 
-        int option = View.SYSTEM_UI_FLAG_LAYOUT_FULLSCREEN;
-        getWindow().getDecorView().setSystemUiVisibility(option);
+        getWindow().getDecorView().setSystemUiVisibility(View.SYSTEM_UI_FLAG_LAYOUT_FULLSCREEN);
 
         AppBarLayout.LayoutParams toolbarParams = (AppBarLayout.LayoutParams) toolbar.getLayoutParams();
         toolbarParams.setMargins(0, statusBarHeight, 0, 0);

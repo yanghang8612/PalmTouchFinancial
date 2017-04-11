@@ -1,0 +1,225 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <ImageView
+        android:layout_width="match_parent"
+        android:layout_height="80dp"
+        android:src="@drawable/loan_apply_step_two" />
+
+    <LinearLayout
+        android:orientation="horizontal"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/loan_apply_row_height">
+
+        <TextView
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:layout_gravity="center"
+            android:gravity="center"
+            android:text="借款人姓名"
+            android:textColor="@color/black"
+            android:textSize="@dimen/loan_apply_text_size"/>
+
+        <LinearLayout
+            android:layout_width="1dp"
+            android:layout_height="match_parent"
+            android:background="@color/divider"
+            android:layout_margin="@dimen/loan_apply_divider_margin" />
+
+        <EditText
+            android:id="@+id/loan_apply_borrower_name_edit"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="3"
+            android:layout_gravity="center"
+            android:inputType="textPersonName|textNoSuggestions"
+            android:maxLines="1"
+            android:textSize="@dimen/loan_apply_text_size" />
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:orientation="horizontal"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/loan_apply_row_height">
+
+        <TextView
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:layout_gravity="center"
+            android:gravity="center"
+            android:text="借款人手机号"
+            android:textColor="@color/black"
+            android:textSize="@dimen/loan_apply_text_size"/>
+
+        <LinearLayout
+            android:layout_width="1dp"
+            android:layout_height="match_parent"
+            android:background="@color/divider"
+            android:layout_margin="@dimen/loan_apply_divider_margin" />
+
+        <EditText
+            android:id="@+id/loan_apply_borrower_phone_number_edit"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="3"
+            android:layout_gravity="center"
+            android:inputType="phone|textNoSuggestions"
+            android:maxLines="1"
+            android:textSize="@dimen/loan_apply_text_size" />
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:orientation="horizontal"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/loan_apply_row_height">
+
+        <TextView
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:layout_gravity="center"
+            android:gravity="center"
+            android:text="借款金额"
+            android:textColor="@color/black"
+            android:textSize="@dimen/loan_apply_text_size"/>
+
+        <LinearLayout
+            android:layout_width="1dp"
+            android:layout_height="match_parent"
+            android:background="@color/divider"
+            android:layout_margin="@dimen/loan_apply_divider_margin" />
+
+        <EditText
+            android:id="@+id/loan_apply_borrower_amount_edit"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="3"
+            android:layout_gravity="center"
+            android:inputType="number|textNoSuggestions"
+            android:maxLines="1"
+            android:textSize="@dimen/loan_apply_text_size" />
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:orientation="horizontal"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/loan_apply_row_height">
+
+        <TextView
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:layout_gravity="center"
+            android:gravity="center"
+            android:text="婚姻状况"
+            android:textColor="@color/black"
+            android:textSize="@dimen/loan_apply_text_size"/>
+
+        <LinearLayout
+            android:layout_width="1dp"
+            android:layout_height="match_parent"
+            android:background="@color/divider"
+            android:layout_margin="@dimen/loan_apply_divider_margin" />
+
+        <LinearLayout
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="3"
+            android:layout_gravity="center">
+
+            <Spinner
+                android:id="@+id/loan_apply_borrower_marriage_spinner"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:entries="@array/marriage" />
+
+        </LinearLayout>
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:orientation="horizontal"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/loan_apply_row_height">
+
+        <TextView
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:layout_gravity="center"
+            android:gravity="center"
+            android:text="住宅所在地"
+            android:textColor="@color/black"
+            android:textSize="@dimen/loan_apply_text_size"/>
+
+        <LinearLayout
+            android:layout_width="1dp"
+            android:layout_height="match_parent"
+            android:background="@color/divider"
+            android:layout_margin="@dimen/loan_apply_divider_margin" />
+
+        <EditText
+            android:id="@+id/loan_apply_borrower_address_edit"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="3"
+            android:layout_gravity="center"
+            android:inputType="textPostalAddress|textNoSuggestions"
+            android:maxLines="1"
+            android:textSize="@dimen/loan_apply_text_size" />
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:orientation="horizontal"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/loan_apply_row_height">
+
+        <TextView
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:layout_gravity="center"
+            android:gravity="center"
+            android:text="详细地址"
+            android:textColor="@color/black"
+            android:textSize="@dimen/loan_apply_text_size"/>
+
+        <LinearLayout
+            android:layout_width="1dp"
+            android:layout_height="match_parent"
+            android:background="@color/divider"
+            android:layout_margin="@dimen/loan_apply_divider_margin" />
+
+        <EditText
+            android:id="@+id/loan_apply_borrower_detailed_address_edit"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="3"
+            android:layout_gravity="center"
+            android:inputType="textPostalAddress|textNoSuggestions"
+            android:maxLines="3"
+            android:hint="务必与房本地址一字不差"
+            android:textSize="@dimen/loan_apply_text_size" />
+
+    </LinearLayout>
+
+    <Button
+        android:id="@+id/loan_apply_step_two_button"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="@string/action_register_next_step"
+        android:textStyle="bold"
+        android:theme="@style/ButtonPrimary" />
+
+</LinearLayout>

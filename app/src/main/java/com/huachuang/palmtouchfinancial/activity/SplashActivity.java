@@ -1,8 +1,11 @@
 package com.huachuang.palmtouchfinancial.activity;
 
 import android.content.SharedPreferences;
+import android.graphics.Color;
+import android.os.Build;
 import android.os.Bundle;
 import android.os.Handler;
+import android.support.v4.view.ViewPager;
 import android.text.TextUtils;
 import android.view.View;
 
@@ -15,6 +18,9 @@ import com.huachuang.palmtouchfinancial.backend.bean.UserCertificationInfo;
 import com.huachuang.palmtouchfinancial.backend.bean.UserDebitCard;
 import com.huachuang.palmtouchfinancial.backend.net.NetCallbackAdapter;
 import com.huachuang.palmtouchfinancial.backend.net.params.LoginParams;
+import com.huachuang.palmtouchfinancial.loader.AdImageLoader;
+import com.youth.banner.Banner;
+import com.youth.banner.listener.OnBannerListener;
 
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -22,27 +28,68 @@ import org.xutils.view.annotation.ContentView;
 import org.xutils.view.annotation.ViewInject;
 import org.xutils.x;
 
-@ContentView(R.layout.activity_splash)
+import java.util.ArrayList;
+import java.util.List;
+
 public class SplashActivity extends BaseActivity {
 
     private static String TAG = SplashActivity.class.getSimpleName();
 
-    @ViewInject(R.id.spin_kit)
-    private SpinKitView progressBar;
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        getWindow().getDecorView().setSystemUiVisibility(View.SYSTEM_UI_FLAG_LAYOUT_FULLSCREEN);
+        if (Build.VERSION.SDK_INT >= 21) {
+            getWindow().setStatusBarColor(Color.TRANSPARENT);
+        }
         SharedPreferences defaultPref = getSharedPreferences(DEFAULT_PRE, MODE_PRIVATE);
-        boolean isFirst = defaultPref.getBoolean("isFirst", false);
+        boolean isFirst = defaultPref.getBoolean("isFirst", true);
         if (isFirst) {
             setContentView(R.layout.activity_splash_first);
             SharedPreferences.Editor editor = defaultPref.edit();
-            editor.putBoolean("isFirst", true);
+            editor.putBoolean("isFirst", false);
             editor.apply();
             editor.commit();
+
+            Banner banner = (Banner) findViewById(R.id.splash_first_banner);
+            final View startButton = findViewById(R.id.splash_first_button);
+            startButton.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    LoginActivity.actionStart(SplashActivity.this);
+                    finish();
+                }
+            });
+            List<Integer> images = new ArrayList<>();
+            images.add(R.drawable.first_1);
+            images.add(R.drawable.first_2);
+            images.add(R.drawable.first_3);
+            banner.setImages(images).setImageLoader(new AdImageLoader()).setOnPageChangeListener(new ViewPager.OnPageChangeListener() {
+                @Override
+                public void onPageScrolled(int position, float positionOffset, int positionOffsetPixels) {
+
+                }
+
+                @Override
+                public void onPageSelected(int position) {
+                    if (position == 3) {
+                        startButton.setVisibility(View.VISIBLE);
+                    }
+                    else {
+                        startButton.setVisibility(View.GONE);
+                    }
+                }
+
+                @Override
+                public void onPageScrollStateChanged(int state) {
+
+                }
+            });
+            banner.isAutoPlay(false).start();
         }
         else {
+            setContentView(R.layout.activity_splash);
+            final SpinKitView progressBar = (SpinKitView) findViewById(R.id.spin_kit);
             if (UserManager.getLoginState()) {
                 MainActivity.actionStart(this);
                 finish();
