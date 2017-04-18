@@ -25,6 +25,7 @@ import com.huachuang.palmtouchfinancial.backend.bean.UserCertificationInfo;
 import com.huachuang.palmtouchfinancial.backend.net.NetCallbackAdapter;
 import com.huachuang.palmtouchfinancial.backend.net.params.CreateCertificationInfoParams;
 import com.huachuang.palmtouchfinancial.backend.net.params.UpdateCertificationInfoParams;
+import com.huachuang.palmtouchfinancial.backend.net.params.UploadIdentifyCardParams;
 import com.huachuang.palmtouchfinancial.loader.HeaderImageLoader;
 import com.huachuang.palmtouchfinancial.util.CommonUtils;
 import com.huachuang.palmtouchfinancial.util.IDCard;
@@ -60,6 +61,12 @@ public class RealNameInfoActivity extends BaseSwipeActivity {
     }
 
     private short currentFlipper = 0;
+    private boolean identifyCardFrontImageState = false;
+    private boolean identifyCardBackImageState = false;
+    private boolean identifyCardHandingImageState = false;
+    private String identifyCardFrontImagePath = null;
+    private String identifyCardBackImagePath = null;
+    private String identifyCardHandingImagePath = null;
 
     @ViewInject(R.id.real_name_info_toolbar)
     private Toolbar toolbar;
@@ -185,12 +192,18 @@ public class RealNameInfoActivity extends BaseSwipeActivity {
                 ImageItem image = images.get(0);
                 switch (requestCode) {
                     case REQUEST_CODE_FRONT_IMAGE:
+                        identifyCardFrontImageState = true;
+                        identifyCardFrontImagePath = image.path;
                         identifyCardFrontImage.setImageBitmap(BitmapFactory.decodeFile(image.path));
                         break;
                     case REQUEST_CODE_BACK_IMAGE:
+                        identifyCardBackImageState = true;
+                        identifyCardBackImagePath = image.path;
                         identifyCardBackImage.setImageBitmap(BitmapFactory.decodeFile(image.path));
                         break;
                     case REQUEST_CODE_HANDING_IMAGE:
+                        identifyCardHandingImageState = true;
+                        identifyCardHandingImagePath = image.path;
                         identifyCardHandingImage.setImageBitmap(BitmapFactory.decodeFile(image.path));
                         break;
                 }
@@ -261,14 +274,18 @@ public class RealNameInfoActivity extends BaseSwipeActivity {
                 return;
             }
 
-            RequestParams params;
+            RequestParams infoParams;
             if (UserManager.getCurrentUser().getCertificationState()) {
-                params = new UpdateCertificationInfoParams(name, spell, sex, identityCard, address);
+                infoParams = new UpdateCertificationInfoParams(name, spell, sex, identityCard, address);
             }
             else {
-                params = new CreateCertificationInfoParams(name, spell, sex, identityCard, address);
+                infoParams = new CreateCertificationInfoParams(name, spell, sex, identityCard, address);
+                if (!identifyCardFrontImageState || !identifyCardBackImageState || !identifyCardHandingImageState) {
+                    showToast("请拍照身份证正反面及手持证件照");
+                    return;
+                }
             }
-            x.http().post(params, new NetCallbackAdapter(this) {
+            x.http().post(infoParams, new NetCallbackAdapter(this) {
                 @Override
                 public void onSuccess(String result) {
                     JSONObject resultJsonObject;
@@ -295,6 +312,17 @@ public class RealNameInfoActivity extends BaseSwipeActivity {
                     catch (JSONException e) {
                         e.printStackTrace();
                     }
+                }
+            });
+            RequestParams imageParams = new UploadIdentifyCardParams(
+                    identifyCardFrontImagePath,
+                    identifyCardBackImagePath,
+                    identifyCardHandingImagePath
+            );
+            x.http().post(imageParams, new NetCallbackAdapter(this, false) {
+                @Override
+                public void onSuccess(String result) {
+
                 }
             });
         }

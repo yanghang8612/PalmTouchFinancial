@@ -2,6 +2,7 @@ package com.huachuang.palmtouchfinancial.activity;
 
 import android.content.Context;
 import android.content.Intent;
+import android.graphics.BitmapFactory;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.v7.widget.Toolbar;
@@ -10,6 +11,7 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.ViewFlipper;
 
@@ -22,7 +24,13 @@ import com.huachuang.palmtouchfinancial.backend.bean.UserDebitCard;
 import com.huachuang.palmtouchfinancial.backend.net.NetCallbackAdapter;
 import com.huachuang.palmtouchfinancial.backend.net.params.CreateDebitCardParams;
 import com.huachuang.palmtouchfinancial.backend.net.params.UpdateDebitCardParams;
+import com.huachuang.palmtouchfinancial.backend.net.params.UploadDebitCardParams;
+import com.huachuang.palmtouchfinancial.loader.HeaderImageLoader;
 import com.huachuang.palmtouchfinancial.util.CommonUtils;
+import com.lzy.imagepicker.ImagePicker;
+import com.lzy.imagepicker.bean.ImageItem;
+import com.lzy.imagepicker.ui.ImageGridActivity;
+import com.lzy.imagepicker.view.CropImageView;
 
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -32,12 +40,16 @@ import org.xutils.view.annotation.Event;
 import org.xutils.view.annotation.ViewInject;
 import org.xutils.x;
 
+import java.util.List;
+
 @ContentView(R.layout.activity_debit_card)
 public class DebitCardActivity extends BaseSwipeActivity {
 
     private static final String TAG = DebitCardActivity.class.getSimpleName();
 
     public static final int REQUEST_CODE_DISTRICT = 0;
+    public static final int REQUEST_CODE_FRONT_IMAGE = 1;
+    public static final int REQUEST_CODE_BACK_IMAGE = 2;
 
     public static void actionStart(Context context) {
         Intent intent = new Intent(context, DebitCardActivity.class);
@@ -45,6 +57,10 @@ public class DebitCardActivity extends BaseSwipeActivity {
     }
 
     private short currentFlipper = 0;
+    private boolean debitCardFrontImageState = false;
+    private boolean debitCardBackImageState = false;
+    private String debitCardFrontImagePath = null;
+    private String debitCardBackImagePath = null;
 
     @ViewInject(R.id.debit_card_toolbar)
     private Toolbar toolbar;
@@ -87,6 +103,12 @@ public class DebitCardActivity extends BaseSwipeActivity {
 
     @ViewInject(R.id.debit_card_province_edit)
     private EditText provinceEdit;
+
+    @ViewInject(R.id.debit_card_front_image)
+    private ImageView debitCardFrontImage;
+
+    @ViewInject(R.id.debit_card_back_image)
+    private ImageView debitCardBackImage;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -171,6 +193,34 @@ public class DebitCardActivity extends BaseSwipeActivity {
                 provinceEdit.setText(bundle.getString("district"));
             }
         }
+        if (resultCode == ImagePicker.RESULT_CODE_ITEMS) {
+            if (data != null) {
+                List<ImageItem> images = (List<ImageItem>) data.getSerializableExtra(ImagePicker.EXTRA_RESULT_ITEMS);
+                ImageItem image = images.get(0);
+                switch (requestCode) {
+                    case REQUEST_CODE_FRONT_IMAGE:
+                        debitCardFrontImageState = true;
+                        debitCardFrontImagePath = image.path;
+                        debitCardFrontImage.setImageBitmap(BitmapFactory.decodeFile(image.path));
+                        break;
+                    case REQUEST_CODE_BACK_IMAGE:
+                        debitCardBackImageState = true;
+                        debitCardBackImagePath = image.path;
+                        debitCardBackImage.setImageBitmap(BitmapFactory.decodeFile(image.path));
+                        break;
+                }
+            }
+        }
+    }
+
+    @Event(R.id.debit_card_front_image)
+    private void debitCardFrontImageClicked(View view) {
+        startImagePicker(REQUEST_CODE_FRONT_IMAGE);
+    }
+
+    @Event(R.id.debit_card_back_image)
+    private void debitCardBackImageClicked(View view) {
+        startImagePicker(REQUEST_CODE_BACK_IMAGE);
     }
 
     @Event(R.id.debit_card_button)
@@ -213,15 +263,17 @@ public class DebitCardActivity extends BaseSwipeActivity {
             final String branch = branchEdit.getText().toString();
             final String province = provinceEdit.getText().toString();
 
-            RequestParams params;
+            RequestParams infoParams;
             if (UserManager.getCurrentUser().getDebitCardState()) {
-                params = new UpdateDebitCardParams(ownerName, number, cardType, headOffice, branch, province);
+                infoParams = new UpdateDebitCardParams(ownerName, number, cardType, headOffice, branch, province);
             }
             else {
-                params = new CreateDebitCardParams(ownerName, number, cardType, headOffice, branch, province);
+                infoParams = new CreateDebitCardParams(ownerName, number, cardType, headOffice, branch, province);
+                if (!debitCardFrontImageState || !debitCardBackImageState) {
+                    showToast("请拍照结算卡正反面");
+                }
             }
-
-            x.http().post(params, new NetCallbackAdapter(this) {
+            x.http().post(infoParams, new NetCallbackAdapter(this) {
                 @Override
                 public void onSuccess(String result) {
                     JSONObject resultJsonObject;
@@ -250,6 +302,29 @@ public class DebitCardActivity extends BaseSwipeActivity {
                     }
                 }
             });
+            RequestParams imageParams = new UploadDebitCardParams(debitCardFrontImagePath, debitCardBackImagePath);
+            x.http().post(imageParams, new NetCallbackAdapter(this) {
+                @Override
+                public void onSuccess(String result) {
+
+                }
+            });
         }
+    }
+
+    private void startImagePicker(int code) {
+        ImagePicker imagePicker = ImagePicker.getInstance();
+        imagePicker.setImageLoader(new HeaderImageLoader());   //设置图片加载器
+        imagePicker.setMultiMode(false);
+        imagePicker.setShowCamera(true);  //显示拍照按钮
+        imagePicker.setCrop(true);        //允许裁剪（单选才有效）
+        imagePicker.setSaveRectangle(true); //是否按矩形区域保存
+        imagePicker.setStyle(CropImageView.Style.RECTANGLE);  //裁剪框的形状
+        imagePicker.setFocusWidth(800);   //裁剪框的宽度。单位像素（圆形自动取宽高最小值）
+        imagePicker.setFocusHeight(800);  //裁剪框的高度。单位像素（圆形自动取宽高最小值）
+        imagePicker.setOutPutX(1024);    //保存文件的宽度。单位像素
+        imagePicker.setOutPutY(1024);    //保存文件的高度。单位像素
+        Intent intent = new Intent(this, ImageGridActivity.class);
+        startActivityForResult(intent, code);
     }
 }

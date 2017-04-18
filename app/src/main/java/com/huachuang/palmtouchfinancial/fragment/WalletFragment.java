@@ -83,7 +83,7 @@ public class WalletFragment extends BaseFragment {
             }
         });
 
-        adapter = new WalletMallAdapter();
+        adapter = new WalletMallAdapter(this.getContext());
         adapter.openLoadAnimation();
         adapter.addHeaderView(header);
         walletMallList.setLayoutManager(new GridLayoutManager(getContext(), 2));

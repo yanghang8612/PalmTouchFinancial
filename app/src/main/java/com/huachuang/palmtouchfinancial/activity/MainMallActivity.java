@@ -53,7 +53,7 @@ public class MainMallActivity extends BaseSwipeActivity {
         imageList.add(R.drawable.mall_ad_2);
         headerAD.setImages(imageList).setImageLoader(new AdImageLoader()).setDelayTime(3000).start();
 
-        adapter = new MainMallAdapter();
+        adapter = new MainMallAdapter(this);
         adapter.openLoadAnimation();
         adapter.addHeaderView(header);
 
