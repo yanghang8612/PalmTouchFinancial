@@ -18,19 +18,19 @@
         android:gravity="center">
 
         <ImageView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            android:layout_width="80dp"
+            android:layout_height="80dp"
             android:layout_gravity="center"
             android:src="@drawable/checked" />
 
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_margin="24dp"
+            android:layout_margin="12dp"
             android:layout_gravity="center"
             android:gravity="center"
             android:text="感谢您的申请，工作人员将会\n在审核后与您联系,请保持\n手机畅通！"
-            android:textSize="20sp"
+            android:textSize="16sp"
             android:textColor="@color/black"/>
 
     </LinearLayout>

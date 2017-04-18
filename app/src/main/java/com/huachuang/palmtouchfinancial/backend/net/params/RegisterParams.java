@@ -15,14 +15,12 @@ import org.xutils.http.annotation.HttpRequest;
 public class RegisterParams extends RequestParams {
 
     private String phoneNumber;
-    private String invitationCode;
-    private String recommenderID;
+    private String identifyCode;
     private String password;
 
-    public RegisterParams(String phoneNumber, String invitationCode, String recommenderID, String password) {
+    public RegisterParams(String phoneNumber, String identifyCode, String password) {
         this.phoneNumber = phoneNumber;
-        this.invitationCode = invitationCode;
-        this.recommenderID = recommenderID;
+        this.identifyCode = identifyCode;
         this.password = password;
     }
 }

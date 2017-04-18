@@ -2,6 +2,7 @@ package com.huachuang.palmtouchfinancial.activity;
 
 import android.content.Context;
 import android.content.Intent;
+import android.graphics.BitmapFactory;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.v7.widget.Toolbar;
@@ -10,6 +11,7 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ImageView;
 import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.ViewFlipper;
@@ -23,8 +25,14 @@ import com.huachuang.palmtouchfinancial.backend.bean.UserCertificationInfo;
 import com.huachuang.palmtouchfinancial.backend.net.NetCallbackAdapter;
 import com.huachuang.palmtouchfinancial.backend.net.params.CreateCertificationInfoParams;
 import com.huachuang.palmtouchfinancial.backend.net.params.UpdateCertificationInfoParams;
+import com.huachuang.palmtouchfinancial.loader.HeaderImageLoader;
 import com.huachuang.palmtouchfinancial.util.CommonUtils;
 import com.huachuang.palmtouchfinancial.util.IDCard;
+import com.lzy.imagepicker.ImagePicker;
+import com.lzy.imagepicker.bean.ImageItem;
+import com.lzy.imagepicker.ui.ImageGridActivity;
+import com.lzy.imagepicker.util.BitmapUtil;
+import com.lzy.imagepicker.view.CropImageView;
 
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -34,12 +42,17 @@ import org.xutils.view.annotation.Event;
 import org.xutils.view.annotation.ViewInject;
 import org.xutils.x;
 
+import java.util.List;
+
 @ContentView(R.layout.activity_real_name_info)
 public class RealNameInfoActivity extends BaseSwipeActivity {
 
     public static final String TAG = RealNameInfoActivity.class.getSimpleName();
 
     public static final int REQUEST_CODE_DISTRICT = 0;
+    public static final int REQUEST_CODE_FRONT_IMAGE = 1;
+    public static final int REQUEST_CODE_BACK_IMAGE = 2;
+    public static final int REQUEST_CODE_HANDING_IMAGE = 3;
 
     public static void actionStart(Context context) {
         Intent intent = new Intent(context, RealNameInfoActivity.class);
@@ -86,6 +99,15 @@ public class RealNameInfoActivity extends BaseSwipeActivity {
 
     @ViewInject(R.id.real_name_info_address_edit)
     private TextView addressEdit;
+
+    @ViewInject(R.id.identify_card_front_image)
+    private ImageView identifyCardFrontImage;
+
+    @ViewInject(R.id.identify_card_back_image)
+    private ImageView identifyCardBackImage;
+
+    @ViewInject(R.id.identify_card_handing_image)
+    private ImageView identifyCardHandingImage;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -157,6 +179,38 @@ public class RealNameInfoActivity extends BaseSwipeActivity {
                 addressEdit.setText(bundle.getString("district"));
             }
         }
+        if (resultCode == ImagePicker.RESULT_CODE_ITEMS) {
+            if (data != null) {
+                List<ImageItem> images = (List<ImageItem>) data.getSerializableExtra(ImagePicker.EXTRA_RESULT_ITEMS);
+                ImageItem image = images.get(0);
+                switch (requestCode) {
+                    case REQUEST_CODE_FRONT_IMAGE:
+                        identifyCardFrontImage.setImageBitmap(BitmapFactory.decodeFile(image.path));
+                        break;
+                    case REQUEST_CODE_BACK_IMAGE:
+                        identifyCardBackImage.setImageBitmap(BitmapFactory.decodeFile(image.path));
+                        break;
+                    case REQUEST_CODE_HANDING_IMAGE:
+                        identifyCardHandingImage.setImageBitmap(BitmapFactory.decodeFile(image.path));
+                        break;
+                }
+            }
+        }
+    }
+
+    @Event(R.id.identify_card_front_image)
+    private void identifyCardFrontImageClicked(View view) {
+        startImagePicker(REQUEST_CODE_FRONT_IMAGE);
+    }
+
+    @Event(R.id.identify_card_back_image)
+    private void identifyCardBackImageClicked(View view) {
+        startImagePicker(REQUEST_CODE_BACK_IMAGE);
+    }
+
+    @Event(R.id.identify_card_handing_image)
+    private void identifyCardHandingImageClicked(View view) {
+        startImagePicker(REQUEST_CODE_HANDING_IMAGE);
     }
 
     @Event(R.id.real_name_info_button)
@@ -244,5 +298,21 @@ public class RealNameInfoActivity extends BaseSwipeActivity {
                 }
             });
         }
+    }
+
+    private void startImagePicker(int code) {
+        ImagePicker imagePicker = ImagePicker.getInstance();
+        imagePicker.setImageLoader(new HeaderImageLoader());   //设置图片加载器
+        imagePicker.setMultiMode(false);
+        imagePicker.setShowCamera(true);  //显示拍照按钮
+        imagePicker.setCrop(true);        //允许裁剪（单选才有效）
+        imagePicker.setSaveRectangle(true); //是否按矩形区域保存
+        imagePicker.setStyle(CropImageView.Style.RECTANGLE);  //裁剪框的形状
+        imagePicker.setFocusWidth(800);   //裁剪框的宽度。单位像素（圆形自动取宽高最小值）
+        imagePicker.setFocusHeight(800);  //裁剪框的高度。单位像素（圆形自动取宽高最小值）
+        imagePicker.setOutPutX(1024);    //保存文件的宽度。单位像素
+        imagePicker.setOutPutY(1024);    //保存文件的高度。单位像素
+        Intent intent = new Intent(this, ImageGridActivity.class);
+        startActivityForResult(intent, code);
     }
 }

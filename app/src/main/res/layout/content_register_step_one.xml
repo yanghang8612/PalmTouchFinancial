@@ -57,32 +57,32 @@
     </LinearLayout>
 
     <android.support.design.widget.TextInputLayout
-        android:id="@+id/register_invitation_code_layout"
+        android:id="@+id/register_identify_code_layout"
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
 
         <android.support.design.widget.TextInputEditText
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:hint="@string/prompt_invitation_code"
+            android:hint="@string/prompt_identify_code"
             android:inputType="textPassword|textNoSuggestions"
             android:maxLines="1" />
 
     </android.support.design.widget.TextInputLayout>
 
-    <android.support.design.widget.TextInputLayout
-        android:id="@+id/register_recommender_id_layout"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content">
+    <!--<android.support.design.widget.TextInputLayout-->
+        <!--android:id="@+id/register_recommender_id_layout"-->
+        <!--android:layout_width="match_parent"-->
+        <!--android:layout_height="wrap_content">-->
 
-        <android.support.design.widget.TextInputEditText
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:hint="@string/prompt_recommender_id"
-            android:inputType="textCapCharacters|textNoSuggestions"
-            android:maxLines="1" />
+        <!--<android.support.design.widget.TextInputEditText-->
+            <!--android:layout_width="match_parent"-->
+            <!--android:layout_height="wrap_content"-->
+            <!--android:hint="@string/prompt_recommender_id"-->
+            <!--android:inputType="textCapCharacters|textNoSuggestions"-->
+            <!--android:maxLines="1" />-->
 
-    </android.support.design.widget.TextInputLayout>
+    <!--</android.support.design.widget.TextInputLayout>-->
 
     <LinearLayout
         android:orientation="horizontal"

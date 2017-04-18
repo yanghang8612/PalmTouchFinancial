@@ -54,6 +54,7 @@ public class RegisterActivity extends BaseSwipeActivity implements View.OnFocusC
     }
 
     private String generatedVerificationCode = "";
+    private boolean identifyCodeCheckState = false;
     private boolean invitationCodeCheckState = false;
     private boolean recommenderIDCheckState = false;
     private ProgressDialog progressDialog;
@@ -73,11 +74,8 @@ public class RegisterActivity extends BaseSwipeActivity implements View.OnFocusC
     @ViewInject(R.id.register_verification_code_layout)
     private TextInputLayout verificationCodeLayout;
 
-    @ViewInject(R.id.register_invitation_code_layout)
-    private TextInputLayout invitationCodeLayout;
-
-    @ViewInject(R.id.register_recommender_id_layout)
-    private TextInputLayout recommenderIDLayout;
+    @ViewInject(R.id.register_identify_code_layout)
+    private TextInputLayout identifyCodeLayout;
 
     @ViewInject(R.id.register_agree_check_box)
     private CheckBox agreeCheckBox;
@@ -109,16 +107,16 @@ public class RegisterActivity extends BaseSwipeActivity implements View.OnFocusC
 
         phoneNumberLayout.getEditText().setOnFocusChangeListener(this);
         verificationCodeLayout.getEditText().setOnFocusChangeListener(this);
-        invitationCodeLayout.getEditText().setOnFocusChangeListener(new View.OnFocusChangeListener() {
-            @Override
-            public void onFocusChange(View v, boolean hasFocus) {
-                if (hasFocus)  {
-                    Intent intent = new Intent(RegisterActivity.this, CaptureActivity.class);
-                    startActivityForResult(intent, REQUEST_CODE_QR_CODE);
-                }
-            }
-        });
-        recommenderIDLayout.getEditText().setOnFocusChangeListener(this);
+//        invitationCodeLayout.getEditText().setOnFocusChangeListener(new View.OnFocusChangeListener() {
+//            @Override
+//            public void onFocusChange(View v, boolean hasFocus) {
+//                if (hasFocus)  {
+//                    Intent intent = new Intent(RegisterActivity.this, CaptureActivity.class);
+//                    startActivityForResult(intent, REQUEST_CODE_QR_CODE);
+//                }
+//            }
+//        });
+        identifyCodeLayout.getEditText().setOnFocusChangeListener(this);
         passwordLayout.getEditText().setOnFocusChangeListener(this);
         confirmPasswordLayout.getEditText().setOnFocusChangeListener(this);
     }
@@ -166,30 +164,30 @@ public class RegisterActivity extends BaseSwipeActivity implements View.OnFocusC
             if (bundle.getInt(CodeUtils.RESULT_TYPE) == CodeUtils.RESULT_SUCCESS) {
                 String content = bundle.getString(CodeUtils.RESULT_STRING);
                 final String[] result = content.split("/");
-                if (!TextUtils.isEmpty(content) && result[0].equals("fuck")) {
+                if (!TextUtils.isEmpty(content) && result[0].equals("palmtouch")) {
                     if (result.length == 2) {
-                        recommenderIDLayout.getEditText().setText(result[1]);
+                        identifyCodeLayout.getEditText().setText(result[1]);
                     }
                     else {
-                        invitationCodeLayout.getEditText().setText(result[2]);
-                        new MaterialDialog.Builder(this)
-                                .content("推荐人也填写该代理商吗?")
-                                .contentColorRes(R.color.black)
-                                .positiveText("确认")
-                                .negativeText("取消")
-                                .onPositive(new MaterialDialog.SingleButtonCallback() {
-                                    @Override
-                                    public void onClick(@NonNull MaterialDialog dialog, @NonNull DialogAction which) {
-                                        recommenderIDLayout.getEditText().setText(result[1]);
-                                    }
-                                })
-                                .onNegative(new MaterialDialog.SingleButtonCallback() {
-                                    @Override
-                                    public void onClick(@NonNull MaterialDialog dialog, @NonNull DialogAction which) {
-                                        dialog.dismiss();
-                                    }
-                                })
-                                .show();
+                        identifyCodeLayout.getEditText().setText(result[2]);
+//                        new MaterialDialog.Builder(this)
+//                                .content("推荐人也填写该代理商吗?")
+//                                .contentColorRes(R.color.black)
+//                                .positiveText("确认")
+//                                .negativeText("取消")
+//                                .onPositive(new MaterialDialog.SingleButtonCallback() {
+//                                    @Override
+//                                    public void onClick(@NonNull MaterialDialog dialog, @NonNull DialogAction which) {
+//                                        recommenderIDLayout.getEditText().setText(result[1]);
+//                                    }
+//                                })
+//                                .onNegative(new MaterialDialog.SingleButtonCallback() {
+//                                    @Override
+//                                    public void onClick(@NonNull MaterialDialog dialog, @NonNull DialogAction which) {
+//                                        dialog.dismiss();
+//                                    }
+//                                })
+//                                .show();
                     }
                 }
             }
@@ -243,6 +241,7 @@ public class RegisterActivity extends BaseSwipeActivity implements View.OnFocusC
                             });
                         }
                         else {
+                            progressDialog.dismiss();
                             showToast(resultJsonObject.getString("Info"));
                         }
                     } catch (JSONException e) {
@@ -284,66 +283,34 @@ public class RegisterActivity extends BaseSwipeActivity implements View.OnFocusC
             verificationCodeLayout.setErrorEnabled(false);
         }
 
-        final String invitationCode = invitationCodeLayout.getEditText().getText().toString();
-        final String recommenderID = recommenderIDLayout.getEditText().getText().toString();
-        if (TextUtils.isEmpty(invitationCode)) {
-            invitationCodeLayout.setError("请输入邀请码");
+        final String identifyCode = identifyCodeLayout.getEditText().getText().toString();
+        if (TextUtils.isEmpty(identifyCode)) {
+            identifyCodeLayout.setError("请输入邀请码或推荐人手机");
+            return;
+        }
+        else if (!CommonUtils.validateInvitationCode(identifyCode) && !CommonUtils.validatePhone(identifyCode)) {
+            identifyCodeLayout.setError("6位数字大写字母组合的邀请码或11位推荐人手机号，请检查后重试");
             return;
         }
         else {
-            invitationCodeLayout.setErrorEnabled(false);
+            identifyCodeLayout.setErrorEnabled(false);
         }
 
-        x.http().post(new VerifyInvitationCodeParams(invitationCode), new NetCallbackAdapter(this, progressDialog) {
-            @Override
-            public void onSuccess(String result) {
-                try {
-                    JSONObject resultJSONObject = new JSONObject(result);
-                    if (resultJSONObject.getBoolean("Status")) {
-                        Log.d(TAG, resultJSONObject.getString("Info"));
-                        invitationCodeCheckState = true;
-                        invitationCodeLayout.setErrorEnabled(false);
-                    }
-                    else {
-                        Log.d(TAG, resultJSONObject.getString("Info"));
-                        invitationCodeCheckState = false;
-                        invitationCodeLayout.setError(resultJSONObject.getString("Info"));
-                    }
-                } catch (JSONException e) {
-                    e.printStackTrace();
-                }
-            }
-
-            @Override
-            public void onFinished() {
-                super.onFinished();
-                if (invitationCodeCheckState && (TextUtils.isEmpty(recommenderID) || (!TextUtils.isEmpty(recommenderID) && recommenderIDCheckState))) {
-                    if (!agreeCheckBox.isChecked()) {
-                        showToast("请阅读并同意《用户协议》");
-                    }
-                    else {
-                        camera.setVisibility(View.GONE);
-                        registerFlipper.setDisplayedChild(1);
-                    }
-                }
-            }
-        });
-
-        if (!TextUtils.isEmpty(recommenderID)) {
-            x.http().post(new VerifyRecommenderIDParams(recommenderID), new NetCallbackAdapter(this, progressDialog) {
+        if (CommonUtils.validatePhone(identifyCode)) {
+            x.http().post(new VerifyRecommenderIDParams(identifyCode), new NetCallbackAdapter(this, progressDialog) {
                 @Override
                 public void onSuccess(String result) {
                     try {
                         JSONObject resultJSONObject = new JSONObject(result);
                         if (resultJSONObject.getBoolean("Status")) {
                             Log.d(TAG, resultJSONObject.getString("Info"));
-                            recommenderIDCheckState = true;
-                            recommenderIDLayout.setErrorEnabled(false);
+                            identifyCodeCheckState = true;
+                            identifyCodeLayout.setErrorEnabled(false);
                         }
                         else {
                             Log.d(TAG, resultJSONObject.getString("Info"));
-                            recommenderIDCheckState = false;
-                            recommenderIDLayout.setError(resultJSONObject.getString("Info"));
+                            identifyCodeCheckState = false;
+                            identifyCodeLayout.setError(resultJSONObject.getString("Info"));
                         }
                     } catch (JSONException e) {
                         e.printStackTrace();
@@ -353,7 +320,7 @@ public class RegisterActivity extends BaseSwipeActivity implements View.OnFocusC
                 @Override
                 public void onFinished() {
                     super.onFinished();
-                    if (invitationCodeCheckState && (TextUtils.isEmpty(recommenderID) || (!TextUtils.isEmpty(recommenderID) && recommenderIDCheckState))) {
+                    if (identifyCodeCheckState) {
                         if (!agreeCheckBox.isChecked()) {
                             showToast("请阅读并同意《用户协议》");
                         }
@@ -366,7 +333,40 @@ public class RegisterActivity extends BaseSwipeActivity implements View.OnFocusC
             });
         }
         else {
-            recommenderIDLayout.setErrorEnabled(false);
+            x.http().post(new VerifyInvitationCodeParams(identifyCode), new NetCallbackAdapter(this, progressDialog) {
+                @Override
+                public void onSuccess(String result) {
+                    try {
+                        JSONObject resultJSONObject = new JSONObject(result);
+                        if (resultJSONObject.getBoolean("Status")) {
+                            Log.d(TAG, resultJSONObject.getString("Info"));
+                            identifyCodeCheckState = true;
+                            identifyCodeLayout.setErrorEnabled(false);
+                        }
+                        else {
+                            Log.d(TAG, resultJSONObject.getString("Info"));
+                            identifyCodeCheckState = false;
+                            identifyCodeLayout.setError(resultJSONObject.getString("Info"));
+                        }
+                    } catch (JSONException e) {
+                        e.printStackTrace();
+                    }
+                }
+
+                @Override
+                public void onFinished() {
+                    super.onFinished();
+                    if (identifyCodeCheckState) {
+                        if (!agreeCheckBox.isChecked()) {
+                            showToast("请阅读并同意《用户协议》");
+                        }
+                        else {
+                            camera.setVisibility(View.GONE);
+                            registerFlipper.setDisplayedChild(1);
+                        }
+                    }
+                }
+            });
         }
     }
 
@@ -387,8 +387,7 @@ public class RegisterActivity extends BaseSwipeActivity implements View.OnFocusC
         else {
             RegisterParams params = new RegisterParams(
                     phoneNumberLayout.getEditText().getText().toString(),
-                    invitationCodeLayout.getEditText().getText().toString(),
-                    recommenderIDLayout.getEditText().getText().toString(),
+                    identifyCodeLayout.getEditText().getText().toString(),
                     passwordLayout.getEditText().getText().toString());
             x.http().post(params, new NetCallbackAdapter(this, progressDialog) {
                 @Override

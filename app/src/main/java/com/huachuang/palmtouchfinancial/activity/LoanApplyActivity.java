@@ -6,6 +6,7 @@ import android.support.annotation.NonNull;
 import android.os.Bundle;
 import android.support.v7.widget.Toolbar;
 import android.text.TextUtils;
+import android.util.Log;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.CheckBox;
@@ -17,12 +18,18 @@ import android.widget.ViewFlipper;
 import com.afollestad.materialdialogs.DialogAction;
 import com.afollestad.materialdialogs.MaterialDialog;
 import com.huachuang.palmtouchfinancial.R;
+import com.huachuang.palmtouchfinancial.backend.UserManager;
+import com.huachuang.palmtouchfinancial.backend.net.NetCallbackAdapter;
+import com.huachuang.palmtouchfinancial.backend.net.params.ApplyLoanParams;
 import com.huachuang.palmtouchfinancial.util.CommonUtils;
 import com.wdullaer.materialdatetimepicker.date.DatePickerDialog;
 
+import org.json.JSONException;
+import org.json.JSONObject;
 import org.xutils.view.annotation.ContentView;
 import org.xutils.view.annotation.Event;
 import org.xutils.view.annotation.ViewInject;
+import org.xutils.x;
 
 import java.util.Calendar;
 
@@ -46,55 +53,55 @@ public class LoanApplyActivity extends BaseActivity implements DatePickerDialog.
     private ScrollView scrollView;
 
     @ViewInject(R.id.loan_apply_flipper)
-    private ViewFlipper loadApplyFlipper;
+    private ViewFlipper loanApplyFlipper;
 
     @ViewInject(R.id.loan_apply_house_address_edit)
-    private EditText loadApplyHouseAddressEdit;
+    private EditText loanApplyHouseAddressEdit;
 
     @ViewInject(R.id.loan_apply_house_property_card_edit)
-    private EditText loadApplyHousePropertyCardEdit;
+    private EditText loanApplyHousePropertyCardEdit;
 
     @ViewInject(R.id.loan_apply_house_land_sources_spinner)
-    private Spinner loadApplyHouseLandSourcesSpinner;
+    private Spinner loanApplyHouseLandSourcesSpinner;
 
     @ViewInject(R.id.loan_apply_house_type_spinner)
-    private EditText loadApplyHouseTypeSpinner;
+    private Spinner loanApplyHouseTypeSpinner;
 
     @ViewInject(R.id.loan_apply_house_build_year_edit)
-    private EditText loadApplyHouseBuildYearEdit;
+    private EditText loanApplyHouseBuildYearEdit;
 
     @ViewInject(R.id.loan_apply_house_build_area_edit)
-    private EditText loadApplyHouseBuildAreaEdit;
+    private EditText loanApplyHouseBuildAreaEdit;
 
     @ViewInject(R.id.loan_apply_house_owned_by_others_check_box)
-    private CheckBox loadApplyHouseOwnedByOthersCheckBox;
+    private CheckBox loanApplyHouseOwnedByOthersCheckBox;
 
     @ViewInject(R.id.loan_apply_house_is_mortgaged_check_box)
-    private CheckBox loadApplyHouseIsMortgagedCheckBox;
+    private CheckBox loanApplyHouseIsMortgagedCheckBox;
 
     @ViewInject(R.id.loan_apply_house_borrower_is_owner_check_box)
-    private CheckBox loadApplyHouseBorrowerIsOwnerCheckBox;
+    private CheckBox loanApplyHouseBorrowerIsOwnerCheckBox;
 
     @ViewInject(R.id.loan_apply_house_handing_time_edit)
-    private EditText loadApplyHouseHandingTimeEdit;
+    private EditText loanApplyHouseHandingTimeEdit;
 
     @ViewInject(R.id.loan_apply_borrower_name_edit)
-    private EditText loadApplyBorrowerNameEdit;
+    private EditText loanApplyBorrowerNameEdit;
 
     @ViewInject(R.id.loan_apply_borrower_phone_number_edit)
-    private EditText loadApplyBorrowerPhoneNumberEdit;
+    private EditText loanApplyBorrowerPhoneNumberEdit;
 
     @ViewInject(R.id.loan_apply_borrower_amount_edit)
-    private EditText loadApplyBorrowerAmountEdit;
+    private EditText loanApplyBorrowerAmountEdit;
 
     @ViewInject(R.id.loan_apply_borrower_marriage_spinner)
-    private Spinner loadApplyBorrowerMarriageSpinner;
+    private Spinner loanApplyBorrowerMarriageSpinner;
 
     @ViewInject(R.id.loan_apply_borrower_address_edit)
-    private EditText loadApplyBorrowerAddressEdit;
+    private EditText loanApplyBorrowerAddressEdit;
 
     @ViewInject(R.id.loan_apply_borrower_detailed_address_edit)
-    private EditText loadApplyBorrowerDetailedAddressEdit;
+    private EditText loanApplyBorrowerDetailedAddressEdit;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -103,8 +110,8 @@ public class LoanApplyActivity extends BaseActivity implements DatePickerDialog.
         if (getSupportActionBar() != null) {
             getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         }
-        loadApplyFlipper.setInAnimation(this, R.anim.push_left_in);
-        loadApplyHouseAddressEdit.setOnFocusChangeListener(new View.OnFocusChangeListener() {
+        loanApplyFlipper.setInAnimation(this, R.anim.push_left_in);
+        loanApplyHouseAddressEdit.setOnFocusChangeListener(new View.OnFocusChangeListener() {
             @Override
             public void onFocusChange(View v, boolean hasFocus) {
                 if (hasFocus) {
@@ -112,7 +119,7 @@ public class LoanApplyActivity extends BaseActivity implements DatePickerDialog.
                 }
             }
         });
-        loadApplyHouseHandingTimeEdit.setOnFocusChangeListener(new View.OnFocusChangeListener() {
+        loanApplyHouseHandingTimeEdit.setOnFocusChangeListener(new View.OnFocusChangeListener() {
             @Override
             public void onFocusChange(View v, boolean hasFocus) {
                 if (hasFocus) {
@@ -127,7 +134,7 @@ public class LoanApplyActivity extends BaseActivity implements DatePickerDialog.
                 }
             }
         });
-        loadApplyBorrowerAddressEdit.setOnFocusChangeListener(new View.OnFocusChangeListener() {
+        loanApplyBorrowerAddressEdit.setOnFocusChangeListener(new View.OnFocusChangeListener() {
             @Override
             public void onFocusChange(View v, boolean hasFocus) {
                 if (hasFocus) {
@@ -140,7 +147,7 @@ public class LoanApplyActivity extends BaseActivity implements DatePickerDialog.
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         if (item.getItemId() == android.R.id.home) {
-            if (loadApplyFlipper.getDisplayedChild() != 2) {
+            if (loanApplyFlipper.getDisplayedChild() != 2) {
                 new MaterialDialog.Builder(this)
                         .content("确认取消申请吗?")
                         .contentColorRes(R.color.black)
@@ -176,10 +183,10 @@ public class LoanApplyActivity extends BaseActivity implements DatePickerDialog.
             if (data != null) {
                 Bundle bundle = data.getExtras();
                 if (requestCode == REQUEST_CODE_HOUSE_ADDRESS) {
-                    loadApplyHouseAddressEdit.setText(bundle.getString("district"));
+                    loanApplyHouseAddressEdit.setText(bundle.getString("district"));
                 }
                 if (requestCode == REQUEST_CODE_BORROWER_ADDRESS) {
-                    loadApplyBorrowerAddressEdit.setText(bundle.getString("district"));
+                    loanApplyBorrowerAddressEdit.setText(bundle.getString("district"));
                 }
             }
         }
@@ -187,7 +194,7 @@ public class LoanApplyActivity extends BaseActivity implements DatePickerDialog.
 
     @Override
     public void onDateSet(DatePickerDialog view, int year, int monthOfYear, int dayOfMonth) {
-        loadApplyHouseHandingTimeEdit.setText(new StringBuilder()
+        loanApplyHouseHandingTimeEdit.setText(new StringBuilder()
                 .append(year)
                 .append("-")
                 .append((monthOfYear + 1) < 10 ? "0"
@@ -197,82 +204,119 @@ public class LoanApplyActivity extends BaseActivity implements DatePickerDialog.
     }
 
     @Event(R.id.loan_apply_step_one_button)
-    private void loadApplyStepOneButton(View view) {
+    private void loanApplyStepOneButton(View view) {
         hideKeyboard();
 
-        String houseAddress = loadApplyHouseAddressEdit.getText().toString();
+        String houseAddress = loanApplyHouseAddressEdit.getText().toString();
         if (TextUtils.isEmpty(houseAddress)) {
-            loadApplyHouseAddressEdit.setError("请输入抵押房产地址");
+            loanApplyHouseAddressEdit.setError("请输入抵押房产地址");
             return;
         }
 
-        String housePropertyCard = loadApplyHousePropertyCardEdit.getText().toString();
+        String housePropertyCard = loanApplyHousePropertyCardEdit.getText().toString();
         if (TextUtils.isEmpty(housePropertyCard)) {
-            loadApplyHousePropertyCardEdit.setError("请输入借款人手机号");
+            loanApplyHousePropertyCardEdit.setError("请输入房产证号");
             return;
         }
 
-        String buildYear = loadApplyHouseBuildYearEdit.getText().toString();
+        String buildYear = loanApplyHouseBuildYearEdit.getText().toString();
         if (TextUtils.isEmpty(buildYear)) {
-            loadApplyHouseBuildYearEdit.setError("请输入建筑年代");
+            loanApplyHouseBuildYearEdit.setError("请输入建筑年代");
             return;
         }
 
-        String buildArea = loadApplyHouseBuildAreaEdit.getText().toString();
+        String buildArea = loanApplyHouseBuildAreaEdit.getText().toString();
         if (TextUtils.isEmpty(buildArea)) {
-            loadApplyHouseBuildAreaEdit.setError("请输入建筑面积");
+            loanApplyHouseBuildAreaEdit.setError("请输入建筑面积");
             return;
         }
 
-        String handingTime = loadApplyHouseHandingTimeEdit.getText().toString();
+        String handingTime = loanApplyHouseHandingTimeEdit.getText().toString();
         if (TextUtils.isEmpty(handingTime)) {
-            loadApplyHouseHandingTimeEdit.setError("请选择交房日期");
+            loanApplyHouseHandingTimeEdit.setError("请选择交房日期");
             return;
         }
 
         scrollView.scrollTo(0, 0);
-        loadApplyFlipper.setDisplayedChild(1);
+        loanApplyFlipper.setDisplayedChild(1);
     }
 
     @Event(R.id.loan_apply_step_two_button)
-    private void loadApplyStepTwoButton(View view) {
+    private void loanApplyStepTwoButton(View view) {
         hideKeyboard();
 
-        String borrowerName = loadApplyBorrowerNameEdit.getText().toString();
+        String borrowerName = loanApplyBorrowerNameEdit.getText().toString();
         if (TextUtils.isEmpty(borrowerName)) {
-            loadApplyBorrowerNameEdit.setError("请输入借款人姓名");
+            loanApplyBorrowerNameEdit.setError("请输入借款人姓名");
             return;
         }
 
-        String borrowerPhoneNumber = loadApplyBorrowerPhoneNumberEdit.getText().toString();
+        String borrowerPhoneNumber = loanApplyBorrowerPhoneNumberEdit.getText().toString();
         if (TextUtils.isEmpty(borrowerPhoneNumber)) {
-            loadApplyBorrowerPhoneNumberEdit.setError("请输入借款人姓名");
+            loanApplyBorrowerPhoneNumberEdit.setError("请输入借款人手机号码");
             return;
         }
         else if (!CommonUtils.validatePhone(borrowerPhoneNumber)) {
-            loadApplyBorrowerPhoneNumberEdit.setError("请输入正确的手机号码");
+            loanApplyBorrowerPhoneNumberEdit.setError("请输入正确的手机号码");
             return;
         }
 
-        String borrowerAmount = loadApplyBorrowerAmountEdit.getText().toString();
+        String borrowerAmount = loanApplyBorrowerAmountEdit.getText().toString();
         if (TextUtils.isEmpty(borrowerAmount)) {
-            loadApplyBorrowerAmountEdit.setError("请输入借款金额");
+            loanApplyBorrowerAmountEdit.setError("请输入借款金额");
             return;
         }
 
-        String borrowerAddress = loadApplyBorrowerAddressEdit.getText().toString();
+        String borrowerAddress = loanApplyBorrowerAddressEdit.getText().toString();
         if (TextUtils.isEmpty(borrowerAddress)) {
-            loadApplyBorrowerAddressEdit.setError("请输入住宅所在地");
+            loanApplyBorrowerAddressEdit.setError("请输入住宅所在地");
             return;
         }
 
-        String borrowerDetailedAddress = loadApplyBorrowerDetailedAddressEdit.getText().toString();
+        String borrowerDetailedAddress = loanApplyBorrowerDetailedAddressEdit.getText().toString();
         if (TextUtils.isEmpty(borrowerDetailedAddress)) {
-            loadApplyBorrowerDetailedAddressEdit.setError("请输入详细地址");
+            loanApplyBorrowerDetailedAddressEdit.setError("请输入详细地址");
             return;
         }
 
-        scrollView.scrollTo(0, 0);
-        loadApplyFlipper.setDisplayedChild(2);
+        ApplyLoanParams params = new ApplyLoanParams(
+                UserManager.getUserID(),
+                loanApplyHouseAddressEdit.getText().toString(),
+                loanApplyHousePropertyCardEdit.getText().toString(),
+                (String) loanApplyHouseLandSourcesSpinner.getSelectedItem(),
+                (String) loanApplyHouseTypeSpinner.getSelectedItem(),
+                loanApplyHouseBuildYearEdit.getText().toString(),
+                loanApplyHouseBuildAreaEdit.getText().toString(),
+                loanApplyHouseOwnedByOthersCheckBox.isChecked(),
+                loanApplyHouseIsMortgagedCheckBox.isChecked(),
+                loanApplyHouseBorrowerIsOwnerCheckBox.isChecked(),
+                loanApplyHouseHandingTimeEdit.getText().toString(),
+                borrowerName,
+                borrowerPhoneNumber,
+                borrowerAmount,
+                (String) loanApplyBorrowerMarriageSpinner.getSelectedItem(),
+                borrowerAddress,
+                borrowerDetailedAddress);
+
+        x.http().post(params, new NetCallbackAdapter(this) {
+            @Override
+            public void onSuccess(String result) {
+
+                try {
+                    JSONObject resultJSONObject = new JSONObject(result);
+                    if (resultJSONObject.getBoolean("Status")) {
+                        Log.d(TAG, resultJSONObject.getString("Info"));
+                        scrollView.scrollTo(0, 0);
+                        loanApplyFlipper.setDisplayedChild(2);
+                    }
+                    else {
+                        showToast(resultJSONObject.getString("Info"));
+                    }
+                } catch (JSONException e) {
+                    e.printStackTrace();
+                }
+
+            }
+        });
     }
 }

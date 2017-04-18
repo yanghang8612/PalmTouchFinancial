@@ -44,6 +44,13 @@ public class CommonUtils {
         return m.matches();
     }
 
+    public static boolean validateInvitationCode(String verificationCode) {
+        String regExp = "^[0-9A-Z]{6}$";
+        Pattern p = Pattern.compile(regExp);
+        Matcher m = p.matcher(verificationCode);
+        return m.matches();
+    }
+
     public static boolean validatePassword(String password) {
         String regExp = "^.{6,}$";
         Pattern p = Pattern.compile(regExp);

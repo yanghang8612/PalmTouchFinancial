@@ -7,6 +7,7 @@ import android.widget.ImageView;
 import com.bumptech.glide.Glide;
 import com.bumptech.glide.load.engine.DiskCacheStrategy;
 import com.huachuang.palmtouchfinancial.R;
+import com.lzy.imagepicker.loader.ImageLoader;
 
 import java.io.File;
 
@@ -14,7 +15,8 @@ import java.io.File;
  * Created by Asuka on 2017/4/2.
  */
 
-public class HeaderImageLoader implements com.lzy.imagepicker.loader.ImageLoader {
+public class HeaderImageLoader implements ImageLoader {
+
     @Override
     public void displayImage(Activity activity, String path, ImageView imageView, int width, int height) {
         Glide.with(activity)                             //配置上下文

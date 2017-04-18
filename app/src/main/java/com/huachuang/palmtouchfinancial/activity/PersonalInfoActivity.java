@@ -117,11 +117,11 @@ public class PersonalInfoActivity extends BaseSwipeActivity {
         imagePicker.setShowCamera(true);  //显示拍照按钮
         imagePicker.setCrop(true);        //允许裁剪（单选才有效）
         imagePicker.setSaveRectangle(true); //是否按矩形区域保存
-        imagePicker.setStyle(CropImageView.Style.RECTANGLE);  //裁剪框的形状
+        imagePicker.setStyle(CropImageView.Style.CIRCLE);  //裁剪框的形状
         imagePicker.setFocusWidth(800);   //裁剪框的宽度。单位像素（圆形自动取宽高最小值）
         imagePicker.setFocusHeight(800);  //裁剪框的高度。单位像素（圆形自动取宽高最小值）
-        imagePicker.setOutPutX(320);//保存文件的宽度。单位像素
-        imagePicker.setOutPutY(320);//保存文件的高度。单位像素
+        imagePicker.setOutPutX(320);    //保存文件的宽度。单位像素
+        imagePicker.setOutPutY(320);    //保存文件的高度。单位像素
         Intent intent = new Intent(this, ImageGridActivity.class);
         startActivityForResult(intent, REQUEST_CODE_IMAGE);
     }
