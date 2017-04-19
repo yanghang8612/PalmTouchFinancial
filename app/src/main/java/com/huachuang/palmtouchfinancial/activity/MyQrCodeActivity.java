@@ -60,7 +60,7 @@ public class MyQrCodeActivity extends BaseSwipeActivity {
         if (getSupportActionBar() != null) {
             getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         }
-        String qrCodeContent = "palmtouch/" + UserManager.getUserPhoneNumber();
+        String qrCodeContent = "palmtouch/" + UserManager.getUserPhoneNumber() + "/";
         if (UserManager.getCurrentUser().getUserType() == 0) {
             invitationCodeView.setVisibility(View.GONE);
             recommendCodeView.setVisibility(View.VISIBLE);

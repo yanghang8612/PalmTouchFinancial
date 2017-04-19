@@ -23,8 +23,8 @@ public class UploadIdentifyCardParams extends RequestParams {
 
     public UploadIdentifyCardParams(String front, String back, String handing) {
         this.phoneNumber = UserManager.getUserPhoneNumber();
-        this.front = new File(front);
-        this.back = new File(back);
-        this.handing = new File(handing);
+        this.front = (front == null) ? null : new File(front);
+        this.back = (back ==  null) ? null : new File(back);
+        this.handing = (handing == null) ? null : new File(handing);
     }
 }

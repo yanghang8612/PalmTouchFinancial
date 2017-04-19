@@ -22,7 +22,7 @@ public class UploadDebitCardParams extends RequestParams {
 
     public UploadDebitCardParams(String front, String back) {
         this.phoneNumber = UserManager.getUserPhoneNumber();
-        this.front = new File(front);
-        this.back = new File(back);
+        this.front = (front == null) ? null : new File(front);
+        this.back = (back ==  null) ? null : new File(back);
     }
 }
