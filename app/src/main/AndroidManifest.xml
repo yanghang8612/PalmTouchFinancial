@@ -62,7 +62,8 @@
         <activity android:name=".activity.MyQrCodeActivity" />
         <activity android:name=".activity.ShareRecordActivity" />
         <activity android:name=".activity.ShareQrCodeActivity" />
-        <activity android:name=".activity.LoanApplyActivity"></activity>
+        <activity android:name=".activity.LoanApplyActivity" />
+        <activity android:name=".activity.AddBankCardActivity" />
     </application>
 
 </manifest>

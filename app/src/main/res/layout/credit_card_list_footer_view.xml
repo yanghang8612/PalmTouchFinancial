@@ -4,10 +4,10 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="@dimen/credit_card_item_height"
-    android:layout_margin="@dimen/credit_card_item_margin"
+    android:layout_height="@dimen/bank_card_item_height"
+    android:layout_margin="@dimen/bank_card_item_margin"
     app:cardCornerRadius="10dp"
-    app:cardElevation="@dimen/credit_card_item_elevation"
+    app:cardElevation="@dimen/bank_card_item_elevation"
     android:clickable="true"
     android:foreground="?android:attr/selectableItemBackground"
     tools:targetApi="lollipop">

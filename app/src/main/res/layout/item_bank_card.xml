@@ -4,13 +4,13 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:orientation="vertical"
     android:layout_width="match_parent"
-    android:layout_height="@dimen/credit_card_item_height"
-    android:layout_marginTop="@dimen/credit_card_item_margin"
-    android:layout_marginLeft="@dimen/credit_card_item_margin"
-    android:layout_marginRight="@dimen/credit_card_item_margin"
-    app:cardBackgroundColor="@color/credit_card_item"
+    android:layout_height="@dimen/bank_card_item_height"
+    android:layout_marginTop="@dimen/bank_card_item_margin"
+    android:layout_marginLeft="@dimen/bank_card_item_margin"
+    android:layout_marginRight="@dimen/bank_card_item_margin"
+    app:cardBackgroundColor="@color/bank_card_item"
     app:cardCornerRadius="10dp"
-    app:cardElevation="@dimen/credit_card_item_elevation"
+    app:cardElevation="@dimen/bank_card_item_elevation"
     android:clickable="true"
     android:foreground="?android:attr/selectableItemBackground">
 
@@ -18,43 +18,43 @@
         android:orientation="horizontal"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_margin="@dimen/credit_card_item_margin">
+        android:layout_margin="@dimen/bank_card_item_margin">
 
         <ImageView
-            android:id="@+id/credit_card_item_bank_icon"
-            android:layout_width="@dimen/credit_card_item_icon_size"
-            android:layout_height="@dimen/credit_card_item_icon_size"
-            android:layout_marginLeft="@dimen/credit_card_item_margin"
+            android:id="@+id/bank_card_item_bank_icon"
+            android:layout_width="@dimen/bank_card_item_icon_size"
+            android:layout_height="@dimen/bank_card_item_icon_size"
+            android:layout_marginLeft="@dimen/bank_card_item_margin"
             android:layout_gravity="center"
-            android:src="@drawable/bank_zhongguo"/>
+            android:src="@drawable/bank_shenzhenfazhan"/>
 
         <LinearLayout
             android:orientation="vertical"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginLeft="@dimen/credit_card_item_text_left_margin">
+            android:layout_marginLeft="@dimen/bank_card_item_text_left_margin">
 
             <TextView
-                android:id="@+id/credit_card_item_bank_name"
+                android:id="@+id/bank_card_item_bank_name"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="中国银行"
-                android:textSize="@dimen/credit_card_item_bank_name_size"
+                android:textSize="@dimen/bank_card_item_bank_name_size"
                 android:textColor="@color/white" />
 
             <TextView
-                android:id="@+id/credit_card_item_card_type"
+                android:id="@+id/bank_card_item_card_type"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="信用卡"
-                android:textSize="@dimen/credit_card_item_card_type_size"
+                android:textSize="@dimen/bank_card_item_card_type_size"
                 android:textColor="@color/white" />
 
             <LinearLayout
                 android:orientation="horizontal"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="@dimen/credit_card_item_margin">
+                android:layout_marginTop="@dimen/bank_card_item_margin">
 
                 <TextView
                     android:layout_width="wrap_content"
@@ -62,15 +62,15 @@
                     android:layout_marginTop="2dp"
                     android:text="* * * *    * * * *     * * * *    "
                     android:textColor="@color/white"
-                    android:textSize="@dimen/credit_card_item_card_number_size" />
+                    android:textSize="@dimen/bank_card_item_card_number_size" />
 
                 <TextView
-                    android:id="@+id/credit_card_item_card_number"
+                    android:id="@+id/bank_card_item_card_number"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="0745"
                     android:textColor="@color/white"
-                    android:textSize="@dimen/credit_card_item_card_number_size" />
+                    android:textSize="@dimen/bank_card_item_card_number_size" />
 
             </LinearLayout>
 

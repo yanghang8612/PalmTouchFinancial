@@ -10,23 +10,37 @@ import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 
+import com.alibaba.fastjson.JSON;
 import com.huachuang.palmtouchfinancial.R;
-import com.huachuang.palmtouchfinancial.adapter.CreditCardAdapter;
+import com.huachuang.palmtouchfinancial.adapter.BankCardAdapter;
+import com.huachuang.palmtouchfinancial.backend.bean.BankCard;
+import com.huachuang.palmtouchfinancial.backend.net.NetCallbackAdapter;
+import com.huachuang.palmtouchfinancial.backend.net.params.GetAllBankCardsParams;
 
+import org.json.JSONException;
+import org.json.JSONObject;
 import org.xutils.view.annotation.ContentView;
+import org.xutils.view.annotation.Event;
 import org.xutils.view.annotation.ViewInject;
+import org.xutils.x;
+
+import java.util.ArrayList;
+import java.util.List;
 
 @ContentView(R.layout.activity_card_manager)
 public class CardManagerActivity extends BaseSwipeActivity {
 
     public static final String TAG = CardManagerActivity.class.getSimpleName();
 
+    public static final int REQUEST_CODE_CARD_INFO = 0;
+
     public static void actionStart(Context context) {
         Intent intent = new Intent(context, CardManagerActivity.class);
         context.startActivity(intent);
     }
 
-    private CreditCardAdapter adapter;
+    private BankCardAdapter adapter;
+    private List<BankCard> cards = new ArrayList<>();
 
     @ViewInject(R.id.card_manager_toolbar)
     private Toolbar toolbar;
@@ -41,7 +55,8 @@ public class CardManagerActivity extends BaseSwipeActivity {
         if (getSupportActionBar() != null) {
             getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         }
-        adapter = new CreditCardAdapter();
+
+        adapter = new BankCardAdapter(cards);
         adapter.openLoadAnimation();
         View footerView = this.getLayoutInflater().inflate(
                 R.layout.credit_card_list_footer_view,
@@ -56,6 +71,24 @@ public class CardManagerActivity extends BaseSwipeActivity {
         adapter.addFooterView(footerView);
         cardList.setLayoutManager(new GridLayoutManager(this, 1));
         cardList.setAdapter(adapter);
+
+        x.http().post(new GetAllBankCardsParams(), new NetCallbackAdapter(this, false) {
+            @Override
+            public void onSuccess(String result) {
+                JSONObject resultJsonObject;
+                try {
+                    resultJsonObject = new JSONObject(result);
+                    if (resultJsonObject.getBoolean("Status")) {
+                        String cardsString = resultJsonObject.getString("Cards");
+                        cards.addAll(JSON.parseArray(cardsString, BankCard.class));
+                        adapter.notifyDataSetChanged();
+                    }
+                }
+                catch (JSONException e) {
+                    e.printStackTrace();
+                }
+            }
+        });
     }
 
     @Override
@@ -68,5 +101,22 @@ public class CardManagerActivity extends BaseSwipeActivity {
                 break;
         }
         return super.onOptionsItemSelected(item);
+    }
+
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        if (resultCode == RESULT_OK) {
+            if (data != null && requestCode == REQUEST_CODE_CARD_INFO) {
+                Bundle bundle = data.getExtras();
+                cards.add((BankCard) bundle.getSerializable("card"));
+                adapter.notifyDataSetChanged();
+            }
+        }
+    }
+
+    @Event(R.id.card_manager_add_button)
+    private void addButtonClicked(View view) {
+        AddBankCardActivity.actionStart(this, REQUEST_CODE_CARD_INFO);
     }
 }

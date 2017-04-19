@@ -1,7 +1,6 @@
 package com.huachuang.palmtouchfinancial.adapter;
 
 import android.content.Context;
-import android.util.Log;
 
 import com.chad.library.adapter.base.BaseQuickAdapter;
 import com.chad.library.adapter.base.BaseViewHolder;
@@ -36,12 +35,12 @@ public class MainMallAdapter extends BaseQuickAdapter<MallGoods, BaseViewHolder>
 
     @Override
     protected void convert(BaseViewHolder baseViewHolder, MallGoods mallGoods) {
-        baseViewHolder.setImageResource(R.id.goods_image,
+        baseViewHolder.setImageResource(R.id.mall_goods_item_image,
                 context.getResources().getIdentifier(mallGoods.getImagePath(), "drawable", "com.huachuang.palmtouchfinancial"))
-                .setText(R.id.goods_name, mallGoods.getName())
-                .setText(R.id.goods_price, "￥" + mallGoods.getPrice());
+                .setText(R.id.mall_goods_item_name, mallGoods.getName())
+                .setText(R.id.mall_goods_item_price, "￥" + mallGoods.getPrice());
         if (baseViewHolder.getLayoutPosition() % 2 == 1) {
-            baseViewHolder.setVisible(R.id.goods_vertical, true);
+            baseViewHolder.setVisible(R.id.mall_goods_item_vertical, true);
         }
     }
 }

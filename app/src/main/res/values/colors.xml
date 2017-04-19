@@ -36,7 +36,7 @@
     <color name="bottom_bar_active">#757575</color>
     <color name="bottom_bar_inactive">#2D2D8B</color>
 
-    <color name="credit_card_item">#E9507D</color>
+    <color name="bank_card_item">#E9507D</color>
 
     <color name="mall_text_background">#BCAAA4</color>
 </resources>

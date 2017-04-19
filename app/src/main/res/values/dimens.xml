@@ -59,6 +59,10 @@
     <dimen name="debit_divider_margin">12dp</dimen>
     <dimen name="debit_text_size">15sp</dimen>
 
+    <dimen name="add_bank_card_row_height">48dp</dimen>
+    <dimen name="add_bank_card_divider_margin">12dp</dimen>
+    <dimen name="add_bank_card_text_size">15sp</dimen>
+
     <dimen name="district_header_height">68dp</dimen>
     <dimen name="district_item_height">48dp</dimen>
 
@@ -66,15 +70,15 @@
     <dimen name="credit_card_apply_card_radius">10dp</dimen>
     <dimen name="credit_card_apply_card_content_padding">16dp</dimen>
 
-    <dimen name="credit_card_item_margin">10dp</dimen>
-    <dimen name="credit_card_item_padding">10dp</dimen>
-    <dimen name="credit_card_item_height">80dp</dimen>
-    <dimen name="credit_card_item_elevation">2dp</dimen>
-    <dimen name="credit_card_item_icon_size">48dp</dimen>
-    <dimen name="credit_card_item_text_left_margin">16dp</dimen>
-    <dimen name="credit_card_item_bank_name_size">13sp</dimen>
-    <dimen name="credit_card_item_card_type_size">11sp</dimen>
-    <dimen name="credit_card_item_card_number_size">15sp</dimen>
+    <dimen name="bank_card_item_margin">10dp</dimen>
+    <dimen name="bank_card_item_padding">10dp</dimen>
+    <dimen name="bank_card_item_height">80dp</dimen>
+    <dimen name="bank_card_item_elevation">2dp</dimen>
+    <dimen name="bank_card_item_icon_size">48dp</dimen>
+    <dimen name="bank_card_item_text_left_margin">16dp</dimen>
+    <dimen name="bank_card_item_bank_name_size">13sp</dimen>
+    <dimen name="bank_card_item_card_type_size">11sp</dimen>
+    <dimen name="bank_card_item_card_number_size">15sp</dimen>
 
     <dimen name="user_agreement_padding">16dp</dimen>
     <dimen name="user_agreement_content_padding">5dp</dimen>

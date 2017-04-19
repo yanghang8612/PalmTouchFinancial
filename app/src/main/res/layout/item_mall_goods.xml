@@ -25,7 +25,7 @@
                 android:layout_height="wrap_content">
 
                 <ImageView
-                    android:id="@+id/goods_image"
+                    android:id="@+id/mall_goods_item_image"
                     android:layout_width="wrap_content"
                     android:layout_height="64dp"
                     android:src="@drawable/goods_5" />
@@ -33,13 +33,13 @@
                 <ImageView
                     android:layout_width="24dp"
                     android:layout_height="24dp"
-                    android:layout_alignRight="@id/goods_image"
-                    android:layout_alignBottom="@id/goods_image" />
+                    android:layout_alignRight="@id/mall_goods_item_image"
+                    android:layout_alignBottom="@id/mall_goods_item_image" />
 
             </RelativeLayout>
 
             <TextView
-                android:id="@+id/goods_name"
+                android:id="@+id/mall_goods_item_name"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="5dp"
@@ -47,7 +47,7 @@
                 android:textColor="@color/black" />
 
             <TextView
-                android:id="@+id/goods_price"
+                android:id="@+id/mall_goods_item_price"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="2dp"
@@ -57,18 +57,18 @@
         </LinearLayout>
 
         <LinearLayout
-            android:id="@+id/goods_horizontal"
+            android:id="@+id/mall_goods_item_horizontal"
             android:orientation="vertical"
             android:layout_width="match_parent"
-            android:layout_height="1dp"
+            android:layout_height="2dp"
             android:background="@color/light_grey" />
 
     </LinearLayout>
 
     <LinearLayout
-        android:id="@+id/goods_vertical"
+        android:id="@+id/mall_goods_item_vertical"
         android:orientation="horizontal"
-        android:layout_width="1dp"
+        android:layout_width="2dp"
         android:layout_height="match_parent"
         android:background="@color/light_grey"
         android:visibility="gone" />

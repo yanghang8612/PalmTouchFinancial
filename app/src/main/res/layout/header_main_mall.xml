@@ -4,7 +4,8 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:orientation="vertical"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="match_parent"
+    android:background="@color/light_grey">
 
     <com.youth.banner.Banner
         android:id="@+id/mall_header_ad"
@@ -14,13 +15,21 @@
         app:indicator_height="5dp"
         app:indicator_margin="2dp"/>
 
-    <TextView
+    <LinearLayout
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:padding="5dp"
-        android:layout_marginTop="5dp"
-        android:layout_marginBottom="5dp"
-        android:background="@color/colorPrimary"
-        android:text="全部商品"/>
+        android:layout_gravity="bottom"
+        android:layout_marginTop="8dp"
+        android:layout_marginLeft="10dp"
+        android:background="@drawable/main_mall_title_bg">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:padding="3dp"
+            android:text="全部商品"
+            android:textSize="10sp" />
+
+    </LinearLayout>
 
 </LinearLayout>

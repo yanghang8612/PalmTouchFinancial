@@ -29,7 +29,7 @@ import java.util.Iterator;
 import java.util.List;
 
 @ContentView(R.layout.activity_agent_manager)
-public class AgentManagerActivity extends BaseSwipeActivity {
+public class AgentManagerActivity extends BaseActivity {
 
     public static final String TAG = AgentManagerActivity.class.getSimpleName();
 
