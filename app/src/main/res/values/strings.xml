@@ -19,7 +19,7 @@
     <string name="title_activity_user_agreement">用户协议</string>
     <string name="title_activity_about_us">关于我们</string>
     <string name="title_activity_debit_card">结算卡信息</string>
-    <string name="title_activity_agent_manager">用户管理</string>
+    <string name="title_activity_agent_manager">会员管理</string>
     <string name="title_activity_main_mall">掌触商城</string>
     <string name="title_activity_card_manager">银行卡管理</string>
     <string name="title_activity_my_balance">我的钱包余额</string>
@@ -36,7 +36,7 @@
     <string name="menu_change_debit_card">结算卡变更</string>
     <string name="menu_my_rate">我的费率</string>
     <string name="menu_profit_share">我的收益</string>
-    <string name="menu_agent_manager">用户管理</string>
+    <string name="menu_agent_manager">会员管理</string>
     <string name="menu_change_password">修改密码</string>
     <string name="menu_sign_out">退出登录</string>
 

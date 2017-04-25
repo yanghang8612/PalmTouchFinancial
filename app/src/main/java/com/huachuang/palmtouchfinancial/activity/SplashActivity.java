@@ -20,6 +20,7 @@ import com.huachuang.palmtouchfinancial.backend.net.NetCallbackAdapter;
 import com.huachuang.palmtouchfinancial.backend.net.params.LoginParams;
 import com.huachuang.palmtouchfinancial.loader.AdImageLoader;
 import com.youth.banner.Banner;
+import com.youth.banner.BannerConfig;
 import com.youth.banner.listener.OnBannerListener;
 
 import org.json.JSONException;
@@ -64,27 +65,30 @@ public class SplashActivity extends BaseActivity {
             images.add(R.drawable.first_1);
             images.add(R.drawable.first_2);
             images.add(R.drawable.first_3);
-            banner.setImages(images).setImageLoader(new AdImageLoader()).setOnPageChangeListener(new ViewPager.OnPageChangeListener() {
-                @Override
-                public void onPageScrolled(int position, float positionOffset, int positionOffsetPixels) {
+            banner.setIndicatorGravity(BannerConfig.RIGHT)
+                    .setImages(images)
+                    .setImageLoader(new AdImageLoader())
+                    .setOnPageChangeListener(new ViewPager.OnPageChangeListener() {
+                        @Override
+                        public void onPageScrolled(int position, float positionOffset, int positionOffsetPixels) {
 
-                }
+                        }
 
-                @Override
-                public void onPageSelected(int position) {
-                    if (position == 3) {
-                        startButton.setVisibility(View.VISIBLE);
-                    }
-                    else {
-                        startButton.setVisibility(View.GONE);
-                    }
-                }
+                        @Override
+                        public void onPageSelected(int position) {
+                            if (position == 3) {
+                                startButton.setVisibility(View.VISIBLE);
+                            }
+                            else {
+                                startButton.setVisibility(View.GONE);
+                            }
+                        }
 
-                @Override
-                public void onPageScrollStateChanged(int state) {
+                        @Override
+                        public void onPageScrollStateChanged(int state) {
 
-                }
-            });
+                        }
+                    });
             banner.isAutoPlay(false).start();
         }
         else {

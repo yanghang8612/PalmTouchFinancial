@@ -2,10 +2,12 @@ package com.huachuang.palmtouchfinancial.fragment;
 
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
+import android.os.Handler;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.TextView;
 
+import com.alibaba.fastjson.JSON;
 import com.flipboard.bottomsheet.BottomSheetLayout;
 import com.flipboard.bottomsheet.commons.MenuSheetView;
 import com.huachuang.palmtouchfinancial.GlobalParams;
@@ -14,14 +16,24 @@ import com.huachuang.palmtouchfinancial.R;
 import com.huachuang.palmtouchfinancial.activity.ShareQrCodeActivity;
 import com.huachuang.palmtouchfinancial.activity.ShareRecordActivity;
 import com.huachuang.palmtouchfinancial.backend.UserManager;
+import com.huachuang.palmtouchfinancial.backend.bean.BankCard;
+import com.huachuang.palmtouchfinancial.backend.net.NetCallbackAdapter;
+import com.huachuang.palmtouchfinancial.backend.net.params.GetRecommendCount;
+import com.huachuang.palmtouchfinancial.backend.net.params.GetUserWallet;
 import com.huachuang.palmtouchfinancial.util.CommonUtils;
 import com.tencent.mm.opensdk.modelmsg.SendMessageToWX;
 import com.tencent.mm.opensdk.modelmsg.WXMediaMessage;
 import com.tencent.mm.opensdk.modelmsg.WXWebpageObject;
 
+import org.json.JSONException;
+import org.json.JSONObject;
 import org.xutils.view.annotation.ContentView;
 import org.xutils.view.annotation.Event;
 import org.xutils.view.annotation.ViewInject;
+import org.xutils.x;
+
+import in.srain.cube.views.ptr.PtrDefaultHandler;
+import in.srain.cube.views.ptr.PtrFrameLayout;
 
 /**
  * Created by Asuka on 2017/3/7.
@@ -29,6 +41,9 @@ import org.xutils.view.annotation.ViewInject;
 
 @ContentView(R.layout.fragment_share)
 public class ShareFragment extends BaseFragment {
+
+    @ViewInject(R.id.share_fragment_ptr_frame)
+    private PtrFrameLayout ptrFrame;
 
     @ViewInject(R.id.share_fragment_bottomsheet)
     private BottomSheetLayout bottomSheet;
@@ -53,6 +68,14 @@ public class ShareFragment extends BaseFragment {
 
     @Override
     protected void initFragment() {
+        initCountViews();
+        ptrFrame.setPtrHandler(new PtrDefaultHandler() {
+            @Override
+            public void onRefreshBegin(PtrFrameLayout frame) {
+                initCountViews();
+            }
+        });
+
         shareWeiXin.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -118,5 +141,29 @@ public class ShareFragment extends BaseFragment {
 
     private String buildTransaction(final String type) {
         return (type == null) ? String.valueOf(System.currentTimeMillis()) : type + System.currentTimeMillis();
+    }
+
+    private void initCountViews() {
+        x.http().post(new GetRecommendCount(), new NetCallbackAdapter(ShareFragment.this.getContext(), false) {
+            @Override
+            public void onSuccess(String result) {
+                JSONObject resultJsonObject;
+                try {
+                    resultJsonObject = new JSONObject(result);
+                    if (resultJsonObject.getBoolean("Status")) {
+                        baseCountView.setText(resultJsonObject.getString("BaseCount") + "人");
+                        deriveCountView.setText(resultJsonObject.getString("DeriveCount") + "人");
+                        thirdCountView.setText(resultJsonObject.getString("ThirdCount") + "人");
+                    }
+                    else {
+                        showToast(resultJsonObject.getString("Info"));
+                    }
+                    ptrFrame.refreshComplete();
+                }
+                catch (JSONException e) {
+                    e.printStackTrace();
+                }
+            }
+        });
     }
 }

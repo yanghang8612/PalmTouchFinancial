@@ -5,6 +5,7 @@ import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.TextView;
 
 import com.afollestad.materialdialogs.DialogAction;
 import com.afollestad.materialdialogs.MaterialDialog;
@@ -14,9 +15,18 @@ import com.huachuang.palmtouchfinancial.activity.MainMallActivity;
 import com.huachuang.palmtouchfinancial.activity.MyBalanceActivity;
 import com.huachuang.palmtouchfinancial.activity.MyPointsActivity;
 import com.huachuang.palmtouchfinancial.adapter.WalletMallAdapter;
+import com.huachuang.palmtouchfinancial.backend.net.NetCallbackAdapter;
+import com.huachuang.palmtouchfinancial.backend.net.params.GetRecommendCount;
+import com.huachuang.palmtouchfinancial.backend.net.params.GetUserWallet;
 
+import org.json.JSONException;
+import org.json.JSONObject;
 import org.xutils.view.annotation.ContentView;
 import org.xutils.view.annotation.ViewInject;
+import org.xutils.x;
+
+import in.srain.cube.views.ptr.PtrDefaultHandler;
+import in.srain.cube.views.ptr.PtrFrameLayout;
 
 /**
  * Created by Asuka on 2017/3/7.
@@ -26,36 +36,34 @@ import org.xutils.view.annotation.ViewInject;
 public class WalletFragment extends BaseFragment {
 
     private WalletMallAdapter adapter;
+    private View header;
+    private TextView balanceAmountView;
+    private TextView pointsAmountView;
+
+    @ViewInject(R.id.wallet_fragment_ptr_frame)
+    private PtrFrameLayout ptrFrame;
 
     @ViewInject(R.id.wallet_mall_list)
     private RecyclerView walletMallList;
 
     @Override
     protected void initFragment() {
-        View header = getActivity().getLayoutInflater().inflate(R.layout.header_fragment_wallet, (ViewGroup) walletMallList.getParent(), false);
+        header = getActivity().getLayoutInflater().inflate(R.layout.header_fragment_wallet, (ViewGroup) walletMallList.getParent(), false);
+        balanceAmountView = (TextView) header.findViewById(R.id.wallet_balance_amount);
+        pointsAmountView = (TextView) header.findViewById(R.id.wallet_points_amount);
 
-        header.findViewById(R.id.wallet_scan).setOnClickListener(new View.OnClickListener() {
+        initWallet();
+        ptrFrame.setPtrHandler(new PtrDefaultHandler() {
             @Override
-            public void onClick(View v) {
-                showDefaultDialog();
+            public void onRefreshBegin(PtrFrameLayout frame) {
+                initWallet();
             }
         });
-        header.findViewById(R.id.wallet_pay_code).setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                showDefaultDialog();
-            }
-        });
+
         header.findViewById(R.id.wallet_card).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 CardManagerActivity.actionStart(WalletFragment.this.getContext());
-            }
-        });
-        header.findViewById(R.id.wallet_pay_code).setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                showDefaultDialog();
             }
         });
         header.findViewById(R.id.wallet_recharge).setOnClickListener(new View.OnClickListener() {
@@ -104,5 +112,28 @@ public class WalletFragment extends BaseFragment {
                     }
                 })
                 .show();
+    }
+
+    private void initWallet() {
+        x.http().post(new GetUserWallet(), new NetCallbackAdapter(WalletFragment.this.getContext(), false) {
+            @Override
+            public void onSuccess(String result) {
+                JSONObject resultJsonObject;
+                try {
+                    resultJsonObject = new JSONObject(result);
+                    if (resultJsonObject.getBoolean("Status")) {
+                        balanceAmountView.setText("￥ " + resultJsonObject.getString("Balance"));
+                        pointsAmountView.setText(resultJsonObject.getString("Points"));
+                    }
+                    else {
+                        showToast(resultJsonObject.getString("Info"));
+                    }
+                    ptrFrame.refreshComplete();
+                }
+                catch (JSONException e) {
+                    e.printStackTrace();
+                }
+            }
+        });
     }
 }

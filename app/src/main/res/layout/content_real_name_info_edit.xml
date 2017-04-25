@@ -139,8 +139,10 @@
                 android:layout_height="wrap_content"
                 android:layout_weight="3"
                 android:layout_gravity="center"
-                android:inputType="number"
-                android:maxEms="18"
+                android:inputType="textCapCharacters"
+                android:digits="0123456789X"
+                android:maxLength="18"
+                android:maxLines="1"
                 android:textSize="15sp" />
 
         </LinearLayout>
