@@ -30,7 +30,7 @@ import java.util.List;
 @ContentView(R.layout.activity_card_manager)
 public class CardManagerActivity extends BaseSwipeActivity {
 
-    public static final String TAG = CardManagerActivity.class.getSimpleName();
+    private static final String TAG = CardManagerActivity.class.getSimpleName();
 
     public static final int REQUEST_CODE_CARD_INFO = 0;
 

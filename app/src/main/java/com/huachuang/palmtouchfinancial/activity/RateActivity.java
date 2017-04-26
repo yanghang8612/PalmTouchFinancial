@@ -16,7 +16,7 @@ import org.xutils.view.annotation.ViewInject;
 @ContentView(R.layout.activity_rate)
 public class RateActivity extends BaseSwipeActivity {
 
-    public static final String TAG = RateActivity.class.getSimpleName();
+    private static final String TAG = RateActivity.class.getSimpleName();
 
     public static void actionStart(Context context) {
         Intent intent = new Intent(context, RateActivity.class);

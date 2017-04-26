@@ -14,7 +14,7 @@ import org.xutils.view.annotation.ViewInject;
 @ContentView(R.layout.activity_my_points)
 public class MyPointsActivity extends BaseSwipeActivity {
 
-    public static final String TAG = MyPointsActivity.class.getSimpleName();
+    private static final String TAG = MyPointsActivity.class.getSimpleName();
 
     public static void actionStart(Context context) {
         Intent intent = new Intent(context, MyPointsActivity.class);

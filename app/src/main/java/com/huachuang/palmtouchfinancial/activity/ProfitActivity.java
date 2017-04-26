@@ -17,7 +17,7 @@ import org.xutils.view.annotation.ViewInject;
 @ContentView(R.layout.activity_profit)
 public class ProfitActivity extends BaseActivity {
 
-    public static final String TAG = ProfitActivity.class.getSimpleName();
+    private static final String TAG = ProfitActivity.class.getSimpleName();
 
     public static void actionStart(Context context) {
         Intent intent = new Intent(context, ProfitActivity.class);

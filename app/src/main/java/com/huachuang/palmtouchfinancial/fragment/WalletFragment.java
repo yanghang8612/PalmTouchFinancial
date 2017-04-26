@@ -134,6 +134,12 @@ public class WalletFragment extends BaseFragment {
                     e.printStackTrace();
                 }
             }
+
+            @Override
+            public void onFinished() {
+                super.onFinished();
+                ptrFrame.refreshComplete();
+            }
         });
     }
 }

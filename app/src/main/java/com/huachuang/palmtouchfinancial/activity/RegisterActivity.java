@@ -387,8 +387,8 @@ public class RegisterActivity extends BaseSwipeActivity implements View.OnFocusC
         else {
             RegisterParams params = new RegisterParams(
                     phoneNumberLayout.getEditText().getText().toString(),
-                    identifyCodeLayout.getEditText().getText().toString(),
-                    passwordLayout.getEditText().getText().toString());
+                    passwordLayout.getEditText().getText().toString(),
+                    identifyCodeLayout.getEditText().getText().toString());
             x.http().post(params, new NetCallbackAdapter(this, progressDialog) {
                 @Override
                 public void onSuccess(String result) {

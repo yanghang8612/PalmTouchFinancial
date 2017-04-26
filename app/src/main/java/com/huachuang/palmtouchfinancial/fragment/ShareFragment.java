@@ -85,7 +85,11 @@ public class ShareFragment extends BaseFragment {
                             public boolean onMenuItemClick(MenuItem item) {
                                 // 初始化一个WXTextObject对象
                                 WXWebpageObject webpage = new WXWebpageObject();
-                                webpage.webpageUrl = GlobalParams.SERVER_URL_HEAD + "/register_step_one.html?recommenderID=" + UserManager.getUserPhoneNumber();
+                                webpage.webpageUrl = GlobalParams.SERVER_URL_HEAD
+                                        + "/register_step_one.html?recommenderID="
+                                        + UserManager.getUserPhoneNumber()
+                                        + "?shareType="
+                                        + ((item.getItemId() == R.id.share_wechat_session) ? "1" : "2");
 
                                 WXMediaMessage msg = new WXMediaMessage(webpage);
                                 msg.title = "下载注册掌触金控APP，推荐好友就送现金大礼";
@@ -163,6 +167,12 @@ public class ShareFragment extends BaseFragment {
                 catch (JSONException e) {
                     e.printStackTrace();
                 }
+            }
+
+            @Override
+            public void onFinished() {
+                super.onFinished();
+                ptrFrame.refreshComplete();
             }
         });
     }

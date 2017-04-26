@@ -1,47 +1,127 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:orientation="vertical"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:paddingTop="72dp"
     android:background="@color/light_grey">
+
+    <LinearLayout
+        android:id="@+id/my_fragment_header"
+        android:orientation="horizontal"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/my_header_height"
+        android:padding="@dimen/my_header_padding"
+        android:background="@drawable/background"
+        android:theme="@style/ThemeOverlay.AppCompat.Dark">
+
+        <de.hdodenhof.circleimageview.CircleImageView
+            android:id="@+id/my_fragment_header_image_view"
+            android:layout_width="@dimen/my_image_length"
+            android:layout_height="@dimen/my_image_length"
+            android:layout_gravity="bottom"
+            android:src="@drawable/default_header_image"
+            app:civ_border_width="3dp"
+            app:civ_border_color="@color/white" />
+
+        <LinearLayout
+            android:orientation="vertical"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="@dimen/my_horizontal_spacing"
+            android:layout_gravity="bottom">
+
+            <LinearLayout
+                android:orientation="horizontal"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:gravity="center">
+
+                <TextView
+                    android:id="@+id/my_fragment_header_phone_number"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="18511838501"
+                    android:textSize="16sp"
+                    android:textAppearance="@style/TextAppearance.AppCompat.Body1" />
+
+                <de.hdodenhof.circleimageview.CircleImageView
+                    android:id="@+id/my_fragment_header_user_type_common"
+                    android:layout_width="24dp"
+                    android:layout_height="24dp"
+                    android:layout_marginLeft="8dp"
+                    android:src="@drawable/ic_vip"
+                    app:civ_fill_color="@color/grey" />
+
+                <de.hdodenhof.circleimageview.CircleImageView
+                    android:id="@+id/my_fragment_header_user_type_vip"
+                    android:layout_width="24dp"
+                    android:layout_height="24dp"
+                    android:layout_marginLeft="8dp"
+                    android:src="@drawable/ic_vip"
+                    android:visibility="gone"
+                    app:civ_fill_color="@color/red" />
+
+                <de.hdodenhof.circleimageview.CircleImageView
+                    android:id="@+id/my_fragment_header_user_type_agent"
+                    android:layout_width="24dp"
+                    android:layout_height="24dp"
+                    android:layout_marginLeft="8dp"
+                    android:src="@drawable/ic_vip"
+                    android:visibility="gone"
+                    app:civ_fill_color="@color/colorPrimary" />
+
+            </LinearLayout>
+
+            <TextView
+                android:id="@+id/my_fragment_header_name"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="5dp"
+                android:text="杨行"
+                android:textSize="16sp"
+                android:textAppearance="@style/TextAppearance.AppCompat.Body1" />
+
+        </LinearLayout>
+
+    </LinearLayout>
 
     <LinearLayout
         android:orientation="vertical"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="@dimen/setting_padding"
+        android:layout_marginTop="@dimen/my_group_margin"
         android:background="@color/white">
 
         <RelativeLayout
-            android:id="@+id/setting_share_app"
+            android:id="@+id/my_real_name_information"
             android:layout_width="match_parent"
-            android:layout_height="@dimen/setting_row_height"
-            android:padding="@dimen/setting_padding">
+            android:layout_height="@dimen/my_row_height"
+            android:padding="@dimen/my_padding">
 
             <ImageView
-                android:id="@+id/setting_share_app_icon"
-                android:layout_width="@dimen/setting_image_width"
-                android:layout_height="@dimen/setting_image_height"
+                android:id="@+id/my_real_name_information_icon"
+                android:layout_width="@dimen/my_image_width"
+                android:layout_height="@dimen/my_image_height"
                 android:layout_centerVertical="true"
-                android:layout_marginLeft="@dimen/setting_padding"
-                android:src="@drawable/ic_touch_app_black_48dp" />
+                android:layout_marginLeft="@dimen/my_padding"
+                android:src="@drawable/ic_assignment_ind_black_48dp" />
 
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center_vertical"
                 android:layout_centerVertical="true"
-                android:layout_toRightOf="@id/setting_share_app_icon"
-                android:layout_marginLeft="@dimen/setting_padding"
-                android:text="@string/setting_share_app"
-                android:textSize="@dimen/setting_text_size"
+                android:layout_toRightOf="@id/my_real_name_information_icon"
+                android:layout_marginLeft="@dimen/my_padding"
+                android:text="@string/my_real_name_information"
+                android:textSize="@dimen/my_text_size"
                 android:textColor="@color/black" />
 
             <ImageView
-                android:layout_width="@dimen/setting_image_width"
-                android:layout_height="@dimen/setting_image_height"
+                android:layout_width="@dimen/my_image_width"
+                android:layout_height="@dimen/my_image_height"
                 android:layout_centerVertical="true"
                 android:layout_alignParentRight="true"
                 android:src="@drawable/ic_navigate_next_black_48dp" />
@@ -51,32 +131,32 @@
         <include layout="@layout/horizontal_line" />
 
         <RelativeLayout
-            android:id="@+id/setting_check_update"
+            android:id="@+id/my_change_debit_card"
             android:layout_width="match_parent"
-            android:layout_height="@dimen/setting_row_height"
-            android:padding="@dimen/setting_padding">
+            android:layout_height="@dimen/my_row_height"
+            android:padding="@dimen/my_padding">
 
             <ImageView
-                android:id="@+id/setting_check_update_icon"
-                android:layout_width="@dimen/setting_image_width"
-                android:layout_height="@dimen/setting_image_height"
-                android:layout_marginLeft="@dimen/setting_padding"
-                android:src="@drawable/ic_autorenew_black_48dp" />
+                android:id="@+id/my_change_debit_card_icon"
+                android:layout_width="@dimen/my_image_width"
+                android:layout_height="@dimen/my_image_height"
+                android:layout_marginLeft="@dimen/my_padding"
+                android:src="@drawable/ic_note_black_48dp" />
 
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center_vertical"
                 android:layout_centerVertical="true"
-                android:layout_toRightOf="@id/setting_check_update_icon"
-                android:layout_marginLeft="@dimen/setting_padding"
-                android:text="@string/setting_check_update"
-                android:textSize="@dimen/setting_text_size"
+                android:layout_toRightOf="@id/my_change_debit_card_icon"
+                android:layout_marginLeft="@dimen/my_padding"
+                android:text="@string/my_change_debit_card"
+                android:textSize="@dimen/my_text_size"
                 android:textColor="@color/black" />
 
             <ImageView
-                android:layout_width="@dimen/setting_image_width"
-                android:layout_height="@dimen/setting_image_height"
+                android:layout_width="@dimen/my_image_width"
+                android:layout_height="@dimen/my_image_height"
                 android:layout_centerVertical="true"
                 android:layout_alignParentRight="true"
                 android:src="@drawable/ic_navigate_next_black_48dp" />
@@ -86,33 +166,105 @@
         <include layout="@layout/horizontal_line" />
 
         <RelativeLayout
-            android:id="@+id/setting_feedback"
+            android:id="@+id/my_rate"
             android:layout_width="match_parent"
-            android:layout_height="@dimen/setting_row_height"
-            android:padding="@dimen/setting_padding">
+            android:layout_height="@dimen/my_row_height"
+            android:padding="@dimen/my_padding">
 
             <ImageView
-                android:id="@+id/setting_feedback_icon"
-                android:layout_width="@dimen/setting_image_width"
-                android:layout_height="@dimen/setting_image_height"
+                android:id="@+id/my_rate_icon"
+                android:layout_width="@dimen/my_image_width"
+                android:layout_height="@dimen/my_image_height"
                 android:layout_centerVertical="true"
-                android:layout_marginLeft="@dimen/setting_padding"
-                android:src="@drawable/ic_thumb_up_black_48dp" />
+                android:layout_marginLeft="@dimen/my_padding"
+                android:src="@drawable/ic_monetization_on_black_48dp" />
 
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center_vertical"
                 android:layout_centerVertical="true"
-                android:layout_toRightOf="@id/setting_feedback_icon"
-                android:layout_marginLeft="@dimen/setting_padding"
-                android:text="@string/setting_feedback"
-                android:textSize="@dimen/setting_text_size"
+                android:layout_toRightOf="@id/my_rate_icon"
+                android:layout_marginLeft="@dimen/my_padding"
+                android:text="@string/my_rate"
+                android:textSize="@dimen/my_text_size"
                 android:textColor="@color/black" />
 
             <ImageView
-                android:layout_width="@dimen/setting_image_width"
-                android:layout_height="@dimen/setting_image_height"
+                android:layout_width="@dimen/my_image_width"
+                android:layout_height="@dimen/my_image_height"
+                android:layout_centerVertical="true"
+                android:layout_alignParentRight="true"
+                android:src="@drawable/ic_navigate_next_black_48dp" />
+
+        </RelativeLayout>
+
+        <include layout="@layout/horizontal_line" />
+
+        <RelativeLayout
+            android:id="@+id/my_profit_share"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/my_row_height"
+            android:padding="@dimen/my_padding">
+
+            <ImageView
+                android:id="@+id/my_profit_share_icon"
+                android:layout_width="@dimen/my_image_width"
+                android:layout_height="@dimen/my_image_height"
+                android:layout_centerVertical="true"
+                android:layout_marginLeft="@dimen/my_padding"
+                android:src="@drawable/ic_pan_tool_black_48dp" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_vertical"
+                android:layout_centerVertical="true"
+                android:layout_toRightOf="@id/my_profit_share_icon"
+                android:layout_marginLeft="@dimen/my_padding"
+                android:text="@string/my_profit_share"
+                android:textSize="@dimen/my_text_size"
+                android:textColor="@color/black" />
+
+            <ImageView
+                android:layout_width="@dimen/my_image_width"
+                android:layout_height="@dimen/my_image_height"
+                android:layout_centerVertical="true"
+                android:layout_alignParentRight="true"
+                android:src="@drawable/ic_navigate_next_black_48dp" />
+
+        </RelativeLayout>
+
+        <include layout="@layout/horizontal_line" />
+
+        <RelativeLayout
+            android:id="@+id/my_agent_manager"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/my_row_height"
+            android:padding="@dimen/my_padding">
+
+            <ImageView
+                android:id="@+id/my_agent_manager_icon"
+                android:layout_width="@dimen/my_image_width"
+                android:layout_height="@dimen/my_image_height"
+                android:layout_centerVertical="true"
+                android:layout_marginLeft="@dimen/my_padding"
+                android:src="@drawable/ic_supervisor_account_black_48dp" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_vertical"
+                android:layout_centerVertical="true"
+                android:layout_toRightOf="@id/my_agent_manager_icon"
+                android:layout_marginLeft="@dimen/my_padding"
+                android:text="@string/my_agent_manager"
+                android:textSize="@dimen/my_text_size"
+                android:textColor="@color/black" />
+
+            <ImageView
+                android:layout_width="@dimen/my_image_width"
+                android:layout_height="@dimen/my_image_height"
                 android:layout_centerVertical="true"
                 android:layout_alignParentRight="true"
                 android:src="@drawable/ic_navigate_next_black_48dp" />
@@ -125,37 +277,37 @@
         android:orientation="vertical"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="@dimen/setting_padding"
+        android:layout_marginTop="@dimen/my_group_margin"
         android:background="@color/white">
 
         <RelativeLayout
-            android:id="@+id/setting_user_agreement"
+            android:id="@+id/my_change_password"
             android:layout_width="match_parent"
-            android:layout_height="@dimen/setting_row_height"
-            android:padding="@dimen/setting_padding">
+            android:layout_height="@dimen/my_row_height"
+            android:padding="@dimen/my_padding">
 
             <ImageView
-                android:id="@+id/setting_user_agreement_icon"
-                android:layout_width="@dimen/setting_image_width"
-                android:layout_height="@dimen/setting_image_height"
+                android:id="@+id/my_change_password_icon"
+                android:layout_width="@dimen/my_image_width"
+                android:layout_height="@dimen/my_image_height"
                 android:layout_centerVertical="true"
-                android:layout_marginLeft="@dimen/setting_padding"
-                android:src="@drawable/ic_user_agreement" />
+                android:layout_marginLeft="@dimen/my_padding"
+                android:src="@drawable/ic_lock_black_48dp" />
 
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center_vertical"
                 android:layout_centerVertical="true"
-                android:layout_toRightOf="@id/setting_user_agreement_icon"
-                android:layout_marginLeft="@dimen/setting_padding"
-                android:text="@string/setting_user_agreement"
-                android:textSize="@dimen/setting_text_size"
+                android:layout_toRightOf="@id/my_change_password_icon"
+                android:layout_marginLeft="@dimen/my_padding"
+                android:text="@string/my_change_password"
+                android:textSize="@dimen/my_text_size"
                 android:textColor="@color/black" />
 
             <ImageView
-                android:layout_width="@dimen/setting_image_width"
-                android:layout_height="@dimen/setting_image_height"
+                android:layout_width="@dimen/my_image_width"
+                android:layout_height="@dimen/my_image_height"
                 android:layout_centerVertical="true"
                 android:layout_alignParentRight="true"
                 android:src="@drawable/ic_navigate_next_black_48dp" />
@@ -165,33 +317,33 @@
         <include layout="@layout/horizontal_line" />
 
         <RelativeLayout
-            android:id="@+id/setting_about_us"
+            android:id="@+id/my_setting"
             android:layout_width="match_parent"
-            android:layout_height="@dimen/setting_row_height"
-            android:padding="@dimen/setting_padding">
+            android:layout_height="@dimen/my_row_height"
+            android:padding="@dimen/my_padding">
 
             <ImageView
-                android:id="@+id/setting_about_us_icon"
-                android:layout_width="@dimen/setting_image_width"
-                android:layout_height="@dimen/setting_image_height"
+                android:id="@+id/my_setting_icon"
+                android:layout_width="@dimen/my_image_width"
+                android:layout_height="@dimen/my_image_height"
                 android:layout_centerVertical="true"
-                android:layout_marginLeft="@dimen/setting_padding"
-                android:src="@drawable/ic_face_black_48dp" />
+                android:layout_marginLeft="@dimen/my_padding"
+                android:src="@drawable/ic_setting" />
 
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center_vertical"
                 android:layout_centerVertical="true"
-                android:layout_toRightOf="@id/setting_about_us_icon"
-                android:layout_marginLeft="@dimen/setting_padding"
-                android:text="@string/setting_about_us"
-                android:textSize="@dimen/setting_text_size"
+                android:layout_toRightOf="@id/my_setting_icon"
+                android:layout_marginLeft="@dimen/my_padding"
+                android:text="@string/my_setting"
+                android:textSize="@dimen/my_text_size"
                 android:textColor="@color/black" />
 
             <ImageView
-                android:layout_width="@dimen/setting_image_width"
-                android:layout_height="@dimen/setting_image_height"
+                android:layout_width="@dimen/my_image_width"
+                android:layout_height="@dimen/my_image_height"
                 android:layout_centerVertical="true"
                 android:layout_alignParentRight="true"
                 android:src="@drawable/ic_navigate_next_black_48dp" />
@@ -201,33 +353,33 @@
         <include layout="@layout/horizontal_line" />
 
         <RelativeLayout
-            android:id="@+id/setting_hotline"
+            android:id="@+id/my_sign_out"
             android:layout_width="match_parent"
-            android:layout_height="@dimen/setting_row_height"
-            android:padding="@dimen/setting_padding">
+            android:layout_height="@dimen/my_row_height"
+            android:padding="@dimen/my_padding">
 
             <ImageView
-                android:id="@+id/setting_hotline_icon"
-                android:layout_width="@dimen/setting_image_width"
-                android:layout_height="@dimen/setting_image_height"
+                android:id="@+id/my_sign_out_icon"
+                android:layout_width="@dimen/my_image_width"
+                android:layout_height="@dimen/my_image_height"
                 android:layout_centerVertical="true"
-                android:layout_marginLeft="@dimen/setting_padding"
-                android:src="@drawable/ic_hotline" />
+                android:layout_marginLeft="@dimen/my_padding"
+                android:src="@drawable/ic_exit_to_app_black_48dp" />
 
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center_vertical"
                 android:layout_centerVertical="true"
-                android:layout_toRightOf="@id/setting_hotline_icon"
-                android:layout_marginLeft="@dimen/setting_padding"
-                android:text="@string/setting_hotline"
-                android:textSize="@dimen/setting_text_size"
+                android:layout_toRightOf="@id/my_sign_out_icon"
+                android:layout_marginLeft="@dimen/my_padding"
+                android:text="@string/my_sign_out"
+                android:textSize="@dimen/my_text_size"
                 android:textColor="@color/black" />
 
             <ImageView
-                android:layout_width="@dimen/setting_image_width"
-                android:layout_height="@dimen/setting_image_height"
+                android:layout_width="@dimen/my_image_width"
+                android:layout_height="@dimen/my_image_height"
                 android:layout_centerVertical="true"
                 android:layout_alignParentRight="true"
                 android:src="@drawable/ic_navigate_next_black_48dp" />
@@ -246,7 +398,7 @@
             android:layout_height="wrap_content"
             android:layout_alignParentBottom="true"
             android:layout_centerHorizontal="true"
-            android:paddingBottom="@dimen/setting_padding"
+            android:paddingBottom="@dimen/my_padding"
             android:text="山东捷讯金融软件技术有限公司"
             android:textSize="13sp" />
 

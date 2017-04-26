@@ -14,7 +14,7 @@ import org.xutils.view.annotation.ViewInject;
 @ContentView(R.layout.activity_user_agreement)
 public class UserAgreementActivity extends BaseSwipeActivity {
 
-    public static final String TAG = UserAgreementActivity.class.getSimpleName();
+    private static final String TAG = UserAgreementActivity.class.getSimpleName();
 
     public static void actionStart(Context context) {
         Intent intent = new Intent(context, UserAgreementActivity.class);

@@ -18,7 +18,7 @@ import org.xutils.view.annotation.ViewInject;
 @ContentView(R.layout.activity_web_view)
 public class WebViewActivity extends BaseSwipeActivity {
 
-    public static final String TAG = WebViewActivity.class.getSimpleName();
+    private static final String TAG = WebViewActivity.class.getSimpleName();
 
     public static void actionStart(Context context, String url, String title) {
         Intent intent = new Intent(context, WebViewActivity.class);

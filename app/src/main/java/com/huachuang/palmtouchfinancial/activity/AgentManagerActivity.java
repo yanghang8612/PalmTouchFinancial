@@ -31,7 +31,7 @@ import java.util.List;
 @ContentView(R.layout.activity_agent_manager)
 public class AgentManagerActivity extends BaseActivity {
 
-    public static final String TAG = AgentManagerActivity.class.getSimpleName();
+    private static final String TAG = AgentManagerActivity.class.getSimpleName();
 
     public static void actionStart(Context context) {
         Intent intent = new Intent(context, AgentManagerActivity.class);

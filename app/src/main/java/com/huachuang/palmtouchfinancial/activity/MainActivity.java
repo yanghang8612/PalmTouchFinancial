@@ -41,7 +41,7 @@ import org.xutils.view.annotation.ViewInject;
 import de.hdodenhof.circleimageview.CircleImageView;
 
 @ContentView(R.layout.activity_main)
-public class MainActivity extends BaseActivity implements NavigationView.OnNavigationItemSelectedListener {
+public class MainActivity extends BaseActivity {
 
     private static final String TAG = MainActivity.class.getSimpleName();
 
@@ -53,19 +53,6 @@ public class MainActivity extends BaseActivity implements NavigationView.OnNavig
     }
 
     private int preFragmentIndex = 0;
-    private int statusBarHeight = 0;
-
-    @ViewInject(R.id.main_toolbar)
-    private Toolbar toolbar;
-
-    @ViewInject(R.id.drawer_layout)
-    private DrawerLayout drawer;
-
-    @ViewInject(R.id.nav_view)
-    private NavigationView navigationView;
-
-    @ViewInject(R.id.main_content)
-    private LinearLayout mainContent;
 
     @ViewInject(R.id.bottom_navigation_bar)
     private BottomNavigationBar bottomNavigationBar;
@@ -75,7 +62,6 @@ public class MainActivity extends BaseActivity implements NavigationView.OnNavig
         super.onCreate(savedInstanceState);
 
         initToolbarAndStatusBar();
-        initNavHeaderView();
         initBottomNavigationBar();
 
         new Handler().postDelayed(new Runnable() {
@@ -87,96 +73,6 @@ public class MainActivity extends BaseActivity implements NavigationView.OnNavig
         }, 500);
     }
 
-    @Override
-    protected void onResume() {
-        super.onResume();
-        refreshNavHeaderView();
-    }
-
-    @Override
-    public void onBackPressed() {
-        DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
-        if (drawer.isDrawerOpen(GravityCompat.START)) {
-            drawer.closeDrawer(GravityCompat.START);
-        }
-        else {
-            new MaterialDialog.Builder(this)
-                    .content("确认退出吗?")
-                    .contentColorRes(R.color.black)
-                    .positiveText("确认")
-                    .negativeText("取消")
-                    .autoDismiss(false)
-                    .onPositive(new MaterialDialog.SingleButtonCallback() {
-                        @Override
-                        public void onClick(@NonNull MaterialDialog dialog, @NonNull DialogAction which) {
-                            MainActivity.super.onBackPressed();
-                        }
-                    })
-                    .onNegative(new MaterialDialog.SingleButtonCallback() {
-                        @Override
-                        public void onClick(@NonNull MaterialDialog dialog, @NonNull DialogAction which) {
-                            dialog.dismiss();
-                        }
-                    })
-                    .show();
-        }
-    }
-
-    @Override
-    public boolean onNavigationItemSelected(MenuItem item) {
-        int id = item.getItemId();
-        switch (id) {
-            case R.id.nav_real_name_information:
-                RealNameInfoActivity.actionStart(this);
-                break;
-            case R.id.nav_change_debit_card:
-                DebitCardActivity.actionStart(this);
-                break;
-            case R.id.nav_my_rate:
-                RateActivity.actionStart(this);
-                break;
-            case R.id.nav_profit_share:
-                ProfitActivity.actionStart(this);
-                break;
-            case R.id.nav_agent_manager:
-                AgentManagerActivity.actionStart(this);
-                break;
-            case R.id.nav_change_password:
-                ChangePasswordActivity.actionStart(this);
-                break;
-            case R.id.nav_sign_out:
-                new MaterialDialog.Builder(this)
-                        .content("确认退出登录吗?")
-                        .contentColorRes(R.color.black)
-                        .positiveText("确认")
-                        .negativeText("取消")
-                        .autoDismiss(false)
-                        .onPositive(new MaterialDialog.SingleButtonCallback() {
-                            @Override
-                            public void onClick(@NonNull MaterialDialog dialog, @NonNull DialogAction which) {
-                                SharedPreferences defaultPref = getSharedPreferences(DEFAULT_PRE, MODE_PRIVATE);
-                                SharedPreferences.Editor editor = defaultPref.edit();
-                                editor.clear();
-                                editor.commit();
-                                LoginActivity.actionStart(MainActivity.this);
-                                finish();
-                            }
-                        })
-                        .onNegative(new MaterialDialog.SingleButtonCallback() {
-                            @Override
-                            public void onClick(@NonNull MaterialDialog dialog, @NonNull DialogAction which) {
-                                dialog.dismiss();
-                            }
-                        })
-                        .show();
-                break;
-            default:
-                break;
-        }
-        drawer.closeDrawer(GravityCompat.START);
-        return true;
-    }
-
     private void showDefaultFragment() {
         Fragment defaultFragment = FragmentFactory.getInstanceByIndex(defaultFragmentIndex);
         FragmentManager fragmentManager = getSupportFragmentManager();
@@ -186,20 +82,20 @@ public class MainActivity extends BaseActivity implements NavigationView.OnNavig
     }
 
     public void switchFragment(int toIndex) {
-        if (toIndex == 0) {
-            toolbar.setBackgroundColor(Color.TRANSPARENT);
-        }
-        else {
-            toolbar.setBackgroundColor(getResources().getColor(R.color.colorPrimary));
-        }
-        if (Build.VERSION.SDK_INT >= 21) {
-            if (toIndex == 0) {
-                getWindow().setStatusBarColor(Color.TRANSPARENT);
-            }
-            else {
-                getWindow().setStatusBarColor(getResources().getColor(R.color.colorPrimary));
-            }
-        }
+//        if (toIndex == 0 || toIndex == 3) {
+//            toolbar.setBackgroundColor(Color.TRANSPARENT);
+//        }
+//        else {
+//            toolbar.setBackgroundColor(getResources().getColor(R.color.colorPrimary));
+//        }
+//        if (Build.VERSION.SDK_INT >= 21) {
+//            if (toIndex == 0 || toIndex == 3) {
+//                getWindow().setStatusBarColor(Color.TRANSPARENT);
+//            }
+//            else {
+//                getWindow().setStatusBarColor(getResources().getColor(R.color.colorPrimary));
+//            }
+//        }
 
         bottomNavigationBar.selectTab(toIndex, false);
         Fragment from = FragmentFactory.getInstanceByIndex(preFragmentIndex), to = FragmentFactory.getInstanceByIndex(toIndex);
@@ -223,85 +119,11 @@ public class MainActivity extends BaseActivity implements NavigationView.OnNavig
     }
 
     private void initToolbarAndStatusBar() {
-        int resourceId = getResources().getIdentifier("status_bar_height", "dimen", "android");
-        if (resourceId > 0) {
-            statusBarHeight = getResources().getDimensionPixelSize(resourceId);
-        }
 
         getWindow().getDecorView().setSystemUiVisibility(View.SYSTEM_UI_FLAG_LAYOUT_FULLSCREEN);
 
-        AppBarLayout.LayoutParams toolbarParams = (AppBarLayout.LayoutParams) toolbar.getLayoutParams();
-        toolbarParams.setMargins(0, statusBarHeight, 0, 0);
-        toolbar.setLayoutParams(toolbarParams);
-        setSupportActionBar(toolbar);
-
-        ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(
-                this, drawer, toolbar, R.string.navigation_drawer_open, R.string.navigation_drawer_close);
-        drawer.addDrawerListener(toggle);
-        toggle.syncState();
-    }
-
-    private void initNavHeaderView() {
-        refreshNavHeaderView();
-        navigationView.getHeaderView(0).setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                if (drawer.isDrawerOpen(GravityCompat.START)) {
-                    drawer.closeDrawer(GravityCompat.START);
-                }
-                PersonalInfoActivity.actionStart(MainActivity.this);
-            }
-        });
-        navigationView.setNavigationItemSelectedListener(this);
-    }
-
-    private void refreshNavHeaderView() {
-        View navHeaderView = navigationView.getHeaderView(0);
-        CircleImageView agentLevelView = (CircleImageView) navHeaderView.findViewById(R.id.nav_header_user_type_agent);
-        if (UserManager.getCurrentUser().getUserType() == 0) {
-            if (UserManager.getCurrentUser().isVip()) {
-                navHeaderView.findViewById(R.id.nav_header_user_type_common).setVisibility(View.GONE);
-                navHeaderView.findViewById(R.id.nav_header_user_type_vip).setVisibility(View.VISIBLE);
-            }
-        }
-        else {
-            navHeaderView.findViewById(R.id.nav_header_user_type_common).setVisibility(View.GONE);
-            switch (UserManager.getCurrentUser().getUserType()) {
-                case 1:
-                    agentLevelView.setImageResource(R.drawable.ic_level_one);
-                    break;
-                case 2:
-                    agentLevelView.setImageResource(R.drawable.ic_level_two);
-                    break;
-                case 3:
-                    agentLevelView.setImageResource(R.drawable.ic_level_three);
-                    break;
-            }
-            agentLevelView.setVisibility(View.VISIBLE);
-        }
-
-        CircleImageView headerImageView = (CircleImageView) navHeaderView.findViewById(R.id.nav_header_image_view);
-        if (UserManager.getCurrentUser().getHeaderState()) {
-            Glide.with(this)
-                    .load(CommonUtils.getHeaderUrl())
-                    .skipMemoryCache(true)
-                    .diskCacheStrategy(DiskCacheStrategy.NONE)
-                    .into(headerImageView);
-        }
-
-        TextView phoneNumberView = (TextView) navHeaderView.findViewById(R.id.nav_header_phone_number);
-        phoneNumberView.setText(UserManager.getCurrentUser().getUserPhoneNumber());
-
-        TextView nameView = (TextView) navHeaderView.findViewById(R.id.nav_header_name);
-        if (UserManager.getCurrentUser().getCertificationState()) {
-            nameView.setText(UserManager.getCertificationInfo().getUserName());
-        }
-        else {
-            nameView.setText("<请实名认证>");
-        }
-
-        if (UserManager.getCurrentUser().getUserType() == 0) {
-            navigationView.getMenu().getItem(4).setVisible(false);
+        if (Build.VERSION.SDK_INT >= 21) {
+            getWindow().setStatusBarColor(Color.TRANSPARENT);
         }
     }
 

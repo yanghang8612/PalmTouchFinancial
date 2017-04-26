@@ -24,7 +24,7 @@ import java.util.List;
 @ContentView(R.layout.activity_main_mall)
 public class MainMallActivity extends BaseSwipeActivity {
 
-    public static final String TAG = MainMallActivity.class.getSimpleName();
+    private static final String TAG = MainMallActivity.class.getSimpleName();
 
     public static void actionStart(Context context) {
         Intent intent = new Intent(context, MainMallActivity.class);

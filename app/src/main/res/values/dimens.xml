@@ -1,9 +1,4 @@
 <resources>
-    <!-- Default screen margins, per the Android Design guidelines. -->
-    <dimen name="nav_header_horizontal_spacing">10dp</dimen>
-    <dimen name="nav_header_height">120dp</dimen>
-    <dimen name="nav_image_length">60dp</dimen>
-    <!-- Default screen margins, per the Android Design guidelines. -->
     <dimen name="activity_horizontal_margin">16dp</dimen>
     <dimen name="activity_vertical_margin">16dp</dimen>
     <dimen name="fab_margin">16dp</dimen>
@@ -41,6 +36,17 @@
     <dimen name="setting_image_width">24dp</dimen>
     <dimen name="setting_image_height">24dp</dimen>
     <dimen name="setting_text_size">16sp</dimen>
+
+    <dimen name="my_horizontal_spacing">10dp</dimen>
+    <dimen name="my_header_height">150dp</dimen>
+    <dimen name="my_header_padding">10dp</dimen>
+    <dimen name="my_image_length">60dp</dimen>
+    <dimen name="my_row_height">40dp</dimen>
+    <dimen name="my_padding">8dp</dimen>
+    <dimen name="my_group_margin">12dp</dimen>
+    <dimen name="my_image_width">20dp</dimen>
+    <dimen name="my_image_height">20dp</dimen>
+    <dimen name="my_text_size">15sp</dimen>
 
     <dimen name="share_row_height">48dp</dimen>
     <dimen name="share_margin">5dp</dimen>
@@ -109,4 +115,6 @@
     <dimen name="loan_apply_row_height">48dp</dimen>
     <dimen name="loan_apply_divider_margin">12dp</dimen>
     <dimen name="loan_apply_text_size">13sp</dimen>
+
+    <dimen name="recommend_record_item_height">64dp</dimen>
 </resources>

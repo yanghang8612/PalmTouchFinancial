@@ -1,7 +1,9 @@
 package com.huachuang.palmtouchfinancial.fragment;
 
 import android.os.Bundle;
+import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -15,7 +17,7 @@ import org.xutils.x;
 
 public abstract class BaseFragment extends Fragment {
 
-    private static final String TAG = BaseFragment.class.getSimpleName();
+    protected static final String DEFAULT_PRE = "default";
 
     private boolean injected = false;
 

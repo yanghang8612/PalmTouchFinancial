@@ -28,7 +28,7 @@ import java.util.List;
 @ContentView(R.layout.activity_force_jump)
 public class ForceJumpActivity extends BaseActivity {
 
-    public static final String TAG = ForceJumpActivity.class.getSimpleName();
+    private static final String TAG = ForceJumpActivity.class.getSimpleName();
 
     public static void actionStart(Context context) {
         Intent intent = new Intent(context, ForceJumpActivity.class);

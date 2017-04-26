@@ -31,14 +31,18 @@
     <string name="title_activity_share_qr_record">分享二维码</string>
     <string name="title_activity_loan_apply">网贷申请</string>
     <string name="title_activity_add_bank_card">添加银行卡</string>
+    <string name="title_activity_setting">设置</string>
+    <string name="title_fragment_share">分享</string>
+    <string name="title_fragment_wallet">掌触钱包</string>
 
-    <string name="menu_real_name_information">实名认证</string>
-    <string name="menu_change_debit_card">结算卡变更</string>
-    <string name="menu_my_rate">我的费率</string>
-    <string name="menu_profit_share">我的收益</string>
-    <string name="menu_agent_manager">会员管理</string>
-    <string name="menu_change_password">修改密码</string>
-    <string name="menu_sign_out">退出登录</string>
+    <string name="my_real_name_information">实名认证</string>
+    <string name="my_change_debit_card">结算卡变更</string>
+    <string name="my_rate">我的费率</string>
+    <string name="my_profit_share">我的收益</string>
+    <string name="my_agent_manager">会员管理</string>
+    <string name="my_setting">更多设置</string>
+    <string name="my_change_password">修改密码</string>
+    <string name="my_sign_out">退出登录</string>
 
     <string name="bottom_navigation_home">主页</string>
     <string name="bottom_navigation_share">分享</string>

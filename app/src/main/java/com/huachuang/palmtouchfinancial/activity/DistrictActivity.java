@@ -25,7 +25,7 @@ import java.util.List;
 @ContentView(R.layout.activity_district)
 public class DistrictActivity extends BaseSwipeActivity {
 
-    public static final String TAG = DistrictActivity.class.getSimpleName();
+    private static final String TAG = DistrictActivity.class.getSimpleName();
 
     public static void actionStart(Context context, int requestCode) {
         Intent intent = new Intent(context, DistrictActivity.class);

@@ -25,7 +25,7 @@ import org.xutils.view.annotation.ViewInject;
 @ContentView(R.layout.activity_specific_apply)
 public class SpecificApplyActivity extends BaseSwipeActivity {
 
-    public static final String TAG = SpecificApplyActivity.class.getSimpleName();
+    private static final String TAG = SpecificApplyActivity.class.getSimpleName();
 
     public static String[] bankName = {
             "兴业银行",

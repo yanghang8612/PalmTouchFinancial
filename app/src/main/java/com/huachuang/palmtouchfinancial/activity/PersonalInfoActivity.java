@@ -37,7 +37,7 @@ import de.hdodenhof.circleimageview.CircleImageView;
 @ContentView(R.layout.activity_personal_info)
 public class PersonalInfoActivity extends BaseSwipeActivity {
 
-    public static final String TAG = PersonalInfoActivity.class.getSimpleName();
+    private static final String TAG = PersonalInfoActivity.class.getSimpleName();
 
     public static int REQUEST_CODE_IMAGE = 0;
 

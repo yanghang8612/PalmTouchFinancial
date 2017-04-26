@@ -48,7 +48,7 @@ import java.util.List;
 @ContentView(R.layout.activity_real_name_info)
 public class RealNameInfoActivity extends BaseSwipeActivity {
 
-    public static final String TAG = RealNameInfoActivity.class.getSimpleName();
+    private static final String TAG = RealNameInfoActivity.class.getSimpleName();
 
     public static final int REQUEST_CODE_DISTRICT = 0;
     public static final int REQUEST_CODE_FRONT_IMAGE = 1;
