@@ -37,7 +37,6 @@
     </android.support.design.widget.AppBarLayout>
 
     <in.srain.cube.views.ptr.PtrFrameLayout
-
         android:id="@+id/wallet_fragment_ptr_frame"
         android:layout_width="match_parent"
         android:layout_height="match_parent"

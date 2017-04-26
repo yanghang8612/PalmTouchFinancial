@@ -4,8 +4,12 @@
     android:orientation="vertical"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:layout_marginBottom="-3dp"
-    android:background="@color/light_grey">
+    android:layout_marginBottom="-3dp">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="10dp"
+        android:background="@color/light_grey" />
 
     <!--<LinearLayout-->
         <!--android:orientation="horizontal"-->
@@ -150,8 +154,6 @@
         </LinearLayout>
 
     </LinearLayout>
-
-    <include layout="@layout/horizontal_line" />
 
     <LinearLayout
         android:layout_width="match_parent"

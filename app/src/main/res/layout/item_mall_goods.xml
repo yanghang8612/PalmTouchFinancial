@@ -28,6 +28,7 @@
                     android:id="@+id/mall_goods_item_image"
                     android:layout_width="wrap_content"
                     android:layout_height="64dp"
+                    android:layout_centerInParent="true"
                     android:src="@drawable/goods_5" />
 
                 <ImageView
