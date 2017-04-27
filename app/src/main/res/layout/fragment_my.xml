@@ -18,8 +18,8 @@
 
         <de.hdodenhof.circleimageview.CircleImageView
             android:id="@+id/my_fragment_header_image_view"
-            android:layout_width="@dimen/my_image_length"
-            android:layout_height="@dimen/my_image_length"
+            android:layout_width="@dimen/my_image_size"
+            android:layout_height="@dimen/my_image_size"
             android:layout_gravity="bottom"
             android:src="@drawable/default_header_image"
             app:civ_border_width="3dp"
@@ -48,16 +48,16 @@
 
                 <de.hdodenhof.circleimageview.CircleImageView
                     android:id="@+id/my_fragment_header_user_type_common"
-                    android:layout_width="24dp"
-                    android:layout_height="24dp"
+                    android:layout_width="@dimen/my_user_type_icon_size"
+                    android:layout_height="@dimen/my_user_type_icon_size"
                     android:layout_marginLeft="8dp"
                     android:src="@drawable/ic_vip"
                     app:civ_fill_color="@color/grey" />
 
                 <de.hdodenhof.circleimageview.CircleImageView
                     android:id="@+id/my_fragment_header_user_type_vip"
-                    android:layout_width="24dp"
-                    android:layout_height="24dp"
+                    android:layout_width="@dimen/my_user_type_icon_size"
+                    android:layout_height="@dimen/my_user_type_icon_size"
                     android:layout_marginLeft="8dp"
                     android:src="@drawable/ic_vip"
                     android:visibility="gone"
@@ -65,8 +65,8 @@
 
                 <de.hdodenhof.circleimageview.CircleImageView
                     android:id="@+id/my_fragment_header_user_type_agent"
-                    android:layout_width="24dp"
-                    android:layout_height="24dp"
+                    android:layout_width="@dimen/my_user_type_icon_size"
+                    android:layout_height="@dimen/my_user_type_icon_size"
                     android:layout_marginLeft="8dp"
                     android:src="@drawable/ic_vip"
                     android:visibility="gone"

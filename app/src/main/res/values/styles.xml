@@ -35,6 +35,11 @@
         <item name="android:textColor">@color/icons</item>
     </style>
 
+    <style name="ButtonLoanApply" parent="Theme.AppCompat.Light">
+        <item name="colorButtonNormal">@color/blue</item>
+        <item name="android:textColor">@color/icons</item>
+    </style>
+
     <style name="ButtonShowText" parent="Theme.AppCompat.Light">
         <item name="colorButtonNormal">@color/grey</item>
         <item name="android:textColor">@color/icons</item>

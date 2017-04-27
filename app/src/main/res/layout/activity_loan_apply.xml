@@ -33,32 +33,14 @@
 
     </android.support.design.widget.AppBarLayout>
 
-    <ScrollView
-        android:id="@+id/loan_apply_scrollview"
+    <ViewFlipper
+        android:id="@+id/loan_apply_flipper"
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
+        android:layout_height="wrap_content">
 
-        <LinearLayout
-            android:orientation="vertical"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:paddingLeft="8dp"
-            android:paddingRight="8dp">
+        <include android:id="@+id/loan_apply_content" layout="@layout/content_loan_apply" />
+        <include android:id="@+id/loan_apply_finish_content" layout="@layout/content_loan_apply_finish" />
 
-            <ViewFlipper
-                android:id="@+id/loan_apply_flipper"
-                android:layout_width="match_parent"
-                android:layout_height="0dp"
-                android:layout_weight="1">
-
-                <include android:id="@+id/loan_apply_step_one_content" layout="@layout/content_loan_apply_step_one" />
-                <include android:id="@+id/loan_apply_step_two_content" layout="@layout/content_loan_apply_step_two" />
-                <include android:id="@+id/loan_apply_step_finish_content" layout="@layout/content_loan_apply_step_finish" />
-
-            </ViewFlipper>
-
-        </LinearLayout>
-
-    </ScrollView>
+    </ViewFlipper>
 
 </LinearLayout>

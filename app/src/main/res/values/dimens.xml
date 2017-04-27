@@ -38,9 +38,10 @@
     <dimen name="setting_text_size">16sp</dimen>
 
     <dimen name="my_horizontal_spacing">10dp</dimen>
+    <dimen name="my_user_type_icon_size">20dp</dimen>
     <dimen name="my_header_height">150dp</dimen>
     <dimen name="my_header_padding">10dp</dimen>
-    <dimen name="my_image_length">60dp</dimen>
+    <dimen name="my_image_size">60dp</dimen>
     <dimen name="my_row_height">40dp</dimen>
     <dimen name="my_padding">8dp</dimen>
     <dimen name="my_group_margin">12dp</dimen>

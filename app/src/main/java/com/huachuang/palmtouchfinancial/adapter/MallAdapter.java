@@ -14,7 +14,7 @@ import java.util.List;
  * Created by Asuka on 2017/3/24.
  */
 
-public class MainMallAdapter extends BaseQuickAdapter<MallGoods, BaseViewHolder> {
+public class MallAdapter extends BaseQuickAdapter<MallGoods, BaseViewHolder> {
 
     private static List<MallGoods> mallGoodsList = new ArrayList<>();
 
@@ -28,7 +28,7 @@ public class MainMallAdapter extends BaseQuickAdapter<MallGoods, BaseViewHolder>
 
     private Context context;
 
-    public MainMallAdapter(Context context) {
+    public MallAdapter(Context context) {
         super(R.layout.item_mall_goods, mallGoodsList);
         this.context = context;
     }

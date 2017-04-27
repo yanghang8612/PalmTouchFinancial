@@ -68,6 +68,7 @@
     <string name="action_get_verification_code">获取验证码</string>
     <string name="action_register_next_step">下一步</string>
     <string name="action_register_finish">完成</string>
+    <string name="action_apply_finish">提交申请</string>
     <string name="action_change_password">确认修改</string>
     <string name="goto_forget_password">忘记密码</string>
     <string name="goto_register">立即注册</string>

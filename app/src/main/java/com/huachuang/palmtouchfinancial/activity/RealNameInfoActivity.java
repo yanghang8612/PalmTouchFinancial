@@ -19,6 +19,9 @@ import android.widget.ViewFlipper;
 import com.afollestad.materialdialogs.DialogAction;
 import com.afollestad.materialdialogs.MaterialDialog;
 import com.alibaba.fastjson.JSON;
+import com.bumptech.glide.Glide;
+import com.bumptech.glide.load.engine.DiskCacheStrategy;
+import com.huachuang.palmtouchfinancial.GlobalParams;
 import com.huachuang.palmtouchfinancial.R;
 import com.huachuang.palmtouchfinancial.backend.UserManager;
 import com.huachuang.palmtouchfinancial.backend.bean.UserCertificationInfo;
@@ -32,7 +35,6 @@ import com.huachuang.palmtouchfinancial.util.IDCard;
 import com.lzy.imagepicker.ImagePicker;
 import com.lzy.imagepicker.bean.ImageItem;
 import com.lzy.imagepicker.ui.ImageGridActivity;
-import com.lzy.imagepicker.util.BitmapUtil;
 import com.lzy.imagepicker.view.CropImageView;
 
 import org.json.JSONException;
@@ -92,6 +94,15 @@ public class RealNameInfoActivity extends BaseSwipeActivity {
     @ViewInject(R.id.real_name_info_address_view)
     private TextView addressView;
 
+    @ViewInject(R.id.identify_card_front_image)
+    private ImageView identifyCardFrontImage;
+
+    @ViewInject(R.id.identify_card_back_image)
+    private ImageView identifyCardBackImage;
+
+    @ViewInject(R.id.identify_card_handing_image)
+    private ImageView identifyCardHandingImage;
+
     @ViewInject(R.id.real_name_info_name_edit)
     private EditText nameEdit;
 
@@ -107,14 +118,14 @@ public class RealNameInfoActivity extends BaseSwipeActivity {
     @ViewInject(R.id.real_name_info_address_edit)
     private TextView addressEdit;
 
-    @ViewInject(R.id.identify_card_front_image)
-    private ImageView identifyCardFrontImage;
+    @ViewInject(R.id.identify_card_front_image_picker)
+    private ImageView identifyCardFrontImagePicker;
 
-    @ViewInject(R.id.identify_card_back_image)
-    private ImageView identifyCardBackImage;
+    @ViewInject(R.id.identify_card_back_image_picker)
+    private ImageView identifyCardBackImagePicker;
 
-    @ViewInject(R.id.identify_card_handing_image)
-    private ImageView identifyCardHandingImage;
+    @ViewInject(R.id.identify_card_handing_image_picker)
+    private ImageView identifyCardHandingImagePicker;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -134,6 +145,7 @@ public class RealNameInfoActivity extends BaseSwipeActivity {
             sexView.setText((UserManager.getCertificationInfo().getUserSex() == '0') ? "男" : "女");
             identityCardView.setText(CommonUtils.mosaicIdentityCard(UserManager.getCertificationInfo().getUserIdentityCard()));
             addressView.setText(UserManager.getCertificationInfo().getUserAddress());
+            refreshPreviewImage();
         }
         addressEdit.setOnFocusChangeListener(new View.OnFocusChangeListener() {
             @Override
@@ -194,34 +206,34 @@ public class RealNameInfoActivity extends BaseSwipeActivity {
                     case REQUEST_CODE_FRONT_IMAGE:
                         identifyCardFrontImageState = true;
                         identifyCardFrontImagePath = image.path;
-                        identifyCardFrontImage.setImageBitmap(BitmapFactory.decodeFile(image.path));
+                        identifyCardFrontImagePicker.setImageBitmap(BitmapFactory.decodeFile(image.path));
                         break;
                     case REQUEST_CODE_BACK_IMAGE:
                         identifyCardBackImageState = true;
                         identifyCardBackImagePath = image.path;
-                        identifyCardBackImage.setImageBitmap(BitmapFactory.decodeFile(image.path));
+                        identifyCardBackImagePicker.setImageBitmap(BitmapFactory.decodeFile(image.path));
                         break;
                     case REQUEST_CODE_HANDING_IMAGE:
                         identifyCardHandingImageState = true;
                         identifyCardHandingImagePath = image.path;
-                        identifyCardHandingImage.setImageBitmap(BitmapFactory.decodeFile(image.path));
+                        identifyCardHandingImagePicker.setImageBitmap(BitmapFactory.decodeFile(image.path));
                         break;
                 }
             }
         }
     }
 
-    @Event(R.id.identify_card_front_image)
+    @Event(R.id.identify_card_front_image_picker)
     private void identifyCardFrontImageClicked(View view) {
         startImagePicker(REQUEST_CODE_FRONT_IMAGE);
     }
 
-    @Event(R.id.identify_card_back_image)
+    @Event(R.id.identify_card_back_image_picker)
     private void identifyCardBackImageClicked(View view) {
         startImagePicker(REQUEST_CODE_BACK_IMAGE);
     }
 
-    @Event(R.id.identify_card_handing_image)
+    @Event(R.id.identify_card_handing_image_picker)
     private void identifyCardHandingImageClicked(View view) {
         startImagePicker(REQUEST_CODE_HANDING_IMAGE);
     }
@@ -301,6 +313,7 @@ public class RealNameInfoActivity extends BaseSwipeActivity {
                             sexView.setText((sexSpinner.getSelectedItemId() == 0) ? "男" : "女");
                             identityCardView.setText(CommonUtils.mosaicIdentityCard(identityCard));
                             addressView.setText(address);
+                            refreshPreviewImage();
 
                             realNameInfoFlipper.setInAnimation(RealNameInfoActivity.this, R.anim.push_right_in);
                             realNameInfoFlipper.setDisplayedChild(0);
@@ -322,7 +335,9 @@ public class RealNameInfoActivity extends BaseSwipeActivity {
             x.http().post(imageParams, new NetCallbackAdapter(this, false) {
                 @Override
                 public void onSuccess(String result) {
-
+                    identifyCardFrontImagePath = null;
+                    identifyCardBackImagePath = null;
+                    identifyCardHandingImagePath = null;
                 }
             });
         }
@@ -342,5 +357,23 @@ public class RealNameInfoActivity extends BaseSwipeActivity {
         imagePicker.setOutPutY(1024);    //保存文件的高度。单位像素
         Intent intent = new Intent(this, ImageGridActivity.class);
         startActivityForResult(intent, code);
+    }
+
+    private void refreshPreviewImage() {
+        Glide.with(this)
+                .load(GlobalParams.SERVER_URL_HEAD + "/preview/" + UserManager.getUserPhoneNumber() + "/identify/front.jpg")
+                .skipMemoryCache(true)
+                .diskCacheStrategy(DiskCacheStrategy.NONE)
+                .into(identifyCardFrontImage);
+        Glide.with(this)
+                .load(GlobalParams.SERVER_URL_HEAD + "/preview/" + UserManager.getUserPhoneNumber() + "/identify/back.jpg")
+                .skipMemoryCache(true)
+                .diskCacheStrategy(DiskCacheStrategy.NONE)
+                .into(identifyCardBackImage);
+        Glide.with(this)
+                .load(GlobalParams.SERVER_URL_HEAD + "/preview/" + UserManager.getUserPhoneNumber() + "/identify/handing.jpg")
+                .skipMemoryCache(true)
+                .diskCacheStrategy(DiskCacheStrategy.NONE)
+                .into(identifyCardHandingImage);
     }
 }

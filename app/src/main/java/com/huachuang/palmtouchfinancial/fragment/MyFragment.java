@@ -128,7 +128,8 @@ public class MyFragment extends BaseFragment {
                     public void onClick(@NonNull MaterialDialog dialog, @NonNull DialogAction which) {
                         SharedPreferences defaultPref = getActivity().getSharedPreferences(DEFAULT_PRE, Activity.MODE_PRIVATE);
                         SharedPreferences.Editor editor = defaultPref.edit();
-                        editor.clear();
+                        editor.remove("phoneNumber");
+                        editor.remove("password");
                         editor.apply();
                         LoginActivity.actionStart(getContext());
                         getActivity().finish();

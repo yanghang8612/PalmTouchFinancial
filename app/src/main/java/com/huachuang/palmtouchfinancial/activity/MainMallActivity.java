@@ -11,7 +11,7 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import com.huachuang.palmtouchfinancial.R;
-import com.huachuang.palmtouchfinancial.adapter.MainMallAdapter;
+import com.huachuang.palmtouchfinancial.adapter.MallAdapter;
 import com.huachuang.palmtouchfinancial.loader.AdImageLoader;
 import com.youth.banner.Banner;
 
@@ -31,7 +31,7 @@ public class MainMallActivity extends BaseSwipeActivity {
         context.startActivity(intent);
     }
 
-    private MainMallAdapter adapter;
+    private MallAdapter adapter;
 
     @ViewInject(R.id.main_mall_toolbar)
     private Toolbar toolbar;
@@ -53,7 +53,7 @@ public class MainMallActivity extends BaseSwipeActivity {
         imageList.add(R.drawable.mall_ad_2);
         headerAD.setImages(imageList).setImageLoader(new AdImageLoader()).setDelayTime(3000).start();
 
-        adapter = new MainMallAdapter(this);
+        adapter = new MallAdapter(this);
         adapter.openLoadAnimation();
         adapter.addHeaderView(header);
 

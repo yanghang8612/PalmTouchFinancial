@@ -18,6 +18,9 @@ import android.widget.ViewFlipper;
 import com.afollestad.materialdialogs.DialogAction;
 import com.afollestad.materialdialogs.MaterialDialog;
 import com.alibaba.fastjson.JSON;
+import com.bumptech.glide.Glide;
+import com.bumptech.glide.load.engine.DiskCacheStrategy;
+import com.huachuang.palmtouchfinancial.GlobalParams;
 import com.huachuang.palmtouchfinancial.R;
 import com.huachuang.palmtouchfinancial.backend.UserManager;
 import com.huachuang.palmtouchfinancial.backend.bean.UserDebitCard;
@@ -86,6 +89,12 @@ public class DebitCardActivity extends BaseSwipeActivity {
     @ViewInject(R.id.debit_card_province)
     private TextView provinceView;
 
+    @ViewInject(R.id.debit_card_front_image)
+    private ImageView debitCardFrontImage;
+
+    @ViewInject(R.id.debit_card_back_image)
+    private ImageView debitCardBackImage;
+
     @ViewInject(R.id.debit_card_owner_name_edit)
     private EditText ownerNameEdit;
 
@@ -104,11 +113,11 @@ public class DebitCardActivity extends BaseSwipeActivity {
     @ViewInject(R.id.debit_card_province_edit)
     private EditText provinceEdit;
 
-    @ViewInject(R.id.debit_card_front_image)
-    private ImageView debitCardFrontImage;
+    @ViewInject(R.id.debit_card_front_image_picker)
+    private ImageView debitCardFrontImagePicker;
 
-    @ViewInject(R.id.debit_card_back_image)
-    private ImageView debitCardBackImage;
+    @ViewInject(R.id.debit_card_back_image_picker)
+    private ImageView debitCardBackImagePicker;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -128,6 +137,7 @@ public class DebitCardActivity extends BaseSwipeActivity {
             bankView.setText(UserManager.getDebitCardInfo().getHeadOffice() + UserManager.getDebitCardInfo().getBranch());
             typeView.setText(UserManager.getDebitCardInfo().getCardType());
             provinceView.setText(UserManager.getDebitCardInfo().getProvince());
+            refreshPreviewImage();
         }
         numberEdit.setOnFocusChangeListener(new View.OnFocusChangeListener() {
             @Override
@@ -201,24 +211,24 @@ public class DebitCardActivity extends BaseSwipeActivity {
                     case REQUEST_CODE_FRONT_IMAGE:
                         debitCardFrontImageState = true;
                         debitCardFrontImagePath = image.path;
-                        debitCardFrontImage.setImageBitmap(BitmapFactory.decodeFile(image.path));
+                        debitCardFrontImagePicker.setImageBitmap(BitmapFactory.decodeFile(image.path));
                         break;
                     case REQUEST_CODE_BACK_IMAGE:
                         debitCardBackImageState = true;
                         debitCardBackImagePath = image.path;
-                        debitCardBackImage.setImageBitmap(BitmapFactory.decodeFile(image.path));
+                        debitCardBackImagePicker.setImageBitmap(BitmapFactory.decodeFile(image.path));
                         break;
                 }
             }
         }
     }
 
-    @Event(R.id.debit_card_front_image)
+    @Event(R.id.debit_card_front_image_picker)
     private void debitCardFrontImageClicked(View view) {
         startImagePicker(REQUEST_CODE_FRONT_IMAGE);
     }
 
-    @Event(R.id.debit_card_back_image)
+    @Event(R.id.debit_card_back_image_picker)
     private void debitCardBackImageClicked(View view) {
         startImagePicker(REQUEST_CODE_BACK_IMAGE);
     }
@@ -289,6 +299,7 @@ public class DebitCardActivity extends BaseSwipeActivity {
                             bankView.setText(headOffice + branch);
                             typeView.setText(cardType);
                             provinceView.setText(province);
+                            refreshPreviewImage();
 
                             debitCardFlipper.setInAnimation(DebitCardActivity.this, R.anim.push_right_in);
                             debitCardFlipper.setDisplayedChild(0);
@@ -302,11 +313,14 @@ public class DebitCardActivity extends BaseSwipeActivity {
                     }
                 }
             });
-            RequestParams imageParams = new UploadDebitCardParams(debitCardFrontImagePath, debitCardBackImagePath);
+            RequestParams imageParams = new UploadDebitCardParams(
+                    debitCardFrontImagePath,
+                    debitCardBackImagePath);
             x.http().post(imageParams, new NetCallbackAdapter(this) {
                 @Override
                 public void onSuccess(String result) {
-
+                    debitCardFrontImagePath = null;
+                    debitCardBackImagePath = null;
                 }
             });
         }
@@ -326,5 +340,18 @@ public class DebitCardActivity extends BaseSwipeActivity {
         imagePicker.setOutPutY(1024);    //保存文件的高度。单位像素
         Intent intent = new Intent(this, ImageGridActivity.class);
         startActivityForResult(intent, code);
+    }
+
+    private void refreshPreviewImage() {
+        Glide.with(this)
+                .load(GlobalParams.SERVER_URL_HEAD + "/preview/" + UserManager.getUserPhoneNumber() + "/debit/front.jpg")
+                .skipMemoryCache(true)
+                .diskCacheStrategy(DiskCacheStrategy.NONE)
+                .into(debitCardFrontImage);
+        Glide.with(this)
+                .load(GlobalParams.SERVER_URL_HEAD + "/preview/" + UserManager.getUserPhoneNumber() + "/debit/back.jpg")
+                .skipMemoryCache(true)
+                .diskCacheStrategy(DiskCacheStrategy.NONE)
+                .into(debitCardBackImage);
     }
 }

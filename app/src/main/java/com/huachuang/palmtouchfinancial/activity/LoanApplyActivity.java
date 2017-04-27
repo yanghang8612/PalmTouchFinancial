@@ -49,9 +49,6 @@ public class LoanApplyActivity extends BaseActivity implements DatePickerDialog.
     @ViewInject(R.id.loan_apply_toolbar)
     private Toolbar toolbar;
 
-    @ViewInject(R.id.loan_apply_scrollview)
-    private ScrollView scrollView;
-
     @ViewInject(R.id.loan_apply_flipper)
     private ViewFlipper loanApplyFlipper;
 
@@ -110,6 +107,7 @@ public class LoanApplyActivity extends BaseActivity implements DatePickerDialog.
         if (getSupportActionBar() != null) {
             getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         }
+
         loanApplyFlipper.setInAnimation(this, R.anim.push_left_in);
         loanApplyHouseAddressEdit.setOnFocusChangeListener(new View.OnFocusChangeListener() {
             @Override
@@ -147,7 +145,7 @@ public class LoanApplyActivity extends BaseActivity implements DatePickerDialog.
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         if (item.getItemId() == android.R.id.home) {
-            if (loanApplyFlipper.getDisplayedChild() != 2) {
+            if (loanApplyFlipper.getDisplayedChild() != 1) {
                 new MaterialDialog.Builder(this)
                         .content("确认取消申请吗?")
                         .contentColorRes(R.color.black)
@@ -203,8 +201,8 @@ public class LoanApplyActivity extends BaseActivity implements DatePickerDialog.
                 .append((dayOfMonth < 10) ? "0" + dayOfMonth : dayOfMonth));
     }
 
-    @Event(R.id.loan_apply_step_one_button)
-    private void loanApplyStepOneButton(View view) {
+    @Event(R.id.loan_apply_finish_button)
+    private void loanApplyFinishButton(View view) {
         hideKeyboard();
 
         String houseAddress = loanApplyHouseAddressEdit.getText().toString();
@@ -224,11 +222,18 @@ public class LoanApplyActivity extends BaseActivity implements DatePickerDialog.
             loanApplyHouseBuildYearEdit.setError("请输入建筑年代");
             return;
         }
+        else if (!CommonUtils.validateYear(buildYear)) {
+            loanApplyHouseBuildYearEdit.setError("请输入4位正确的年份");
+            return;
+        }
 
         String buildArea = loanApplyHouseBuildAreaEdit.getText().toString();
         if (TextUtils.isEmpty(buildArea)) {
             loanApplyHouseBuildAreaEdit.setError("请输入建筑面积");
             return;
+        }
+        else if (!CommonUtils.validateNumber(buildArea)) {
+            loanApplyHouseBuildAreaEdit.setError("请输入正确的建筑面积");
         }
 
         String handingTime = loanApplyHouseHandingTimeEdit.getText().toString();
@@ -237,18 +242,13 @@ public class LoanApplyActivity extends BaseActivity implements DatePickerDialog.
             return;
         }
 
-        scrollView.scrollTo(0, 0);
-        loanApplyFlipper.setDisplayedChild(1);
-    }
-
-    @Event(R.id.loan_apply_step_two_button)
-    private void loanApplyStepTwoButton(View view) {
-        hideKeyboard();
-
         String borrowerName = loanApplyBorrowerNameEdit.getText().toString();
         if (TextUtils.isEmpty(borrowerName)) {
             loanApplyBorrowerNameEdit.setError("请输入借款人姓名");
             return;
+        }
+        else if (!CommonUtils.validateChineseName(borrowerName)) {
+            loanApplyBorrowerNameEdit.setError("请输入正确的中文名");
         }
 
         String borrowerPhoneNumber = loanApplyBorrowerPhoneNumberEdit.getText().toString();
@@ -266,10 +266,14 @@ public class LoanApplyActivity extends BaseActivity implements DatePickerDialog.
             loanApplyBorrowerAmountEdit.setError("请输入借款金额");
             return;
         }
+        else if (!CommonUtils.validateNumber(borrowerAmount)) {
+            loanApplyBorrowerAmountEdit.setError("请输入正确的借款金额");
+            return;
+        }
 
         String borrowerAddress = loanApplyBorrowerAddressEdit.getText().toString();
         if (TextUtils.isEmpty(borrowerAddress)) {
-            loanApplyBorrowerAddressEdit.setError("请输入住宅所在地");
+            loanApplyBorrowerAddressEdit.setError("请选择住宅所在地");
             return;
         }
 
@@ -306,8 +310,7 @@ public class LoanApplyActivity extends BaseActivity implements DatePickerDialog.
                     JSONObject resultJSONObject = new JSONObject(result);
                     if (resultJSONObject.getBoolean("Status")) {
                         Log.d(TAG, resultJSONObject.getString("Info"));
-                        scrollView.scrollTo(0, 0);
-                        loanApplyFlipper.setDisplayedChild(2);
+                        loanApplyFlipper.setDisplayedChild(1);
                     }
                     else {
                         showToast(resultJSONObject.getString("Info"));

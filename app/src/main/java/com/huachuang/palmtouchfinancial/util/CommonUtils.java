@@ -59,9 +59,16 @@ public class CommonUtils {
     }
 
     public static boolean validateNumber(String number) {
-        String regExp = "^\\d+$";
+        String regExp = "^\\d+(?:\\.\\d+)?$";
         Pattern p = Pattern.compile(regExp);
         Matcher m = p.matcher(number);
+        return m.matches();
+    }
+
+    public static boolean validateYear(String year) {
+        String regExp = "^\\d{4}$";
+        Pattern p = Pattern.compile(regExp);
+        Matcher m = p.matcher(year);
         return m.matches();
     }
 
@@ -181,5 +188,15 @@ public class CommonUtils {
             luhmSum += k;
         }
         return (luhmSum % 10 == 0) ? '0' : (char)((10 - luhmSum % 10) + '0');
+    }
+
+    public static void main(String[] args) {
+        System.out.println(validateNumber("100"));
+        System.out.println(validateNumber("100.0"));
+        System.out.println(validateNumber(".1"));
+        System.out.println(validateNumber("0.1"));
+        System.out.println(validateNumber("1.1.1"));
+        System.out.println(validateNumber("1."));
+        System.out.println(validateNumber("1..1"));
     }
 }

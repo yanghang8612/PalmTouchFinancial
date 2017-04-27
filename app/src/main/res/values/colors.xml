@@ -37,6 +37,6 @@
     <color name="bottom_bar_inactive">#2D2D8B</color>
 
     <color name="bank_card_item">#E9507D</color>
-
     <color name="mall_text_background">#BCAAA4</color>
+    <color name="loan_apply_color">#FFCE4E</color>
 </resources>

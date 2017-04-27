@@ -3,6 +3,7 @@ package com.huachuang.palmtouchfinancial.activity;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
+import android.support.annotation.NonNull;
 import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
@@ -10,9 +11,12 @@ import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 
+import com.afollestad.materialdialogs.DialogAction;
+import com.afollestad.materialdialogs.MaterialDialog;
 import com.alibaba.fastjson.JSON;
 import com.huachuang.palmtouchfinancial.R;
 import com.huachuang.palmtouchfinancial.adapter.BankCardAdapter;
+import com.huachuang.palmtouchfinancial.backend.UserManager;
 import com.huachuang.palmtouchfinancial.backend.bean.BankCard;
 import com.huachuang.palmtouchfinancial.backend.net.NetCallbackAdapter;
 import com.huachuang.palmtouchfinancial.backend.net.params.GetAllBankCardsParams;
@@ -65,7 +69,23 @@ public class CardManagerActivity extends BaseSwipeActivity {
         footerView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                CreditCardApplyActivity.actionStart(CardManagerActivity.this);
+                if (!UserManager.getCurrentUser().getCertificationState()) {
+                    new MaterialDialog.Builder(CardManagerActivity.this)
+                            .content("请先进行实名认证")
+                            .contentColorRes(R.color.black)
+                            .positiveText("确认")
+                            .autoDismiss(false)
+                            .onPositive(new MaterialDialog.SingleButtonCallback() {
+                                @Override
+                                public void onClick(@NonNull MaterialDialog dialog, @NonNull DialogAction which) {
+                                    dialog.dismiss();
+                                }
+                            })
+                            .show();
+                }
+                else {
+                    CreditCardApplyActivity.actionStart(CardManagerActivity.this);
+                }
             }
         });
         adapter.addFooterView(footerView);

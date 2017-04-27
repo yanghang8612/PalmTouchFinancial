@@ -38,7 +38,7 @@
                 android:layout_height="wrap_content"
                 android:layout_weight="3"
                 android:layout_gravity="center"
-                android:inputType="textPersonName"
+                android:inputType="textPersonName|textNoSuggestions"
                 android:maxLines="1"
                 android:textSize="15sp" />
 
@@ -70,7 +70,7 @@
                 android:layout_height="wrap_content"
                 android:layout_weight="3"
                 android:layout_gravity="center"
-                android:inputType="textCapCharacters"
+                android:inputType="textCapCharacters|textNoSuggestions"
                 android:maxLines="1"
                 android:textSize="15sp" />
 
@@ -173,7 +173,6 @@
                 android:layout_height="wrap_content"
                 android:layout_weight="3"
                 android:layout_gravity="center"
-                android:inputType="textPostalAddress"
                 android:textSize="15sp" />
 
         </LinearLayout>
@@ -186,7 +185,7 @@
         android:background="@color/white">
 
         <ImageView
-            android:id="@+id/identify_card_front_image"
+            android:id="@+id/identify_card_front_image_picker"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight="1"
@@ -194,7 +193,7 @@
             android:src="@drawable/identify_card_front" />
 
         <ImageView
-            android:id="@+id/identify_card_back_image"
+            android:id="@+id/identify_card_back_image_picker"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight="1"
@@ -202,7 +201,7 @@
             android:src="@drawable/identify_card_back" />
 
         <ImageView
-            android:id="@+id/identify_card_handing_image"
+            android:id="@+id/identify_card_handing_image_picker"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight="1"
