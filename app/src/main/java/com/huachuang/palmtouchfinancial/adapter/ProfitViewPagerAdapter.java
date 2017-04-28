@@ -35,7 +35,7 @@ public class ProfitViewPagerAdapter extends PagerAdapter {
     @Override
     public Object instantiateItem(ViewGroup container, int position) {
         final RecyclerView.Adapter adapter;
-        adapter = new ProfitAdapter();
+        adapter = new ProfitRecordAdapter();
         View view =  inflater.inflate(R.layout.item_profit_tab, container, false);
         profitRecyclerList = (RecyclerView) view.findViewById(R.id.profit_list);
         profitSwipeContainer = (SwipeRefreshLayout) view.findViewById(R.id.profit_swipe_container);

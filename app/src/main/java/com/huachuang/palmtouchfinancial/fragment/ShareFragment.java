@@ -101,8 +101,9 @@ public class ShareFragment extends BaseFragment {
                                 // 初始化一个WXTextObject对象
                                 WXWebpageObject webpage = new WXWebpageObject();
                                 webpage.webpageUrl = GlobalParams.SERVER_URL_HEAD
-                                        + "/register_step_one.html?recommenderID="
-                                        + UserManager.getUserPhoneNumber()
+                                        + "/register_step_one.html?identifyCode="
+                                        + (UserManager.getCurrentUser().getUserType() == 0 ?
+                                        UserManager.getUserPhoneNumber() : UserManager.getCurrentUser().getInvitationCode())
                                         + "&shareType="
                                         + ((item.getItemId() == R.id.share_wechat_session) ? "1" : "2");
 
@@ -148,8 +149,9 @@ public class ShareFragment extends BaseFragment {
                                     params.putString(QQShare.SHARE_TO_QQ_APP_NAME, "掌触金控");
                                     params.putString(QQShare.SHARE_TO_QQ_IMAGE_URL, GlobalParams.SERVER_URL_HEAD + "/imgs/icon.jpg");
                                     String url = GlobalParams.SERVER_URL_HEAD
-                                            + "/register_step_one.html?recommenderID="
-                                            + UserManager.getUserPhoneNumber()
+                                            + "/register_step_one.html?identifyCode="
+                                            + (UserManager.getCurrentUser().getUserType() == 0 ?
+                                            UserManager.getUserPhoneNumber() : UserManager.getCurrentUser().getInvitationCode())
                                             + "&shareType="
                                             + ((item.getItemId() == R.id.share_qq_friend) ? "3" : "4");
                                     params.putString(QQShare.SHARE_TO_QQ_TARGET_URL, url);
@@ -163,8 +165,9 @@ public class ShareFragment extends BaseFragment {
                                     params.putString(QzoneShare.SHARE_TO_QQ_SUMMARY, "信用卡申请、办理贷款，掌触金控为您提供一站式解决方案，更有推荐现金大礼，刷卡返佣等优惠活动等你来，赶快加入吧！");
                                     params.putString(QzoneShare.SHARE_TO_QQ_APP_NAME, "掌触金控");
                                     String url = GlobalParams.SERVER_URL_HEAD
-                                            + "/register_step_one.html?recommenderID="
-                                            + UserManager.getUserPhoneNumber()
+                                            + "/register_step_one.html?identifyCode="
+                                            + (UserManager.getCurrentUser().getUserType() == 0 ?
+                                            UserManager.getUserPhoneNumber() : UserManager.getCurrentUser().getInvitationCode())
                                             + "&shareType="
                                             + ((item.getItemId() == R.id.share_qq_friend) ? "3" : "4");
                                     params.putString(QzoneShare.SHARE_TO_QQ_TARGET_URL, url);

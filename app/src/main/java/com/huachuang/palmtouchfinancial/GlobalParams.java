@@ -12,8 +12,8 @@ public class GlobalParams {
     private GlobalParams(){}
 
     //public static final String SERVER_URL_HEAD = "http://47.89.47.200:8080/AppServer";
-    public static final String SERVER_URL_HEAD = "http://192.168.1.106:8080/AppServer";
-    //public static final String SERVER_URL_HEAD = "http://10.0.2.2:8080/AppServer";
+    //public static final String SERVER_URL_HEAD = "http://192.168.1.106:8080/AppServer";
+    public static final String SERVER_URL_HEAD = "http://10.0.2.2:8080/AppServer";
     public static final String YUNPIAN_URL_HEAD = "https://sms.yunpian.com/v2";
     public static final String WECHAT_APP_ID = "wxffb25beeebed0544";
     public static final String TENCENT_APP_ID = "1105997397";

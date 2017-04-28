@@ -52,7 +52,11 @@ public class ShareQrCodeActivity extends BaseSwipeActivity {
         if (getSupportActionBar() != null) {
             getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         }
-        String qrCodeContent = GlobalParams.SERVER_URL_HEAD + "/register_step_one.html?recommenderID=" + UserManager.getUserPhoneNumber() + "?shareType=5";
+        String qrCodeContent = GlobalParams.SERVER_URL_HEAD
+                + "/register_step_one.html?identifyCode="
+                + (UserManager.getCurrentUser().getUserType() == 0 ?
+                UserManager.getUserPhoneNumber() : UserManager.getCurrentUser().getInvitationCode())
+                + "&shareType=5";
         qrCodeImage.setImageBitmap(CodeUtils.createImage(qrCodeContent, 640, 640, BitmapFactory.decodeResource(getResources(), R.mipmap.ic_launcher)));
     }
 

@@ -22,25 +22,28 @@
             android:layout_weight="1">
 
             <TextView
+                android:id="@+id/profit_record_item_time_up"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
-                android:text="周一"/>
+                android:text="周一" />
 
             <TextView
+                android:id="@+id/profit_record_item_time_down"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
-                android:text="04-25"/>
+                android:text="04-25" />
 
         </LinearLayout>
 
         <de.hdodenhof.circleimageview.CircleImageView
-            android:id="@+id/recommend_record_item_type_image"
+            android:id="@+id/profit_record_item_type_image"
             android:layout_width="48dp"
             android:layout_height="48dp"
-            android:src="@drawable/ic_timeline"
-            app:civ_fill_color="@color/white"/>
+            android:src="@drawable/ic_profit_share"
+            app:civ_border_width="3dp"
+            app:civ_border_color="@color/light_grey" />
 
         <LinearLayout
             android:orientation="vertical"
@@ -50,27 +53,28 @@
             android:layout_marginLeft="@dimen/activity_horizontal_margin">
 
             <TextView
-                android:id="@+id/recommend_record_item_phone_number"
+                android:id="@+id/profit_record_item_amount"
                 android:layout_width="match_parent"
                 android:layout_height="0dp"
                 android:layout_weight="1"
                 android:gravity="bottom"
-                android:text="+20.00"
-                android:textColor="@color/black"/>
+                android:text="+ 20.00"
+                android:textColor="@color/black"
+                android:textSize="18sp" />
 
             <TextView
-                android:id="@+id/recommend_record_item_type"
+                android:id="@+id/profit_record_item_description"
                 android:layout_width="match_parent"
                 android:layout_height="0dp"
                 android:layout_weight="1"
-                android:layout_marginTop="5dp"
-                android:text="推荐一级用户。"
-                android:textColor="@color/black"/>
+                android:layout_marginTop="3dp"
+                android:text="分享有礼：一级注册用户"
+                android:textColor="@color/black" />
 
         </LinearLayout>
 
     </LinearLayout>
 
-    <include layout="@layout/horizontal_line"/>
+    <include layout="@layout/horizontal_line" />
 
 </LinearLayout>

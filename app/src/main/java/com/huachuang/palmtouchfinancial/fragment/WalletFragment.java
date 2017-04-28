@@ -16,7 +16,6 @@ import com.huachuang.palmtouchfinancial.activity.MyBalanceActivity;
 import com.huachuang.palmtouchfinancial.activity.MyPointsActivity;
 import com.huachuang.palmtouchfinancial.adapter.WalletMallAdapter;
 import com.huachuang.palmtouchfinancial.backend.net.NetCallbackAdapter;
-import com.huachuang.palmtouchfinancial.backend.net.params.GetRecommendCount;
 import com.huachuang.palmtouchfinancial.backend.net.params.GetUserWallet;
 
 import org.json.JSONException;
@@ -84,7 +83,7 @@ public class WalletFragment extends BaseFragment {
                 MyPointsActivity.actionStart(WalletFragment.this.getContext());
             }
         });
-        header.findViewById(R.id.wallet_mall_more).setOnClickListener(new View.OnClickListener() {
+        header.findViewById(R.id.wallet_profit_more).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 MainMallActivity.actionStart(WalletFragment.this.getContext());
