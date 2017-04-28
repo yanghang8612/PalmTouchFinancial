@@ -27,14 +27,6 @@ android {
             signingConfig signingConfigs.config
         }
     }
-    splits {
-        abi {
-            enable true
-            reset()
-            include 'x86', 'armeabi-v7a', 'x86_64'
-            universalApk true
-        }
-    }
 }
 
 dependencies {
@@ -66,4 +58,5 @@ dependencies {
     compile 'in.srain.cube:ultra-ptr:1.0.11'
     compile 'com.wdullaer:materialdatetimepicker:3.2.0'
     compile 'com.tencent.mm.opensdk:wechat-sdk-android-with-mta:1.0.2'
+    compile files('src/main/lib/open_sdk_r5788_lite.jar')
 }

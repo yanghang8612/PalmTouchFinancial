@@ -1,8 +1,13 @@
 package com.huachuang.palmtouchfinancial.fragment;
 
+import android.content.ContentResolver;
+import android.content.res.Resources;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
+import android.net.Uri;
+import android.os.Bundle;
 import android.os.Handler;
+import android.util.Log;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.TextView;
@@ -21,9 +26,13 @@ import com.huachuang.palmtouchfinancial.backend.net.NetCallbackAdapter;
 import com.huachuang.palmtouchfinancial.backend.net.params.GetRecommendCount;
 import com.huachuang.palmtouchfinancial.backend.net.params.GetUserWallet;
 import com.huachuang.palmtouchfinancial.util.CommonUtils;
+import com.tencent.connect.share.QQShare;
+import com.tencent.connect.share.QzoneShare;
 import com.tencent.mm.opensdk.modelmsg.SendMessageToWX;
 import com.tencent.mm.opensdk.modelmsg.WXMediaMessage;
 import com.tencent.mm.opensdk.modelmsg.WXWebpageObject;
+import com.tencent.tauth.IUiListener;
+import com.tencent.tauth.UiError;
 
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -31,6 +40,10 @@ import org.xutils.view.annotation.ContentView;
 import org.xutils.view.annotation.Event;
 import org.xutils.view.annotation.ViewInject;
 import org.xutils.x;
+
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
 
 import in.srain.cube.views.ptr.PtrDefaultHandler;
 import in.srain.cube.views.ptr.PtrFrameLayout;
@@ -41,6 +54,8 @@ import in.srain.cube.views.ptr.PtrFrameLayout;
 
 @ContentView(R.layout.fragment_share)
 public class ShareFragment extends BaseFragment {
+
+    private static final String TAG = ShareFragment.class.getSimpleName();
 
     @ViewInject(R.id.share_fragment_ptr_frame)
     private PtrFrameLayout ptrFrame;
@@ -88,7 +103,7 @@ public class ShareFragment extends BaseFragment {
                                 webpage.webpageUrl = GlobalParams.SERVER_URL_HEAD
                                         + "/register_step_one.html?recommenderID="
                                         + UserManager.getUserPhoneNumber()
-                                        + "?shareType="
+                                        + "&shareType="
                                         + ((item.getItemId() == R.id.share_wechat_session) ? "1" : "2");
 
                                 WXMediaMessage msg = new WXMediaMessage(webpage);
@@ -121,6 +136,44 @@ public class ShareFragment extends BaseFragment {
                         new MenuSheetView(ShareFragment.this.getContext(), MenuSheetView.MenuType.GRID, "分享到...", new MenuSheetView.OnMenuItemClickListener() {
                             @Override
                             public boolean onMenuItemClick(MenuItem item) {
+                                if (GlobalVariable.tencent.isSessionValid() && GlobalVariable.tencent.getOpenId() == null) {
+                                    showToast("未安装QQ客户端");
+                                }
+
+                                if (item.getItemId() == R.id.share_qq_friend) {
+                                    Bundle params = new Bundle();
+                                    params.putInt(QQShare.SHARE_TO_QQ_KEY_TYPE, QQShare.SHARE_TO_QQ_TYPE_DEFAULT);
+                                    params.putString(QQShare.SHARE_TO_QQ_TITLE, "推荐好友注册送礼");
+                                    params.putString(QQShare.SHARE_TO_QQ_SUMMARY, "信用卡申请、办理贷款，掌触金控为您提供一站式解决方案，更有推荐现金大礼，刷卡返佣等优惠活动等你来，赶快加入吧！");
+                                    params.putString(QQShare.SHARE_TO_QQ_APP_NAME, "掌触金控");
+                                    params.putString(QQShare.SHARE_TO_QQ_IMAGE_URL, GlobalParams.SERVER_URL_HEAD + "/imgs/icon.jpg");
+                                    String url = GlobalParams.SERVER_URL_HEAD
+                                            + "/register_step_one.html?recommenderID="
+                                            + UserManager.getUserPhoneNumber()
+                                            + "&shareType="
+                                            + ((item.getItemId() == R.id.share_qq_friend) ? "3" : "4");
+                                    params.putString(QQShare.SHARE_TO_QQ_TARGET_URL, url);
+                                    params.putInt(QQShare.SHARE_TO_QQ_EXT_INT,  QQShare.SHARE_TO_QQ_FLAG_QZONE_ITEM_HIDE);
+                                    GlobalVariable.tencent.shareToQQ(ShareFragment.this.getActivity(), params, null);
+                                }
+                                else {
+                                    Bundle params = new Bundle();
+                                    params.putInt(QzoneShare.SHARE_TO_QZONE_KEY_TYPE, QzoneShare.SHARE_TO_QZONE_TYPE_IMAGE_TEXT);
+                                    params.putString(QzoneShare.SHARE_TO_QQ_TITLE, "推荐好友注册送礼");
+                                    params.putString(QzoneShare.SHARE_TO_QQ_SUMMARY, "信用卡申请、办理贷款，掌触金控为您提供一站式解决方案，更有推荐现金大礼，刷卡返佣等优惠活动等你来，赶快加入吧！");
+                                    params.putString(QzoneShare.SHARE_TO_QQ_APP_NAME, "掌触金控");
+                                    String url = GlobalParams.SERVER_URL_HEAD
+                                            + "/register_step_one.html?recommenderID="
+                                            + UserManager.getUserPhoneNumber()
+                                            + "&shareType="
+                                            + ((item.getItemId() == R.id.share_qq_friend) ? "3" : "4");
+                                    params.putString(QzoneShare.SHARE_TO_QQ_TARGET_URL, url);
+                                    ArrayList<String> images = new ArrayList<>();
+                                    images.add(GlobalParams.SERVER_URL_HEAD + "/imgs/icon.jpg");
+                                    params.putStringArrayList(QzoneShare.SHARE_TO_QQ_IMAGE_URL, images);
+                                    GlobalVariable.tencent.shareToQzone(ShareFragment.this.getActivity(), params, null);
+                                }
+
                                 if (bottomSheet.isSheetShowing()) {
                                     bottomSheet.dismissSheet();
                                 }

@@ -3,6 +3,7 @@ package com.huachuang.palmtouchfinancial;
 import android.app.Application;
 
 import com.tencent.mm.opensdk.openapi.WXAPIFactory;
+import com.tencent.tauth.Tencent;
 import com.uuzuche.lib_zxing.activity.ZXingLibrary;
 
 import org.xutils.x;
@@ -21,5 +22,6 @@ public class MyApplication extends Application {
         ZXingLibrary.initDisplayOpinion(this);
         GlobalVariable.api = WXAPIFactory.createWXAPI(this, GlobalParams.WECHAT_APP_ID ,true);
         GlobalVariable.api.registerApp(GlobalParams.WECHAT_APP_ID);
+        GlobalVariable.tencent = Tencent.createInstance(GlobalParams.TENCENT_APP_ID, this);
     }
 }
