@@ -21,12 +21,9 @@ import com.huachuang.palmtouchfinancial.backend.net.params.LoginParams;
 import com.huachuang.palmtouchfinancial.loader.AdImageLoader;
 import com.youth.banner.Banner;
 import com.youth.banner.BannerConfig;
-import com.youth.banner.listener.OnBannerListener;
 
 import org.json.JSONException;
 import org.json.JSONObject;
-import org.xutils.view.annotation.ContentView;
-import org.xutils.view.annotation.ViewInject;
 import org.xutils.x;
 
 import java.util.ArrayList;

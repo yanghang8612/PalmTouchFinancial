@@ -1,15 +1,13 @@
 package com.huachuang.palmtouchfinancial.activity;
 
 import android.Manifest;
-import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.net.Uri;
+import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.v4.app.ActivityCompat;
-import android.support.v7.app.AppCompatActivity;
-import android.os.Bundle;
 import android.support.v7.widget.Toolbar;
 import android.view.MenuItem;
 import android.view.View;
@@ -53,11 +51,11 @@ public class SettingActivity extends BaseSwipeActivity {
         return super.onOptionsItemSelected(item);
     }
 
-    @Event(R.id.setting_share_app)
-    private void shareAppClicked(View view) {
-        ((MainActivity) getParent()).switchFragment(1);
-        finish();
-    }
+//    @Event(R.id.setting_share_app)
+//    private void shareAppClicked(View view) {
+//        ((MainActivity) getParent()).switchFragment(1);
+//        finish();
+//    }
 
     @Event(R.id.setting_check_update)
     private void checkUpdateClicked(View view) {

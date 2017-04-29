@@ -1,8 +1,6 @@
 package com.huachuang.palmtouchfinancial.activity;
 
 import android.content.res.TypedArray;
-import android.graphics.Color;
-import android.os.Build;
 import android.os.Bundle;
 
 import com.jude.swipbackhelper.SwipeBackHelper;

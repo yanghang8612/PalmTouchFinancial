@@ -2,26 +2,15 @@ package com.huachuang.palmtouchfinancial.activity;
 
 import android.content.Context;
 import android.content.Intent;
-import android.os.Handler;
-import android.support.v4.widget.SwipeRefreshLayout;
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
-import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
-import android.util.Log;
 import android.view.MenuItem;
-import android.view.MotionEvent;
-import android.view.View;
-import android.view.ViewGroup;
-import android.widget.ScrollView;
 
 import com.alibaba.fastjson.JSON;
 import com.huachuang.palmtouchfinancial.R;
-import com.huachuang.palmtouchfinancial.adapter.BankCardAdapter;
 import com.huachuang.palmtouchfinancial.adapter.RecommendRecordAdapter;
-import com.huachuang.palmtouchfinancial.backend.bean.BankCard;
 import com.huachuang.palmtouchfinancial.backend.bean.RecommendRecord;
 import com.huachuang.palmtouchfinancial.backend.net.NetCallbackAdapter;
 import com.huachuang.palmtouchfinancial.backend.net.params.GetRecommendRecord;

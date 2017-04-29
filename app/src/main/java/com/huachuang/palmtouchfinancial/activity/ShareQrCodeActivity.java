@@ -2,28 +2,19 @@ package com.huachuang.palmtouchfinancial.activity;
 
 import android.content.Context;
 import android.content.Intent;
-import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.os.Bundle;
 import android.support.v7.widget.Toolbar;
 import android.view.MenuItem;
-import android.view.View;
 import android.widget.ImageView;
-import android.widget.TextView;
 
-import com.bumptech.glide.Glide;
-import com.bumptech.glide.request.animation.GlideAnimation;
-import com.bumptech.glide.request.target.SimpleTarget;
 import com.huachuang.palmtouchfinancial.GlobalParams;
 import com.huachuang.palmtouchfinancial.R;
 import com.huachuang.palmtouchfinancial.backend.UserManager;
-import com.huachuang.palmtouchfinancial.util.CommonUtils;
 import com.uuzuche.lib_zxing.activity.CodeUtils;
 
 import org.xutils.view.annotation.ContentView;
 import org.xutils.view.annotation.ViewInject;
-
-import de.hdodenhof.circleimageview.CircleImageView;
 
 /**
  * Created by Asuka on 2017/4/7.

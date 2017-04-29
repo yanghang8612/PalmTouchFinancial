@@ -51,6 +51,7 @@
                 android:textSize="15sp"/>
 
             <TextView
+                android:id="@+id/points_amount"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="5dp"
@@ -93,7 +94,7 @@
     <include layout="@layout/horizontal_line" />
 
     <android.support.v7.widget.RecyclerView
-        android:id="@+id/points_record"
+        android:id="@+id/points_record_list"
         android:layout_width="match_parent"
         android:layout_height="0dp"/>
 

@@ -2,7 +2,6 @@ package com.huachuang.palmtouchfinancial.adapter;
 
 import com.chad.library.adapter.base.BaseQuickAdapter;
 import com.chad.library.adapter.base.BaseViewHolder;
-import com.huachuang.palmtouchfinancial.GlobalParams;
 import com.huachuang.palmtouchfinancial.R;
 import com.huachuang.palmtouchfinancial.backend.bean.RecommendRecord;
 

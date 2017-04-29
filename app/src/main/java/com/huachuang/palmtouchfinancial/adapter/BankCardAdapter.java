@@ -6,7 +6,6 @@ import com.huachuang.palmtouchfinancial.GlobalParams;
 import com.huachuang.palmtouchfinancial.R;
 import com.huachuang.palmtouchfinancial.backend.bean.BankCard;
 
-import java.util.ArrayList;
 import java.util.List;
 
 /**

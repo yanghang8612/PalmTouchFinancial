@@ -2,6 +2,7 @@ package com.huachuang.palmtouchfinancial.fragment;
 
 import android.support.annotation.NonNull;
 import android.support.v7.widget.GridLayoutManager;
+import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.View;
 import android.view.ViewGroup;
@@ -9,20 +10,29 @@ import android.widget.TextView;
 
 import com.afollestad.materialdialogs.DialogAction;
 import com.afollestad.materialdialogs.MaterialDialog;
+import com.alibaba.fastjson.JSON;
 import com.huachuang.palmtouchfinancial.R;
 import com.huachuang.palmtouchfinancial.activity.CardManagerActivity;
 import com.huachuang.palmtouchfinancial.activity.MainMallActivity;
 import com.huachuang.palmtouchfinancial.activity.MyBalanceActivity;
 import com.huachuang.palmtouchfinancial.activity.MyPointsActivity;
+import com.huachuang.palmtouchfinancial.activity.ProfitActivity;
+import com.huachuang.palmtouchfinancial.adapter.ProfitRecordAdapter;
 import com.huachuang.palmtouchfinancial.adapter.WalletMallAdapter;
+import com.huachuang.palmtouchfinancial.backend.bean.ProfitRecord;
 import com.huachuang.palmtouchfinancial.backend.net.NetCallbackAdapter;
 import com.huachuang.palmtouchfinancial.backend.net.params.GetUserWallet;
+import com.huachuang.palmtouchfinancial.backend.net.params.GetWalletBalanceRecords;
 
 import org.json.JSONException;
 import org.json.JSONObject;
+import org.w3c.dom.Text;
 import org.xutils.view.annotation.ContentView;
 import org.xutils.view.annotation.ViewInject;
 import org.xutils.x;
+
+import java.util.ArrayList;
+import java.util.List;
 
 import in.srain.cube.views.ptr.PtrDefaultHandler;
 import in.srain.cube.views.ptr.PtrFrameLayout;
@@ -34,7 +44,8 @@ import in.srain.cube.views.ptr.PtrFrameLayout;
 @ContentView(R.layout.fragment_wallet)
 public class WalletFragment extends BaseFragment {
 
-    private WalletMallAdapter adapter;
+    private ProfitRecordAdapter adapter;
+    private List<ProfitRecord> records = new ArrayList<>();
     private View header;
     private TextView balanceAmountView;
     private TextView pointsAmountView;
@@ -42,12 +53,15 @@ public class WalletFragment extends BaseFragment {
     @ViewInject(R.id.wallet_fragment_ptr_frame)
     private PtrFrameLayout ptrFrame;
 
-    @ViewInject(R.id.wallet_mall_list)
-    private RecyclerView walletMallList;
+    @ViewInject(R.id.wallet_profit_list)
+    private RecyclerView walletProfitList;
+
+    @ViewInject(R.id.wallet_profit_empty_view)
+    private TextView emptyView;
 
     @Override
     protected void initFragment() {
-        header = getActivity().getLayoutInflater().inflate(R.layout.header_fragment_wallet, (ViewGroup) walletMallList.getParent(), false);
+        header = getActivity().getLayoutInflater().inflate(R.layout.header_fragment_wallet, (ViewGroup) walletProfitList.getParent(), false);
         balanceAmountView = (TextView) header.findViewById(R.id.wallet_balance_amount);
         pointsAmountView = (TextView) header.findViewById(R.id.wallet_points_amount);
 
@@ -86,16 +100,18 @@ public class WalletFragment extends BaseFragment {
         header.findViewById(R.id.wallet_profit_more).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                MainMallActivity.actionStart(WalletFragment.this.getContext());
+                ProfitActivity.actionStart(WalletFragment.this.getContext());
             }
         });
 
-        adapter = new WalletMallAdapter(this.getContext());
+        adapter = new ProfitRecordAdapter(records);
         adapter.openLoadAnimation();
         adapter.addHeaderView(header);
-        walletMallList.setLayoutManager(new GridLayoutManager(getContext(), 2));
+        //adapter.setEmptyView(R.layout.empty_view, (ViewGroup) walletProfitList.getParent());
+        walletProfitList.setLayoutManager(new LinearLayoutManager(this.getContext()));
         //walletMallList.addItemDecoration(new WalletMallGoodsDecoration(1, R.color.divider));
-        walletMallList.setAdapter(adapter);
+        walletProfitList.setAdapter(adapter);
+
     }
 
     private void showDefaultDialog() {
@@ -123,6 +139,40 @@ public class WalletFragment extends BaseFragment {
                     if (resultJsonObject.getBoolean("Status")) {
                         balanceAmountView.setText("￥ " + resultJsonObject.getString("Balance"));
                         pointsAmountView.setText(resultJsonObject.getString("Points"));
+                    }
+                    else {
+                        showToast(resultJsonObject.getString("Info"));
+                    }
+                    ptrFrame.refreshComplete();
+                }
+                catch (JSONException e) {
+                    e.printStackTrace();
+                }
+            }
+
+            @Override
+            public void onFinished() {
+                super.onFinished();
+                ptrFrame.refreshComplete();
+            }
+        });
+
+        x.http().post(new GetWalletBalanceRecords(), new NetCallbackAdapter(WalletFragment.this.getContext(), false) {
+            @Override
+            public void onSuccess(String result) {
+                JSONObject resultJsonObject;
+                try {
+                    resultJsonObject = new JSONObject(result);
+                    if (resultJsonObject.getBoolean("Status")) {
+                        records.clear();
+                        records.addAll(JSON.parseArray(resultJsonObject.getString("Records"), ProfitRecord.class));
+                        adapter.notifyDataSetChanged();
+                        if (records.size() == 0) {
+                            emptyView.setVisibility(View.VISIBLE);
+                        }
+                        else {
+                            emptyView.setVisibility(View.GONE);
+                        }
                     }
                     else {
                         showToast(resultJsonObject.getString("Info"));
