@@ -7,6 +7,7 @@ import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
 import android.view.MenuItem;
+import android.view.View;
 
 import com.alibaba.fastjson.JSON;
 import com.huachuang.palmtouchfinancial.R;
@@ -26,6 +27,7 @@ import java.util.List;
 
 import in.srain.cube.views.ptr.PtrDefaultHandler;
 import in.srain.cube.views.ptr.PtrFrameLayout;
+import in.srain.cube.views.ptr.PtrHandler;
 
 @ContentView(R.layout.activity_share_record)
 public class  ShareRecordActivity extends BaseSwipeActivity {
@@ -38,6 +40,7 @@ public class  ShareRecordActivity extends BaseSwipeActivity {
     }
 
     private RecommendRecordAdapter adapter;
+    private LinearLayoutManager layoutManager;
     private List<RecommendRecord> records = new ArrayList<>();
 
     @ViewInject(R.id.share_record_toolbar)
@@ -57,19 +60,24 @@ public class  ShareRecordActivity extends BaseSwipeActivity {
             getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         }
 
-        adapter = new RecommendRecordAdapter(records);
-        adapter.openLoadAnimation();
-        recordList.setLayoutManager(new LinearLayoutManager(this));
-        recordList.setAdapter(adapter);
+        refreshShareRecord();
+        ptrFrame.setPtrHandler(new PtrHandler() {
+            @Override
+            public boolean checkCanDoRefresh(PtrFrameLayout frame, View content, View header) {
+                return layoutManager.findFirstCompletelyVisibleItemPosition() == 0;
+            }
 
-        ptrFrame.setPtrHandler(new PtrDefaultHandler() {
             @Override
             public void onRefreshBegin(PtrFrameLayout frame) {
                 refreshShareRecord();
             }
         });
 
-        refreshShareRecord();
+        adapter = new RecommendRecordAdapter(records);
+        adapter.openLoadAnimation();
+        layoutManager = new LinearLayoutManager(this);
+        recordList.setLayoutManager(layoutManager);
+        recordList.setAdapter(adapter);
     }
 
     @Override

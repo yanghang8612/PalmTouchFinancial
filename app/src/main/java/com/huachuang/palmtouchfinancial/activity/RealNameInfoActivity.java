@@ -361,17 +361,17 @@ public class RealNameInfoActivity extends BaseSwipeActivity {
 
     private void refreshPreviewImage() {
         Glide.with(this)
-                .load(GlobalParams.SERVER_URL_HEAD + "/preview/" + UserManager.getUserPhoneNumber() + "/identify/front.jpg")
+                .load(GlobalParams.SERVER_URL_HEAD + "/preview/" + UserManager.getUserPhoneNumber() + "/identify_card/front.jpg")
                 .skipMemoryCache(true)
                 .diskCacheStrategy(DiskCacheStrategy.NONE)
                 .into(identifyCardFrontImage);
         Glide.with(this)
-                .load(GlobalParams.SERVER_URL_HEAD + "/preview/" + UserManager.getUserPhoneNumber() + "/identify/back.jpg")
+                .load(GlobalParams.SERVER_URL_HEAD + "/preview/" + UserManager.getUserPhoneNumber() + "/identify_card/back.jpg")
                 .skipMemoryCache(true)
                 .diskCacheStrategy(DiskCacheStrategy.NONE)
                 .into(identifyCardBackImage);
         Glide.with(this)
-                .load(GlobalParams.SERVER_URL_HEAD + "/preview/" + UserManager.getUserPhoneNumber() + "/identify/handing.jpg")
+                .load(GlobalParams.SERVER_URL_HEAD + "/preview/" + UserManager.getUserPhoneNumber() + "/identify_card/handing.jpg")
                 .skipMemoryCache(true)
                 .diskCacheStrategy(DiskCacheStrategy.NONE)
                 .into(identifyCardHandingImage);

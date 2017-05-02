@@ -1,7 +1,6 @@
 package com.huachuang.palmtouchfinancial.fragment;
 
 import android.support.annotation.NonNull;
-import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.View;
@@ -13,12 +12,10 @@ import com.afollestad.materialdialogs.MaterialDialog;
 import com.alibaba.fastjson.JSON;
 import com.huachuang.palmtouchfinancial.R;
 import com.huachuang.palmtouchfinancial.activity.CardManagerActivity;
-import com.huachuang.palmtouchfinancial.activity.MainMallActivity;
 import com.huachuang.palmtouchfinancial.activity.MyBalanceActivity;
 import com.huachuang.palmtouchfinancial.activity.MyPointsActivity;
 import com.huachuang.palmtouchfinancial.activity.ProfitActivity;
 import com.huachuang.palmtouchfinancial.adapter.ProfitRecordAdapter;
-import com.huachuang.palmtouchfinancial.adapter.WalletMallAdapter;
 import com.huachuang.palmtouchfinancial.backend.bean.ProfitRecord;
 import com.huachuang.palmtouchfinancial.backend.net.NetCallbackAdapter;
 import com.huachuang.palmtouchfinancial.backend.net.params.GetUserWallet;
@@ -26,7 +23,6 @@ import com.huachuang.palmtouchfinancial.backend.net.params.GetWalletBalanceRecor
 
 import org.json.JSONException;
 import org.json.JSONObject;
-import org.w3c.dom.Text;
 import org.xutils.view.annotation.ContentView;
 import org.xutils.view.annotation.ViewInject;
 import org.xutils.x;
@@ -34,8 +30,8 @@ import org.xutils.x;
 import java.util.ArrayList;
 import java.util.List;
 
-import in.srain.cube.views.ptr.PtrDefaultHandler;
 import in.srain.cube.views.ptr.PtrFrameLayout;
+import in.srain.cube.views.ptr.PtrHandler;
 
 /**
  * Created by Asuka on 2017/3/7.
@@ -45,6 +41,7 @@ import in.srain.cube.views.ptr.PtrFrameLayout;
 public class WalletFragment extends BaseFragment {
 
     private ProfitRecordAdapter adapter;
+    private LinearLayoutManager layoutManager;
     private List<ProfitRecord> records = new ArrayList<>();
     private View header;
     private TextView balanceAmountView;
@@ -65,11 +62,16 @@ public class WalletFragment extends BaseFragment {
         balanceAmountView = (TextView) header.findViewById(R.id.wallet_balance_amount);
         pointsAmountView = (TextView) header.findViewById(R.id.wallet_points_amount);
 
-        initWallet();
-        ptrFrame.setPtrHandler(new PtrDefaultHandler() {
+        refreshWallet();
+        ptrFrame.setPtrHandler(new PtrHandler() {
+            @Override
+            public boolean checkCanDoRefresh(PtrFrameLayout frame, View content, View header) {
+                return layoutManager.findFirstCompletelyVisibleItemPosition() == 0;
+            }
+
             @Override
             public void onRefreshBegin(PtrFrameLayout frame) {
-                initWallet();
+                refreshWallet();
             }
         });
 
@@ -108,8 +110,8 @@ public class WalletFragment extends BaseFragment {
         adapter.openLoadAnimation();
         adapter.addHeaderView(header);
         //adapter.setEmptyView(R.layout.empty_view, (ViewGroup) walletProfitList.getParent());
-        walletProfitList.setLayoutManager(new LinearLayoutManager(this.getContext()));
-        //walletMallList.addItemDecoration(new WalletMallGoodsDecoration(1, R.color.divider));
+        layoutManager = new LinearLayoutManager(this.getContext());
+        walletProfitList.setLayoutManager(layoutManager);
         walletProfitList.setAdapter(adapter);
 
     }
@@ -129,7 +131,7 @@ public class WalletFragment extends BaseFragment {
                 .show();
     }
 
-    private void initWallet() {
+    private void refreshWallet() {
         x.http().post(new GetUserWallet(), new NetCallbackAdapter(WalletFragment.this.getContext(), false) {
             @Override
             public void onSuccess(String result) {

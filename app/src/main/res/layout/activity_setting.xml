@@ -74,7 +74,7 @@
 
         <!--</RelativeLayout>-->
 
-        <include layout="@layout/horizontal_line" />
+        <!--<include layout="@layout/horizontal_line" />-->
 
         <RelativeLayout
             android:id="@+id/setting_check_update"

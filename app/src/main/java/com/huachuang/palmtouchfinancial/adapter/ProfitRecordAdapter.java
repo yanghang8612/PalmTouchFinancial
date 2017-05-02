@@ -74,10 +74,10 @@ public class ProfitRecordAdapter extends BaseQuickAdapter<ProfitRecord, BaseView
                 helper.setText(R.id.profit_record_item_description, "分享有礼：一级注册用户");
                 break;
             case 2:
-                helper.setText(R.id.profit_record_item_description, "分享有礼：一级注册用户");
+                helper.setText(R.id.profit_record_item_description, "分享有礼：二级注册用户");
                 break;
             case 3:
-                helper.setText(R.id.profit_record_item_description, "分享有礼：一级注册用户");
+                helper.setText(R.id.profit_record_item_description, "分享有礼：三级注册用户");
                 break;
         }
     }

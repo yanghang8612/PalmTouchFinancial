@@ -344,12 +344,12 @@ public class DebitCardActivity extends BaseSwipeActivity {
 
     private void refreshPreviewImage() {
         Glide.with(this)
-                .load(GlobalParams.SERVER_URL_HEAD + "/preview/" + UserManager.getUserPhoneNumber() + "/debit/front.jpg")
+                .load(GlobalParams.SERVER_URL_HEAD + "/preview/" + UserManager.getUserPhoneNumber() + "/debit_card/front.jpg")
                 .skipMemoryCache(true)
                 .diskCacheStrategy(DiskCacheStrategy.NONE)
                 .into(debitCardFrontImage);
         Glide.with(this)
-                .load(GlobalParams.SERVER_URL_HEAD + "/preview/" + UserManager.getUserPhoneNumber() + "/debit/back.jpg")
+                .load(GlobalParams.SERVER_URL_HEAD + "/preview/" + UserManager.getUserPhoneNumber() + "/debit_card/back.jpg")
                 .skipMemoryCache(true)
                 .diskCacheStrategy(DiskCacheStrategy.NONE)
                 .into(debitCardBackImage);
