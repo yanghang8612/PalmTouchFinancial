@@ -1,6 +1,7 @@
 package com.huachuang.palmtouchfinancial.backend.net.params;
 
 import com.huachuang.palmtouchfinancial.GlobalParams;
+import com.huachuang.palmtouchfinancial.backend.UserManager;
 
 import org.xutils.http.RequestParams;
 import org.xutils.http.annotation.HttpRequest;
@@ -33,7 +34,6 @@ public class ApplyLoanParams extends RequestParams {
     private String borrowerDetailedAddress;
 
     public ApplyLoanParams(
-            long userId,
             String houseAddress,
             String housePropertyCard,
             String houseLandSources,
@@ -51,7 +51,7 @@ public class ApplyLoanParams extends RequestParams {
             String borrowerAddress,
             String borrowerDetailedAddress) {
 
-        this.userId = userId;
+        this.userId = UserManager.getUserID();
         this.houseAddress = houseAddress;
         this.housePropertyCard = housePropertyCard;
         this.houseLandSources = houseLandSources;

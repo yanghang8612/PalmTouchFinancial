@@ -283,7 +283,6 @@ public class LoanApplyActivity extends BaseActivity implements DatePickerDialog.
         }
 
         ApplyLoanParams params = new ApplyLoanParams(
-                UserManager.getUserID(),
                 loanApplyHouseAddressEdit.getText().toString(),
                 loanApplyHousePropertyCardEdit.getText().toString(),
                 (String) loanApplyHouseLandSourcesSpinner.getSelectedItem(),
@@ -304,7 +303,6 @@ public class LoanApplyActivity extends BaseActivity implements DatePickerDialog.
         x.http().post(params, new NetCallbackAdapter(this) {
             @Override
             public void onSuccess(String result) {
-
                 try {
                     JSONObject resultJSONObject = new JSONObject(result);
                     if (resultJSONObject.getBoolean("Status")) {
@@ -317,7 +315,6 @@ public class LoanApplyActivity extends BaseActivity implements DatePickerDialog.
                 } catch (JSONException e) {
                     e.printStackTrace();
                 }
-
             }
         });
     }
