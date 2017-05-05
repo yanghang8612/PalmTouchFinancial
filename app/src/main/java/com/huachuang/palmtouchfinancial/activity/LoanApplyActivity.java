@@ -154,6 +154,7 @@ public class LoanApplyActivity extends BaseActivity implements DatePickerDialog.
                         .onPositive(new MaterialDialog.SingleButtonCallback() {
                             @Override
                             public void onClick(@NonNull MaterialDialog dialog, @NonNull DialogAction which) {
+                                dialog.dismiss();
                                 finish();
                             }
                         })

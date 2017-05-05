@@ -83,6 +83,7 @@ public class SettingActivity extends BaseSwipeActivity {
                 .onPositive(new MaterialDialog.SingleButtonCallback() {
                     @Override
                     public void onClick(@NonNull MaterialDialog dialog, @NonNull DialogAction which) {
+                        dialog.dismiss();
                         Intent intent = new Intent(Intent.ACTION_CALL, Uri.parse("tel:" + "400 810 9910"));
                         if (ActivityCompat.checkSelfPermission(SettingActivity.this, Manifest.permission.CALL_PHONE) != PackageManager.PERMISSION_GRANTED) {
                             // TODO: Consider calling

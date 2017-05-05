@@ -170,6 +170,7 @@ public class RealNameInfoActivity extends BaseSwipeActivity {
                         .onPositive(new MaterialDialog.SingleButtonCallback() {
                             @Override
                             public void onClick(@NonNull MaterialDialog dialog, @NonNull DialogAction which) {
+                                dialog.dismiss();
                                 finish();
                             }
                         })

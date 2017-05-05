@@ -120,6 +120,7 @@ public class MyFragment extends BaseFragment {
                 .onPositive(new MaterialDialog.SingleButtonCallback() {
                     @Override
                     public void onClick(@NonNull MaterialDialog dialog, @NonNull DialogAction which) {
+                        dialog.dismiss();
                         SharedPreferences defaultPref = getActivity().getSharedPreferences(DEFAULT_PRE, Activity.MODE_PRIVATE);
                         SharedPreferences.Editor editor = defaultPref.edit();
                         editor.remove("phoneNumber");

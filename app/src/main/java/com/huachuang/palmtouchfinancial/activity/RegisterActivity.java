@@ -134,6 +134,7 @@ public class RegisterActivity extends BaseSwipeActivity implements View.OnFocusC
                         .onPositive(new MaterialDialog.SingleButtonCallback() {
                             @Override
                             public void onClick(@NonNull MaterialDialog dialog, @NonNull DialogAction which) {
+                                dialog.dismiss();
                                 finish();
                             }
                         })

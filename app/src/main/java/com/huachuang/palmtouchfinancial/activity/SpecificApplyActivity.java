@@ -6,8 +6,10 @@ import android.content.Context;
 import android.content.Intent;
 import android.os.Build;
 import android.os.Bundle;
+import android.os.Handler;
 import android.support.annotation.NonNull;
 import android.support.v7.widget.Toolbar;
+import android.text.TextUtils;
 import android.util.Log;
 import android.view.MenuItem;
 import android.webkit.JavascriptInterface;
@@ -64,9 +66,9 @@ public class SpecificApplyActivity extends BaseSwipeActivity {
 
     private boolean finishedApply = false;
     private int bankID;
-    private String userName;
-    private String userPhoneNumber;
-    private String userCompany;
+    private String userName = "";
+    private String userPhoneNumber = "";
+    private String userCompany = "";
 
     @ViewInject(R.id.specific_apply_toolbar)
     private Toolbar toolbar;
@@ -104,19 +106,32 @@ public class SpecificApplyActivity extends BaseSwipeActivity {
 
             @JavascriptInterface
             public void fetchApplyInfo(String userName, String userPhoneNumber, String userCompany) {
-                if (!userName.equals("undefined")) {
+                if (!TextUtils.isEmpty(userName) && !userName.equals("undefined")) {
                     SpecificApplyActivity.this.userName = userName;
                 }
-                if (!userPhoneNumber.equals("undefined")) {
+                if (!TextUtils.isEmpty(userPhoneNumber) && !userPhoneNumber.equals("undefined")) {
                     SpecificApplyActivity.this.userPhoneNumber = userPhoneNumber;
                 }
-                if (!userCompany.equals("undefined")) {
+                if (!TextUtils.isEmpty(userCompany) && !userCompany.equals("undefined")) {
                     SpecificApplyActivity.this.userCompany = userCompany;
                 }
+                Log.d(TAG, userName + " " + userPhoneNumber + " " + userCompany);
             }
 
             @JavascriptInterface
             public void commitApplyInfo() {
+                Log.d(TAG, "Enter commit function.");
+                if (TextUtils.isEmpty(userName) || TextUtils.isEmpty(userPhoneNumber) || TextUtils.isEmpty(userCompany)) {
+                    return;
+                }
+                if (userName.equals("undefined") || userPhoneNumber.equals("undefined") || userCompany.equals("undefined")) {
+                    return;
+                }
+                if (finishedApply) {
+                    return;
+                }
+                finishedApply = true;
+                Log.d(TAG, "Commit to server.");
                 x.http().post(
                         new ApplyCreditCardParams(bankID, userName, userPhoneNumber, userCompany),
                         new NetCallbackAdapter(SpecificApplyActivity.this, false) {
@@ -126,7 +141,6 @@ public class SpecificApplyActivity extends BaseSwipeActivity {
                                     JSONObject resultJSONObject = new JSONObject(result);
                                     if (resultJSONObject.getBoolean("Status")) {
                                         Log.d(TAG, resultJSONObject.getString("Info"));
-                                        finishedApply = true;
                                     }
                                     else {
                                         showToast(resultJSONObject.getString("Info"));
@@ -142,7 +156,7 @@ public class SpecificApplyActivity extends BaseSwipeActivity {
         WebViewClient client = new WebViewClient() {
 
             @Override
-            public void onPageFinished(WebView view, String url) {
+            public void onPageFinished(final WebView view, String url) {
                 String js = "";
                 String name = UserManager.getCertificationInfo().getUserName();
                 String spell = UserManager.getCertificationInfo().getUserSpell();
@@ -150,6 +164,7 @@ public class SpecificApplyActivity extends BaseSwipeActivity {
                 String phoneNumber = UserManager.getUserPhoneNumber();
                 switch (bankID) {
                     case 0:
+                        //每页跳转，已测
                         js += "$('#realname').val('" + name + "');";
                         js += "$('#indentificationId').val('" + identityCard + "');";
                         js += "$('#tel').val('" + phoneNumber + "');";
@@ -157,15 +172,17 @@ public class SpecificApplyActivity extends BaseSwipeActivity {
                         js += "$('a#next').click(function(){myObj.commitApplyInfo()});";
                         break;
                     case 1:
+                        //分块显示，已测
                         js += "$('#chaneseName').val('" + name + "');";
                         js += "$('#pingyin').val('" + spell + "');";
                         js += "$('#identity').val('" + identityCard + "');";
                         js += "$('#phoneNum').val('" + phoneNumber + "');";
                         js += "$('#pannalOne .next_button').click(function(){myObj.fetchApplyInfo($('#chaneseName').val(),$('#phoneNum').val(),$('#companyName').val())});";
                         js += "$('#pannalThree .next_button').click(function(){myObj.fetchApplyInfo($('#chaneseName').val(),$('#phoneNum').val(),$('#companyName').val())});";
-                        js += "$('#pannalThree .next_button').click(function(){myObj.commitApplyInfo()});";
+                        js += "$('#pannalFour .next_button').click(function(){myObj.commitApplyInfo()});";
                         break;
                     case 2:
+                        //每页跳转，已测
                         js += "$('#cuName').val('" + name + "');";
                         js += "$('#cuIdentity').val('" + identityCard + "');";
                         js += "$('#cuMobilePhone').val('" + phoneNumber + "');";
@@ -174,61 +191,79 @@ public class SpecificApplyActivity extends BaseSwipeActivity {
                         js += "$('a#submitinfo').click(function(){myObj.commitApplyInfo()});";
                         break;
                     case 3:
-                        try {
-                            Thread.sleep(500);
-                        } catch (InterruptedException e) {
-                            e.printStackTrace();
-                        }
-                        //js += "document.getElementById('TelephoneNo').value='" + phoneNumber + "';";
-                        js += "$('#TelephoneNo').val('" + phoneNumber + "');";
-                        js += "$('#username').val('" + name + "');";
-                        js += "$('#usernameSpell').val('" + spell + "');";
-                        js += "$('#IdNo').val('" + identityCard + "');";
-                        js += "$($('form[name=\"form1\"] button')[0]).on('click',function(){myObj.fetchApplyInfo($('#username').val(),$('#TelephoneNo').val(),$('#Uname').val())});";
-                        js += "$($('form[name=\"form3\"] button')[3]).on('click',function(){myObj.commitApplyInfo()});";
+                        //分块显示，已测，但是输入信息的验证有问题
+                        js += "(function checkphone(){if($('#TelephoneNo').length==1){" +
+                                "$('#TelephoneNo').val('" + phoneNumber + "');" +
+                                "$($('form[name=\"form1\"] button')[0]).on('click',function(){myObj.fetchApplyInfo($('#username').val(),$('#TelephoneNo').val(),$('#Uname').val())});" +
+                                "return;" +
+                                "}setTimeout(checkphone,1000);})();";
+                        js += "(function checkcontent(){if($('#username').length==1){" +
+                                "$('#username').val('" + name + "');" +
+                                "$('#usernameSpell').val('" + spell + "');" +
+                                "$('#IdNo').val('" + identityCard + "');" +
+                                "$($('form[name=\"form1\"] button')[0]).on('click',function(){myObj.fetchApplyInfo($('#username').val(),$('#TelephoneNo').val(),$('#Uname').val())});" +
+                                "$($('form[name=\"form3\"] button')[3]).on('click',function(){myObj.fetchApplyInfo($('#username').val(),$('#TelephoneNo').val(),$('#Uname').val())});" +
+                                "$($('form[name=\"form3\"] button')[3]).on('click',function(){myObj.commitApplyInfo()});" +
+                                "return;" +
+                                "}setTimeout(checkcontent,1000);})();";
                         break;
                     case 4:
+                        //首页跳转，填写分块，已测
                         js += "$('#pccc_applyName').val('" + name + "');";
                         js += "$('#pccc_certNo').val('" + identityCard + "');";
                         js += "$('#pccc_applyTel').val('" + phoneNumber + "');";
-                        js += "$('div#next').click(function(){myObj.fetchApplyInfo($('#realname').val(),$('#tel').val(),$('#workplace').val())});";
-                        js += "$('a#next').click(function(){myObj.commitApplyInfo()});";
+                        js += "$('a#submitForm').click(function(){myObj.fetchApplyInfo($('#pccc_applyName').val(),$('#pccc_applyTel').val(),$('#applyCompanyName').val())});";
+                        new Handler().postDelayed(new Runnable() {
+                            @Override
+                            public void run() {
+                                String js = "";
+                                js += "$('a.tianxie_qita_xinxi_button').click(function(){myObj.fetchApplyInfo($('#pccc_applyName').val(),$('#pccc_applyTel').val(),$('#applyCompanyName').val())});";
+                                js += "$('a#mrm_submit_maincard').click(function(){myObj.commitApplyInfo()});";
+                                js += "$('a#mrm_submit_attachcard').click(function(){myObj.commitApplyInfo()});";
+                                view.evaluateJavascript(js, null);
+                            }
+                        }, 5000);
                         break;
                     case 5:
-                        js += "document.getElementById('ctl00_ContentPlaceHolder1_txbName').value='" + name + "';";
-                        js += "document.getElementById('ctl00_ContentPlaceHolder1_txbCardId').value='" + identityCard + "';";
-                        js += "document.getElementById('tbxMobile').value='" + phoneNumber + "';";
-                        js += "$('div#next').click(function(){myObj.fetchApplyInfo($('#realname').val(),$('#tel').val(),$('#workplace').val())});";
-                        js += "$('a#next').click(function(){myObj.commitApplyInfo()});";
+                        //无跳转，只有一页，信息很少，已测
+                        js += "$('ctl00_ContentPlaceHolder1_txbName').value='" + name + "';";
+                        js += "$('ctl00_ContentPlaceHolder1_txbCardId').value='" + identityCard + "';";
+                        js += "$('tbxMobile').value='" + phoneNumber + "';";
+                        js += "$('ctl00_ContentPlaceHolder1_btnQuery').addEventListener('click',function(){myObj.fetchApplyInfo($('ctl00_ContentPlaceHolder1_txbName').value,$('tbxMobile').value,$('ctl00_ContentPlaceHolder1_tbxUnitName').value)},false);";
+                        js += "$('ctl00_ContentPlaceHolder1_btnQuery').addEventListener('click',function(){myObj.commitApplyInfo()},false);";
                         break;
                     case 6:
+                        //两页跳转，信息不多，已测
                         js += "$('#name').val('" + name + "');";
                         js += "$('#namepy').val('" + spell + "');";
                         js += "$('#id_no').val('" + identityCard + "');";
                         js += "$('#mobilephone').val('" + phoneNumber + "');";
-                        js += "$('div#next').click(function(){myObj.fetchApplyInfo($('#realname').val(),$('#tel').val(),$('#workplace').val())});";
-                        js += "$('a#next').click(function(){myObj.commitApplyInfo()});";
+                        js += "$('.button-next-step').click(function(){myObj.fetchApplyInfo($('#name').val(),$('#mobilephone').val(),$('#comname').val())});";
+                        js += "$('#submitId').click(function(){myObj.commitApplyInfo()});";
                         break;
                     case 7:
+                        //无跳转，分块显示，详细信息填写动态请求，用死循环判断form_more是否被填充而进行注入，已测
                         try {
                             Thread.sleep(500);
                         } catch (InterruptedException e) {
                             e.printStackTrace();
                         }
                         js += "$('#name').val('" + name + "');";
-                        js += "$('#pinyin').val('" + spell + "');";
+                        js += "$('#name').focus();";
                         js += "$('#idNo').val('" + identityCard + "');";
+                        js += "$('#idNo').focus();";
                         js += "$('#tel').val('" + phoneNumber + "');";
-                        js += "$('div#next').click(function(){myObj.fetchApplyInfo($('#realname').val(),$('#tel').val(),$('#workplace').val())});";
-                        js += "$('a#next').click(function(){myObj.commitApplyInfo()});";
+                        js += "$('#tel').focus();";
+                        js += "$('#pinyin').focus();";
+                        js += "$('#nextStep').click(function(){myObj.fetchApplyInfo($('#name').val(),$('#tel').val(),$('#company').val())});";
+                        js += "(function checkcontent(){if($('.form_more').html()!=''){" +
+                                "$('#submit').click(function(){myObj.fetchApplyInfo($('#name').val(),$('#tel').val(),$('#company').val())});" +
+                                "$('#submit').click(function(){myObj.commitApplyInfo()});" +
+                                "return;" +
+                                "}setTimeout(checkcontent,1000);})();";
                         break;
                 }
-                view.evaluateJavascript(js, new ValueCallback<String>() {
-                    @Override
-                    public void onReceiveValue(String value) {
-
-                    }
-                });
+                view.evaluateJavascript(js, null);
             }
         };
         webView.setWebViewClient(client);
@@ -252,6 +287,7 @@ public class SpecificApplyActivity extends BaseSwipeActivity {
                         .onPositive(new MaterialDialog.SingleButtonCallback() {
                             @Override
                             public void onClick(@NonNull MaterialDialog dialog, @NonNull DialogAction which) {
+                                dialog.dismiss();
                                 finish();
                             }
                         })
