@@ -32,6 +32,7 @@
     <string name="title_activity_loan_apply">网贷申请</string>
     <string name="title_activity_add_bank_card">添加银行卡</string>
     <string name="title_activity_setting">设置</string>
+    <string name="title_activity_register_vip">掌触会员</string>
     <string name="title_fragment_share">分享</string>
     <string name="title_fragment_wallet">掌触钱包</string>
 

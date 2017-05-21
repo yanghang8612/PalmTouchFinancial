@@ -83,6 +83,10 @@ public class CommonUtils {
         return String.valueOf((int) (Math.random() * 1000000));
     }
 
+    public static String generateRandomString(int length) {
+        return null;
+    }
+
     public static String mosaicIdentityCard(String identityCard) {
         return identityCard.substring(0, 8) + "******" + identityCard.substring(14);
     }
