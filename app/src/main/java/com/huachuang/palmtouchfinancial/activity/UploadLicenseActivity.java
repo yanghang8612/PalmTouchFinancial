@@ -72,11 +72,18 @@ public class UploadLicenseActivity extends BaseActivity {
             public void onClick(View v) {
                 if (!licenseFrontImageState || !licenseBackImageState) {
                     showToast("请拍照营业执照正反面");
+                    //return;
                 }
                 MenuSheetView menuSheetView =
                         new MenuSheetView(UploadLicenseActivity.this, MenuSheetView.MenuType.LIST, "请选择支付方式", new MenuSheetView.OnMenuItemClickListener() {
                             @Override
                             public boolean onMenuItemClick(MenuItem item) {
+                                if (item.getItemId() == R.id.wechatpay) {
+                                    PayQrCodeActivity.actionStart(UploadLicenseActivity.this, '0', 1);
+                                }
+                                else {
+                                    PayQrCodeActivity.actionStart(UploadLicenseActivity.this, '1', 1);
+                                }
                                 if (bottomSheet.isSheetShowing()) {
                                     bottomSheet.dismissSheet();
                                 }

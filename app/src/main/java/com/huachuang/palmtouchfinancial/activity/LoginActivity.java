@@ -120,10 +120,9 @@ public class LoginActivity extends BaseActivity implements View.OnFocusChangeLis
         x.http().post(new LoginParams(phoneNumber, password), new NetCallbackAdapter(this) {
             @Override
             public void onSuccess(String result) {
-                JSONObject resultJsonObject;
                 try {
                     SharedPreferences defaultPref = getSharedPreferences(DEFAULT_PRE, MODE_PRIVATE);
-                    resultJsonObject = new JSONObject(result);
+                    JSONObject resultJsonObject = new JSONObject(result);
                     if (resultJsonObject.getBoolean("Status")) {
                         User user = JSON.parseObject(resultJsonObject.getString("User"), User.class);
                         //String token = resultJsonObject.getString("Token");

@@ -93,9 +93,8 @@ public class  ShareRecordActivity extends BaseSwipeActivity {
         x.http().post(new GetRecommendRecord(), new NetCallbackAdapter(this, false) {
             @Override
             public void onSuccess(String result) {
-                JSONObject resultJsonObject;
                 try {
-                    resultJsonObject = new JSONObject(result);
+                    JSONObject resultJsonObject = new JSONObject(result);
                     if (resultJsonObject.getBoolean("Status")) {
                         String recordString = resultJsonObject.getString("Records");
                         records.clear();

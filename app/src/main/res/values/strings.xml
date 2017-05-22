@@ -29,6 +29,7 @@
     <string name="title_activity_my_qr_code">我的二维码</string>
     <string name="title_activity_share_record">我的分享记录</string>
     <string name="title_activity_share_qr_record">分享二维码</string>
+    <string name="title_activity_pay_qr_record">支付二维码</string>
     <string name="title_activity_loan_apply">网贷申请</string>
     <string name="title_activity_add_bank_card">添加银行卡</string>
     <string name="title_activity_setting">设置</string>

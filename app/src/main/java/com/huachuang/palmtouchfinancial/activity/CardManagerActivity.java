@@ -95,9 +95,8 @@ public class CardManagerActivity extends BaseSwipeActivity {
         x.http().post(new GetAllBankCardsParams(), new NetCallbackAdapter(this, false) {
             @Override
             public void onSuccess(String result) {
-                JSONObject resultJsonObject;
                 try {
-                    resultJsonObject = new JSONObject(result);
+                    JSONObject resultJsonObject = new JSONObject(result);
                     if (resultJsonObject.getBoolean("Status")) {
                         String cardsString = resultJsonObject.getString("Cards");
                         cards.addAll(JSON.parseArray(cardsString, BankCard.class));

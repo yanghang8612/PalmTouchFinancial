@@ -28,7 +28,7 @@ public class CommonPayHeaderParams extends RequestParams {
 
     public CommonPayHeaderParams() {
         SimpleDateFormat fmt = new SimpleDateFormat("yyyyMMddHHmmss");
-        trans_time = fmt.format(Calendar.getInstance().getTime());
-        nonce_str = CommonUtils.generateRandomString(16);
+        this.trans_time = fmt.format(Calendar.getInstance().getTime());
+        this.nonce_str = CommonUtils.generateRandomString(16);
     }
 }

@@ -110,9 +110,8 @@ public class ChangePasswordActivity extends BaseSwipeActivity {
         x.http().post(new ChangePasswordParams(newPassword), new NetCallbackAdapter(this) {
             @Override
             public void onSuccess(String result) {
-                JSONObject resultJsonObject;
                 try {
-                    resultJsonObject = new JSONObject(result);
+                    JSONObject resultJsonObject = new JSONObject(result);
                     if (resultJsonObject.getBoolean("Status")) {
                         UserManager.getCurrentUser().setUserPassword(newPassword);
                     }

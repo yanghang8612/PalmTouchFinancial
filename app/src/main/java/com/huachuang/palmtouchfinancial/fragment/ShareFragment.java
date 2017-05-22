@@ -195,9 +195,8 @@ public class ShareFragment extends BaseFragment {
         x.http().post(new GetRecommendCount(), new NetCallbackAdapter(ShareFragment.this.getContext(), false) {
             @Override
             public void onSuccess(String result) {
-                JSONObject resultJsonObject;
                 try {
-                    resultJsonObject = new JSONObject(result);
+                    JSONObject resultJsonObject = new JSONObject(result);
                     if (resultJsonObject.getBoolean("Status")) {
                         baseCountView.setText(resultJsonObject.getString("BaseCount") + "人");
                         deriveCountView.setText(resultJsonObject.getString("DeriveCount") + "人");

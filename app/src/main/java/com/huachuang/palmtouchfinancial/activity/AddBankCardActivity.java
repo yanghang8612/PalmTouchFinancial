@@ -146,9 +146,8 @@ public class AddBankCardActivity extends BaseActivity {
         x.http().post(new AddBankCardParams(ownerName, number, cardType, bankName, phoneNumber), new NetCallbackAdapter(this) {
             @Override
             public void onSuccess(String result) {
-                JSONObject resultJsonObject;
                 try {
-                    resultJsonObject = new JSONObject(result);
+                    JSONObject resultJsonObject = new JSONObject(result);
                     showToast(resultJsonObject.getString("Info"));
                     if (resultJsonObject.getBoolean("Status")) {
                         new Handler().postDelayed(new Runnable() {

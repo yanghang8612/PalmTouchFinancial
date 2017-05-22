@@ -91,9 +91,8 @@ public class AgentManagerActivity extends BaseActivity {
         x.http().post(new GetSubUserParams(), new NetCallbackAdapter(this, false) {
             @Override
             public void onSuccess(String result) {
-                JSONObject resultJsonObject;
                 try {
-                    resultJsonObject = new JSONObject(result);
+                    JSONObject resultJsonObject = new JSONObject(result);
                     if (resultJsonObject.getBoolean("Status")) {
                         List<User> users = JSON.parseArray(resultJsonObject.getString("Users"), User.class);
                         if (UserManager.getCurrentUser().getUserType() != 0 && users != null) {

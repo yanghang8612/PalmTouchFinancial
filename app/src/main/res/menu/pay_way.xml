@@ -2,11 +2,11 @@
 <menu xmlns:android="http://schemas.android.com/apk/res/android">
     <item
         android:id="@+id/wechatpay"
-        android:title=""
-        android:icon="@drawable/wechatpay_logo" />
+        android:title="微信支付"
+        android:icon="@drawable/ic_wechatpay" />
 
     <item
         android:id="@+id/alipay"
-        android:title=""
-        android:icon="@drawable/alipay_logo" />
+        android:title="支付宝支付"
+        android:icon="@drawable/ic_alipay" />
 </menu>

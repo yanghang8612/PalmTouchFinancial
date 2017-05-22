@@ -287,9 +287,8 @@ public class DebitCardActivity extends BaseSwipeActivity {
             x.http().post(infoParams, new NetCallbackAdapter(this) {
                 @Override
                 public void onSuccess(String result) {
-                    JSONObject resultJsonObject;
                     try {
-                        resultJsonObject = new JSONObject(result);
+                        JSONObject resultJsonObject = new JSONObject(result);
                         if (resultJsonObject.getBoolean("Status")) {
                             UserManager.setDebitCardInfo(
                                     JSON.parseObject(resultJsonObject.getString("DebitCard"), UserDebitCard.class));

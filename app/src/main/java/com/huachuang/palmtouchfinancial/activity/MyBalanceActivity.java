@@ -64,9 +64,8 @@ public class MyBalanceActivity extends BaseSwipeActivity {
         x.http().post(new GetUserWallet(), new NetCallbackAdapter(this, false) {
             @Override
             public void onSuccess(String result) {
-                JSONObject resultJsonObject;
                 try {
-                    resultJsonObject = new JSONObject(result);
+                    JSONObject resultJsonObject = new JSONObject(result);
                     if (resultJsonObject.getBoolean("Status")) {
                         balanceAmount.setText("￥ " + resultJsonObject.getString("Balance"));
                     }

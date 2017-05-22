@@ -301,9 +301,8 @@ public class RealNameInfoActivity extends BaseSwipeActivity {
             x.http().post(infoParams, new NetCallbackAdapter(this) {
                 @Override
                 public void onSuccess(String result) {
-                    JSONObject resultJsonObject;
                     try {
-                        resultJsonObject = new JSONObject(result);
+                        JSONObject resultJsonObject = new JSONObject(result);
                         if (resultJsonObject.getBoolean("Status")) {
                             UserManager.setCertificationInfo(
                                     JSON.parseObject(resultJsonObject.getString("CertificationInfo"), UserCertificationInfo.class));

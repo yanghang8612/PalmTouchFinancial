@@ -135,9 +135,8 @@ public class WalletFragment extends BaseFragment {
         x.http().post(new GetUserWallet(), new NetCallbackAdapter(WalletFragment.this.getContext(), false) {
             @Override
             public void onSuccess(String result) {
-                JSONObject resultJsonObject;
                 try {
-                    resultJsonObject = new JSONObject(result);
+                    JSONObject resultJsonObject = new JSONObject(result);
                     if (resultJsonObject.getBoolean("Status")) {
                         balanceAmountView.setText("￥ " + resultJsonObject.getString("Balance"));
                         pointsAmountView.setText(resultJsonObject.getString("Points"));
@@ -162,9 +161,8 @@ public class WalletFragment extends BaseFragment {
         x.http().post(new GetWalletBalanceRecords(), new NetCallbackAdapter(WalletFragment.this.getContext(), false) {
             @Override
             public void onSuccess(String result) {
-                JSONObject resultJsonObject;
                 try {
-                    resultJsonObject = new JSONObject(result);
+                    JSONObject resultJsonObject = new JSONObject(result);
                     if (resultJsonObject.getBoolean("Status")) {
                         records.clear();
                         records.addAll(JSON.parseArray(resultJsonObject.getString("Records"), ProfitRecord.class));

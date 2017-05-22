@@ -14,9 +14,12 @@ import java.net.Inet6Address;
 import java.net.InetAddress;
 import java.net.NetworkInterface;
 import java.net.SocketException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.Enumeration;
 import java.util.List;
+import java.util.Locale;
 import java.util.UUID;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
@@ -121,6 +124,15 @@ public class CommonUtils {
         String str = uuid.toString();
         String temp = str.substring(0, 8) + str.substring(9, 13) + str.substring(14, 18) + str.substring(19, 23) + str.substring(24);
         return temp.substring(0, length);
+    }
+
+    public static String generateTransactionNo() {
+        StringBuilder no = new StringBuilder("ZCJK");
+        Calendar calendar = Calendar.getInstance();
+        SimpleDateFormat fmt = new SimpleDateFormat("yyyyMMdd", Locale.CHINA);
+        no.append(fmt.format(calendar.getTime()));
+        no.append(String.valueOf(calendar.getTimeInMillis()));
+        return no.toString();
     }
 
     public static String mosaicIdentityCard(String identityCard) {

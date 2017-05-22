@@ -54,9 +54,8 @@ public class ProfitActivity extends BaseActivity {
         x.http().post(new GetWalletBalanceRecords(), new NetCallbackAdapter(this, false) {
             @Override
             public void onSuccess(String result) {
-                JSONObject resultJsonObject;
                 try {
-                    resultJsonObject = new JSONObject(result);
+                    JSONObject resultJsonObject = new JSONObject(result);
                     if (resultJsonObject.getBoolean("Status")) {
                         adapter = new ProfitViewPagerAdapter(ProfitActivity.this,
                                 getResources().getStringArray(R.array.profit_tab),

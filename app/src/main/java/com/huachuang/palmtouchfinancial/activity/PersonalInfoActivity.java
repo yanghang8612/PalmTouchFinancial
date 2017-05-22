@@ -141,9 +141,8 @@ public class PersonalInfoActivity extends BaseSwipeActivity {
                 x.http().post(new UploadHeaderParams(new File(image.path)), new NetCallbackAdapter(this) {
                     @Override
                     public void onSuccess(String result) {
-                        JSONObject resultJsonObject;
                         try {
-                            resultJsonObject = new JSONObject(result);
+                            JSONObject resultJsonObject = new JSONObject(result);
                             if (resultJsonObject.getBoolean("Status")) {
                                 UserManager.getCurrentUser().setHeaderState(true);
                                 Glide.with(PersonalInfoActivity.this)
