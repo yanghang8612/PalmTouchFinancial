@@ -94,6 +94,48 @@
         android:background="@color/white">
 
         <RelativeLayout
+            android:id="@+id/my_vip_register"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/my_row_height"
+            android:padding="@dimen/my_padding"
+            android:visibility="gone">
+
+            <ImageView
+                android:id="@+id/my_vip_register_icon"
+                android:layout_width="@dimen/my_image_width"
+                android:layout_height="@dimen/my_image_height"
+                android:layout_marginLeft="@dimen/my_padding"
+                android:src="@drawable/ic_vip_register" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_vertical"
+                android:layout_centerVertical="true"
+                android:layout_toRightOf="@id/my_vip_register_icon"
+                android:layout_marginLeft="@dimen/my_padding"
+                android:text="@string/my_vip_register"
+                android:textSize="@dimen/my_text_size"
+                android:textColor="@color/black" />
+
+            <ImageView
+                android:layout_width="@dimen/my_image_width"
+                android:layout_height="@dimen/my_image_height"
+                android:layout_centerVertical="true"
+                android:layout_alignParentRight="true"
+                android:src="@drawable/ic_navigate_next_black_48dp" />
+
+        </RelativeLayout>
+
+        <LinearLayout
+            android:id="@+id/my_vip_register_divider"
+            android:orientation="horizontal"
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:background="@color/divider"
+            android:visibility="gone"/>
+
+        <RelativeLayout
             android:id="@+id/my_real_name_information"
             android:layout_width="match_parent"
             android:layout_height="@dimen/my_row_height"
@@ -234,7 +276,13 @@
 
         </RelativeLayout>
 
-        <include layout="@layout/horizontal_line" />
+        <LinearLayout
+            android:id="@+id/my_agent_manager_divider"
+            android:orientation="horizontal"
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:background="@color/divider"
+            android:visibility="gone"/>
 
         <RelativeLayout
             android:id="@+id/my_agent_manager"

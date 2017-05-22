@@ -33,11 +33,13 @@
     <string name="title_activity_add_bank_card">添加银行卡</string>
     <string name="title_activity_setting">设置</string>
     <string name="title_activity_register_vip">掌触会员</string>
+    <string name="title_activity_upload_license">上传营业执照</string>
     <string name="title_fragment_share">分享</string>
     <string name="title_fragment_wallet">掌触钱包</string>
 
     <string name="my_real_name_information">实名认证</string>
     <string name="my_change_debit_card">结算卡变更</string>
+    <string name="my_vip_register">会员注册</string>
     <string name="my_rate">我的费率</string>
     <string name="my_profit_share">我的收益</string>
     <string name="my_agent_manager">会员管理</string>

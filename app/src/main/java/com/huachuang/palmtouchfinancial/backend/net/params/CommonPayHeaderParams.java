@@ -19,7 +19,7 @@ public class CommonPayHeaderParams extends RequestParams {
     private String auth_inst_no = GlobalParams.PAY_MID;
     private String dest_chnl = GlobalParams.PAY_KEY;
     private String dest_sub_chnl;
-    private String trans_code;
+    protected String trans_code;
     private String mch_id = GlobalParams.PAY_MID;
     private String device_info;
     private String trans_time;

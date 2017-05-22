@@ -4,6 +4,7 @@ import android.app.Activity;
 import android.content.SharedPreferences;
 import android.support.annotation.NonNull;
 import android.view.View;
+import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
@@ -20,6 +21,7 @@ import com.huachuang.palmtouchfinancial.activity.PersonalInfoActivity;
 import com.huachuang.palmtouchfinancial.activity.ProfitActivity;
 import com.huachuang.palmtouchfinancial.activity.RateActivity;
 import com.huachuang.palmtouchfinancial.activity.RealNameInfoActivity;
+import com.huachuang.palmtouchfinancial.activity.RegisterVIPActivity;
 import com.huachuang.palmtouchfinancial.activity.SettingActivity;
 import com.huachuang.palmtouchfinancial.backend.UserManager;
 import com.huachuang.palmtouchfinancial.util.CommonUtils;
@@ -55,8 +57,17 @@ public class MyFragment extends BaseFragment {
     @ViewInject(R.id.my_fragment_header_name)
     private TextView nameView;
 
+    @ViewInject(R.id.my_vip_register)
+    private RelativeLayout vipRegisterLayout;
+
+    @ViewInject(R.id.my_vip_register_divider)
+    private LinearLayout vipRegisterDivider;
+
     @ViewInject(R.id.my_agent_manager)
     private RelativeLayout agentManagerLayout;
+
+    @ViewInject(R.id.my_agent_manager_divider)
+    private LinearLayout agentManagerDivider;
 
     @Override
     protected void initFragment() {
@@ -72,6 +83,11 @@ public class MyFragment extends BaseFragment {
     @Event(R.id.my_fragment_header)
     private void myFragmentHeaderClicked(View view) {
         PersonalInfoActivity.actionStart(getContext());
+    }
+
+    @Event(R.id.my_vip_register)
+    private void myVipRegisterClicked(View view) {
+        RegisterVIPActivity.actionStart(getContext());
     }
 
     @Event(R.id.my_real_name_information)
@@ -181,6 +197,11 @@ public class MyFragment extends BaseFragment {
 
         if (UserManager.getCurrentUser().getUserType() == 0) {
             agentManagerLayout.setVisibility(View.GONE);
+            agentManagerDivider.setVisibility(View.GONE);
+            if (!UserManager.getCurrentUser().isVip()) {
+                vipRegisterLayout.setVisibility(View.VISIBLE);
+                vipRegisterDivider.setVisibility(View.VISIBLE);
+            }
         }
     }
 }
