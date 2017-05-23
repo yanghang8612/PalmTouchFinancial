@@ -7,6 +7,9 @@ import com.huachuang.palmtouchfinancial.GlobalParams;
 import com.huachuang.palmtouchfinancial.backend.UserManager;
 import com.opencsv.CSVReader;
 
+import org.json.JSONException;
+import org.json.JSONObject;
+
 import java.io.ByteArrayOutputStream;
 import java.io.InputStream;
 import java.io.InputStreamReader;
@@ -20,6 +23,7 @@ import java.util.Calendar;
 import java.util.Enumeration;
 import java.util.List;
 import java.util.Locale;
+import java.util.Random;
 import java.util.UUID;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
@@ -126,13 +130,34 @@ public class CommonUtils {
         return temp.substring(0, length);
     }
 
-    public static String generateTransactionNo() {
-        StringBuilder no = new StringBuilder("ZCJK");
+    public static String generateTransactionNo(int payWay) {
+        StringBuilder no = new StringBuilder(payWay == 0 ? "W" : "A");
         Calendar calendar = Calendar.getInstance();
-        SimpleDateFormat fmt = new SimpleDateFormat("yyyyMMdd", Locale.CHINA);
+        SimpleDateFormat fmt = new SimpleDateFormat("yyyyMMddHHmmss", Locale.CHINA);
         no.append(fmt.format(calendar.getTime()));
         no.append(String.valueOf(calendar.getTimeInMillis()));
+        no.append(generateRandomString(4));
         return no.toString();
+    }
+
+    public static JSONObject getCommonPayHeader(String trans_code) {
+        SimpleDateFormat fmt = new SimpleDateFormat("yyyyMMddHHmmss", Locale.CHINA);
+        JSONObject header = new JSONObject();
+        try {
+            header.put("version", "01");
+            header.put("auth_inst_no", GlobalParams.PAY_MID);
+            header.put("dest_chnl", GlobalParams.PAY_KEY);
+            header.put("dest_sub_chnl", "");
+            header.put("trans_code", trans_code);
+            header.put("mch_id", GlobalParams.PAY_MID);
+            header.put("trans_time", fmt.format(Calendar.getInstance().getTime()));
+            header.put("device_info", "");
+            header.put("nonce_str", CommonUtils.generateRandomString(16));
+            header.put("appid", "");
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
+        return header;
     }
 
     public static String mosaicIdentityCard(String identityCard) {

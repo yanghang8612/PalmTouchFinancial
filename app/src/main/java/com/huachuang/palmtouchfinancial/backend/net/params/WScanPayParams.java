@@ -14,7 +14,7 @@ import org.xutils.http.annotation.HttpRequest;
 @HttpRequest(
         host = GlobalParams.PAY_URL_HEAD,
         path = "cpay-acps-qrcode/qrcode")
-public class WScanPayParams extends CommonPayHeaderParams {
+public class WScanPayParams extends RequestParams {
 
     private String body;
     private String detail;
@@ -33,6 +33,7 @@ public class WScanPayParams extends CommonPayHeaderParams {
             int total_fee,
             String auth_code) {
 
+        super("W00001");
         spbill_create_ip = CommonUtils.getIPAddress();
     }
 }

@@ -3,10 +3,14 @@ package com.huachuang.palmtouchfinancial.backend.net.params;
 import com.huachuang.palmtouchfinancial.GlobalParams;
 import com.huachuang.palmtouchfinancial.util.CommonUtils;
 
+import org.json.JSONException;
+import org.json.JSONObject;
+import org.xutils.http.RequestParams;
 import org.xutils.http.annotation.HttpRequest;
 
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
+import java.util.Locale;
 
 import javax.security.auth.Subject;
 
@@ -17,36 +21,42 @@ import javax.security.auth.Subject;
 @HttpRequest(
         host = GlobalParams.PAY_URL_HEAD,
         path = "cpay-acps-qrcode/qrcode")
-public class AQrCodePayParams extends CommonPayHeaderParams {
-
-    private String out_trade_no;
-    private String seller_id;
-    private String total_amount;
-    private String discountable_amount;
-    private String undiscountable_amount;
-    private String buyer_logon_id;
-    private String subject;
-    private String body;
-    private String goods_detail;
-    private String operator_id;
-    private String store_id;
-    private String terminal_id;
-    private String extend_params;
-    private String timeout_express;
-    private String royalty_info;
-    private String sub_merchant;
-    private String alipay_store_id;
+public class AQrCodePayParams extends RequestParams {
 
     public AQrCodePayParams(
             String out_trade_no,
             int total_fee,
             String subject) {
 
-        this.trans_code = "A00006";
-        this.out_trade_no = out_trade_no;
-        this.total_amount = String.valueOf(total_fee);
-        this.undiscountable_amount = String.valueOf(total_fee);
-        this.subject = subject;
-        this.timeout_express = "30m";
+        try {
+            JSONObject content = new JSONObject();
+            content.put("out_trade_no", out_trade_no);
+            content.put("seller_id", "");
+            content.put("total_amount", String.valueOf(total_fee));
+            content.put("discountable_amount", "0");
+            content.put("undiscountable_amount", String.valueOf(total_fee));
+            content.put("buyer_logon_id", "");
+            content.put("subject", subject);
+            content.put("body", "");
+            content.put("goods_detail", "");
+            content.put("operator_id", "");
+            content.put("store_id", "");
+            content.put("terminal_id", "");
+            content.put("extend_params", "");
+            content.put("timeout_express", "30m");
+            content.put("royalty_info", "");
+            content.put("sub_merchant", "");
+            content.put("alipay_store_id", "");
+
+            JSONObject object = new JSONObject();
+            object.put("header", CommonUtils.getCommonPayHeader("A00006"));
+            object.put("content", content);
+            object.put("mac", "");
+            String params = object.toString();
+            setBodyContent(params);
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
+        setAsJsonContent(true);
     }
 }

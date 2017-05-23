@@ -51,17 +51,9 @@ public class ForceJumpActivity extends BaseActivity {
             @Override
             public void OnBannerClick(int position) {
                 if (position == 0) {
-                    new MaterialDialog.Builder(ForceJumpActivity.this)
-                            .content("会员注册即将开启，敬请期待")
-                            .contentColorRes(R.color.black)
-                            .positiveText("确认")
-                            .autoDismiss(false)
-                            .onPositive(new MaterialDialog.SingleButtonCallback() {
-                                @Override
-                                public void onClick(@NonNull MaterialDialog dialog, @NonNull DialogAction which) {
-                                    dialog.dismiss();
-                                }
-                            }).show();
+                    if (UserManager.getCurrentUser().getUserType() == 0) {
+                        RegisterVIPActivity.actionStart(ForceJumpActivity.this);
+                    }
                 }
                 else {
                     if (UserManager.getCurrentUser().getCertificationState()) {

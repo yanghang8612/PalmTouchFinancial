@@ -8,10 +8,6 @@ import org.json.JSONObject;
 import org.xutils.http.RequestParams;
 import org.xutils.http.annotation.HttpRequest;
 
-import java.text.SimpleDateFormat;
-import java.util.Calendar;
-import java.util.Locale;
-
 /**
  * Created by Asuka on 2017/5/22.
  */
@@ -19,17 +15,15 @@ import java.util.Locale;
 @HttpRequest(
         host = GlobalParams.PAY_URL_HEAD,
         path = "cpay-acps-qrcode/qrcode")
-public class WPayStateCheckParams extends RequestParams {
+public class WPayCloseParams extends RequestParams {
 
-    public WPayStateCheckParams(String out_trade_no) {
-        super("W00002");
+    public WPayCloseParams(String out_trade_no) {
         try {
             JSONObject content = new JSONObject();
-            content.put("transaction_id", "");
             content.put("out_trade_no", out_trade_no);
 
             JSONObject object = new JSONObject();
-            object.put("header", CommonUtils.getCommonPayHeader("W00002"));
+            object.put("header", CommonUtils.getCommonPayHeader("W00007"));
             object.put("content", content);
             object.put("mac", "");
             String params = object.toString();

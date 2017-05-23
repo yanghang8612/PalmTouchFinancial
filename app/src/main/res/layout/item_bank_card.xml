@@ -57,18 +57,10 @@
                 android:layout_marginTop="@dimen/bank_card_item_margin">
 
                 <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="2dp"
-                    android:text="* * * *    * * * *     * * * *    "
-                    android:textColor="@color/white"
-                    android:textSize="@dimen/bank_card_item_card_number_size" />
-
-                <TextView
                     android:id="@+id/bank_card_item_card_number"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="0745"
+                    android:text="6222  0202  0007  9068  785"
                     android:textColor="@color/white"
                     android:textSize="@dimen/bank_card_item_card_number_size" />
 

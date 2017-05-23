@@ -33,9 +33,16 @@ public class BankCardAdapter extends BaseQuickAdapter<BankCard, BaseViewHolder> 
 
     @Override
     protected void convert(BaseViewHolder baseViewHolder, BankCard bankCard) {
+        StringBuilder cardNumber = new StringBuilder();
+        for (int i = 0; i < bankCard.getCardNumber().length(); i++) {
+            cardNumber.append(bankCard.getCardNumber().charAt(i));
+            if (i % 4 == 3) {
+                cardNumber.append("  ");
+            }
+        }
         baseViewHolder.setText(R.id.bank_card_item_bank_name, bankCard.getBankName())
                 .setText(R.id.bank_card_item_card_type, bankCard.getCardType())
-                .setText(R.id.bank_card_item_card_number, bankCard.getCardNumber().substring(bankCard.getCardNumber().length() - 4));
+                .setText(R.id.bank_card_item_card_number, cardNumber.toString());
         if (GlobalParams.bankNameIconMap.containsKey(bankCard.getBankName())) {
             baseViewHolder.setImageResource(R.id.bank_card_item_bank_icon, GlobalParams.bankNameIconMap.get(bankCard.getBankName()));
         }
