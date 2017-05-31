@@ -118,6 +118,7 @@ public class PayQrCodeActivity extends BaseActivity {
                         JSONObject contentObject = resultJsonObject.getJSONObject("content");
                         qrCodeUrl = contentObject.getString("qr_code");
                         payQrCodeImage.setImageBitmap(CodeUtils.createImage(qrCodeUrl, 640, 640, BitmapFactory.decodeResource(getResources(), R.drawable.ic_alipay)));
+                        new Handler().postDelayed(new CheckTransactionStateTask(), 1000);
                     }
                     catch (JSONException e) {
                         e.printStackTrace();

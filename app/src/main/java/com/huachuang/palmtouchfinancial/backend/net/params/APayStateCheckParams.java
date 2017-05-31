@@ -1,7 +1,10 @@
 package com.huachuang.palmtouchfinancial.backend.net.params;
 
 import com.huachuang.palmtouchfinancial.GlobalParams;
+import com.huachuang.palmtouchfinancial.util.CommonUtils;
 
+import org.json.JSONException;
+import org.json.JSONObject;
 import org.xutils.http.RequestParams;
 import org.xutils.http.annotation.HttpRequest;
 
@@ -14,11 +17,21 @@ import org.xutils.http.annotation.HttpRequest;
         path = "cpay-acps-qrcode/qrcode")
 public class APayStateCheckParams extends RequestParams {
 
-    private String out_trade_no;
-    private String trade_no;
-
     public APayStateCheckParams(String out_trade_no) {
-        super("A00002");
-        this.out_trade_no = out_trade_no;
+        try {
+            JSONObject content = new JSONObject();
+            content.put("out_trade_no", out_trade_no);
+            content.put("trade_no", "");
+
+            JSONObject object = new JSONObject();
+            object.put("header", CommonUtils.getCommonPayHeader("A00002"));
+            object.put("content", content);
+            object.put("mac", "");
+            String params = object.toString();
+            setBodyContent(params);
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
+        setAsJsonContent(true);
     }
 }

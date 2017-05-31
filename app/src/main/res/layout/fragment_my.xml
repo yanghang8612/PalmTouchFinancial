@@ -281,8 +281,7 @@
             android:orientation="horizontal"
             android:layout_width="match_parent"
             android:layout_height="1dp"
-            android:background="@color/divider"
-            android:visibility="gone"/>
+            android:background="@color/divider"/>
 
         <RelativeLayout
             android:id="@+id/my_agent_manager"

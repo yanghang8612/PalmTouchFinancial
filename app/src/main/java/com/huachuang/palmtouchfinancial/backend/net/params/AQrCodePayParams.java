@@ -38,14 +38,14 @@ public class AQrCodePayParams extends RequestParams {
             content.put("buyer_logon_id", "");
             content.put("subject", subject);
             content.put("body", "");
-            content.put("goods_detail", "");
+            content.put("goods_detail", null);
             content.put("operator_id", "");
             content.put("store_id", "");
             content.put("terminal_id", "");
-            content.put("extend_params", "");
+            content.put("extend_params", null);
             content.put("timeout_express", "30m");
-            content.put("royalty_info", "");
-            content.put("sub_merchant", "");
+            content.put("royalty_info", null);
+            content.put("sub_merchant", null);
             content.put("alipay_store_id", "");
 
             JSONObject object = new JSONObject();

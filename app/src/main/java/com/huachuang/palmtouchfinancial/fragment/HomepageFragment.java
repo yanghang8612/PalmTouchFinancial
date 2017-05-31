@@ -106,7 +106,7 @@ public class HomepageFragment extends BaseFragment {
 
     @Event(R.id.main_fuel_card)
     private void fuelCardClicked(View view) {
-        showDefaultDialog();
+        WebViewActivity.actionStart(getContext(), "http://m.sinopecsales.com/webmobile/html/webhome.jsp", "中国石化");
     }
 
     public void startAdCarousel() {

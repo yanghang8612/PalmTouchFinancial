@@ -46,7 +46,9 @@ public class SpecificApplyActivity extends BaseSwipeActivity {
             "交通银行",
             "招商银行",
             "中国光大银行",
-            "平安银行"};
+            "平安银行",
+            "中国民生银行"
+    };
 
     public static String[] bankUrl = {
             "https://wm.cib.com.cn/application/cardapp/Fast/TwoBar/view?id=9bedfe6b25ca47dcae22ad30931e680e&from=timeline&isappinstalled=0",
@@ -56,7 +58,9 @@ public class SpecificApplyActivity extends BaseSwipeActivity {
             "https://creditcardapp.bankcomm.com/applynew/front/apply/track/record.html?trackCode=A101208503136",
             "https://ccclub.cmbchina.com/mca/MPreContract.aspx?cardSel=uc&swbrief=Y&WT.mc_id=N3700MM2061I392500ZH",
             "https://xyk.cebbank.com/cebmms/apply/ps/card-index.htm?req_card_id=3341&pro_code=FHTG023556SJ20RONG",
-            "https://c.pingan.com/apply/mobile/apply/index.html"};
+            "https://c.pingan.com/apply/mobile/apply/index.html",
+            "https://creditcard.cmbc.com.cn/wsonline/index/index.jhtml?tradeFrom=YX-JNWS2&EnStr=8C80D27585C039FEBAB3AE3F9FA20484&jg=616080001&jgEnStr=E0E6BC2369190175A96A0D428BBCA756&from=timeline&isappinstalled=0"
+    };
 
     public static void actionStart(Context context, int bank) {
         Intent intent = new Intent(context, SpecificApplyActivity.class);
@@ -261,6 +265,14 @@ public class SpecificApplyActivity extends BaseSwipeActivity {
                                 "$('#submit').click(function(){myObj.commitApplyInfo()});" +
                                 "return;" +
                                 "}setTimeout(checkcontent,1000);})();";
+                        break;
+                    case 8:
+                        js += "$('#RiName1').val('" + name + "');";
+                        js += "$('#txtNum').val('" + identityCard + "');";
+                        js += "$('#MobilePhone').val('" + phoneNumber + "');";
+                        js += "$('#BtnSave').click(function(){myObj.fetchApplyInfo($('#RiName1').val(),$('#MobilePhone').val(),$('#CompanyName').val())});";
+                        js += "$('#BtnSave1').click(function(){myObj.fetchApplyInfo($('#RiName1').val(),$('#MobilePhone').val(),$('#CompanyName').val())});";
+                        js += "$('.form_subBtn #BtnSave').click(function(){myObj.commitApplyInfo()});";
                         break;
                 }
                 view.evaluateJavascript(js, null);

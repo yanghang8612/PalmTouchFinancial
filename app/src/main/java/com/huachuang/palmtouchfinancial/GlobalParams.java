@@ -22,7 +22,7 @@ public class GlobalParams {
     public static final String PAY_MID = "000010141000001";
     public static final String PAY_KEY = "68156dfb16c8f6ea7be97bfc9e921546";
 
-    public static final int VIP_FEE = 10000;
+    public static final int VIP_FEE = 10;
 
     public static final Map<String, Integer> bankNameIconMap = new HashMap<>();
 

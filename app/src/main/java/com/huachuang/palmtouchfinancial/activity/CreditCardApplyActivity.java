@@ -86,4 +86,9 @@ public class CreditCardApplyActivity extends BaseSwipeActivity {
     private void pinganClicked(View view) {
         SpecificApplyActivity.actionStart(this, 7);
     }
+
+    @Event(R.id.credit_card_apply_minsheng)
+    private void minshengClicked(View view) {
+        SpecificApplyActivity.actionStart(this, 8);
+    }
 }

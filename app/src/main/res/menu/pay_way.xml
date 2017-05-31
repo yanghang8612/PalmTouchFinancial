@@ -5,8 +5,8 @@
         android:title="微信支付"
         android:icon="@drawable/ic_wechatpay" />
 
-    <!--<item-->
-        <!--android:id="@+id/alipay"-->
-        <!--android:title="支付宝支付"-->
-        <!--android:icon="@drawable/ic_alipay" />-->
+    <item
+        android:id="@+id/alipay"
+        android:title="支付宝支付"
+        android:icon="@drawable/ic_alipay" />
 </menu>

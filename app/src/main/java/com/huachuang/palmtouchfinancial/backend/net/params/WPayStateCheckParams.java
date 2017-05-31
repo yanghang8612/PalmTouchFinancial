@@ -22,7 +22,6 @@ import java.util.Locale;
 public class WPayStateCheckParams extends RequestParams {
 
     public WPayStateCheckParams(String out_trade_no) {
-        super("W00002");
         try {
             JSONObject content = new JSONObject();
             content.put("transaction_id", "");
