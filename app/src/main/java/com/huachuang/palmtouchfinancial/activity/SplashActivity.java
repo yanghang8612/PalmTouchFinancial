@@ -16,6 +16,7 @@ import com.huachuang.palmtouchfinancial.backend.UserManager;
 import com.huachuang.palmtouchfinancial.backend.bean.User;
 import com.huachuang.palmtouchfinancial.backend.bean.UserCertificationInfo;
 import com.huachuang.palmtouchfinancial.backend.bean.UserDebitCard;
+import com.huachuang.palmtouchfinancial.backend.bean.UserMobilePay;
 import com.huachuang.palmtouchfinancial.backend.net.NetCallbackAdapter;
 import com.huachuang.palmtouchfinancial.backend.net.params.LoginParams;
 import com.huachuang.palmtouchfinancial.loader.AdImageLoader;
@@ -133,6 +134,11 @@ public class SplashActivity extends BaseActivity {
                                         if (user.getDebitCardState()) {
                                             UserManager.setDebitCardInfo(
                                                     JSON.parseObject(resultJsonObject.getString("DebitCard"), UserDebitCard.class));
+                                        }
+
+                                        if (user.getMobilePayState() == 1) {
+                                            UserManager.setMobilePay(
+                                                    JSON.parseObject(resultJsonObject.getString("MobilePay"), UserMobilePay.class));
                                         }
 
                                         SharedPreferences.Editor editor = defaultPref.edit();

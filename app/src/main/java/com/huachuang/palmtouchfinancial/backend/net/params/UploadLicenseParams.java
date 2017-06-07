@@ -17,12 +17,10 @@ import java.io.File;
         path = "Picture/UploadLicense")
 public class UploadLicenseParams extends RequestParams {
     private String phoneNumber;
-    private File front;
-    private File back;
+    private File license;
 
-    public UploadLicenseParams(String front, String back) {
+    public UploadLicenseParams(String license) {
         this.phoneNumber = UserManager.getUserPhoneNumber();
-        this.front = (front == null) ? null : new File(front);
-        this.back = (back ==  null) ? null : new File(back);
+        this.license = (license == null) ? null : new File(license);
     }
 }

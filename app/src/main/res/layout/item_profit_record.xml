@@ -26,21 +26,23 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
-                android:text="周一" />
+                android:text="周一"
+                android:textSize="14sp" />
 
             <TextView
                 android:id="@+id/profit_record_item_time_down"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
-                android:text="04-25" />
+                android:text="04-25"
+                android:textSize="14sp" />
 
         </LinearLayout>
 
         <de.hdodenhof.circleimageview.CircleImageView
             android:id="@+id/profit_record_item_type_image"
             android:layout_width="48dp"
-            android:layout_height="48dp"
+            android:layout_height="40dp"
             android:src="@drawable/ic_profit_share"
             app:civ_border_width="3dp"
             app:civ_border_color="@color/light_grey" />
@@ -50,7 +52,8 @@
             android:layout_width="0dp"
             android:layout_height="match_parent"
             android:layout_weight="4"
-            android:layout_marginLeft="@dimen/activity_horizontal_margin">
+            android:layout_marginLeft="@dimen/activity_horizontal_margin"
+            android:paddingTop="6dp">
 
             <TextView
                 android:id="@+id/profit_record_item_amount"
@@ -67,9 +70,9 @@
                 android:layout_width="match_parent"
                 android:layout_height="0dp"
                 android:layout_weight="1"
-                android:layout_marginTop="3dp"
+                android:layout_marginTop="5dp"
                 android:text="分享有礼：一级注册用户"
-                android:textColor="@color/black" />
+                android:textSize="12sp"/>
 
         </LinearLayout>
 

@@ -17,6 +17,8 @@ import android.widget.TextView;
 
 import com.afollestad.materialdialogs.DialogAction;
 import com.afollestad.materialdialogs.MaterialDialog;
+import com.huachuang.palmtouchfinancial.GlobalParams;
+import com.huachuang.palmtouchfinancial.GlobalVariable;
 import com.huachuang.palmtouchfinancial.R;
 import com.huachuang.palmtouchfinancial.backend.UserManager;
 import com.huachuang.palmtouchfinancial.backend.net.NetCallbackAdapter;
@@ -43,18 +45,23 @@ public class PayQrCodeActivity extends BaseActivity {
 
     private static final String TAG = RegisterVIPActivity.class.getSimpleName();
 
-    public static void actionStart(Context context, int requestCode, int payWay, int payAmount) {
+    public static void actionStart(Context context, int requestCode, int payWay, int payAmount, String subject, boolean useDefaultMerchant) {
         Intent intent = new Intent(context, PayQrCodeActivity.class);
         intent.putExtra("way", payWay);
         intent.putExtra("amount", payAmount);
+        intent.putExtra("subject", subject);
+        intent.putExtra("user_default_merchant", useDefaultMerchant);
         ((BaseActivity) context).startActivityForResult(intent, requestCode);
     }
 
-    private String transactionNo;
     private boolean transactionState = false;
     private int payWay;
     private int payAmount;
+    private String subject;
+    private boolean useDefaultMerchant;
+    private String transactionNo;
     private String qrCodeUrl;
+    private Handler checkHandler;
 
     @ViewInject(R.id.pay_qr_code_toolbar)
     private Toolbar toolbar;
@@ -84,11 +91,16 @@ public class PayQrCodeActivity extends BaseActivity {
 
         payWay = getIntent().getIntExtra("way", 0);
         payAmount = getIntent().getIntExtra("amount", 0);
+        subject = getIntent().getStringExtra("subject");
+        useDefaultMerchant = getIntent().getBooleanExtra("user_default_merchant", true);
+        GlobalVariable.PAY_MID = useDefaultMerchant ? GlobalParams.DEFAULT_PAY_MID : UserManager.getMobilePay().getMid();
+        GlobalVariable.PAY_KEY = useDefaultMerchant ? GlobalParams.DEFAULT_PAY_KEY : UserManager.getMobilePay().getKey();
         transactionNo = CommonUtils.generateTransactionNo(payWay);
+        checkHandler = new Handler();
         payQrCodeAmount.setText(String.valueOf(payAmount / 100) + "." + (payAmount % 100 < 10 ? "0" + String.valueOf(payAmount % 100) : String.valueOf(payAmount % 100)));
         if (payWay == 0) {
             payQrCodeWay.setText("微信");
-            RequestParams params = new WQrCodePayParams("掌触金控VIP", transactionNo, payAmount);
+            RequestParams params = new WQrCodePayParams(subject, transactionNo, payAmount);
             x.http().post(params, new NetCallbackAdapter(this, false) {
                 @Override
                 public void onSuccess(String result) {
@@ -98,7 +110,7 @@ public class PayQrCodeActivity extends BaseActivity {
                         JSONObject contentObject = resultJsonObject.getJSONObject("content");
                         qrCodeUrl = contentObject.getString("code_url");
                         payQrCodeImage.setImageBitmap(CodeUtils.createImage(qrCodeUrl, 640, 640, BitmapFactory.decodeResource(getResources(), R.drawable.ic_wechatpay)));
-                        new Handler().postDelayed(new CheckTransactionStateTask(), 1000);
+                        checkHandler.postDelayed(new CheckTransactionStateTask(), 1000);
                     }
                     catch (JSONException e) {
                         e.printStackTrace();
@@ -108,7 +120,7 @@ public class PayQrCodeActivity extends BaseActivity {
         }
         else if (payWay == 1) {
             payQrCodeWay.setText("支付宝");
-            RequestParams params = new AQrCodePayParams(transactionNo, payAmount, "掌触金控VIP");
+            RequestParams params = new AQrCodePayParams(transactionNo, payAmount, subject);
             x.http().post(params, new NetCallbackAdapter(this, false) {
                 @Override
                 public void onSuccess(String result) {
@@ -118,7 +130,7 @@ public class PayQrCodeActivity extends BaseActivity {
                         JSONObject contentObject = resultJsonObject.getJSONObject("content");
                         qrCodeUrl = contentObject.getString("qr_code");
                         payQrCodeImage.setImageBitmap(CodeUtils.createImage(qrCodeUrl, 640, 640, BitmapFactory.decodeResource(getResources(), R.drawable.ic_alipay)));
-                        new Handler().postDelayed(new CheckTransactionStateTask(), 1000);
+                        checkHandler.postDelayed(new CheckTransactionStateTask(), 1000);
                     }
                     catch (JSONException e) {
                         e.printStackTrace();
@@ -214,6 +226,12 @@ public class PayQrCodeActivity extends BaseActivity {
         return super.onOptionsItemSelected(item);
     }
 
+    @Override
+    public void finish() {
+        super.finish();
+        checkHandler = null;
+    }
+
     private class CheckTransactionStateTask implements Runnable {
 
         @Override
@@ -241,10 +259,12 @@ public class PayQrCodeActivity extends BaseActivity {
                                         setResult(RESULT_OK, intent);
                                         finish();
                                     }
-                                }, 1000);
+                                }, 3000);
                             }
                             else {
-                                new Handler().postDelayed(CheckTransactionStateTask.this, 1000);
+                                if (checkHandler != null) {
+                                    checkHandler.postDelayed(CheckTransactionStateTask.this, 1000);
+                                }
                             }
                         }
                         catch (JSONException e) {
@@ -255,7 +275,9 @@ public class PayQrCodeActivity extends BaseActivity {
                     @Override
                     public void onError(Throwable ex, boolean isOnCallback) {
                         //super.onError(ex, isOnCallback);
-                        new Handler().postDelayed(CheckTransactionStateTask.this, 1000);
+                        if (checkHandler != null) {
+                            checkHandler.postDelayed(CheckTransactionStateTask.this, 1000);
+                        }
                     }
                 });
             }
@@ -282,10 +304,12 @@ public class PayQrCodeActivity extends BaseActivity {
                                         setResult(RESULT_OK, intent);
                                         finish();
                                     }
-                                }, 1000);
+                                }, 3000);
                             }
                             else {
-                                new Handler().postDelayed(CheckTransactionStateTask.this, 1000);
+                                if (checkHandler != null) {
+                                    checkHandler.postDelayed(CheckTransactionStateTask.this, 1000);
+                                }
                             }
                         } catch (JSONException e) {
                             e.printStackTrace();
@@ -295,7 +319,9 @@ public class PayQrCodeActivity extends BaseActivity {
                     @Override
                     public void onError(Throwable ex, boolean isOnCallback) {
                         //super.onError(ex, isOnCallback);
-                        new Handler().postDelayed(CheckTransactionStateTask.this, 1000);
+                        if (checkHandler != null) {
+                            checkHandler.postDelayed(CheckTransactionStateTask.this, 1000);
+                        }
                     }
                 });
             }

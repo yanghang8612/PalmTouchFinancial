@@ -1,0 +1,541 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context="com.huachuang.palmtouchfinancial.activity.MobilePayActivity">
+
+    <android.support.design.widget.AppBarLayout
+        android:id="@+id/mobile_pay_appbar"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:theme="@style/AppTheme.AppBarOverlay">
+
+        <android.support.v7.widget.Toolbar
+            android:id="@+id/mobile_pay_toolbar"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/toolbar_height"
+            app:popupTheme="@style/AppTheme.PopupOverlay">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:text="@string/title_activity_mobile_pay"
+                android:textSize="@dimen/toolbar_title_size"
+                android:textColor="@color/white" />
+
+        </android.support.v7.widget.Toolbar>
+
+    </android.support.design.widget.AppBarLayout>
+
+    <com.flipboard.bottomsheet.BottomSheetLayout
+        android:id="@+id/mobile_pay_bottomsheet"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <!--<GridLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:rowCount="5"
+            android:columnCount="4">
+
+            <EditText
+                android:hint="￥0"
+                android:layout_columnSpan="4"
+                android:layout_rowWeight="1.5"
+                android:layout_gravity="fill_horizontal"
+                android:gravity="right|bottom"
+                android:textSize="36sp"/>
+
+            <Button
+                android:layout_width="wrap_content"
+                android:text="1"
+                android:layout_columnWeight="1"
+                android:layout_rowWeight="1"
+                android:textSize="20sp"
+                android:layout_height="wrap_content" />
+
+            <Button
+                android:text="2"
+                android:layout_columnWeight="1"
+                android:layout_rowWeight="1"
+                android:textSize="20sp"/>
+
+            <Button
+                android:text="3"
+                android:layout_columnWeight="1"
+                android:layout_rowWeight="1"
+                android:textSize="20sp"/>
+
+            <Button
+                android:text="<-"
+                android:layout_columnWeight="1"
+                android:layout_rowWeight="1"
+                android:textSize="20sp"/>
+
+            <Button
+            android:text="4"
+            android:layout_columnWeight="1"
+            android:layout_rowWeight="1"
+            android:textSize="20sp"/>
+
+            <Button
+                android:text="5"
+                android:layout_columnWeight="1"
+                android:layout_rowWeight="1"
+                android:textSize="20sp"/>
+
+            <Button
+                android:text="6"
+                android:layout_columnWeight="1"
+                android:layout_rowWeight="1"
+                android:textSize="20sp"/>
+
+            <Button
+                android:text="清空"
+                android:layout_columnWeight="1"
+                android:layout_rowWeight="1"
+                android:textSize="18sp"/>
+
+            <Button
+                android:text="7"
+                android:layout_columnWeight="1"
+                android:layout_rowWeight="1"
+                android:textSize="20sp"/>
+
+            <Button
+                android:text="8"
+                android:layout_columnWeight="1"
+                android:layout_rowWeight="1"
+                android:textSize="20sp"/>
+
+            <Button
+                android:text="9"
+                android:layout_columnWeight="1"
+                android:layout_rowWeight="1"
+                android:textSize="20sp"/>
+
+            <Button
+                android:text="收\n款"
+                android:layout_rowSpan="2"
+                android:layout_columnWeight="1"
+                android:layout_rowWeight="2"
+                android:textSize="18sp"
+                android:theme="@style/ButtonPrimary"/>
+
+            <Button
+                android:text="."
+                android:layout_columnWeight="1"
+                android:layout_rowWeight="1"
+                android:textSize="20sp"/>
+
+            <Button
+                android:text="0"
+                android:layout_columnWeight="1"
+                android:layout_rowWeight="1"
+                android:textSize="20sp"/>
+
+            <Button
+                android:text="00"
+                android:layout_columnWeight="1"
+                android:layout_rowWeight="1"
+                android:textSize="20sp"/>
+
+        </GridLayout>-->
+
+        <LinearLayout
+            android:orientation="vertical"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <android.support.v7.widget.CardView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="12dp"
+                android:layout_marginLeft="20dp"
+                android:stateListAnimator="@drawable/lift_on_touch"
+                android:clickable="true"
+                android:foreground="?android:attr/selectableItemBackground"
+                app:cardBackgroundColor="@color/colorPrimary"
+                tools:targetApi="lollipop">
+
+                <LinearLayout
+                    android:orientation="horizontal"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:padding="3dp">
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:gravity="center"
+                        android:text="费率:"
+                        android:textColor="@color/white"
+                        android:textSize="12sp"/>
+
+                    <TextView
+                        android:id="@+id/mobile_pay_rate"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:gravity="center"
+                        android:text="0.48%"
+                        android:textColor="@color/white"
+                        android:textSize="12sp"/>
+
+                    <TextView
+                        android:id="@+id/mobile_pay_tips"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:gravity="center"
+                        android:text=" 注册会员降费率"
+                        android:textColor="@color/white"
+                        android:textSize="12sp"
+                        android:visibility="gone"/>
+
+                </LinearLayout>
+
+            </android.support.v7.widget.CardView>
+
+            <GridLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:padding="6dp"
+                android:columnCount="4"
+                android:rowCount="5">
+
+                <EditText
+                    android:id="@+id/mobile_pay_amount"
+                    android:layout_columnSpan="4"
+                    android:layout_rowWeight="1.5"
+                    android:layout_gravity="fill_horizontal"
+                    android:gravity="right|bottom"
+                    android:text="￥0"
+                    android:textSize="48sp"/>
+
+                <android.support.v7.widget.CardView
+                    android:id="@+id/mobile_pay_seven"
+                    android:layout_margin="@dimen/mobile_pay_card_margin"
+                    android:layout_columnWeight="1"
+                    android:layout_rowWeight="1"
+                    android:stateListAnimator="@drawable/lift_on_touch"
+                    android:clickable="true"
+                    android:foreground="?android:attr/selectableItemBackground"
+                    app:cardBackgroundColor="@color/divider"
+                    app:cardCornerRadius="@dimen/mobile_pay_card_radius"
+                    tools:targetApi="lollipop">
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:gravity="center"
+                        android:text="7"
+                        android:textSize="@dimen/mobile_pay_card_number_size"/>
+
+                </android.support.v7.widget.CardView>
+
+                <android.support.v7.widget.CardView
+                    android:id="@+id/mobile_pay_eight"
+                    android:layout_margin="@dimen/mobile_pay_card_margin"
+                    android:layout_columnWeight="1"
+                    android:layout_rowWeight="1"
+                    android:stateListAnimator="@drawable/lift_on_touch"
+                    android:clickable="true"
+                    android:foreground="?android:attr/selectableItemBackground"
+                    app:cardBackgroundColor="@color/divider"
+                    app:cardCornerRadius="@dimen/mobile_pay_card_radius"
+                    tools:targetApi="lollipop">
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:gravity="center"
+                        android:text="8"
+                        android:textSize="@dimen/mobile_pay_card_number_size"/>
+
+                </android.support.v7.widget.CardView>
+
+                <android.support.v7.widget.CardView
+                    android:id="@+id/mobile_pay_nine"
+                    android:layout_margin="@dimen/mobile_pay_card_margin"
+                    android:layout_columnWeight="1"
+                    android:layout_rowWeight="1"
+                    android:stateListAnimator="@drawable/lift_on_touch"
+                    android:clickable="true"
+                    android:foreground="?android:attr/selectableItemBackground"
+                    app:cardBackgroundColor="@color/divider"
+                    app:cardCornerRadius="@dimen/mobile_pay_card_radius"
+                    tools:targetApi="lollipop">
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:gravity="center"
+                        android:text="9"
+                        android:textSize="@dimen/mobile_pay_card_number_size"/>
+
+                </android.support.v7.widget.CardView>
+
+                <android.support.v7.widget.CardView
+                    android:id="@+id/mobile_pay_backspace"
+                    android:layout_margin="@dimen/mobile_pay_card_margin"
+                    android:layout_columnWeight="1"
+                    android:layout_rowWeight="1"
+                    android:stateListAnimator="@drawable/lift_on_touch"
+                    android:clickable="true"
+                    android:foreground="?android:attr/selectableItemBackground"
+                    app:cardBackgroundColor="@color/divider"
+                    app:cardCornerRadius="@dimen/mobile_pay_card_radius"
+                    tools:targetApi="lollipop">
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:gravity="center"
+                        android:text="\u003C-"
+                        android:textSize="@dimen/mobile_pay_card_number_size"/>
+
+                </android.support.v7.widget.CardView>
+
+                <android.support.v7.widget.CardView
+                    android:id="@+id/mobile_pay_four"
+                    android:layout_margin="@dimen/mobile_pay_card_margin"
+                    android:layout_columnWeight="1"
+                    android:layout_rowWeight="1"
+                    android:stateListAnimator="@drawable/lift_on_touch"
+                    android:clickable="true"
+                    android:foreground="?android:attr/selectableItemBackground"
+                    app:cardBackgroundColor="@color/divider"
+                    app:cardCornerRadius="@dimen/mobile_pay_card_radius"
+                    tools:targetApi="lollipop">
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:gravity="center"
+                        android:text="4"
+                        android:textSize="@dimen/mobile_pay_card_number_size"/>
+
+                </android.support.v7.widget.CardView>
+
+                <android.support.v7.widget.CardView
+                    android:id="@+id/mobile_pay_five"
+                    android:layout_margin="@dimen/mobile_pay_card_margin"
+                    android:layout_columnWeight="1"
+                    android:layout_rowWeight="1"
+                    android:stateListAnimator="@drawable/lift_on_touch"
+                    android:clickable="true"
+                    android:foreground="?android:attr/selectableItemBackground"
+                    app:cardBackgroundColor="@color/divider"
+                    app:cardCornerRadius="@dimen/mobile_pay_card_radius"
+                    tools:targetApi="lollipop">
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:gravity="center"
+                        android:text="5"
+                        android:textSize="@dimen/mobile_pay_card_number_size"/>
+
+                </android.support.v7.widget.CardView>
+
+                <android.support.v7.widget.CardView
+                    android:id="@+id/mobile_pay_six"
+                    android:layout_margin="@dimen/mobile_pay_card_margin"
+                    android:layout_columnWeight="1"
+                    android:layout_rowWeight="1"
+                    android:stateListAnimator="@drawable/lift_on_touch"
+                    android:clickable="true"
+                    android:foreground="?android:attr/selectableItemBackground"
+                    app:cardBackgroundColor="@color/divider"
+                    app:cardCornerRadius="@dimen/mobile_pay_card_radius"
+                    tools:targetApi="lollipop">
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:gravity="center"
+                        android:text="6"
+                        android:textSize="@dimen/mobile_pay_card_number_size"/>
+
+                </android.support.v7.widget.CardView>
+
+                <android.support.v7.widget.CardView
+                    android:id="@+id/mobile_pay_clear"
+                    android:layout_margin="@dimen/mobile_pay_card_margin"
+                    android:layout_columnWeight="1"
+                    android:layout_rowWeight="1"
+                    android:stateListAnimator="@drawable/lift_on_touch"
+                    android:clickable="true"
+                    android:foreground="?android:attr/selectableItemBackground"
+                    app:cardBackgroundColor="@color/divider"
+                    app:cardCornerRadius="@dimen/mobile_pay_card_radius"
+                    tools:targetApi="lollipop">
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:gravity="center"
+                        android:text="清空"
+                        android:textSize="18sp"/>
+
+                </android.support.v7.widget.CardView>
+
+                <android.support.v7.widget.CardView
+                    android:id="@+id/mobile_pay_one"
+                    android:layout_margin="@dimen/mobile_pay_card_margin"
+                    android:layout_columnWeight="1"
+                    android:layout_rowWeight="1"
+                    android:stateListAnimator="@drawable/lift_on_touch"
+                    android:clickable="true"
+                    android:foreground="?android:attr/selectableItemBackground"
+                    app:cardBackgroundColor="@color/divider"
+                    app:cardCornerRadius="@dimen/mobile_pay_card_radius"
+                    tools:targetApi="lollipop">
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:gravity="center"
+                        android:text="  1  "
+                        android:textSize="@dimen/mobile_pay_card_number_size"/>
+
+                </android.support.v7.widget.CardView>
+
+                <android.support.v7.widget.CardView
+                    android:id="@+id/mobile_pay_two"
+                    android:layout_margin="@dimen/mobile_pay_card_margin"
+                    android:layout_columnWeight="1"
+                    android:layout_rowWeight="1"
+                    android:stateListAnimator="@drawable/lift_on_touch"
+                    android:clickable="true"
+                    android:foreground="?android:attr/selectableItemBackground"
+                    app:cardBackgroundColor="@color/divider"
+                    app:cardCornerRadius="@dimen/mobile_pay_card_radius"
+                    tools:targetApi="lollipop">
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:gravity="center"
+                        android:text="  2  "
+                        android:textSize="@dimen/mobile_pay_card_number_size"/>
+
+                </android.support.v7.widget.CardView>
+
+                <android.support.v7.widget.CardView
+                    android:id="@+id/mobile_pay_three"
+                    android:layout_margin="@dimen/mobile_pay_card_margin"
+                    android:layout_columnWeight="1"
+                    android:layout_rowWeight="1"
+                    android:stateListAnimator="@drawable/lift_on_touch"
+                    android:clickable="true"
+                    android:foreground="?android:attr/selectableItemBackground"
+                    app:cardBackgroundColor="@color/divider"
+                    app:cardCornerRadius="@dimen/mobile_pay_card_radius"
+                    tools:targetApi="lollipop">
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:gravity="center"
+                        android:text="  3  "
+                        android:textSize="@dimen/mobile_pay_card_number_size"/>
+
+                </android.support.v7.widget.CardView>
+
+                <android.support.v7.widget.CardView
+                    android:id="@+id/mobile_pay_button"
+                    android:layout_margin="@dimen/mobile_pay_card_margin"
+                    android:layout_rowSpan="2"
+                    android:layout_columnWeight="1"
+                    android:layout_rowWeight="2"
+                    android:stateListAnimator="@drawable/lift_on_touch"
+                    android:clickable="true"
+                    android:foreground="?android:attr/selectableItemBackground"
+                    app:cardBackgroundColor="@color/colorPrimary"
+                    app:cardCornerRadius="@dimen/mobile_pay_card_radius"
+                    tools:targetApi="lollipop">
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:gravity="center"
+                        android:text="收\n款"
+                        android:textSize="18sp"/>
+
+                </android.support.v7.widget.CardView>
+
+                <android.support.v7.widget.CardView
+                    android:id="@+id/mobile_pay_dot"
+                    android:layout_margin="@dimen/mobile_pay_card_margin"
+                    android:layout_columnWeight="1"
+                    android:layout_rowWeight="1"
+                    android:stateListAnimator="@drawable/lift_on_touch"
+                    android:clickable="true"
+                    android:foreground="?android:attr/selectableItemBackground"
+                    app:cardBackgroundColor="@color/divider"
+                    app:cardCornerRadius="@dimen/mobile_pay_card_radius"
+                    tools:targetApi="lollipop">
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:gravity="center"
+                        android:text="."
+                        android:textSize="@dimen/mobile_pay_card_number_size"/>
+
+                </android.support.v7.widget.CardView>
+
+                <android.support.v7.widget.CardView
+                    android:id="@+id/mobile_pay_zero"
+                    android:layout_margin="@dimen/mobile_pay_card_margin"
+                    android:layout_columnWeight="1"
+                    android:layout_rowWeight="1"
+                    android:stateListAnimator="@drawable/lift_on_touch"
+                    android:clickable="true"
+                    android:foreground="?android:attr/selectableItemBackground"
+                    app:cardBackgroundColor="@color/divider"
+                    app:cardCornerRadius="@dimen/mobile_pay_card_radius"
+                    tools:targetApi="lollipop">
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:gravity="center"
+                        android:text="0"
+                        android:textSize="@dimen/mobile_pay_card_number_size"/>
+
+                </android.support.v7.widget.CardView>
+
+                <android.support.v7.widget.CardView
+                    android:id="@+id/mobile_pay_double_zero"
+                    android:layout_margin="@dimen/mobile_pay_card_margin"
+                    android:layout_columnWeight="1"
+                    android:layout_rowWeight="1"
+                    android:stateListAnimator="@drawable/lift_on_touch"
+                    android:clickable="true"
+                    android:foreground="?android:attr/selectableItemBackground"
+                    app:cardBackgroundColor="@color/divider"
+                    app:cardCornerRadius="@dimen/mobile_pay_card_radius"
+                    tools:targetApi="lollipop">
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:gravity="center"
+                        android:text="00"
+                        android:textSize="@dimen/mobile_pay_card_number_size"/>
+
+                </android.support.v7.widget.CardView>
+
+            </GridLayout>
+
+        </LinearLayout>
+
+    </com.flipboard.bottomsheet.BottomSheetLayout>
+
+</LinearLayout>

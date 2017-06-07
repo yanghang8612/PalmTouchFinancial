@@ -57,7 +57,7 @@ public class ForceJumpActivity extends BaseActivity {
                 }
                 else {
                     if (UserManager.getCurrentUser().getCertificationState()) {
-                        SpecificApplyActivity.actionStart(ForceJumpActivity.this, 7);
+                        SpecificApplyActivity.actionStart(ForceJumpActivity.this, 7, true);
                     }
                     else {
                         new MaterialDialog.Builder(ForceJumpActivity.this)

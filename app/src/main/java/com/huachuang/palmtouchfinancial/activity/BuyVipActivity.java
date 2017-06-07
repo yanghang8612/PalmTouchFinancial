@@ -93,10 +93,10 @@ public class BuyVipActivity extends BaseActivity {
                             @Override
                             public boolean onMenuItemClick(MenuItem item) {
                                 if (item.getItemId() == R.id.wechatpay) {
-                                    PayQrCodeActivity.actionStart(BuyVipActivity.this, REQUEST_CODE_PAY, 0, GlobalParams.VIP_FEE);
+                                    PayQrCodeActivity.actionStart(BuyVipActivity.this, REQUEST_CODE_PAY, 0, GlobalParams.VIP_FEE, "掌触VIP", true);
                                 }
                                 else {
-                                    PayQrCodeActivity.actionStart(BuyVipActivity.this, REQUEST_CODE_PAY, 1, GlobalParams.VIP_FEE);
+                                    PayQrCodeActivity.actionStart(BuyVipActivity.this, REQUEST_CODE_PAY, 1, GlobalParams.VIP_FEE, "掌触VIP", true);
                                 }
                                 if (bottomSheet.isSheetShowing()) {
                                     bottomSheet.dismissSheet();
@@ -128,7 +128,7 @@ public class BuyVipActivity extends BaseActivity {
                 if (bundle.getBoolean("pay_state")) {
                     payWayButton.setVisibility(View.GONE);
                     paySuccess.setVisibility(View.VISIBLE);
-                    RequestParams params = new UploadLicenseParams(licenseFrontImagePath, licenseBackImagePath);
+                    RequestParams params = new UploadLicenseParams(licenseFrontImagePath);
                     x.http().post(params, new NetCallbackAdapter(this) {
                         @Override
                         public void onSuccess(String result) {

@@ -9,7 +9,7 @@ import java.util.Date;
 public class RecommendRecord {
 
     private String phoneNumber;
-    private short type;
+    private byte type;
     private Date recommendTime;
 
     public String getPhoneNumber() {
@@ -20,11 +20,11 @@ public class RecommendRecord {
         this.phoneNumber = phoneNumber;
     }
 
-    public short getType() {
+    public byte getType() {
         return type;
     }
 
-    public void setType(short type) {
+    public void setType(byte type) {
         this.type = type;
     }
 

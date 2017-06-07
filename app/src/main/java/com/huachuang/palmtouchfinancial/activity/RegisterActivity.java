@@ -284,7 +284,7 @@ public class RegisterActivity extends BaseSwipeActivity implements View.OnFocusC
             verificationCodeLayout.setErrorEnabled(false);
         }
 
-        final String identifyCode = identifyCodeLayout.getEditText().getText().toString();
+        final String identifyCode = identifyCodeLayout.getEditText().getText().toString().toUpperCase();
         if (TextUtils.isEmpty(identifyCode)) {
             identifyCodeLayout.setError("请输入邀请码或推荐人手机");
             return;

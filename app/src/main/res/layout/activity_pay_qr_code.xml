@@ -52,7 +52,8 @@
             android:layout_marginLeft="24dp"
             android:layout_marginRight="24dp"
             android:gravity="center"
-            android:background="@color/white">
+            android:background="@color/white"
+            android:visibility="visible">
 
             <ImageView
                 android:id="@+id/pay_qr_code_image"
@@ -146,6 +147,13 @@
                 android:text="支付成功"
                 android:textColor="@color/black"
                 android:textSize="20sp" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
+                android:text="3秒后返回上级"
+                android:textSize="15sp"/>
 
         </LinearLayout>
 

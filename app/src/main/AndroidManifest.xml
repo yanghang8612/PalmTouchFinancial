@@ -83,7 +83,8 @@
             android:theme="@android:style/Theme.Translucent.NoTitleBar" />
         <activity android:name=".activity.RegisterVIPActivity" />
         <activity android:name=".activity.BuyVipActivity" />
-        <activity android:name=".activity.PayQrCodeActivity"></activity>
+        <activity android:name=".activity.PayQrCodeActivity" />
+        <activity android:name=".activity.MobilePayActivity"></activity>
     </application>
 
 </manifest>

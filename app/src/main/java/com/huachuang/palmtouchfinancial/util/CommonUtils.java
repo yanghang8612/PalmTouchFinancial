@@ -4,6 +4,7 @@ import android.content.Context;
 import android.graphics.Bitmap;
 
 import com.huachuang.palmtouchfinancial.GlobalParams;
+import com.huachuang.palmtouchfinancial.GlobalVariable;
 import com.huachuang.palmtouchfinancial.backend.UserManager;
 import com.opencsv.CSVReader;
 
@@ -145,11 +146,11 @@ public class CommonUtils {
         JSONObject header = new JSONObject();
         try {
             header.put("version", "01");
-            header.put("auth_inst_no", GlobalParams.PAY_MID);
-            header.put("dest_chnl", GlobalParams.PAY_KEY);
+            header.put("auth_inst_no", GlobalVariable.PAY_MID);
+            header.put("dest_chnl", GlobalVariable.PAY_KEY);
             header.put("dest_sub_chnl", "");
             header.put("trans_code", trans_code);
-            header.put("mch_id", GlobalParams.PAY_MID);
+            header.put("mch_id", GlobalVariable.PAY_MID);
             header.put("trans_time", fmt.format(Calendar.getInstance().getTime()));
             header.put("device_info", "");
             header.put("nonce_str", CommonUtils.generateRandomString(16));

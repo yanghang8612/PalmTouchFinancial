@@ -12,19 +12,28 @@ import android.widget.TextView;
 
 import com.afollestad.materialdialogs.DialogAction;
 import com.afollestad.materialdialogs.MaterialDialog;
+import com.flipboard.bottomsheet.BottomSheetLayout;
+import com.flipboard.bottomsheet.commons.MenuSheetView;
+import com.huachuang.palmtouchfinancial.GlobalParams;
 import com.huachuang.palmtouchfinancial.R;
 import com.huachuang.palmtouchfinancial.backend.UserManager;
+import com.huachuang.palmtouchfinancial.backend.net.NetCallbackAdapter;
+import com.huachuang.palmtouchfinancial.backend.net.params.UploadPaymentOrderParams;
 
+import org.json.JSONException;
+import org.json.JSONObject;
+import org.xutils.http.RequestParams;
 import org.xutils.view.annotation.ContentView;
 import org.xutils.view.annotation.Event;
 import org.xutils.view.annotation.ViewInject;
+import org.xutils.x;
 
 @ContentView(R.layout.activity_register_vip)
 public class RegisterVIPActivity extends BaseSwipeActivity {
 
     private static final String TAG = RegisterVIPActivity.class.getSimpleName();
 
-    public static final int REQUEST_CODE_BUY_VIP = 0;
+    public static final int REQUEST_CODE_PAY = 0;
 
     public static void actionStart(Context context) {
         Intent intent = new Intent(context, RegisterVIPActivity.class);
@@ -34,11 +43,14 @@ public class RegisterVIPActivity extends BaseSwipeActivity {
     @ViewInject(R.id.register_vip_toolbar)
     private Toolbar toolbar;
 
+    @ViewInject(R.id.register_vip_bottomsheet)
+    private BottomSheetLayout bottomSheet;
+
     @ViewInject(R.id.register_vip_user_phone_number)
     private TextView userPhoneNumberView;
 
-    @ViewInject(R.id.buy_vip_button)
-    private Button buyVipButton;
+    @ViewInject(R.id.pay_way_button)
+    private Button payWayButton;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -49,8 +61,8 @@ public class RegisterVIPActivity extends BaseSwipeActivity {
         }
         userPhoneNumberView.setText(UserManager.getUserPhoneNumber());
         if (UserManager.getCurrentUser().isVip()) {
-            buyVipButton.setEnabled(false);
-            buyVipButton.setText("已购买会员");
+            payWayButton.setEnabled(false);
+            payWayButton.setText("已购买会员");
         }
     }
 
@@ -67,34 +79,47 @@ public class RegisterVIPActivity extends BaseSwipeActivity {
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
         if (resultCode == RESULT_OK) {
-            if (data != null && requestCode == REQUEST_CODE_BUY_VIP) {
+            if (data != null && requestCode == REQUEST_CODE_PAY) {
                 Bundle bundle = data.getExtras();
-                if (bundle.getBoolean("vip_state")) {
-                    buyVipButton.setEnabled(false);
-                    buyVipButton.setText("已购买会员");
+                if (bundle.getBoolean("pay_state")) {
+                    UserManager.getCurrentUser().setVip(true);
+                    payWayButton.setEnabled(false);
+                    payWayButton.setText("已购买会员");
+                    RequestParams params = new UploadPaymentOrderParams(
+                            bundle.getString("transaction_no"),
+                            (byte) 0,
+                            100.0,
+                            (byte) 1,
+                            "");
+                    x.http().post(params, new NetCallbackAdapter(this, false) {
+                        @Override
+                        public void onSuccess(String result) {
+                        }
+                    });
                 }
             }
         }
     }
 
-    @Event(R.id.buy_vip_button)
-    private void bugVipButtonClicked(View view) {
-        if (!UserManager.getCurrentUser().getDebitCardState()) {
-            new MaterialDialog.Builder(this)
-                    .content("申请前请先完善结算卡信息！")
-                    .contentColorRes(R.color.black)
-                    .positiveText("确认")
-                    .autoDismiss(false)
-                    .onPositive(new MaterialDialog.SingleButtonCallback() {
-                        @Override
-                        public void onClick(@NonNull MaterialDialog dialog, @NonNull DialogAction which) {
-                            dialog.dismiss();
+    @Event(R.id.pay_way_button)
+    private void payWayButtonClicked(View view) {
+        MenuSheetView menuSheetView =
+                new MenuSheetView(this, MenuSheetView.MenuType.LIST, "请选择支付方式", new MenuSheetView.OnMenuItemClickListener() {
+                    @Override
+                    public boolean onMenuItemClick(MenuItem item) {
+                        if (item.getItemId() == R.id.wechatpay) {
+                            PayQrCodeActivity.actionStart(RegisterVIPActivity.this, REQUEST_CODE_PAY, 0, GlobalParams.VIP_FEE, "掌触VIP", true);
                         }
-                    })
-                    .show();
-        }
-        else {
-            BuyVipActivity.actionStart(this, REQUEST_CODE_BUY_VIP);
-        }
+                        else {
+                            PayQrCodeActivity.actionStart(RegisterVIPActivity.this, REQUEST_CODE_PAY, 1, GlobalParams.VIP_FEE, "掌触VIP", true);
+                        }
+                        if (bottomSheet.isSheetShowing()) {
+                            bottomSheet.dismissSheet();
+                        }
+                        return true;
+                    }
+                });
+        menuSheetView.inflateMenu(R.menu.pay_way);
+        bottomSheet.showWithSheetView(menuSheetView);
     }
 }

@@ -3,6 +3,7 @@ package com.huachuang.palmtouchfinancial.backend;
 import com.huachuang.palmtouchfinancial.backend.bean.User;
 import com.huachuang.palmtouchfinancial.backend.bean.UserCertificationInfo;
 import com.huachuang.palmtouchfinancial.backend.bean.UserDebitCard;
+import com.huachuang.palmtouchfinancial.backend.bean.UserMobilePay;
 
 /**
  * Created by Asuka on 2017/2/28.
@@ -13,11 +14,16 @@ public class UserManager {
     private static User currentUser = null;
     private static UserCertificationInfo certificationInfo = null;
     private static UserDebitCard debitCardInfo = null;
+    private static UserMobilePay mobilePay = null;
 
     private static String token;
     private static boolean loginState = false;
 
     private UserManager(){}
+
+    public static void update() {
+
+    }
 
     public static User getCurrentUser() {
         return currentUser;
@@ -65,5 +71,13 @@ public class UserManager {
 
     public static void setDebitCardInfo(UserDebitCard debitCardInfo) {
         UserManager.debitCardInfo = debitCardInfo;
+    }
+
+    public static UserMobilePay getMobilePay() {
+        return mobilePay;
+    }
+
+    public static void setMobilePay(UserMobilePay mobilePay) {
+        UserManager.mobilePay = mobilePay;
     }
 }

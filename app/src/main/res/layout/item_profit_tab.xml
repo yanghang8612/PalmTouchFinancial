@@ -13,8 +13,7 @@
             android:id="@+id/profit_list"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:clipToPadding="false"
-            android:paddingTop="@dimen/activity_horizontal_margin" />
+            android:clipToPadding="false" />
 
     </android.support.v4.widget.SwipeRefreshLayout>
 

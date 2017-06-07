@@ -51,7 +51,7 @@
         <include layout="@layout/vertical_line" />
 
         <TextView
-            android:id="@+id/main_mobile_payment"
+            android:id="@+id/main_mobile_pay"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight="1"

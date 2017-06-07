@@ -11,4 +11,6 @@ public class GlobalVariable {
 
     public static IWXAPI api;
     public static Tencent tencent;
+    public static String PAY_MID;
+    public static String PAY_KEY;
 }

@@ -3,21 +3,31 @@ package com.huachuang.palmtouchfinancial.fragment;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.os.Bundle;
+import android.support.v7.widget.LinearLayoutManager;
+import android.support.v7.widget.RecyclerView;
 import android.view.MenuItem;
 import android.view.View;
+import android.view.ViewGroup;
 import android.widget.TextView;
 
+import com.alibaba.fastjson.JSON;
 import com.flipboard.bottomsheet.BottomSheetLayout;
 import com.flipboard.bottomsheet.commons.MenuSheetView;
 import com.huachuang.palmtouchfinancial.GlobalParams;
 import com.huachuang.palmtouchfinancial.GlobalVariable;
 import com.huachuang.palmtouchfinancial.R;
+import com.huachuang.palmtouchfinancial.activity.ProfitActivity;
 import com.huachuang.palmtouchfinancial.activity.ShareQrCodeActivity;
 import com.huachuang.palmtouchfinancial.activity.ShareRecordActivity;
+import com.huachuang.palmtouchfinancial.adapter.ProfitRecordAdapter;
+import com.huachuang.palmtouchfinancial.adapter.RecommendRecordAdapter;
 import com.huachuang.palmtouchfinancial.backend.UserManager;
+import com.huachuang.palmtouchfinancial.backend.bean.RecommendRecord;
 import com.huachuang.palmtouchfinancial.backend.net.NetCallbackAdapter;
 import com.huachuang.palmtouchfinancial.backend.net.params.GetRecommendCount;
+import com.huachuang.palmtouchfinancial.backend.net.params.GetRecommendRecord;
 import com.huachuang.palmtouchfinancial.util.CommonUtils;
+import com.huachuang.palmtouchfinancial.view.NoScrollLinearLayoutManager;
 import com.tencent.connect.share.QQShare;
 import com.tencent.connect.share.QzoneShare;
 import com.tencent.mm.opensdk.modelmsg.SendMessageToWX;
@@ -32,6 +42,7 @@ import org.xutils.view.annotation.ViewInject;
 import org.xutils.x;
 
 import java.util.ArrayList;
+import java.util.List;
 
 import in.srain.cube.views.ptr.PtrDefaultHandler;
 import in.srain.cube.views.ptr.PtrFrameLayout;
@@ -44,6 +55,11 @@ import in.srain.cube.views.ptr.PtrFrameLayout;
 public class ShareFragment extends BaseFragment {
 
     private static final String TAG = ShareFragment.class.getSimpleName();
+
+    private RecommendRecordAdapter adapter;
+    private LinearLayoutManager layoutManager;
+    private List<RecommendRecord> records = new ArrayList<>();
+    private View header;
 
     @ViewInject(R.id.share_fragment_ptr_frame)
     private PtrFrameLayout ptrFrame;
@@ -60,19 +76,41 @@ public class ShareFragment extends BaseFragment {
     @ViewInject(R.id.share_third_count)
     private TextView thirdCountView;
 
+    @ViewInject(R.id.share_record_preview_list)
+    private RecyclerView previewList;
+
+    @ViewInject(R.id.share_record_empty_view)
+    private TextView emptyView;
+
     @ViewInject(R.id.share_weixin_view)
     private View shareWeiXin;
 
     @ViewInject(R.id.share_qq_view)
     private View shareQQ;
 
-    @ViewInject(R.id.share_qr_code_view)
-    private View shareQrCode;
-
     @Override
     protected void initFragment() {
+        header = getActivity().getLayoutInflater().inflate(R.layout.header_fragment_share, (ViewGroup) previewList.getParent(), false);
+        header.findViewById(R.id.share_record_more).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                ShareRecordActivity.actionStart(ShareFragment.this.getContext());
+            }
+        });
+        adapter = new RecommendRecordAdapter(records);
+        adapter.openLoadAnimation();
+        adapter.addHeaderView(header);
+        layoutManager = new NoScrollLinearLayoutManager(this.getContext());
+        previewList.setLayoutManager(layoutManager);
+        previewList.setAdapter(adapter);
+
         initCountViews();
         ptrFrame.setPtrHandler(new PtrDefaultHandler() {
+            @Override
+            public boolean checkCanDoRefresh(PtrFrameLayout frame, View content, View header) {
+                return layoutManager.findFirstCompletelyVisibleItemPosition() == 0;
+            }
+
             @Override
             public void onRefreshBegin(PtrFrameLayout frame) {
                 initCountViews();
@@ -177,10 +215,10 @@ public class ShareFragment extends BaseFragment {
         });
     }
 
-    @Event(R.id.share_record_layout)
-    private void shareRecordLayoutClicked(View view) {
-        ShareRecordActivity.actionStart(this.getContext());
-    }
+//    @Event(R.id.share_record_layout)
+//    private void shareRecordLayoutClicked(View view) {
+//        ShareRecordActivity.actionStart(this.getContext());
+//    }
 
     @Event(R.id.share_qr_code_view)
     private void shareQrCodeViewClicked(View view) {
@@ -192,7 +230,7 @@ public class ShareFragment extends BaseFragment {
     }
 
     private void initCountViews() {
-        x.http().post(new GetRecommendCount(), new NetCallbackAdapter(ShareFragment.this.getContext(), false) {
+        x.http().post(new GetRecommendCount(), new NetCallbackAdapter(this.getContext(), false) {
             @Override
             public void onSuccess(String result) {
                 try {
@@ -206,6 +244,39 @@ public class ShareFragment extends BaseFragment {
                         showToast(resultJsonObject.getString("Info"));
                     }
                     ptrFrame.refreshComplete();
+                }
+                catch (JSONException e) {
+                    e.printStackTrace();
+                }
+            }
+
+            @Override
+            public void onFinished() {
+                super.onFinished();
+                ptrFrame.refreshComplete();
+            }
+        });
+
+        x.http().post(new GetRecommendRecord(), new NetCallbackAdapter(this.getContext(), false) {
+            @Override
+            public void onSuccess(String result) {
+                try {
+                    JSONObject resultJsonObject = new JSONObject(result);
+                    if (resultJsonObject.getBoolean("Status")) {
+                        String recordString = resultJsonObject.getString("Records");
+                        records.clear();
+                        records.addAll(JSON.parseArray(recordString, RecommendRecord.class));
+                        while (records.size() > 4) {
+                            records.remove(records.size() - 1);
+                        }
+                        adapter.notifyDataSetChanged();
+                        if (records.size() == 0) {
+                            emptyView.setVisibility(View.VISIBLE);
+                        }
+                        else {
+                            emptyView.setVisibility(View.GONE);
+                        }
+                    }
                 }
                 catch (JSONException e) {
                     e.printStackTrace();

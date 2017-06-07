@@ -11,7 +11,7 @@ public class User {
     private long userId;
     private String userPhoneNumber;
     private String userPassword;
-    private short userType;
+    private byte userType;
     private boolean isVip;
     private String invitationCode;
     private long superiorUserId;
@@ -20,6 +20,7 @@ public class User {
     private boolean certificationState;
     private boolean debitCardState;
     private boolean headerState;
+    private byte mobilePayState;
 
     public long getUserId() {
         return userId;
@@ -45,11 +46,11 @@ public class User {
         this.userPassword = userPassword;
     }
 
-    public short getUserType() {
+    public byte getUserType() {
         return userType;
     }
 
-    public void setUserType(short userType) {
+    public void setUserType(byte userType) {
         this.userType = userType;
     }
 
@@ -115,5 +116,13 @@ public class User {
 
     public void setHeaderState(boolean headerState) {
         this.headerState = headerState;
+    }
+
+    public byte getMobilePayState() {
+        return mobilePayState;
+    }
+
+    public void setMobilePayState(byte mobilePayState) {
+        this.mobilePayState = mobilePayState;
     }
 }

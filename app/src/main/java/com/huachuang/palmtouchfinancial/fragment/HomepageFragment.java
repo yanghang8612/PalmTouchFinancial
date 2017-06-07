@@ -10,6 +10,7 @@ import com.huachuang.palmtouchfinancial.activity.CreditCardApplyActivity;
 import com.huachuang.palmtouchfinancial.activity.LoanApplyActivity;
 import com.huachuang.palmtouchfinancial.activity.MainActivity;
 import com.huachuang.palmtouchfinancial.activity.MainMallActivity;
+import com.huachuang.palmtouchfinancial.activity.MobilePayActivity;
 import com.huachuang.palmtouchfinancial.activity.WebViewActivity;
 import com.huachuang.palmtouchfinancial.backend.UserManager;
 import com.huachuang.palmtouchfinancial.loader.AdImageLoader;
@@ -69,9 +70,35 @@ public class HomepageFragment extends BaseFragment {
         LoanApplyActivity.actionStart(this.getContext());
     }
 
-    @Event(R.id.main_mobile_payment)
+    @Event(R.id.main_mobile_pay)
     private void mobilePaymentClicked(View view) {
-        showDefaultDialog();
+        if (!UserManager.getCurrentUser().getCertificationState()) {
+            showDialog("请先进行实名认证");
+        }
+        else if (!UserManager.getCurrentUser().getDebitCardState()) {
+            showDialog("请提交相关民生银行结算卡信息");
+        }
+        else {
+            switch (UserManager.getCurrentUser().getMobilePayState()) {
+                case 0:
+                    showDialog("工作人员审核资料开户中，请耐心等待");
+                    break;
+                case 1:
+                    MobilePayActivity.actionStart(this.getContext());
+                    break;
+                case 2:
+                    showDialog("身份证照片不清晰或信息有误，请检查后重新提交");
+                    break;
+                case 3:
+                    showDialog("营业执照不清晰或信息有误，请检查后重新提交");
+                    break;
+                case 4:
+                    showDialog("结算卡照片不清晰或信息有误，请检查后重新提交");
+                    break;
+                case 5:
+                    showDialog("开通移动支付需民生银行结算卡，请重新提交民生银行结算卡");
+            }
+        }
     }
 
     @Event(R.id.main_share_app)
@@ -117,9 +144,9 @@ public class HomepageFragment extends BaseFragment {
         adCarouselView.stopAutoPlay();
     }
 
-    private void showDefaultDialog() {
+    private void showDialog(String message) {
         new MaterialDialog.Builder(getContext())
-                .content("敬请期待")
+                .content(message)
                 .contentColorRes(R.color.black)
                 .positiveText("确认")
                 .autoDismiss(false)

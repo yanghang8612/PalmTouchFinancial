@@ -56,7 +56,7 @@
     <dimen name="share_content_padding">10dp</dimen>
     <dimen name="share_content_padding_vertical">36dp</dimen>
     <dimen name="share_content_padding_horizontal">24dp</dimen>
-    <dimen name="share_way_margin">10dp</dimen>
+    <dimen name="share_way_margin">6dp</dimen>
 
     <dimen name="real_row_height">50dp</dimen>
     <dimen name="real_divider_margin">12dp</dimen>
@@ -118,4 +118,8 @@
     <dimen name="loan_apply_text_size">13sp</dimen>
 
     <dimen name="recommend_record_item_height">64dp</dimen>
+
+    <dimen name="mobile_pay_card_radius">6dp</dimen>
+    <dimen name="mobile_pay_card_margin">6dp</dimen>
+    <dimen name="mobile_pay_card_number_size">20sp</dimen>
 </resources>
