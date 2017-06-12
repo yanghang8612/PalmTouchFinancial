@@ -11,9 +11,9 @@ public class GlobalParams {
 
     private GlobalParams(){}
 
-    //public static final String SERVER_URL_HEAD = "http://47.89.47.200:8080/AppServer";
+    public static final String SERVER_URL_HEAD = "http://47.89.47.200:8080/AppServer";
     //public static final String SERVER_URL_HEAD = "http://192.168.1.100:8080/AppServer";
-    public static final String SERVER_URL_HEAD = "http://10.0.2.2:8080/AppServer";
+    //public static final String SERVER_URL_HEAD = "http://10.0.2.2:8080/AppServer";
     public static final String YUNPIAN_URL_HEAD = "https://sms.yunpian.com/v2";
     public static final String PAY_URL_HEAD = "http://120.27.221.200:10001";
     public static final String WECHAT_APP_ID = "wxffb25beeebed0544";
@@ -22,7 +22,7 @@ public class GlobalParams {
     public static final String DEFAULT_PAY_MID = "000010141000001";
     public static final String DEFAULT_PAY_KEY = "68156dfb16c8f6ea7be97bfc9e921546";
 
-    public static final int VIP_FEE = 10;
+    public static final int VIP_FEE = 10000;
 
     public static final Map<String, Integer> bankNameIconMap = new HashMap<>();
 

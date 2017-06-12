@@ -19,6 +19,7 @@ import com.huachuang.palmtouchfinancial.backend.UserManager;
 import com.huachuang.palmtouchfinancial.backend.bean.User;
 import com.huachuang.palmtouchfinancial.backend.bean.UserCertificationInfo;
 import com.huachuang.palmtouchfinancial.backend.bean.UserDebitCard;
+import com.huachuang.palmtouchfinancial.backend.bean.UserMobilePay;
 import com.huachuang.palmtouchfinancial.backend.net.NetCallbackAdapter;
 import com.huachuang.palmtouchfinancial.backend.net.params.LoginParams;
 import com.huachuang.palmtouchfinancial.util.CommonUtils;
@@ -137,6 +138,11 @@ public class LoginActivity extends BaseActivity implements View.OnFocusChangeLis
                         if (user.getDebitCardState()) {
                             UserManager.setDebitCardInfo(
                                     JSON.parseObject(resultJsonObject.getString("DebitCard"), UserDebitCard.class));
+                        }
+
+                        if(user.getMobilePayState() == 1) {
+                            UserManager.setMobilePay(
+                                    JSON.parseObject(resultJsonObject.getString("MobilePayInfo"), UserMobilePay.class));
                         }
 
                         SharedPreferences.Editor editor = defaultPref.edit();

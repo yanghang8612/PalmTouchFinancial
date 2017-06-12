@@ -59,8 +59,8 @@ public class WalletFragment extends BaseFragment {
     @Override
     protected void initFragment() {
         header = getActivity().getLayoutInflater().inflate(R.layout.header_fragment_wallet, (ViewGroup) walletProfitList.getParent(), false);
-        balanceAmountView = (TextView) header.findViewById(R.id.wallet_balance_amount);
-        pointsAmountView = (TextView) header.findViewById(R.id.wallet_points_amount);
+//        balanceAmountView = (TextView) header.findViewById(R.id.wallet_balance_amount);
+//        pointsAmountView = (TextView) header.findViewById(R.id.wallet_points_amount);
 
         refreshWallet();
         ptrFrame.setPtrHandler(new PtrHandler() {
@@ -75,28 +75,16 @@ public class WalletFragment extends BaseFragment {
             }
         });
 
-        header.findViewById(R.id.wallet_card).setOnClickListener(new View.OnClickListener() {
+        header.findViewById(R.id.wallet_commission).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                CardManagerActivity.actionStart(WalletFragment.this.getContext());
+                //CardManagerActivity.actionStart(WalletFragment.this.getContext());
             }
         });
-        header.findViewById(R.id.wallet_recharge).setOnClickListener(new View.OnClickListener() {
+        header.findViewById(R.id.wallet_withdraw).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 showDefaultDialog();
-            }
-        });
-        header.findViewById(R.id.wallet_balance).setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                MyBalanceActivity.actionStart(WalletFragment.this.getContext());
-            }
-        });
-        header.findViewById(R.id.wallet_points).setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                MyPointsActivity.actionStart(WalletFragment.this.getContext());
             }
         });
         header.findViewById(R.id.wallet_profit_more).setOnClickListener(new View.OnClickListener() {
@@ -132,31 +120,31 @@ public class WalletFragment extends BaseFragment {
     }
 
     private void refreshWallet() {
-        x.http().post(new GetUserWallet(), new NetCallbackAdapter(WalletFragment.this.getContext(), false) {
-            @Override
-            public void onSuccess(String result) {
-                try {
-                    JSONObject resultJsonObject = new JSONObject(result);
-                    if (resultJsonObject.getBoolean("Status")) {
-                        balanceAmountView.setText("￥ " + resultJsonObject.getString("Balance"));
-                        pointsAmountView.setText(resultJsonObject.getString("Points"));
-                    }
-                    else {
-                        showToast(resultJsonObject.getString("Info"));
-                    }
-                    ptrFrame.refreshComplete();
-                }
-                catch (JSONException e) {
-                    e.printStackTrace();
-                }
-            }
-
-            @Override
-            public void onFinished() {
-                super.onFinished();
-                ptrFrame.refreshComplete();
-            }
-        });
+//        x.http().post(new GetUserWallet(), new NetCallbackAdapter(WalletFragment.this.getContext(), false) {
+//            @Override
+//            public void onSuccess(String result) {
+//                try {
+//                    JSONObject resultJsonObject = new JSONObject(result);
+//                    if (resultJsonObject.getBoolean("Status")) {
+//                        balanceAmountView.setText("￥ " + resultJsonObject.getString("Balance"));
+//                        pointsAmountView.setText(resultJsonObject.getString("Points"));
+//                    }
+//                    else {
+//                        showToast(resultJsonObject.getString("Info"));
+//                    }
+//                    ptrFrame.refreshComplete();
+//                }
+//                catch (JSONException e) {
+//                    e.printStackTrace();
+//                }
+//            }
+//
+//            @Override
+//            public void onFinished() {
+//                super.onFinished();
+//                ptrFrame.refreshComplete();
+//            }
+//        });
 
         x.http().post(new GetWalletBalanceRecords(), new NetCallbackAdapter(WalletFragment.this.getContext(), false) {
             @Override

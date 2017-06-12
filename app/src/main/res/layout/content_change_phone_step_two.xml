@@ -1,0 +1,84 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <android.support.design.widget.TextInputLayout
+        android:id="@+id/change_phone_new_number"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <com.rengwuxian.materialedittext.MaterialEditText
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginRight="16dp"
+            android:hint="@string/prompt_new_phone_number"
+            android:inputType="phone"
+            android:maxLength="11"
+            android:maxLines="1"
+            android:textSize="15sp"
+            app:met_underlineColor="@color/black"
+            app:met_iconLeft="@drawable/ic_phone"
+            app:met_iconPadding="0dp"
+            app:met_primaryColor="@color/colorAccent" />
+
+    </android.support.design.widget.TextInputLayout>
+
+    <LinearLayout
+        android:orientation="horizontal"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <android.support.design.widget.TextInputLayout
+            android:id="@+id/change_phone_step_two_verification_code_layout"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1">
+
+            <com.rengwuxian.materialedittext.MaterialEditText
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="@string/prompt_verification_code"
+                android:inputType="number"
+                android:maxLength="6"
+                android:maxLines="1"
+                android:textSize="15sp"
+                app:met_underlineColor="@color/black"
+                app:met_iconLeft="@drawable/ic_verification_code"
+                app:met_iconPadding="0dp"
+                app:met_primaryColor="@color/colorAccent" />
+
+        </android.support.design.widget.TextInputLayout>
+
+        <Button
+            android:id="@+id/change_phone_step_two_get_verification_code_button"
+            android:layout_width="@dimen/register_verification_code_button_width"
+            android:layout_height="wrap_content"
+            android:layout_marginRight="16dp"
+            android:text="@string/action_get_verification_code"
+            android:theme="@style/ButtonPrimary" />
+
+        <Button
+            android:id="@+id/change_phone_step_two_countdown_button"
+            android:layout_width="@dimen/register_verification_code_button_width"
+            android:layout_height="wrap_content"
+            android:layout_marginRight="16dp"
+            android:text="@string/action_get_verification_code"
+            android:theme="@style/ButtonShowText"
+            android:visibility="gone"/>
+
+    </LinearLayout>
+
+    <Button
+        android:id="@+id/change_phone_confirm_button"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="10dp"
+        android:text="@string/action_change_phone"
+        android:textStyle="bold"
+        android:theme="@style/ButtonPrimary" />
+
+</LinearLayout>

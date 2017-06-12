@@ -29,6 +29,7 @@ import com.huachuang.palmtouchfinancial.backend.net.NetCallbackAdapter;
 import com.huachuang.palmtouchfinancial.backend.net.params.CreateCertificationInfoParams;
 import com.huachuang.palmtouchfinancial.backend.net.params.UpdateCertificationInfoParams;
 import com.huachuang.palmtouchfinancial.backend.net.params.UploadIdentifyCardParams;
+import com.huachuang.palmtouchfinancial.backend.net.params.UploadLicenseParams;
 import com.huachuang.palmtouchfinancial.loader.HeaderImageLoader;
 import com.huachuang.palmtouchfinancial.util.CommonUtils;
 import com.huachuang.palmtouchfinancial.util.IDCard;
@@ -56,6 +57,7 @@ public class RealNameInfoActivity extends BaseSwipeActivity {
     public static final int REQUEST_CODE_FRONT_IMAGE = 1;
     public static final int REQUEST_CODE_BACK_IMAGE = 2;
     public static final int REQUEST_CODE_HANDING_IMAGE = 3;
+    public static final int REQUEST_CODE_LICENSE_IMAGE = 4;
 
     public static void actionStart(Context context) {
         Intent intent = new Intent(context, RealNameInfoActivity.class);
@@ -66,9 +68,11 @@ public class RealNameInfoActivity extends BaseSwipeActivity {
     private boolean identifyCardFrontImageState = false;
     private boolean identifyCardBackImageState = false;
     private boolean identifyCardHandingImageState = false;
+    private boolean licenseImageState = false;
     private String identifyCardFrontImagePath = null;
     private String identifyCardBackImagePath = null;
     private String identifyCardHandingImagePath = null;
+    private String licenseImagePath = null;
 
     @ViewInject(R.id.real_name_info_toolbar)
     private Toolbar toolbar;
@@ -103,6 +107,9 @@ public class RealNameInfoActivity extends BaseSwipeActivity {
     @ViewInject(R.id.identify_card_handing_image)
     private ImageView identifyCardHandingImage;
 
+    @ViewInject(R.id.license_image)
+    private ImageView licenseImage;
+
     @ViewInject(R.id.real_name_info_name_edit)
     private EditText nameEdit;
 
@@ -126,6 +133,9 @@ public class RealNameInfoActivity extends BaseSwipeActivity {
 
     @ViewInject(R.id.identify_card_handing_image_picker)
     private ImageView identifyCardHandingImagePicker;
+
+    @ViewInject(R.id.license_image_picker)
+    private ImageView licenseImagePicker;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -219,6 +229,10 @@ public class RealNameInfoActivity extends BaseSwipeActivity {
                         identifyCardHandingImagePath = image.path;
                         identifyCardHandingImagePicker.setImageBitmap(BitmapFactory.decodeFile(image.path));
                         break;
+                    case REQUEST_CODE_LICENSE_IMAGE:
+                        licenseImageState = true;
+                        licenseImagePath = image.path;
+                        licenseImagePicker.setImageBitmap(BitmapFactory.decodeFile(image.path));
                 }
             }
         }
@@ -237,6 +251,16 @@ public class RealNameInfoActivity extends BaseSwipeActivity {
     @Event(R.id.identify_card_handing_image_picker)
     private void identifyCardHandingImageClicked(View view) {
         startImagePicker(REQUEST_CODE_HANDING_IMAGE);
+    }
+
+    @Event(R.id.license_image_picker)
+    private void licenseImagePickerClicked(View view) {
+        startImagePicker(REQUEST_CODE_LICENSE_IMAGE);
+    }
+
+    @Event(R.id.view_identify_card_samples)
+    private void viewIdentifyCardSamplesClicked(View view) {
+        IdentifyCardExampleActivity.actionStart(this);
     }
 
     @Event(R.id.real_name_info_button)
@@ -327,17 +351,24 @@ public class RealNameInfoActivity extends BaseSwipeActivity {
                     }
                 }
             });
-            RequestParams imageParams = new UploadIdentifyCardParams(
+            RequestParams identifyCardImageParams = new UploadIdentifyCardParams(
                     identifyCardFrontImagePath,
                     identifyCardBackImagePath,
                     identifyCardHandingImagePath
             );
-            x.http().post(imageParams, new NetCallbackAdapter(this, false) {
+            x.http().post(identifyCardImageParams, new NetCallbackAdapter(this, false) {
                 @Override
                 public void onSuccess(String result) {
                     identifyCardFrontImagePath = null;
                     identifyCardBackImagePath = null;
                     identifyCardHandingImagePath = null;
+                }
+            });
+            RequestParams licenseImageParams = new UploadLicenseParams(licenseImagePath);
+            x.http().post(licenseImageParams, new NetCallbackAdapter(this, false) {
+                @Override
+                public void onSuccess(String result) {
+                    licenseImagePath = null;
                 }
             });
         }
@@ -351,10 +382,10 @@ public class RealNameInfoActivity extends BaseSwipeActivity {
         imagePicker.setCrop(true);        //允许裁剪（单选才有效）
         imagePicker.setSaveRectangle(true); //是否按矩形区域保存
         imagePicker.setStyle(CropImageView.Style.RECTANGLE);  //裁剪框的形状
-        imagePicker.setFocusWidth(800);   //裁剪框的宽度。单位像素（圆形自动取宽高最小值）
-        imagePicker.setFocusHeight(800);  //裁剪框的高度。单位像素（圆形自动取宽高最小值）
+        imagePicker.setFocusWidth(1024);   //裁剪框的宽度。单位像素（圆形自动取宽高最小值）
+        imagePicker.setFocusHeight(650);  //裁剪框的高度。单位像素（圆形自动取宽高最小值）
         imagePicker.setOutPutX(1024);    //保存文件的宽度。单位像素
-        imagePicker.setOutPutY(1024);    //保存文件的高度。单位像素
+        imagePicker.setOutPutY(650);    //保存文件的高度。单位像素
         Intent intent = new Intent(this, ImageGridActivity.class);
         startActivityForResult(intent, code);
     }
@@ -375,5 +406,10 @@ public class RealNameInfoActivity extends BaseSwipeActivity {
                 .skipMemoryCache(true)
                 .diskCacheStrategy(DiskCacheStrategy.NONE)
                 .into(identifyCardHandingImage);
+        Glide.with(this)
+                .load(GlobalParams.SERVER_URL_HEAD + "/preview/" + UserManager.getUserPhoneNumber() + "/license.jpg")
+                .skipMemoryCache(true)
+                .diskCacheStrategy(DiskCacheStrategy.NONE)
+                .into(licenseImage);
     }
 }

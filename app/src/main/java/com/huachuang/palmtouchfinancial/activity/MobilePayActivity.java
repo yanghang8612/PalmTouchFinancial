@@ -18,10 +18,17 @@ import com.flipboard.bottomsheet.commons.MenuSheetView;
 import com.huachuang.palmtouchfinancial.GlobalParams;
 import com.huachuang.palmtouchfinancial.R;
 import com.huachuang.palmtouchfinancial.backend.UserManager;
+import com.huachuang.palmtouchfinancial.backend.net.NetCallbackAdapter;
+import com.huachuang.palmtouchfinancial.backend.net.params.UploadPaymentOrderParams;
+import com.huachuang.palmtouchfinancial.util.ActivityCollector;
 
+import org.json.JSONException;
+import org.json.JSONObject;
+import org.xutils.http.RequestParams;
 import org.xutils.view.annotation.ContentView;
 import org.xutils.view.annotation.Event;
 import org.xutils.view.annotation.ViewInject;
+import org.xutils.x;
 
 @ContentView(R.layout.activity_mobile_pay)
 public class MobilePayActivity extends BaseActivity {
@@ -34,6 +41,8 @@ public class MobilePayActivity extends BaseActivity {
         Intent intent = new Intent(context, MobilePayActivity.class);
         context.startActivity(intent);
     }
+
+    private double amount;
 
     @ViewInject(R.id.mobile_pay_toolbar)
     private Toolbar toolbar;
@@ -78,6 +87,41 @@ public class MobilePayActivity extends BaseActivity {
             return true;
         }
         return super.onOptionsItemSelected(item);
+    }
+
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        if (resultCode == RESULT_OK) {
+            if (data != null && requestCode == REQUEST_CODE_PAY) {
+                Bundle bundle = data.getExtras();
+                if (bundle.getBoolean("pay_state")) {
+                    RequestParams params = new UploadPaymentOrderParams(
+                            bundle.getString("transaction_no"),
+                            (byte) 1,
+                            amount,
+                            (byte) 1,
+                            "");
+                    x.http().post(params, new NetCallbackAdapter(this, false) {
+                        @Override
+                        public void onSuccess(String result) {
+                            try {
+                                JSONObject resultJsonObject = new JSONObject(result);
+                                if (resultJsonObject.getBoolean("Status")) {
+                                    finish();
+                                }
+                                else {
+                                    showToast(resultJsonObject.getString("Info"));
+                                }
+                            }
+                            catch (JSONException e) {
+                                e.printStackTrace();
+                            }
+                        }
+                    });
+                }
+            }
+        }
     }
 
     @Event(R.id.mobile_pay_one)
@@ -171,7 +215,7 @@ public class MobilePayActivity extends BaseActivity {
     @Event(R.id.mobile_pay_button)
     private void payButtonClicked(View view) {
         String amountStr = payAmount.getText().toString().substring(1);
-        final double amount = Double.valueOf(amountStr);
+        amount = Double.valueOf(amountStr);
         if (amount == 0.0) {
             new MaterialDialog.Builder(this)
                     .content("请输入正确的收款金额")
@@ -192,10 +236,10 @@ public class MobilePayActivity extends BaseActivity {
                         @Override
                         public boolean onMenuItemClick(MenuItem item) {
                             if (item.getItemId() == R.id.wechatpay) {
-                                PayQrCodeActivity.actionStart(MobilePayActivity.this, REQUEST_CODE_PAY, 0, (int) amount * 100, "商户收款", false);
+                                PayQrCodeActivity.actionStart(MobilePayActivity.this, REQUEST_CODE_PAY, 0, (int) (amount * 100), "商户收款", false);
                             }
                             else {
-                                PayQrCodeActivity.actionStart(MobilePayActivity.this, REQUEST_CODE_PAY, 1, (int) amount * 100, "商户收款", false);
+                                PayQrCodeActivity.actionStart(MobilePayActivity.this, REQUEST_CODE_PAY, 1, (int) (amount * 100), "商户收款", false);
                             }
                             if (bottomSheet.isSheetShowing()) {
                                 bottomSheet.dismissSheet();

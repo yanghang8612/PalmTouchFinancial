@@ -84,7 +84,10 @@
         <activity android:name=".activity.RegisterVIPActivity" />
         <activity android:name=".activity.BuyVipActivity" />
         <activity android:name=".activity.PayQrCodeActivity" />
-        <activity android:name=".activity.MobilePayActivity"></activity>
+        <activity android:name=".activity.MobilePayActivity" />
+        <activity android:name=".activity.ChangePhoneActivity" />
+        <activity android:name=".activity.FeedbackActivity" />
+        <activity android:name=".activity.IdentifyCardExampleActivity"></activity>
     </application>
 
 </manifest>

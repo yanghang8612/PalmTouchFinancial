@@ -57,9 +57,19 @@ public class SettingActivity extends BaseSwipeActivity {
 //        finish();
 //    }
 
+    @Event(R.id.setting_change_phone)
+    private void changePhoneClicked(View view) {
+        ChangePhoneActivity.actionStart(this);
+    }
+
     @Event(R.id.setting_check_update)
     private void checkUpdateClicked(View view) {
         showToast("已是最新版本");
+    }
+
+    @Event(R.id.setting_feedback)
+    private void feedbackClicked(View view) {
+        FeedbackActivity.actionStart(this);
     }
 
     @Event(R.id.setting_user_agreement)

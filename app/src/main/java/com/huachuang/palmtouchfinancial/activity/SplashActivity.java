@@ -138,7 +138,7 @@ public class SplashActivity extends BaseActivity {
 
                                         if (user.getMobilePayState() == 1) {
                                             UserManager.setMobilePay(
-                                                    JSON.parseObject(resultJsonObject.getString("MobilePay"), UserMobilePay.class));
+                                                    JSON.parseObject(resultJsonObject.getString("MobilePayInfo"), UserMobilePay.class));
                                         }
 
                                         SharedPreferences.Editor editor = defaultPref.edit();

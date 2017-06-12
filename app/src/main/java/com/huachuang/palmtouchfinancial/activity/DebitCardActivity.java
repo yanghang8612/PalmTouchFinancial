@@ -4,6 +4,7 @@ import android.content.Context;
 import android.content.Intent;
 import android.graphics.BitmapFactory;
 import android.os.Bundle;
+import android.os.Handler;
 import android.support.annotation.NonNull;
 import android.support.v7.widget.Toolbar;
 import android.text.TextUtils;
@@ -160,6 +161,18 @@ public class DebitCardActivity extends BaseSwipeActivity {
                 }
             }
         });
+        new MaterialDialog.Builder(DebitCardActivity.this)
+                .content("提示：移动支付功能需使用民生银行结算卡")
+                .contentColorRes(R.color.black)
+                .positiveText("确认")
+                .autoDismiss(false)
+                .onPositive(new MaterialDialog.SingleButtonCallback() {
+                    @Override
+                    public void onClick(@NonNull MaterialDialog dialog, @NonNull DialogAction which) {
+                        dialog.dismiss();
+                    }
+                })
+                .show();
     }
 
     @Override
@@ -334,10 +347,10 @@ public class DebitCardActivity extends BaseSwipeActivity {
         imagePicker.setCrop(true);        //允许裁剪（单选才有效）
         imagePicker.setSaveRectangle(true); //是否按矩形区域保存
         imagePicker.setStyle(CropImageView.Style.RECTANGLE);  //裁剪框的形状
-        imagePicker.setFocusWidth(800);   //裁剪框的宽度。单位像素（圆形自动取宽高最小值）
-        imagePicker.setFocusHeight(800);  //裁剪框的高度。单位像素（圆形自动取宽高最小值）
+        imagePicker.setFocusWidth(1024);   //裁剪框的宽度。单位像素（圆形自动取宽高最小值）
+        imagePicker.setFocusHeight(650);  //裁剪框的高度。单位像素（圆形自动取宽高最小值）
         imagePicker.setOutPutX(1024);    //保存文件的宽度。单位像素
-        imagePicker.setOutPutY(1024);    //保存文件的高度。单位像素
+        imagePicker.setOutPutY(650);    //保存文件的高度。单位像素
         Intent intent = new Intent(this, ImageGridActivity.class);
         startActivityForResult(intent, code);
     }

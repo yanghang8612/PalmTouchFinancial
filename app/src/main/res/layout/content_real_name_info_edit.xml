@@ -181,7 +181,7 @@
 
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="120dp"
+        android:layout_height="80dp"
         android:background="@color/white">
 
         <ImageView
@@ -189,7 +189,6 @@
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight="1"
-            android:layout_margin="16dp"
             android:src="@drawable/identify_card_front" />
 
         <ImageView
@@ -197,14 +196,18 @@
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight="1"
-            android:layout_margin="16dp"
             android:src="@drawable/identify_card_back" />
 
     </LinearLayout>
 
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="120dp"
+        android:layout_height="8dp"
+        android:background="@color/white"/>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="80dp"
         android:background="@color/white">
 
         <ImageView
@@ -212,7 +215,6 @@
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight="1"
-            android:layout_margin="16dp"
             android:src="@drawable/identify_card_handing" />
 
         <ImageView
@@ -220,7 +222,6 @@
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight="1"
-            android:layout_margin="16dp"
             android:src="@drawable/license" />
 
     </LinearLayout>
@@ -233,10 +234,11 @@
         android:background="@color/white">
 
         <TextView
+            android:id="@+id/view_identify_card_samples"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="点击查看拍照示例"
-            android:textColor="@color/colorPrimary"/>
+            android:textColor="@color/colorPrimary" />
 
     </LinearLayout>
 

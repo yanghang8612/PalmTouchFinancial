@@ -14,6 +14,7 @@ import com.huachuang.palmtouchfinancial.R;
 import com.huachuang.palmtouchfinancial.backend.UserManager;
 import com.huachuang.palmtouchfinancial.backend.net.NetCallbackAdapter;
 import com.huachuang.palmtouchfinancial.backend.net.params.ChangePasswordParams;
+import com.huachuang.palmtouchfinancial.util.ActivityCollector;
 import com.huachuang.palmtouchfinancial.util.CommonUtils;
 
 import org.json.JSONException;
@@ -44,9 +45,6 @@ public class ChangePasswordActivity extends BaseSwipeActivity {
 
     @ViewInject(R.id.confirm_new_password_layout)
     private TextInputLayout confirmNewPasswordLayout;
-
-    @ViewInject(R.id.change_password_button)
-    private Button changePasswordButton;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -107,15 +105,19 @@ public class ChangePasswordActivity extends BaseSwipeActivity {
             confirmNewPasswordLayout.setErrorEnabled(false);
         }
 
-        x.http().post(new ChangePasswordParams(newPassword), new NetCallbackAdapter(this) {
+        x.http().post(new ChangePasswordParams(newPassword), new NetCallbackAdapter(this, true) {
             @Override
             public void onSuccess(String result) {
                 try {
                     JSONObject resultJsonObject = new JSONObject(result);
                     if (resultJsonObject.getBoolean("Status")) {
-                        UserManager.getCurrentUser().setUserPassword(newPassword);
+                        showToast("修改成功，请重新登录");
+                        ActivityCollector.backToLogin();
                     }
-                    showToast(resultJsonObject.getString("Info"));
+                    else {
+                        showToast(resultJsonObject.getString("Info"));
+
+                    }
                 }
                 catch (JSONException e) {
                     e.printStackTrace();

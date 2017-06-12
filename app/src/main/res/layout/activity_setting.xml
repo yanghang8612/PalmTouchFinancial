@@ -77,6 +77,41 @@
         <!--<include layout="@layout/horizontal_line" />-->
 
         <RelativeLayout
+            android:id="@+id/setting_change_phone"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/setting_row_height"
+            android:padding="@dimen/setting_padding">
+
+            <ImageView
+                android:id="@+id/setting_change_phone_icon"
+                android:layout_width="@dimen/setting_image_width"
+                android:layout_height="@dimen/setting_image_height"
+                android:layout_marginLeft="@dimen/setting_padding"
+                android:src="@drawable/ic_change_phone" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_vertical"
+                android:layout_centerVertical="true"
+                android:layout_toRightOf="@id/setting_change_phone_icon"
+                android:layout_marginLeft="@dimen/setting_padding"
+                android:text="@string/setting_change_phone"
+                android:textSize="@dimen/setting_text_size"
+                android:textColor="@color/black" />
+
+            <ImageView
+                android:layout_width="@dimen/setting_image_width"
+                android:layout_height="@dimen/setting_image_height"
+                android:layout_centerVertical="true"
+                android:layout_alignParentRight="true"
+                android:src="@drawable/ic_navigate_next_black_48dp" />
+
+        </RelativeLayout>
+
+        <include layout="@layout/horizontal_line" />
+
+        <RelativeLayout
             android:id="@+id/setting_check_update"
             android:layout_width="match_parent"
             android:layout_height="@dimen/setting_row_height"

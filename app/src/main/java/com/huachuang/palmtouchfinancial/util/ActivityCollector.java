@@ -1,6 +1,9 @@
 package com.huachuang.palmtouchfinancial.util;
 
 import android.app.Activity;
+import android.content.SharedPreferences;
+
+import com.huachuang.palmtouchfinancial.activity.LoginActivity;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -44,5 +47,20 @@ public class ActivityCollector {
                 activity.finish();
             }
         }
+    }
+
+    public static void backToLogin() {
+        for (int i = activities.size() - 1; i > 0; i--) {
+            if (!activities.get(i).isFinishing()) {
+                activities.get(i).finish();
+            }
+        }
+        SharedPreferences defaultPref = activities.get(0).getSharedPreferences("default", Activity.MODE_PRIVATE);
+        SharedPreferences.Editor editor = defaultPref.edit();
+        editor.remove("phoneNumber");
+        editor.remove("password");
+        editor.apply();
+        LoginActivity.actionStart(activities.get(0));
+        activities.get(0).finish();
     }
 }
